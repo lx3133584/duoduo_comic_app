@@ -1,0 +1,3 @@
+rootProject.name = 'duoduo_comic_app'
+
+include ':app'
