@@ -1,14 +1,19 @@
-import { PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import styled from "styled-components";
+import { Text, View } from 'react-native';
 
 const StyledView = styled.View`
-  background-color: papayawhip;
+  background-color: red;
 `;
 
 class UserInfoScreen extends PureComponent {
+  static navigationOptions = {
+    title: '用户',
+    header: null,
+  };
   render() {
     return (
-      <StyledView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <StyledView>
         <Text>UserInfoScreen</Text>
       </StyledView>
     );
