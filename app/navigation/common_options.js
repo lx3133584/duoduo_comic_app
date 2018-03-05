@@ -1,11 +1,10 @@
 import React from 'React';
-import { LeftButton, HeaderTitle } from './components';
+import { Header } from './components';
 
 export default {
   navigationOptions({navigation}) {
     return {
-      headerTitle: (props) => <HeaderTitle {...props} />,
-      headerLeft: <LeftButton navigation={navigation}/>,
+      header: (props) => <Header {...props} />
     }
   },
 }
