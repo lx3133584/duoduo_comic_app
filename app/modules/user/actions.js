@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions';
 
-export const { get_user_info } = createActions({
+export const aaa = createActions({
   GET_USER_INFO: id => ({ id }),
 });

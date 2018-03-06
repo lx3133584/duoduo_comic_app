@@ -1,3 +1,2 @@
-export { Screen as SearchListScreen, SearchBar } from './search_list';
-export { default as SearchActions } from './actions';
-export { default as SearchReducer } from './reducer';
+export { Screen as SearchListScreen, SearchBar, searchListActions } from './search_list';
+export { default as searchReducer } from './reducer';

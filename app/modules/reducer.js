@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux-immutable';
-import { UserReducer } from './user';
+import { userReducer } from './user';
+import { searchReducer } from './search';
+import { cookiesReducer } from './cookies';
 
 export default combineReducers({
-  UserReducer,
+  user: userReducer,
+  search: searchReducer,
+  cookies: cookiesReducer,
 })
