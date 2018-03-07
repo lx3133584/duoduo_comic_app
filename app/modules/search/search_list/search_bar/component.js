@@ -27,9 +27,11 @@ class SearchBarComponent extends PureComponent {
   onChange(value) {
     this.setState({ value });
   };
-  async onSubmit(value) {
+  async onSubmit() {
+    const { value } = this.state;
+    const { search } = this.props;
     this.setState({ loading: true });
-    await this.props.search(value);
+    await search({ keyword: value, page: 0 });
     this.setState({ loading: false });
   };
   render() {
@@ -39,6 +41,7 @@ class SearchBarComponent extends PureComponent {
         value={value}
         placeholder="搜索漫画信息（名称、作者、描述）"
         lightTheme
+        round
         showLoading={loading}
         containerStyle={containerStyle}
         inputStyle={inputStyle}

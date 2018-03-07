@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react';
-import styled from "styled-components";
-import { Text, View } from 'react-native';
-import { SearchBar } from '.';
-
-const StyledView = styled.View`
-  background-color: red;
-`;
+import { View } from 'react-native';
+import { SearchBar, SearchList } from '.';
 
 class SearchListScreen extends PureComponent {
   static navigationOptions = {
@@ -14,9 +9,11 @@ class SearchListScreen extends PureComponent {
   };
   render() {
     return (
+    <View>
       <SearchBar />
-    );
-  }
+      <SearchList />
+    </View>)
+  };
 }
 
 export default SearchListScreen;

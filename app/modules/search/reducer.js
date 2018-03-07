@@ -3,11 +3,20 @@ import Immutable from 'immutable';
 import { searchListActions } from '.';
 
 const initialState = Immutable.Map({
-  list: Immutable.List()
+  keyword: '',
+  curData: Immutable.List(),
+  list: Immutable.List(),
+  page: 0,
 });
-
 export default handleActions({
-  [searchListActions.searchLocal]: (state, action) => {
-    return state.set('list', action.payload.data);
+  [searchListActions.getSearchList]: (state, action) => {
+    let newState;
+    if (!action.payload.page) {
+      newState = state.set('list', state.get('list').clear());
+    }
+    newState = state.set('page', action.payload.page);
+    newState = state.set('keyword', action.payload.keyword);
+    newState = newState.set('curData', Immutable.List(action.payload.result.data));
+    return newState.set('list', newState.get('list').concat(action.payload.result.data));
   },
 }, initialState)
