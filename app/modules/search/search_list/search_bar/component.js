@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { SearchBar } from 'react-native-elements';
+import PropTypes from 'prop-types';
 
 const containerStyle = {
   backgroundColor: '#FFF',
@@ -11,9 +12,8 @@ const inputStyle = {
 }
 
 class SearchBarComponent extends PureComponent {
-  static navigationOptions = {
-    title: '搜索',
-    header: null,
+  static propTypes = {
+    search: PropTypes.func.isRequired,
   };
   state = {
     value: '',
