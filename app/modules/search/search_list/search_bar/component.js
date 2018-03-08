@@ -29,6 +29,7 @@ class SearchBarComponent extends PureComponent {
   };
   async onSubmit() {
     const { value } = this.state;
+    if (!value) return;
     const { search } = this.props;
     this.setState({ loading: true });
     await search({ keyword: value, page: 0 });

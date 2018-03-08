@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
+import { ListEmpty } from '..';
 
 const ContainStyled = styled.View`
   margin: 10px 0;
@@ -13,17 +14,11 @@ const TextStyled = styled.Text`
 function FooterComponent() {
   return (
     <ContainStyled>
-      <TextStyled>已无更多数据</TextStyled>
+      <TextStyled>下面什么都没有了哦.</TextStyled>
     </ContainStyled>
   )
 }
-function ListEmptyComponent() {
-  return (
-    <ContainStyled>
-      <TextStyled>暂无数据</TextStyled>
-    </ContainStyled>
-  )
-}
+
 class LongListComponent extends PureComponent {
   static propTypes = {
     initPage: PropTypes.number,
@@ -79,8 +74,8 @@ class LongListComponent extends PureComponent {
          onEndReachedThreshold={0.5}
          onRefresh={this._onRefresh}
          refreshing={loading}
-         ListEmptyComponent={ListEmptyComponent}
-         ListFooterComponent={FooterComponent}
+         ListEmptyComponent={ListEmpty}
+         ListFooterComponent={list.length && FooterComponent}
        />
     );
   }

@@ -1,8 +1,6 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import styled from "styled-components";
-import Image from 'react-native-image-progress';
-import Progress from 'react-native-progress/Circle';
+import { Image } from '..';
 import { Badge } from 'react-native-elements';
 
 const ContainStyled = styled.View`
@@ -34,11 +32,16 @@ const AuthorStyled = styled.Text`
   font-size: 12px;
   margin-right: 10px;
 `
+const imageStyle = {
+  width: 60,
+  height: 100,
+}
 const textStyle = {
   fontSize: 10,
 }
 const wrapperStyle = {
   width: 50,
+  marginRight: 10,
 }
 const greenBackground = {
   backgroundColor: '#85d6cf',
@@ -46,17 +49,16 @@ const greenBackground = {
 const redBackground = {
   backgroundColor: '#f98882',
 }
-export default function ListItem({ title, cover, desc, author, status }) {
+const purpleBackground = {
+  backgroundColor: '#a0aae6',
+}
+export default function ListItem({ title, cover, desc, author, status, class_name }) {
   return (
     <ContainStyled>
       <LeftStyled>
         <Image
           source={{ uri: cover }}
-          indicator={Progress}
-          style={{
-            width: 60,
-            height: 100,
-          }}
+          imageStyle={imageStyle}
         />
       </LeftStyled>
       <RightStyled>
@@ -71,6 +73,12 @@ export default function ListItem({ title, cover, desc, author, status }) {
             wrapperStyle={wrapperStyle}
             containerStyle={status === '完结' ? greenBackground : redBackground}
           />
+          {class_name && <Badge
+            value={class_name}
+            textStyle={textStyle}
+            wrapperStyle={wrapperStyle}
+            containerStyle={purpleBackground}
+          />}
         </ContainStyled>
       </RightStyled>
     </ContainStyled>

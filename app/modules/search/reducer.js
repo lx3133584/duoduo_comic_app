@@ -13,9 +13,11 @@ export default handleActions({
     let newState;
     if (!action.payload.page) {
       newState = state.set('list', state.get('list').clear());
+    } else {
+      newState = state;
     }
-    newState = state.set('page', action.payload.page);
-    newState = state.set('keyword', action.payload.keyword);
+    newState = newState.set('page', action.payload.page);
+    newState = newState.set('keyword', action.payload.keyword);
     newState = newState.set('curData', Immutable.List(action.payload.result.data));
     return newState.set('list', newState.get('list').concat(action.payload.result.data));
   },
