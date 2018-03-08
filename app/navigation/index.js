@@ -1,1 +1,1 @@
-export { default } from './tab_navigation';
+export { default } from './stack_navigation';

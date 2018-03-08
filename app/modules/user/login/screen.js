@@ -1,23 +1,23 @@
 import React, { PureComponent } from 'react';
-import { UserTop, UserOperateList } from '.';
+import { Brand, LoginLocal } from '.';
 import styled from "styled-components";
 
 const ContainStyled = styled.View`
-  padding-bottom: 100px;
+  padding: 100px 0;
 `
 
-class UserInfoScreen extends PureComponent {
+class LoginScreen extends PureComponent {
   static navigationOptions = {
-    title: '用户',
+    title: '登录',
   };
   render() {
     return (
       <ContainStyled>
-        <UserTop />
-        <UserOperateList />
+        <Brand />
+        <LoginLocal />
       </ContainStyled>
     );
   }
 }
 
-export default UserInfoScreen;
+export default LoginScreen;

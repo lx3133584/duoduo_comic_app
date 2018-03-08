@@ -36,6 +36,7 @@ const TabBar = ({ navigation }) => ({
         break;
     }
     return <TabBarIcon color={tintColor} />
-  }
+  },
+  header: null,
 })
 export default TabBar;

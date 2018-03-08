@@ -1,18 +1,14 @@
 import React from 'React';
 import { TabNavigator, TabBarBottom  } from 'react-navigation';
-import { UserStack, SearchStack } from './stack_navigation';
+import { UserInfoScreen, SearchListScreen } from '../modules';
 import DEFAULT_THEME from '../../theme';
 import { TabBar } from './components';
 
 export default TabNavigator({
-  Search: {
-    screen: SearchStack
-  },
-  User: {
-    screen: UserStack
-  }
-}, {
-  initialRouteName: 'User',
+  Search: { screen: SearchListScreen },
+  User: { screen: UserInfoScreen },
+},
+{
   navigationOptions: TabBar,
   tabBarOptions: {
     activeTintColor: DEFAULT_THEME.brand_primary,
@@ -21,5 +17,5 @@ export default TabNavigator({
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
   animationEnabled: false,
-  swipeEnabled: false
+  swipeEnabled: false,
 });

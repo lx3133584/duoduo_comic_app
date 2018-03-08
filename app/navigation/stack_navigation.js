@@ -1,17 +1,34 @@
+import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { UserInfoScreen, SearchListScreen } from '../modules';
-import commonOptions from './common_options';
+import { LoginScreen } from '../modules';
+import { default as TabNavigator } from './tab_navigation';
+import { Header } from './components';
+import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 
-export const UserStack = StackNavigator(
+const HeaderStack = StackNavigator(
   {
-    UserInfo: { screen: UserInfoScreen },
+    Login: { screen: LoginScreen },
   },
-  commonOptions,
+  {
+    navigationOptions: ({navigation}) => ({
+      header: (props) => <Header {...props} />,
+    }),
+  },
 );
 
-export const SearchStack = StackNavigator(
+const RootStack = StackNavigator(
   {
-    SearchList: { screen: SearchListScreen },
+    TabStack: { screen: TabNavigator },
+    HeaderStack: { screen: HeaderStack },
   },
-  commonOptions,
+  {
+    navigationOptions: ({navigation}) => ({
+      header: null,
+    }),
+    transitionConfig: () => ({
+      screenInterpolator: CardStackStyleInterpolator.forHorizontal,
+    }),
+  },
 );
+
+export default RootStack;

@@ -1,18 +1,21 @@
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
 import { SearchBar, SearchList } from '.';
+import styled from "styled-components";
+
+const ContainStyled = styled.View`
+  padding-bottom: 100px;
+`
 
 class SearchListScreen extends PureComponent {
   static navigationOptions = {
     title: '搜索',
-    header: null,
   };
   render() {
     return (
-    <View>
+    <ContainStyled>
       <SearchBar />
       <SearchList />
-    </View>)
+    </ContainStyled>)
   };
 }
 
