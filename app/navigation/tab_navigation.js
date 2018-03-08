@@ -12,6 +12,7 @@ export default TabNavigator({
     screen: UserStack
   }
 }, {
+  initialRouteName: 'User',
   navigationOptions: TabBar,
   tabBarOptions: {
     activeTintColor: DEFAULT_THEME.brand_primary,

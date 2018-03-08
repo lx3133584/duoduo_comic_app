@@ -4,14 +4,14 @@ import commonOptions from './common_options';
 
 export const UserStack = StackNavigator(
   {
-    User: { screen: UserInfoScreen },
+    UserInfo: { screen: UserInfoScreen },
   },
   commonOptions,
 );
 
 export const SearchStack = StackNavigator(
   {
-    Search: { screen: SearchListScreen },
+    SearchList: { screen: SearchListScreen },
   },
   commonOptions,
 );

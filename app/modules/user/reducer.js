@@ -1,11 +1,13 @@
 import { handleActions } from 'redux-actions';
 import Immutable from 'immutable';
-import { get_user_info } from './actions';
+import { getUserInfo } from '.';
 
-const initialState = Immutable.Map();
+const initialState = Immutable.Map({
+  info: Immutable.Map(),
+});
 
 export default handleActions({
-  [get_user_info]: (state, action) => ({
+  [getUserInfo]: (state, action) => ({
     info: action.payload,
   }),
 }, initialState)

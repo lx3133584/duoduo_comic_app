@@ -1,3 +1,3 @@
 module.exports = {
-  brand_primary: '#FE493D'
+  brand_primary: '#f97568'
 };
