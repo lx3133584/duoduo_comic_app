@@ -1,4 +1,5 @@
 export { UserInfoScreen, LoginScreen } from './user';
-export { SearchListScreen } from './search';
+export { SearchListScreen, LongList, Image } from './search';
+export { FavoritesListScreen } from './favorites';
 export { cookiesActions } from './cookies';
 export { default as rootReducer } from './reducer';

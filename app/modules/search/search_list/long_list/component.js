@@ -29,7 +29,10 @@ class LongListComponent extends PureComponent {
     ]).isRequired,
     list: PropTypes.array.isRequired,
     onFetch: PropTypes.func.isRequired,
-    callback: PropTypes.func.isRequired,
+    callback: PropTypes.func,
+    isLong: PropTypes.bool,
+    horizontal: PropTypes.bool,
+    numColumns: PropTypes.number,
   };
   constructor(props) {
     super(props);
@@ -42,6 +45,7 @@ class LongListComponent extends PureComponent {
     this._onRefresh = this._onRefresh.bind(this);
     this._onFetch = this._onFetch.bind(this);
     this._renderItem = this._renderItem.bind(this);
+    this._keyExtractor = this._keyExtractor.bind(this);
   };
   _keyExtractor(item, index) {
     return item[this.customkey]
@@ -56,7 +60,7 @@ class LongListComponent extends PureComponent {
     onFetch(this.page).then(res => {
       this.setState({ loading: false });
       if (!res.error) {
-        callback(this.page);
+        callback && callback(this.page);
         this.page++;
       }
     });
@@ -66,15 +70,17 @@ class LongListComponent extends PureComponent {
     return <Item {...item} />
   };
   render() {
-    const { list } = this.props;
+    const { list, isLong, horizontal, numColumns } = this.props;
     const { loading } = this.state;
     return (
       <FlatList
          data={list}
          keyExtractor={this._keyExtractor}
          renderItem={this._renderItem}
-         onEndReached={this._onFetch}
-         onEndReachedThreshold={0.5}
+         onEndReached={isLong && this._onFetch}
+         onEndReachedThreshold={0.6}
+         horizontal={horizontal}
+         numColumns={numColumns}
          onRefresh={this._onRefresh}
          refreshing={loading}
          ListEmptyComponent={ListEmpty}

@@ -1,5 +1,7 @@
 import http from 'axios';
 
+// 收藏
+export const fetchFavoritesList = () => http.get('favorites');
 // 搜索
 export const searchLocal = ({ keyword, page }) => http.get('searchLocal', {params: { keyword, page }});
 // 用户

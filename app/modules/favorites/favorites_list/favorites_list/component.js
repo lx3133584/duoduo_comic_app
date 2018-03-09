@@ -1,33 +1,35 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import { LongList, ListItem } from '..';
-
-class SearchListComponent extends PureComponent {
+import { FavoritesListItem } from '..';
+import { LongList } from '../../..';
+class FavoritesListComponent extends PureComponent {
   static propTypes = {
-    search: PropTypes.func.isRequired,
+    getList: PropTypes.func.isRequired,
     list: ImmutablePropTypes.list.isRequired,
-    keyword: PropTypes.string.isRequired,
   };
   constructor() {
     super();
     this.onFetch = this.onFetch.bind(this);
   };
-  async onFetch(page) {
-    const { keyword, search } = this.props;
-    return await search({ page, keyword });
+  componentDidMount() {
+    this.onFetch();
+  };
+  async onFetch() {
+    const { getList } = this.props;
+    return await getList();
   };
   render() {
     const list = this.props.list.toJS();
     return (
       <LongList
          list={list}
-         Item={ListItem}
+         Item={FavoritesListItem}
          onFetch={this.onFetch}
-         isLong
+         numColumns={3}
        />
     );
   }
 }
 
-export default SearchListComponent;
+export default FavoritesListComponent;

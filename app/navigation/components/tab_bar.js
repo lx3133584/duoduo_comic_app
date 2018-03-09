@@ -19,7 +19,7 @@ const TabBar = ({ navigation }) => ({
     const { routeName } = navigation.state;
     let TabBarIcon = UserIcon;
     switch (routeName) {
-      case 'Book':
+      case 'Favorites':
         TabBarIcon = BookIcon;
         break;
       case 'Grid':

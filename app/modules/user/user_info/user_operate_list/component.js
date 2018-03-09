@@ -8,6 +8,10 @@ const list = [
     route: 'aaa',
   },
   {
+    name: '我的下载',
+    route: 'aaa',
+  },
+  {
     name: '浏览记录',
     route: 'aaa',
   },

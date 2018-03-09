@@ -1,18 +1,17 @@
 import { connect } from 'react-redux';
-import { getSearchList } from '../actions';
+import { getFavoritesList } from '../actions';
 import Component from './component';
 import { withNavigation } from 'react-navigation';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    list: state.getIn(['search', 'list']),
-    keyword: state.getIn(['search', 'keyword']),
+    list: state.getIn(['favorites', 'list']),
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  search(params) {
-    return dispatch(getSearchList(params))
+  getList(params) {
+    return dispatch(getFavoritesList(params))
   },
 })
 
