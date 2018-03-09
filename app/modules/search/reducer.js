@@ -10,6 +10,7 @@ const initialState = Immutable.Map({
 });
 export default handleActions({
   [searchListActions.getSearchList]: (state, action) => {
+    if (action.error) return state;
     let newState;
     if (!action.payload.page) {
       newState = state.set('list', state.get('list').clear());

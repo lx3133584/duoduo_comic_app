@@ -44,6 +44,7 @@ class UserTopComponent extends PureComponent {
   static propTypes = {
     info: ImmutablePropTypes.map,
     token: PropTypes.string,
+    getUser: PropTypes.func.isRequired,
   };
   state = {
     value: '',
@@ -51,11 +52,10 @@ class UserTopComponent extends PureComponent {
   };
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
-    console.log(props);
   };
-  onChange(value) {
-    this.setState({ value });
+  componentDidMount() {
+    const { getUser } = this.props;
+    getUser();
   };
   render() {
     const { info, token } = this.props;

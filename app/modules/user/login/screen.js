@@ -3,7 +3,8 @@ import { Brand, LoginLocal } from '.';
 import styled from "styled-components";
 
 const ContainStyled = styled.View`
-  padding: 100px 0;
+  padding: 100px 0 200px;
+  background-color: #fff;
 `
 
 class LoginScreen extends PureComponent {

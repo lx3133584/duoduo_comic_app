@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Component from './component';
 import { withNavigation } from 'react-navigation';
+import { getUserInfo } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -9,7 +10,14 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  getUser() {
+    return dispatch(getUserInfo())
+  },
+})
+
+
 export default withNavigation(connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
   )(Component))

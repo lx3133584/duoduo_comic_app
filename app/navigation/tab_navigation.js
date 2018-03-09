@@ -9,6 +9,7 @@ export default TabNavigator({
   User: { screen: UserInfoScreen },
 },
 {
+  initialRouteName: 'User',
   navigationOptions: TabBar,
   tabBarOptions: {
     activeTintColor: DEFAULT_THEME.brand_primary,

@@ -1,23 +1,44 @@
 import React from 'react';
 import { Input  } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { brand_primary } from '../../../../../theme';
+import styled from "styled-components";
 
-const buttonStyle = {
-  backgroundColor: "#fff",
-  width: 80,
-  height: 30,
-  borderColor: brand_primary,
-  borderWidth: 1,
-}
+const ContainStyled = styled.View`
+  margin: 5px 40px;
+`
+
 const textStyle = {
   fontSize: 12,
   color: brand_primary,
 }
+const containerStyle = {
+  borderBottomColor: brand_primary,
+}
 
-export default function LoginInputComponent({ navigation }) {
+export default function LoginInputComponent({ password, displayError, errorMessage, iconName, placeholder, value, onChange, onSubmit }) {
   return (
-    <Input
-      placeholder='BASIC INPUT'
-    />
+    <ContainStyled>
+      <Input
+        value={value}
+        placeholder={placeholder || '请输入'}
+        maxLength={32}
+        shake
+        containerStyle={containerStyle}
+        secureTextEntry={password}
+        onChangeText={onChange}
+        onSubmitEditing={onSubmit}
+        displayError={!!displayError}
+        errorStyle={{ color: 'red' }}
+        errorMessage={errorMessage}
+        leftIcon={
+          <Icon
+            name={iconName || 'user'}
+            size={24}
+            color={brand_primary}
+          />
+        }
+      />
+    </ContainStyled>
   );
 }

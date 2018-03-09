@@ -7,10 +7,12 @@ const initialState = Immutable.Map({
 });
 
 export default handleActions({
-  [userInfoActions.getUserInfo]: (state, action) => ({
-    info: action.payload,
-  }),
-  [loginActions.loginForLocal]: (state, action) => ({
-    info: action.payload,
-  }),
+  [userInfoActions.getUserInfo]: (state, action) => {
+    if (action.error) return state;
+    return state.set('info', Immutable.Map(action.payload.data));
+  },
+  [loginActions.loginForLocal]: (state, action) => {
+    if (action.error) return state;
+    return state.set('info', Immutable.Map(action.payload.data));
+  },
 }, initialState)
