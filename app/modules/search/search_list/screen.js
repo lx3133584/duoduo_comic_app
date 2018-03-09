@@ -3,7 +3,7 @@ import { SearchBar, SearchList } from '.';
 import styled from "styled-components";
 
 const ContainStyled = styled.View`
-  padding-bottom: 100px;
+  padding-bottom: 50px;
 `
 
 class SearchListScreen extends PureComponent {

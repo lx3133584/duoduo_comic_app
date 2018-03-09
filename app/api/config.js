@@ -10,8 +10,8 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'; 
 axios.defaults.baseURL = baseURL; // 配置接口地址
 
 function interceptorsRequestSuccess (config) {
+  store.dispatch(cookiesActions.getAllCookies())
   if (config.method !== 'get') {
-    store.dispatch(cookiesActions.getAllCookies())
     config.headers['x-csrf-token'] = store.getState().getIn(['cookies', 'csrfToken']);
   }
   return config;

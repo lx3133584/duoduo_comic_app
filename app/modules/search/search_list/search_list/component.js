@@ -15,7 +15,7 @@ class SearchListComponent extends PureComponent {
   };
   async onFetch(page) {
     const { keyword, search } = this.props;
-    await search({ page, keyword });
+    return await search({ page, keyword });
   };
   callback(page) {
   }
