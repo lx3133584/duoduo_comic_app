@@ -50,13 +50,16 @@ class LongListComponent extends PureComponent {
     this.page = 0;
     await this._onFetch()
   }
-  async _onFetch() {
+  _onFetch() {
     const { onFetch, callback } = this.props;
     this.setState({ loading: true });
-    await onFetch(this.page);
-    callback(this.page);
-    this.page++;
-    this.setState({ loading: false });
+    onFetch(this.page).then(res => {
+      this.setState({ loading: false });
+      if (!res.error) {
+        callback(this.page);
+        this.page++;
+      }
+    });
   };
   _renderItem({ item }) {
     const { Item } = this.props;

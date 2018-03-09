@@ -20,6 +20,7 @@ class LoginLocalComponent extends PureComponent {
   state = {
     username: '',
     password: '',
+    loading: false,
   };
   constructor() {
     super();
@@ -27,22 +28,26 @@ class LoginLocalComponent extends PureComponent {
     this.onChangePassword = this.changFunc('password');
     this.onSubmit = this.onSubmit.bind(this);
   };
-  async onSubmit() {
+  onSubmit() {
     const { loginLocal, navigation } = this.props;
     const { username, password } = this.state;
     if (username.length < 8 || password.length < 8) return;
-    await loginLocal({ username, password });
-    navigation.navigate('User')
+    this.setState({ loading: true });
+    loginLocal({ username, password }).then(res => {
+      this.setState({ loading: false });
+      if (!res.error) navigation.navigate('User')
+    });
   };
   changFunc(key) {
     return (value) => this.setState({ [key]: value });
   };
   render() {
-    const { username, password } = this.state;
+    const { username, password, loading } = this.state;
     return (
       <ContainStyled>
         <InputContainStyled>
           <LoginInput
+            placeholder="用户名"
             iconName="user"
             onChange={this.onChangeUsername}
             onSubmit={this.onSubmit}
@@ -50,6 +55,7 @@ class LoginLocalComponent extends PureComponent {
             errorMessage="用户名必须大于8位"
           />
           <LoginInput
+            placeholder="密码"
             onChange={this.onChangePassword}
             iconName="lock"
             onSubmit={this.onSubmit}
@@ -59,6 +65,7 @@ class LoginLocalComponent extends PureComponent {
           />
         </InputContainStyled>
         <LoginButton
+          loading={loading}
           onPress={this.onSubmit}
         />
       </ContainStyled>

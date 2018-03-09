@@ -1,9 +1,12 @@
 import { createActions } from 'redux-actions';
-import { getCookies } from '../../api/cookies';
+import { getCookies, clearCookies } from '../../api/cookies';
 
-export const { getAllCookies } = createActions({
+export const { getAllCookies, removeCookies } = createActions({
     GET_ALL_COOKIES: async () => {
-    const result = await getCookies();
-    return result;
-  },
+      const result = await getCookies();
+      return result;
+    },
+    REMOVE_COOKIES: async () => {
+      await clearCookies();
+    },
 });

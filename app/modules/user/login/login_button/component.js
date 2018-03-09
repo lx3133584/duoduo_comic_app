@@ -15,10 +15,11 @@ const textStyle = {
   textAlign: 'justify',
 }
 
-export default function LoginButtonComponent({ onPress }) {
+export default function LoginButtonComponent({ loading, onPress }) {
   return (
       <Button
         text='登  录'
+        loading={loading}
         textStyle={textStyle}
         buttonStyle={buttonStyle}
         onPress={onPress}

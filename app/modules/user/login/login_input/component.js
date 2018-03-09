@@ -9,8 +9,7 @@ const ContainStyled = styled.View`
 `
 
 const textStyle = {
-  fontSize: 12,
-  color: brand_primary,
+  fontSize: 14,
 }
 const containerStyle = {
   borderBottomColor: brand_primary,
@@ -24,6 +23,7 @@ export default function LoginInputComponent({ password, displayError, errorMessa
         placeholder={placeholder || '请输入'}
         maxLength={32}
         shake
+        inputStyle={textStyle}
         containerStyle={containerStyle}
         secureTextEntry={password}
         onChangeText={onChange}

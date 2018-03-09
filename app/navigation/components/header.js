@@ -15,7 +15,6 @@ class HeaderComponent extends PureComponent {
   constructor(props) {
     super(props);
     const { getScreenDetails, scene, navigation } = props;
-    console.log(props);
     const { options } = getScreenDetails(scene);
     this.options = options;
     this.navigation = navigation;
