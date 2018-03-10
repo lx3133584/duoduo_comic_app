@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { LoginScreen } from '../modules';
+import { LoginScreen, ComicDetailScreen } from '../modules';
 import { default as TabNavigator } from './tab_navigation';
 import { Header } from './components';
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
@@ -8,6 +8,7 @@ import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/Car
 const HeaderStack = StackNavigator(
   {
     Login: { screen: LoginScreen },
+    ComicDetail: { screen: ComicDetailScreen },
   },
   {
     navigationOptions: ({navigation}) => ({

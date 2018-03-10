@@ -8,10 +8,14 @@ class SearchListComponent extends PureComponent {
     search: PropTypes.func.isRequired,
     list: ImmutablePropTypes.list.isRequired,
     keyword: PropTypes.string.isRequired,
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }),
   };
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onFetch = this.onFetch.bind(this);
+    this.navigate = props.navigation.navigate.bind(this);
   };
   async onFetch(page) {
     const { keyword, search } = this.props;
@@ -24,6 +28,7 @@ class SearchListComponent extends PureComponent {
          list={list}
          Item={ListItem}
          onFetch={this.onFetch}
+         itemOnPress={this.navigate}
          isLong
        />
     );

@@ -7,10 +7,14 @@ class FavoritesListComponent extends PureComponent {
   static propTypes = {
     getList: PropTypes.func.isRequired,
     list: ImmutablePropTypes.list.isRequired,
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }),
   };
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onFetch = this.onFetch.bind(this);
+    this.navigate = props.navigation.navigate.bind(this);
   };
   componentDidMount() {
     this.onFetch();
@@ -25,6 +29,7 @@ class FavoritesListComponent extends PureComponent {
       <LongList
          list={list}
          Item={FavoritesListItem}
+         itemOnPress={this.navigate}
          onFetch={this.onFetch}
          numColumns={3}
        />

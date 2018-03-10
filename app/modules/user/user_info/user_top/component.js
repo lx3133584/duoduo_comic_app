@@ -25,6 +25,7 @@ const AvatarContainStyled = styled.View`
 const AvatarStyled = styled.View`
   border: 5px solid #fff;
   border-radius: 100px;
+  background-color: #fff;
   transform: translateY(-35px);
 `
 const ContentContainStyled = styled.View`

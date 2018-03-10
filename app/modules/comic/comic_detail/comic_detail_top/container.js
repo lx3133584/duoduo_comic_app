@@ -1,17 +1,17 @@
+import { connect } from 'react-redux';
+import { getComicDetail } from '../actions';
 import Component from './component';
 import { withNavigation } from 'react-navigation';
-import { logoutAction } from '../actions';
-import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    token: state.getIn(['cookies', 'EGG_SESS']),
+    detail: state.getIn(['comic', 'detail']),
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  logout() {
-    return dispatch(logoutAction())
+  getDetail(params) {
+    return dispatch(getComicDetail(params))
   },
 })
 

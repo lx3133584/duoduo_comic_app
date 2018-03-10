@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { Image } from '..';
 import { Badge } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native';
 
 const ContainStyled = styled.View`
   flex: 1;
@@ -43,6 +44,9 @@ const wrapperStyle = {
   width: 50,
   marginRight: 10,
 }
+const WhiteContainStyled = styled.View`
+  background: #fff;
+`
 const greenBackground = {
   backgroundColor: '#85d6cf',
 }
@@ -52,35 +56,40 @@ const redBackground = {
 const purpleBackground = {
   backgroundColor: '#a0aae6',
 }
-export default function ListItem({ title, cover, desc, author, status, class_name }) {
+export default function ListItem({ id, title, cover, desc, author, status, class_name, itemOnPress }) {
   return (
-    <ContainStyled>
-      <LeftStyled>
-        <Image
-          source={{ uri: cover }}
-          imageStyle={imageStyle}
-        />
-      </LeftStyled>
-      <RightStyled>
-        <TitleStyled>{title}</TitleStyled>
-        <DescStyled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          {desc.replace(':', '')}</DescStyled>
+    <WhiteContainStyled>
+      <TouchableOpacity activeOpacity={0.6} onPress={() => itemOnPress('ComicDetail', { id })}>
         <ContainStyled>
-          <AuthorStyled>{author}</AuthorStyled>
-          <Badge
-            value={status}
-            textStyle={textStyle}
-            wrapperStyle={wrapperStyle}
-            containerStyle={status === '完结' ? greenBackground : redBackground}
-          />
-          {class_name && <Badge
-            value={class_name}
-            textStyle={textStyle}
-            wrapperStyle={wrapperStyle}
-            containerStyle={purpleBackground}
-          />}
+          <LeftStyled>
+            <Image
+              source={{ uri: cover }}
+              imageStyle={imageStyle}
+            />
+          </LeftStyled>
+          <RightStyled>
+            <TitleStyled>{title}</TitleStyled>
+            <DescStyled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {desc.replace(':', '')}</DescStyled>
+            <ContainStyled>
+              <AuthorStyled>{author}</AuthorStyled>
+              <Badge
+                value={status}
+                textStyle={textStyle}
+                wrapperStyle={wrapperStyle}
+                containerStyle={status === '完结' ? greenBackground : redBackground}
+              />
+              {class_name && <Badge
+                value={class_name}
+                textStyle={textStyle}
+                wrapperStyle={wrapperStyle}
+                containerStyle={purpleBackground}
+              />}
+            </ContainStyled>
+          </RightStyled>
         </ContainStyled>
-      </RightStyled>
-    </ContainStyled>
+      </TouchableOpacity>
+    </WhiteContainStyled>
+
   )
 }

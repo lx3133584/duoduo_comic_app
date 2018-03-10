@@ -8,6 +8,6 @@ const themeVars = Object.assign({}, defaultVars, customVars);
 if (fs.statSync(themePath).isFile()) {
   fs.writeFileSync(
     themePath,
-    'module.exports = ' + JSON.stringify(themeVars)
+    'var brandPrimary = "#f97568"; var brandPrimaryTap = "#ff534d";module.exports = ' + JSON.stringify(themeVars)
   );
 }

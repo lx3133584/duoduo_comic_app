@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
 import { SearchBar, SearchList } from '.';
 import styled from "styled-components";
+import { Dimensions } from 'react-native';
+const { height } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   padding-bottom: 50px;
+  min-height: ${height};
 `
 
 class SearchListScreen extends PureComponent {

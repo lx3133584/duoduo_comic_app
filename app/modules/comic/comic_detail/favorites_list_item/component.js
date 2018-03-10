@@ -2,7 +2,6 @@ import React from 'react';
 import styled from "styled-components";
 import { Image } from '../../..';
 import { Badge } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native';
 
 const ContainStyled = styled.View`
   padding: 10px 20px;
@@ -23,16 +22,14 @@ const imageStyle = {
   width: 80,
   height: 120,
 }
-export default function FavoritesListItem({ title, cover, itemOnPress, id }) {
+export default function ComicDetailItem({ title, cover }) {
   return (
     <ContainStyled>
       <TopStyled>
-        <TouchableOpacity activeOpacity={0.6} onPress={() => itemOnPress('ComicDetail', { id })}>
-          <Image
-            source={{ uri: cover }}
-            imageStyle={imageStyle}
-          />
-        </TouchableOpacity>
+        <Image
+          source={{ uri: cover }}
+          imageStyle={imageStyle}
+        />
       </TopStyled>
       <BottomStyled>
         <TitleStyled>{title}</TitleStyled>

@@ -66,8 +66,8 @@ class LongListComponent extends PureComponent {
     });
   };
   _renderItem({ item }) {
-    const { Item } = this.props;
-    return <Item {...item} />
+    const { Item, itemOnPress } = this.props;
+    return <Item {...item} itemOnPress={itemOnPress} />
   };
   render() {
     const { list, isLong, horizontal, numColumns } = this.props;
