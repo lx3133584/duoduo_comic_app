@@ -51,7 +51,7 @@ const BottomTextStyled = styled.Text`
   opacity: 0.8;
 `
 
-class ComicDetailComponent extends PureComponent {
+class ComicDetailTopComponent extends PureComponent {
   static propTypes = {
     getDetail: PropTypes.func.isRequired,
     detail: ImmutablePropTypes.map.isRequired,
@@ -91,12 +91,12 @@ class ComicDetailComponent extends PureComponent {
           onLoadEnd={this.imageLoaded}
           source={{uri: detail.cover}}
         />
-        <BlurView
+        {viewRef && <BlurView
           style={blurImageStyled}
           viewRef={viewRef}
           blurType="dark"
           blurAmount={6}
-        />
+        />}
         <Image
           style={coverImageStyled}
           source={{uri: detail.cover}}
@@ -113,4 +113,4 @@ class ComicDetailComponent extends PureComponent {
   }
 }
 
-export default ComicDetailComponent;
+export default ComicDetailTopComponent;

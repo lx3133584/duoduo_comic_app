@@ -2,6 +2,7 @@ import http from 'axios';
 
 // 收藏
 export const fetchFavoritesList = () => http.get('favorites'); // 收藏列表
+export const postFavorite = (id) => http.post(`favorites/${id}`); // 添加收藏
 // 搜索
 export const searchLocal = ({ keyword, page }) => http.get('searchLocal', {params: { keyword, page }});
 // 用户

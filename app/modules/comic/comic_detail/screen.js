@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { ComicDetailTop } from '.';
+import { ComicDetailTop, ComicDetailBtns } from '.';
 import styled from "styled-components";
 
 const ContainStyled = styled.View`
@@ -14,6 +14,7 @@ class ComicDetailScreen extends PureComponent {
     return (
     <ContainStyled>
       <ComicDetailTop />
+      <ComicDetailBtns />
     </ContainStyled>)
   };
 }

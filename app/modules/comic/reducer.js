@@ -15,4 +15,9 @@ export default handleActions({
     if (action.error) return state;
     return state.set('list', Immutable.List(action.payload.data));
   },
+  [comicDetailActions.addFavorite]: (state, action) => {
+    if (action.error) return state;
+    const num = state.getIn(['detail', 'collection_number']) || 0;
+    return state.setIn(['detail', 'collection_number'], num + 1);
+  },
 }, initialState)
