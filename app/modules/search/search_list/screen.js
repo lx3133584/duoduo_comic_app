@@ -1,13 +1,6 @@
 import React, { PureComponent } from 'react';
 import { SearchBar, SearchList } from '.';
-import styled from "styled-components";
-import { Dimensions } from 'react-native';
-const { height } = Dimensions.get('window');
-
-const ContainStyled = styled.View`
-  padding-bottom: 50px;
-  min-height: ${height};
-`
+import { View } from 'react-native';
 
 class SearchListScreen extends PureComponent {
   static navigationOptions = {
@@ -15,10 +8,10 @@ class SearchListScreen extends PureComponent {
   };
   render() {
     return (
-    <ContainStyled>
+    <View>
       <SearchBar />
       <SearchList />
-    </ContainStyled>)
+    </View>)
   };
 }
 

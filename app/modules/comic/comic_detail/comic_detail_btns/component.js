@@ -10,6 +10,7 @@ const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   height: 60px;
+  background-color: #fff;
   justify-content: space-around;
   flex-direction: row;
   width: ${width};

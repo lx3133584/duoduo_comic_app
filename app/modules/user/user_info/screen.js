@@ -1,10 +1,6 @@
 import React, { PureComponent } from 'react';
 import { UserTop, UserOperateList } from '.';
-import styled from "styled-components";
-
-const ContainStyled = styled.View`
-  padding-bottom: 50px;
-`
+import { View } from 'react-native';
 
 class UserInfoScreen extends PureComponent {
   static navigationOptions = {
@@ -12,10 +8,10 @@ class UserInfoScreen extends PureComponent {
   };
   render() {
     return (
-      <ContainStyled>
+      <View>
         <UserTop />
         <UserOperateList />
-      </ContainStyled>
+      </View>
     );
   }
 }

@@ -56,7 +56,7 @@ const redBackground = {
 const purpleBackground = {
   backgroundColor: '#a0aae6',
 }
-export default function ListItem({ id, title, cover, desc, author, status, class_name, itemOnPress }) {
+export default function SearchListItem({ id, title, cover, desc, author, status, class_name, itemOnPress }) {
   return (
     <WhiteContainStyled>
       <TouchableOpacity activeOpacity={0.6} onPress={() => itemOnPress('ComicDetail', { id })}>

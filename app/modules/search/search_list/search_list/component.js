@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import { LongList, ListItem } from '..';
+import { LongList, SearchListItem } from '..';
 
 class SearchListComponent extends PureComponent {
   static propTypes = {
@@ -26,7 +26,7 @@ class SearchListComponent extends PureComponent {
     return (
       <LongList
          list={list}
-         Item={ListItem}
+         Item={SearchListItem}
          onFetch={this.onFetch}
          itemOnPress={this.navigate}
          isLong

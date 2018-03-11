@@ -3,11 +3,12 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { BlurView } from 'react-native-blur';
-import { Image, Dimensions, findNodeHandle } from 'react-native';
-const { width, height } = Dimensions.get('window');
+import { Image, Dimensions, findNodeHandle, View } from 'react-native';
+const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   height: 180px;
+  background-color: #000;
 `
 const coverImageStyled = {
   position: 'absolute',
@@ -27,12 +28,17 @@ const blurImageStyled = {
   height: 180,
   zIndex: 1,
 }
+const blackBgStyle = {
+  backgroundColor: '#000',
+  opacity: 0.6,
+  zIndex: 3,
+}
 const TextContainStyled = styled.View`
   position: absolute;
   top: 60px;
   left: 20px;
   bottom: 15px;
-  z-index: 3;
+  z-index: 4;
 `
 const TitleStyled = styled.Text`
   color: #fff;
@@ -75,7 +81,7 @@ class ComicDetailTopComponent extends PureComponent {
   };
   imageLoaded() {
     this.setState({ viewRef: findNodeHandle(this.backgroundImage) });
-  }
+  };
   async onFetch(id) {
     const { getDetail } = this.props;
     return await getDetail(id);
@@ -91,11 +97,13 @@ class ComicDetailTopComponent extends PureComponent {
           onLoadEnd={this.imageLoaded}
           source={{uri: detail.cover}}
         />
-        {viewRef && <BlurView
+        {viewRef ? <BlurView
           style={blurImageStyled}
           viewRef={viewRef}
           blurType="dark"
           blurAmount={6}
+        /> : <View
+          style={[blurImageStyled, blackBgStyle]}
         />}
         <Image
           style={coverImageStyled}

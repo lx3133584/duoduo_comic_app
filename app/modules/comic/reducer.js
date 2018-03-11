@@ -17,7 +17,6 @@ export default handleActions({
   },
   [comicDetailActions.addFavorite]: (state, action) => {
     if (action.error) return state;
-    const num = state.getIn(['detail', 'collection_number']) || 0;
-    return state.setIn(['detail', 'collection_number'], num + 1);
+    return state.updateIn(['detail', 'collection_number'], (num) => +num + 1);
   },
 }, initialState)

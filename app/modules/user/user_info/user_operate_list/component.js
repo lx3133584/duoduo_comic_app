@@ -57,7 +57,10 @@ export default function UserOperateListComponent({ navigation, logout, token }) 
           chevronColor="#999"
           onPress={() => alert('注销', '是否确认退出登录？', [
             { text: '取消' , style: { color: '#333' } },
-            { text: '确定', onPress: logout, style: { color: brand_primary } },
+            { text: '确定', onPress: () => {
+              logout();
+              navigation.navigate('Login');
+            }, style: { color: brand_primary } },
           ])}
         />
       </List>}

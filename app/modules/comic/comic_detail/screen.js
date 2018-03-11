@@ -1,10 +1,6 @@
 import React, { PureComponent } from 'react';
 import { ComicDetailTop, ComicDetailBtns, ComicDetailTabs } from '.';
-import styled from "styled-components";
-
-const ContainStyled = styled.View`
-  background: #fff;
-`
+import { View } from 'react-native';
 
 class ComicDetailScreen extends PureComponent {
   static navigationOptions = {
@@ -12,12 +8,12 @@ class ComicDetailScreen extends PureComponent {
   };
   render() {
     return (
-    <ContainStyled>
-      <ComicDetailTop />
-      <ComicDetailBtns />
-      <ComicDetailTabs />
-    </ContainStyled>)
-  };
+      <View style={{flex: 1}}>
+        <ComicDetailTop />
+        <ComicDetailBtns />
+        <ComicDetailTabs />
+      </View>
+  )};
 }
 
 export default ComicDetailScreen;
