@@ -23,11 +23,14 @@ const imageStyle = {
   width: 80,
   height: 120,
 }
-export default function FavoritesListItem({ title, cover, itemOnPress, id }) {
+export default function FavoritesListItem({ title, cover, itemOnPress, itemOnLongPress, id }) {
   return (
     <ContainStyled>
       <TopStyled>
-        <TouchableOpacity activeOpacity={0.6} onPress={() => itemOnPress('ComicDetail', { id, page_id: 1 })}>
+        <TouchableOpacity
+          activeOpacity={0.6}
+          onLongPress={() => itemOnLongPress(id)}
+          onPress={() => itemOnPress('ComicDetail', { id, page_id: 1 })}>
           <Image
             source={{ uri: cover }}
             imageStyle={imageStyle}

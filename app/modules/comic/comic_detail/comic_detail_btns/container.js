@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Component from './component';
 import { withNavigation } from 'react-navigation';
-import { addFavorite } from '../actions';
+import { addFavorite, removeFavorite } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -12,6 +12,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   add(params) {
     return dispatch(addFavorite(params))
+  },
+  remove(params) {
+    return dispatch(removeFavorite(params))
   },
 })
 

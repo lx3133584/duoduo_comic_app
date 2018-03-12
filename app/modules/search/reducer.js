@@ -11,15 +11,12 @@ const initialState = Immutable.Map({
 export default handleActions({
   [searchListActions.getSearchList]: (state, action) => {
     if (action.error) return state;
-    let newState;
     if (!action.payload.page) {
-      newState = state.update('list', (list) => list.clear());
-    } else {
-      newState = state;
+      state = state.update('list', (list) => list.clear());
     }
-    newState = newState.set('page', action.payload.page);
-    newState = newState.set('keyword', action.payload.keyword);
-    newState = newState.set('curData', Immutable.List(action.payload.result.data));
-    return newState.update('list', (oldList) => oldList.concat(action.payload.result.data));
+    state = state.set('page', action.payload.page);
+    state = state.set('keyword', action.payload.keyword);
+    state = state.set('curData', Immutable.List(action.payload.result.data));
+    return state.update('list', (oldList) => oldList.concat(action.payload.result.data));
   },
 }, initialState)

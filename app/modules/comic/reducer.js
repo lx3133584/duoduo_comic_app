@@ -17,6 +17,12 @@ export default handleActions({
   },
   [comicDetailActions.addFavorite]: (state, action) => {
     if (action.error) return state;
-    return state.updateIn(['detail', 'collection_number'], (num) => +num + 1);
+    state = state.updateIn(['detail', 'collection_number'], num => +num + 1);
+    return state.setIn(['detail', 'favorite_id'], 1);
+  },
+  [comicDetailActions.removeFavorite]: (state, action) => {
+    if (action.error) return state;
+    state = state.updateIn(['detail', 'collection_number'], num => +num - 1);
+    return state.setIn(['detail', 'favorite_id'], 0);
   },
 }, initialState)

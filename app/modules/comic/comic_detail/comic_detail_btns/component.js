@@ -6,6 +6,8 @@ import { Button } from 'react-native-elements';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { brand_primary } from '../../../../../theme';
+import { Modal } from 'antd-mobile';
+const alert = Modal.alert;
 const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
@@ -25,11 +27,11 @@ const CollectionStyled = styled.View`
 `
 const CollectionTextStyled = styled.Text`
   color: #666;
-  fontSize: 14px;
+  font-size: 14px;
   margin-left: 8px;
 `
 const CollectionNumberStyled = styled.Text`
-  fontSize: 12px;
+  font-size: 12px;
 `
 const startTextStyle = {
   color: '#fff',
@@ -45,6 +47,7 @@ class ComicDetailBtnsComponent extends PureComponent {
   static propTypes = {
     detail: ImmutablePropTypes.map.isRequired,
     add: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
     }),
@@ -53,10 +56,20 @@ class ComicDetailBtnsComponent extends PureComponent {
     super();
     this.startRead = this.startRead.bind(this);
     this.addFavorite = this.addFavorite.bind(this);
+    this.removeFavorite = this.removeFavorite.bind(this);
   };
   addFavorite() {
     const id = this.props.detail.get('id');
     this.props.add(id);
+  };
+  removeFavorite() {
+    alert('提示', '是否确认取消收藏？', [
+      { text: '取消' , style: { color: '#333' } },
+      { text: '确定', onPress: () => {
+        const id = this.props.detail.get('id');
+        this.props.remove(id);
+      }, style: { color: brand_primary } },
+    ])
   };
   startRead() {
     this.props.navigation.navigate('Favorites');
@@ -66,14 +79,14 @@ class ComicDetailBtnsComponent extends PureComponent {
     return (
       <ContainStyled>
         <CollectionContainStyled>
-          <TouchableOpacity activeOpacity={0.6} onPress={this.addFavorite}>
+          <TouchableOpacity activeOpacity={0.6} onPress={detail.favorite_id ? this.removeFavorite : this.addFavorite}>
             <CollectionStyled>
               <Icon
-                name='heart-o'
+                name={detail.favorite_id ? 'heart' : 'heart-o'}
                 size={18}
                 color={brand_primary}
               />
-              <CollectionTextStyled>收藏 <CollectionNumberStyled>({detail.collection_number || 0})</CollectionNumberStyled></CollectionTextStyled>
+              <CollectionTextStyled>{detail.favorite_id ? '已' : ''}收藏 <CollectionNumberStyled>({detail.collection_number || 0})</CollectionNumberStyled></CollectionTextStyled>
             </CollectionStyled>
           </TouchableOpacity>
         </CollectionContainStyled>
