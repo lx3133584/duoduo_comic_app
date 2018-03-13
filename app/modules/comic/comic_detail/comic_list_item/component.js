@@ -22,10 +22,10 @@ const activeStyle = {
   color: brand_primary,
 }
 
-export default function ComicListItem({ title, id }) {
+export default function ComicListItem({item}) {
   return (
     <Button
-      text={title}
+      text={item.title}
       buttonStyle={buttonStyle}
       textStyle={textStyle}
     />

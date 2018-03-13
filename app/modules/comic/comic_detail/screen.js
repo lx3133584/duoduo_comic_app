@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { ComicDetailTop, ComicDetailBtns, ComicDetailTabs } from '.';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 
 class ComicDetailScreen extends PureComponent {
   static navigationOptions = {
@@ -8,11 +8,11 @@ class ComicDetailScreen extends PureComponent {
   };
   render() {
     return (
-      <View style={{flex: 1}}>
+      <ScrollView>
         <ComicDetailTop />
         <ComicDetailBtns />
         <ComicDetailTabs />
-      </View>
+      </ScrollView>
   )};
 }
 

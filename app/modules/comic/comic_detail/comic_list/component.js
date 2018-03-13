@@ -1,9 +1,14 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import styled from "styled-components";
-import { View } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { ComicListItem, ComicListCategory } from '..';
+
+const rowStyle = {
+  justifyContent: 'space-around',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+}
 
 class ComicListComponent extends PureComponent {
   static propTypes = {
@@ -22,6 +27,7 @@ class ComicListComponent extends PureComponent {
   componentDidMount() {
     this.onFetch();
   };
+  _keyExtractor: (item, index) => item.id;
   async onFetch() {
     const { id } = this.props.navigation.state.params;
     const { getList } = this.props;
@@ -31,13 +37,20 @@ class ComicListComponent extends PureComponent {
     const { list } = this.props;
     return (
       <View>
-        {list.map(({id, name, chapters}) => <ComicListCategory
-            title={name}
-            key={id}
-          >
-            {chapters.map(item => <ComicListItem {...item} key={item.id} />)}
+        {
+          list.map(item => {
+            const { id, name, chapters } = item;
+            return <ComicListCategory title={name} key={id}>
+            <FlatList
+              data={chapters}
+              columnWrapperStyle={rowStyle}
+              keyExtractor={this._keyExtractor}
+              numColumns={9999999}
+              renderItem={ComicListItem}
+            />
           </ComicListCategory>
-        )}
+          })
+        }
       </View>
     );
   }
