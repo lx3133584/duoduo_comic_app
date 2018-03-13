@@ -7,6 +7,9 @@ const ContainStyled = styled.View`
   padding: 5px;
   background-color: #fff;
 `
+const ItemContainStyled = styled.View`
+  padding: 10px;
+`
 const TitleStyled = styled.Text`
   font-size: 12px;
   color: #999;
@@ -16,7 +19,7 @@ export default function ComicListCategory({ title, children }) {
   return (
     <ContainStyled>
       <TitleStyled>{title}</TitleStyled>
-      {children}
+      <ItemContainStyled>{children}</ItemContainStyled>
     </ContainStyled>
   )
 }

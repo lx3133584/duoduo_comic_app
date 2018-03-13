@@ -30,6 +30,7 @@ class SearchListComponent extends PureComponent {
          onFetch={this.onFetch}
          itemOnPress={this.navigate}
          isLong
+         showFooter
        />
     );
   }

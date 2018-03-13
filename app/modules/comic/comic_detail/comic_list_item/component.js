@@ -22,12 +22,13 @@ const activeStyle = {
   color: brand_primary,
 }
 
-export default function ComicListItem({item}) {
+export default function ComicListItem({title, id, itemOnPress}) {
   return (
     <Button
-      text={item.title}
+      text={title}
       buttonStyle={buttonStyle}
       textStyle={textStyle}
+      onPress={() => itemOnPress('ComicContent', { id })}
     />
   )
 }

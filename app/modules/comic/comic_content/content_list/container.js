@@ -1,18 +1,17 @@
 import { connect } from 'react-redux';
 import Component from './component';
 import { withNavigation } from 'react-navigation';
-import { getComicList } from '../actions';
+import { getContentList } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    list: state.getIn(['comic', 'list']),
-    detail: state.getIn(['comic', 'detail']),
+    content: state.getIn(['comic', 'content']),
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  getList(params) {
-    return dispatch(getComicList(params))
+  getContent(params) {
+    return dispatch(getContentList(params))
   },
 })
 

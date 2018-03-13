@@ -3,9 +3,9 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { View, FlatList } from 'react-native';
 import { ComicListItem, ComicListCategory } from '..';
+import { LongList } from '../../..';
 
 const rowStyle = {
-  justifyContent: 'space-around',
   flexDirection: 'row',
   flexWrap: 'wrap',
 }
@@ -13,6 +13,7 @@ const rowStyle = {
 class ComicListComponent extends PureComponent {
   static propTypes = {
     list: ImmutablePropTypes.list.isRequired,
+    detail: ImmutablePropTypes.map.isRequired,
     getList: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
@@ -21,8 +22,9 @@ class ComicListComponent extends PureComponent {
       }),
     }),
   };
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.navigate = props.navigation.navigate.bind(this);
   };
   componentDidMount() {
     this.onFetch();
@@ -33,6 +35,10 @@ class ComicListComponent extends PureComponent {
     const { getList } = this.props;
     return await getList(id);
   };
+  _renderItem({ item }) {
+    const { Item, itemOnPress, itemOnLongPress } = this.props;
+    return <Item {...item} itemOnPress={itemOnPress} itemOnLongPress={itemOnLongPress} />
+  };
   render() {
     const { list } = this.props;
     return (
@@ -41,13 +47,13 @@ class ComicListComponent extends PureComponent {
           list.map(item => {
             const { id, name, chapters } = item;
             return <ComicListCategory title={name} key={id}>
-            <FlatList
-              data={chapters}
-              columnWrapperStyle={rowStyle}
-              keyExtractor={this._keyExtractor}
-              numColumns={9999999}
-              renderItem={ComicListItem}
-            />
+            <LongList
+               list={chapters}
+               columnWrapperStyle={rowStyle}
+               Item={ComicListItem}
+               itemOnPress={this.navigate}
+               numColumns={9999999}
+             />
           </ComicListCategory>
           })
         }
