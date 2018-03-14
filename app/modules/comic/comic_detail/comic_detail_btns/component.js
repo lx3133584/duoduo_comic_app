@@ -7,6 +7,7 @@ import { Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { brand_primary } from '../../../../../theme';
 import { Modal } from 'antd-mobile';
+import { numberFormat } from '../../../../utils';
 const alert = Modal.alert;
 const { width } = Dimensions.get('window');
 
@@ -87,7 +88,7 @@ class ComicDetailBtnsComponent extends PureComponent {
                 size={18}
                 color={brand_primary}
               />
-              <CollectionTextStyled>{detail.get('favorite_id')? '已' : ''}收藏 <CollectionNumberStyled>({detail.get('collection_number') || 0})</CollectionNumberStyled></CollectionTextStyled>
+              <CollectionTextStyled>{detail.get('favorite_id')? '已' : ''}收藏 <CollectionNumberStyled>({numberFormat(detail.get('collection_number'))})</CollectionNumberStyled></CollectionTextStyled>
             </CollectionStyled>
           </TouchableOpacity>
         </CollectionContainStyled>

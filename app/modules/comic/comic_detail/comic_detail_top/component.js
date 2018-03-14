@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { BlurView } from 'react-native-blur';
 import { Image, Dimensions, findNodeHandle, View } from 'react-native';
+import { numberFormat } from '../../../../utils';
 const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
@@ -39,6 +40,7 @@ const TextContainStyled = styled.View`
   left: 20px;
   bottom: 15px;
   z-index: 4;
+  width: ${width};
 `
 const TitleStyled = styled.Text`
   color: #fff;
@@ -118,7 +120,7 @@ class ComicDetailTopComponent extends PureComponent {
           <TitleStyled>{title}</TitleStyled>
           <BottomTextStyled>{author}</BottomTextStyled>
           <BottomTextContainStyled>
-            <BottomTextStyled>{class_name && (class_name + ' | ')}人气 {popularity_number || 0}</BottomTextStyled>
+            <BottomTextStyled>{class_name && (class_name + ' | ')}人气 {numberFormat(popularity_number)}</BottomTextStyled>
           </BottomTextContainStyled>
         </TextContainStyled>
       </ContainStyled>
