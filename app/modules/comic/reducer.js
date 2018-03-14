@@ -28,6 +28,7 @@ export default handleActions({
   },
   [comicContentActions.getContentList]: (state, action) => {
     if (action.error) return state;
-    return state.set('content', Immutable.List(action.payload.data));
+    state = state.setIn(['detail', 'chapter_id'], action.payload.id);
+    return state.set('content', Immutable.List(action.payload.result.data));
   },
 }, initialState)

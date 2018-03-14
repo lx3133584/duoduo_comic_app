@@ -47,6 +47,7 @@ const startButtonStyle = {
 class ComicDetailBtnsComponent extends PureComponent {
   static propTypes = {
     detail: ImmutablePropTypes.map.isRequired,
+    list: ImmutablePropTypes.list.isRequired,
     add: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
@@ -73,22 +74,27 @@ class ComicDetailBtnsComponent extends PureComponent {
     ])
   };
   startRead() {
-    const id = this.props.detail.get('chapter_id');
+    const { detail, list } = this.props;
+    const chapter_id = detail.get('chapter_id');
+    const id = chapter_id || list.get(0).chapters[0].id;
     this.props.navigation.navigate('ComicContent', { id });
   };
   render() {
     const { detail } = this.props;
+    const favorite_id = detail.get('favorite_id');
+    const collection_number = detail.get('collection_number');
+    const chapter_id = detail.get('chapter_id');
     return (
       <ContainStyled>
         <CollectionContainStyled>
-          <TouchableOpacity activeOpacity={0.6} onPress={detail.get('favorite_id') ? this.removeFavorite : this.addFavorite}>
+          <TouchableOpacity activeOpacity={0.6} onPress={favorite_id ? this.removeFavorite : this.addFavorite}>
             <CollectionStyled>
               <Icon
-                name={detail.get('favorite_id') ? 'heart' : 'heart-o'}
+                name={favorite_id ? 'heart' : 'heart-o'}
                 size={18}
                 color={brand_primary}
               />
-              <CollectionTextStyled>{detail.get('favorite_id')? '已' : ''}收藏 <CollectionNumberStyled>({numberFormat(detail.get('collection_number'))})</CollectionNumberStyled></CollectionTextStyled>
+              <CollectionTextStyled>{favorite_id? '已' : ''}收藏 <CollectionNumberStyled>({numberFormat(collection_number)})</CollectionNumberStyled></CollectionTextStyled>
             </CollectionStyled>
           </TouchableOpacity>
         </CollectionContainStyled>
@@ -96,7 +102,7 @@ class ComicDetailBtnsComponent extends PureComponent {
           textStyle={startTextStyle}
           buttonStyle={startButtonStyle}
           onPress={this.startRead}
-          text={detail.get('chapter_id') ? '续看' : '开始阅读'}
+          text={chapter_id ? '续看' : '开始阅读'}
         />
       </ContainStyled>
     );

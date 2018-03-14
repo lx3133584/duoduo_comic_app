@@ -6,6 +6,7 @@ import { addFavorite, removeFavorite } from '../actions';
 const mapStateToProps = (state, ownProps) => {
   return {
     detail: state.getIn(['comic', 'detail']),
+    list: state.getIn(['comic', 'list']),
   }
 }
 

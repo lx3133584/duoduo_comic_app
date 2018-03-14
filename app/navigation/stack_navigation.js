@@ -17,22 +17,11 @@ const HeaderStack = StackNavigator(
   },
 );
 
-const NoHeaderStack = StackNavigator(
-  {
-    ComicContent: { screen: ComicContentScreen },
-  },
-  {
-    navigationOptions: ({navigation}) => ({
-      header: null,
-    }),
-  },
-);
-
 const RootStack = StackNavigator(
   {
     TabStack: { screen: TabNavigator },
     HeaderStack: { screen: HeaderStack },
-    NoHeaderStack: { screen: NoHeaderStack },
+    ComicContent: { screen: ComicContentScreen },
   },
   {
     navigationOptions: ({navigation}) => ({

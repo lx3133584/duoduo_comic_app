@@ -17,17 +17,13 @@ const textStyle = {
   color: '#333',
   fontSize: 12,
 }
-const activeStyle = {
-  borderColor: brand_primary,
-  color: brand_primary,
-}
 
-export default function ComicListItem({title, id, itemOnPress}) {
+export default function ComicListItem({title, id, itemOnPress, active}) {
   return (
     <Button
       text={title}
-      buttonStyle={buttonStyle}
-      textStyle={textStyle}
+      buttonStyle={[buttonStyle, active && {borderColor: brand_primary}]}
+      textStyle={[textStyle, active && {color: brand_primary}]}
       onPress={() => itemOnPress('ComicContent', { id })}
     />
   )

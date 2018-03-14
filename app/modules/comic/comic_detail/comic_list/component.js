@@ -29,18 +29,15 @@ class ComicListComponent extends PureComponent {
   componentDidMount() {
     this.onFetch();
   };
-  _keyExtractor: (item, index) => item.id;
   async onFetch() {
     const { id } = this.props.navigation.state.params;
     const { getList } = this.props;
     return await getList(id);
   };
-  _renderItem({ item }) {
-    const { Item, itemOnPress, itemOnLongPress } = this.props;
-    return <Item {...item} itemOnPress={itemOnPress} itemOnLongPress={itemOnLongPress} />
-  };
   render() {
     const { list } = this.props;
+    const { detail } = this.props;
+    const chapter_id = detail.get('chapter_id');
     return (
       <View>
         {
@@ -50,7 +47,7 @@ class ComicListComponent extends PureComponent {
             <LongList
                list={chapters}
                columnWrapperStyle={rowStyle}
-               Item={ComicListItem}
+               Item={item => <ComicListItem {...item} active={item.id === chapter_id} />}
                itemOnPress={this.navigate}
                numColumns={9999999}
              />
