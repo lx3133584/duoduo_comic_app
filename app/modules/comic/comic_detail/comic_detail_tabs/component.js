@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { Tabs } from 'antd-mobile';
-import { Text } from 'react-native';
-import { ComicList } from '..';
+import { ComicList, ComicDetail } from '..';
 
 const tabs = [
   { title: '详情' },
@@ -36,7 +35,7 @@ class ComicDetailTabsComponent extends PureComponent {
         tabBarInactiveTextColor="#999"
         tabBarUnderlineStyle={tabBarUnderlineStyle}
       >
-        <Text>Content of 11111 tab</Text>
+        <ComicDetail />
         <ComicList />
       </Tabs>
     );

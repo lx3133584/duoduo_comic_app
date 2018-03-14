@@ -7,6 +7,7 @@ export default function ImageComponent({ source, imageStyle }) {
   return (
     <Image
       source={source}
+      resizeMode="cover"
       indicator={() => <Progress color={brand_primary}/>}
       style={imageStyle}
     />

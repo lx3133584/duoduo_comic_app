@@ -72,21 +72,22 @@ class ComicDetailBtnsComponent extends PureComponent {
     ])
   };
   startRead() {
-    this.props.navigation.navigate('Favorites');
+    const id = this.props.detail.get('chapter_id');
+    this.props.navigation.navigate('ComicContent', { id });
   };
   render() {
-    const detail = this.props.detail.toJS();
+    const { detail } = this.props;
     return (
       <ContainStyled>
         <CollectionContainStyled>
-          <TouchableOpacity activeOpacity={0.6} onPress={detail.favorite_id ? this.removeFavorite : this.addFavorite}>
+          <TouchableOpacity activeOpacity={0.6} onPress={detail.get('favorite_id') ? this.removeFavorite : this.addFavorite}>
             <CollectionStyled>
               <Icon
-                name={detail.favorite_id ? 'heart' : 'heart-o'}
+                name={detail.get('favorite_id') ? 'heart' : 'heart-o'}
                 size={18}
                 color={brand_primary}
               />
-              <CollectionTextStyled>{detail.favorite_id ? '已' : ''}收藏 <CollectionNumberStyled>({detail.collection_number || 0})</CollectionNumberStyled></CollectionTextStyled>
+              <CollectionTextStyled>{detail.get('favorite_id')? '已' : ''}收藏 <CollectionNumberStyled>({detail.get('collection_number') || 0})</CollectionNumberStyled></CollectionTextStyled>
             </CollectionStyled>
           </TouchableOpacity>
         </CollectionContainStyled>
@@ -94,7 +95,7 @@ class ComicDetailBtnsComponent extends PureComponent {
           textStyle={startTextStyle}
           buttonStyle={startButtonStyle}
           onPress={this.startRead}
-          text={'开始阅读'}
+          text={detail.get('chapter_id') ? '续看' : '开始阅读'}
         />
       </ContainStyled>
     );

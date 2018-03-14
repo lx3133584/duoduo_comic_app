@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-import { ComicListItem } from '..';
 
 const ContainStyled = styled.View`
   margin-bottom: 5px;

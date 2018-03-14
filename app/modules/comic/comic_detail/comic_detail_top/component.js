@@ -87,15 +87,20 @@ class ComicDetailTopComponent extends PureComponent {
     return await getDetail(id);
   };
   render() {
-    const detail = this.props.detail.toJS();
+    const { detail } = this.props;
     const { viewRef } = this.state;
+    const cover = detail.get('cover');
+    const title = detail.get('title');
+    const author = detail.get('author');
+    const class_name = detail.get('class_name');
+    const popularity_number = detail.get('popularity_number');
     return (
       <ContainStyled>
         <Image
           ref={(img) => { this.backgroundImage = img }}
           style={blurImageStyled}
           onLoadEnd={this.imageLoaded}
-          source={{uri: detail.cover}}
+          source={{uri: cover}}
         />
         {viewRef ? <BlurView
           style={blurImageStyled}
@@ -107,13 +112,13 @@ class ComicDetailTopComponent extends PureComponent {
         />}
         <Image
           style={coverImageStyled}
-          source={{uri: detail.cover}}
+          source={{uri: cover}}
         />
         <TextContainStyled>
-          <TitleStyled>{detail.title}</TitleStyled>
-          <BottomTextStyled>{detail.author}</BottomTextStyled>
+          <TitleStyled>{title}</TitleStyled>
+          <BottomTextStyled>{author}</BottomTextStyled>
           <BottomTextContainStyled>
-            <BottomTextStyled>人气 {detail.popularity_number || 0}</BottomTextStyled>
+            <BottomTextStyled>{class_name && (class_name + ' | ')}人气 {popularity_number || 0}</BottomTextStyled>
           </BottomTextContainStyled>
         </TextContainStyled>
       </ContainStyled>
