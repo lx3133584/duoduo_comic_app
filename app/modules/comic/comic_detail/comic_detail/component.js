@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import { Rating } from '..';
 
 const ContainStyled = styled.View`
   margin-bottom: 5px;
@@ -51,6 +52,7 @@ export default function ComicDetailComponent({ detail }) {
           </AuthorContainStyled>
           <StatusStyled>{status} | {update_date}</StatusStyled>
         </LeftContainStyled>
+        <Rating />
       </TopContainStyled>
       <DescStyled>{desc}</DescStyled>
     </ContainStyled>
