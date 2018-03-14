@@ -6,6 +6,7 @@ import { LongList } from '../../..';
 import { brand_primary } from '../../../../../theme';
 import { Modal } from 'antd-mobile';
 const alert = Modal.alert;
+
 class FavoritesListComponent extends PureComponent {
   static propTypes = {
     getList: PropTypes.func.isRequired,

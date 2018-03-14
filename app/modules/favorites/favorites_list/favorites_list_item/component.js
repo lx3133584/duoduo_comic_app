@@ -3,10 +3,13 @@ import styled from "styled-components";
 import { Image } from '../../..';
 import { Badge } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
+import { Dimensions } from 'react-native';
+const { width } = Dimensions.get('window');
 
+const contentWidth = width / 3 - 25;
 const ContainStyled = styled.View`
-  padding: 10px 20px;
-  width: 120px;
+  margin: 5px 12px;
+  width: ${contentWidth};
 `
 const TopStyled = styled.View`
   width: 80px;
@@ -16,29 +19,31 @@ const BottomStyled = styled.View`
 `
 const TitleStyled = styled.Text`
   color: #000;
-  font-size: 14px;
+  font-size: 12px;
 `
-
+const DescStyled = styled.Text`
+  color: #999;
+  font-size: 8px;
+`
 const imageStyle = {
-  width: 80,
-  height: 120,
+  width: contentWidth,
+  height: contentWidth * 3 / 2,
 }
-export default function FavoritesListItem({ title, cover, itemOnPress, itemOnLongPress, id }) {
+export default function FavoritesListItem({ title, cover, itemOnPress, itemOnLongPress, id, cur_chapter }) {
   return (
     <ContainStyled>
-      <TopStyled>
-        <TouchableOpacity
-          activeOpacity={0.6}
-          onLongPress={() => itemOnLongPress(id)}
-          onPress={() => itemOnPress('ComicDetail', { id, page_id: 1 })}>
-          <Image
-            source={{ uri: cover }}
-            imageStyle={imageStyle}
-          />
-        </TouchableOpacity>
-      </TopStyled>
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onLongPress={() => itemOnLongPress(id)}
+        onPress={() => itemOnPress('ComicDetail', { id, page_id: 1 })}>
+        <Image
+          source={{ uri: cover }}
+          imageStyle={imageStyle}
+        />
+      </TouchableOpacity>
       <BottomStyled>
         <TitleStyled>{title}</TitleStyled>
+        <DescStyled>{cur_chapter ? cur_chapter : '未看'}</DescStyled>
       </BottomStyled>
     </ContainStyled>
   )
