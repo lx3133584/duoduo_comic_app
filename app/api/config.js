@@ -20,9 +20,8 @@ function interceptorsResponseSuccess (response) {
   return response.data;
 }
 function interceptorsResponseError (error) {
-  if (error.request.status === 401) {
-    store.dispatch(cookiesActions.removeCookies())
-  }
+  // if (error.request.status !== 401) {
+  // }
   error.response.data && Toast.show(error.response.data.message, {
     position: -50,
   });

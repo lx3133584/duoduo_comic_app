@@ -33,7 +33,7 @@ const logoutItemStyle = {
 }
 
 
-export default function UserOperateListComponent({ navigation, logout, token }) {
+export default function UserOperateListComponent({ navigation, logout, info }) {
   return (
     <View>
       <List containerStyle={containerStyle}>
@@ -49,7 +49,7 @@ export default function UserOperateListComponent({ navigation, logout, token }) 
           ))
         }
       </List>
-      {token && <List containerStyle={containerStyle}>
+      {!!info.size && <List containerStyle={containerStyle}>
         <ListItem
           containerStyle={logoutItemStyle}
           key='logout'

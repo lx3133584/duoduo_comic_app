@@ -6,7 +6,6 @@ import { getUserInfo } from '../actions';
 const mapStateToProps = (state, ownProps) => {
   return {
     info: state.getIn(['user', 'info']),
-    token: state.getIn(['cookies', 'EGG_SESS']),
   }
 }
 

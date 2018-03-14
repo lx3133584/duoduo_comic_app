@@ -11,6 +11,10 @@ export default handleActions({
     if (action.error) return state;
     return state.set('info', Immutable.Map(action.payload.data));
   },
+  [userInfoActions.logoutAction]: (state, action) => {
+    if (action.error) return state;
+    return state.update('info', (info) => info.clear());
+  },
   [loginActions.loginForLocal]: (state, action) => {
     if (action.error) return state;
     return state.set('info', Immutable.Map(action.payload.data));

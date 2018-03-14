@@ -43,8 +43,7 @@ const NameStyled = styled.Text`
 
 class UserTopComponent extends PureComponent {
   static propTypes = {
-    info: ImmutablePropTypes.map,
-    token: PropTypes.string,
+    info: ImmutablePropTypes.map.isRequired,
     getUser: PropTypes.func.isRequired,
   };
   state = {
@@ -59,7 +58,7 @@ class UserTopComponent extends PureComponent {
     getUser();
   };
   render() {
-    const { info, token } = this.props;
+    const { info } = this.props;
     return (
       <ContainStyled>
         <TransparentContainStyled>
@@ -74,7 +73,7 @@ class UserTopComponent extends PureComponent {
         </TransparentContainStyled>
         <ContentContainStyled>
           <NameContainStyled>
-          {token ? <NameStyled>{info.get('name') || info.get('username')}</NameStyled>
+          {info.size ? <NameStyled>{info.get('name') || info.get('username')}</NameStyled>
            : <LoginNowButton />}
            </NameContainStyled>
         </ContentContainStyled>

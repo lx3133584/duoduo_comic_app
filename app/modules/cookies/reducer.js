@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import Immutable from 'immutable';
-import { getAllCookies, removeCookies } from './actions';
+import { getAllCookies } from './actions';
 
 const initialState = Immutable.Map({
   csrfToken: '',
@@ -13,8 +13,5 @@ export default handleActions({
       state = state.set(key, action.payload[key]);
     }
     return state;
-  },
-  [removeCookies]: (state, action) => {
-    return state.clear();
   },
 }, initialState)

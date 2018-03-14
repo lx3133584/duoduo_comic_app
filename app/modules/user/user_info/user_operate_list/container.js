@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    token: state.getIn(['cookies', 'EGG_SESS']),
+    info: state.getIn(['user', 'info']),
   }
 }
 
