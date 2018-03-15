@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Image } from '../../..';
 import PropTypes from 'prop-types';
-import { Dimensions, Image as img } from 'react-native';
+import { Dimensions, Image } from 'react-native';
 import PhotoView from 'react-native-photo-view';
 import Progress from 'react-native-progress/Circle';
 import { brand_primary } from '../../../../../theme';
 const { width } = Dimensions.get('window');
-const getSize = img.getSize;
+const getSize = Image.getSize;
 const buttonStyle = {
   backgroundColor: '#fff',
   borderWidth: 1,

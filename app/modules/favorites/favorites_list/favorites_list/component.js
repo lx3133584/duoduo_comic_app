@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import { FavoritesListItem } from '..';
+import { FavoritesListItem, Modal } from '..';
+import { View } from 'react-native';
 import { LongList } from '../../..';
 import { brand_primary } from '../../../../../theme';
-import { Modal } from 'antd-mobile';
-const alert = Modal.alert;
 
 class FavoritesListComponent extends PureComponent {
   static propTypes = {
@@ -16,22 +15,30 @@ class FavoritesListComponent extends PureComponent {
       navigate: PropTypes.func.isRequired,
     }),
   };
+  state = {
+    isVisible: false,
+  };
   constructor(props) {
     super(props);
     this.onFetch = this.onFetch.bind(this);
     this.removeFavorite = this.removeFavorite.bind(this);
+    this.confirm = this.confirm.bind(this);
+    this.cancel = this.cancel.bind(this);
     this.navigate = props.navigation.navigate.bind(this);
   };
   componentDidMount() {
     this.onFetch();
   };
   removeFavorite(id) {
-    alert('提示', '是否确认删除收藏？', [
-      { text: '取消' , style: { color: '#333' } },
-      { text: '确定', onPress: () => {
-        this.props.remove(id);
-      }, style: { color: brand_primary } },
-    ])
+    this.setState({ isVisible: true });
+    this.id = id;
+  };
+  confirm() {
+    this.setState({ isVisible: false });
+    this.props.remove(this.id);
+  };
+  cancel() {
+    this.setState({ isVisible: false });
   };
   async onFetch() {
     const { getList } = this.props;
@@ -39,15 +46,24 @@ class FavoritesListComponent extends PureComponent {
   };
   render() {
     const list = this.props.list.toJS();
+    const { isVisible } = this.state;
     return (
-      <LongList
-         list={list}
-         Item={FavoritesListItem}
-         itemOnLongPress={this.removeFavorite}
-         itemOnPress={this.navigate}
-         onFetch={this.onFetch}
-         numColumns={3}
-       />
+      <View>
+        <LongList
+           list={list}
+           Item={FavoritesListItem}
+           itemOnLongPress={this.removeFavorite}
+           itemOnPress={this.navigate}
+           onFetch={this.onFetch}
+           numColumns={3}
+         />
+         <Modal
+           confirm={this.confirm}
+           cancel={this.cancel}
+           isVisible={isVisible}>
+           是否确认删除收藏？
+         </Modal>
+      </View>
     );
   }
 }

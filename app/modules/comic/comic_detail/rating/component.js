@@ -16,7 +16,7 @@ const ContainStyled = styled.View`
   padding: 2px;
 `
 const TitleStyled = styled.Text`
-  color: #999;
+  color: #666;
   font-size: 12px;
 `
 const ScoreStyled = styled.Text`

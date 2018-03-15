@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { List, ListItem } from 'react-native-elements';
+import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { brand_primary } from '../../../../../theme';
 import { View } from 'react-native';
-import { Modal } from 'antd-mobile';
-const alert = Modal.alert;
+import { Modal } from '../../..';
 
 const list = [
   {
@@ -32,39 +33,70 @@ const logoutItemStyle = {
   borderBottomColor: '#ddd',
 }
 
-
-export default function UserOperateListComponent({ navigation, logout, info }) {
-  return (
-    <View>
-      <List containerStyle={containerStyle}>
-        {
-          list.map(({ name, route }, index) => (
-            <ListItem
-              containerStyle={itemContainerStyle}
-              key={name}
-              title={name}
-              chevronColor="#999"
-              onPress={() => navigation.navigate(route)}
-            />
-          ))
-        }
-      </List>
-      {!!info.size && <List containerStyle={containerStyle}>
-        <ListItem
-          containerStyle={logoutItemStyle}
-          key='logout'
-          title='退出登录'
-          chevronColor="#999"
-          onPress={() => alert('注销', '是否确认退出登录？', [
-            { text: '取消' , style: { color: '#333' } },
-            { text: '确定', onPress: () => {
-              logout();
-              navigation.navigate('Login');
-            }, style: { color: brand_primary } },
-          ])}
-        />
-      </List>}
-
-    </View>
-  );
+class UserOperateListComponent extends PureComponent {
+  static propTypes = {
+    info: ImmutablePropTypes.map.isRequired,
+    logout: PropTypes.func.isRequired,
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }),
+  };
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+    this.confirm = this.confirm.bind(this);
+    this.cancel = this.cancel.bind(this);
+  };
+  state = {
+    isVisible: false,
+  };
+  logout() {
+    this.setState({ isVisible: true });
+  };
+  confirm() {
+    const { navigation, logout } = this.props;
+    this.setState({ isVisible: false });
+    logout();
+    navigation.navigate('Login');
+  };
+  cancel() {
+    this.setState({ isVisible: false });
+  };
+  render() {
+    const { isVisible } = this.state;
+    const { info } = this.props;
+    return (
+      <View>
+        <List containerStyle={containerStyle}>
+          {
+            list.map(({ name, route }, index) => (
+              <ListItem
+                containerStyle={itemContainerStyle}
+                key={name}
+                title={name}
+                chevronColor="#999"
+                onPress={() => navigation.navigate(route)}
+              />
+            ))
+          }
+        </List>
+        {!!info.size && <List containerStyle={containerStyle}>
+          <ListItem
+            containerStyle={logoutItemStyle}
+            key='logout'
+            title='退出登录'
+            chevronColor="#999"
+            onPress={this.logout}
+          />
+        </List>}
+        <Modal
+          confirm={this.confirm}
+          cancel={this.cancel}
+          isVisible={isVisible}>
+          是否确认退出登录？
+        </Modal>
+      </View>
+    );
+  }
 }
+export default UserOperateListComponent;

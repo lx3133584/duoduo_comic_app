@@ -6,9 +6,8 @@ import { Button } from 'react-native-elements';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { brand_primary } from '../../../../../theme';
-import { Modal } from 'antd-mobile';
+import { Modal } from '../../..';
 import { numberFormat } from '../../../../utils';
-const alert = Modal.alert;
 const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
@@ -54,24 +53,31 @@ class ComicDetailBtnsComponent extends PureComponent {
       navigate: PropTypes.func.isRequired,
     }),
   };
+  state = {
+    isVisible: false,
+  };
   constructor() {
     super();
     this.startRead = this.startRead.bind(this);
     this.addFavorite = this.addFavorite.bind(this);
     this.removeFavorite = this.removeFavorite.bind(this);
+    this.confirm = this.confirm.bind(this);
+    this.cancel = this.cancel.bind(this);
+  };
+  removeFavorite() {
+    this.setState({ isVisible: true });
+  };
+  confirm() {
+    this.setState({ isVisible: false });
+    const id = this.props.detail.get('id');
+    this.props.remove(id);
+  };
+  cancel() {
+    this.setState({ isVisible: false });
   };
   addFavorite() {
     const id = this.props.detail.get('id');
     this.props.add(id);
-  };
-  removeFavorite() {
-    alert('提示', '是否确认取消收藏？', [
-      { text: '取消' , style: { color: '#333' } },
-      { text: '确定', onPress: () => {
-        const id = this.props.detail.get('id');
-        this.props.remove(id);
-      }, style: { color: brand_primary } },
-    ])
   };
   startRead() {
     const { detail, list } = this.props;
@@ -81,6 +87,7 @@ class ComicDetailBtnsComponent extends PureComponent {
   };
   render() {
     const { detail } = this.props;
+    const { isVisible } = this.state;
     const favorite_id = detail.get('favorite_id');
     const collection_number = detail.get('collection_number');
     const chapter_id = detail.get('chapter_id');
@@ -104,6 +111,12 @@ class ComicDetailBtnsComponent extends PureComponent {
           onPress={this.startRead}
           text={chapter_id ? '续看' : '开始阅读'}
         />
+        <Modal
+          confirm={this.confirm}
+          cancel={this.cancel}
+          isVisible={isVisible}>
+          是否确认取消收藏？
+        </Modal>
       </ContainStyled>
     );
   }
