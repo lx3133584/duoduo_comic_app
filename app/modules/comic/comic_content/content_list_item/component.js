@@ -4,7 +4,7 @@ import { Dimensions, Image } from 'react-native';
 import PhotoView from 'react-native-photo-view';
 import Progress from 'react-native-progress/Circle';
 import { brand_primary } from '../../../../theme';
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const getSize = Image.getSize;
 const buttonStyle = {
   backgroundColor: '#fff',
@@ -28,7 +28,7 @@ class ContentListItem extends PureComponent {
   };
   state = {
     width,
-    height: 300
+    height: 500,
   };
   constructor() {
     super();
@@ -37,6 +37,8 @@ class ContentListItem extends PureComponent {
     const {url} = this.props;
     getSize(url, (imgWidth, imgHeight) => {
       this.setState({ height: imgHeight / imgWidth * width })
+    }, (error) => {
+      this.setState({ height })
     });
   };
   render() {

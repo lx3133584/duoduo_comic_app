@@ -16,7 +16,7 @@ const RootStack = StackNavigator(
       header: null,
     }),
     transitionConfig: () => ({
-      screenInterpolator: CardStackStyleInterpolator.forHorizontal,
+      screenInterpolator: CardStackStyleInterpolator.forHorizontal, // 页面切换动画改为自定义:横向
     }),
   },
 );

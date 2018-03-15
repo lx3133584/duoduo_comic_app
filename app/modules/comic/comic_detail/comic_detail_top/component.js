@@ -8,7 +8,7 @@ import { numberFormat } from '../../../../utils';
 const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
-  height: 180px;
+  height: 200px;
   background-color: #000;
 `
 const coverImageStyled = {
@@ -26,13 +26,12 @@ const blurImageStyled = {
   top: 0,
   left: 0,
   width,
-  height: 180,
+  height: 200,
   zIndex: 1,
 }
 const blackBgStyle = {
   backgroundColor: '#000',
   opacity: 0.6,
-  zIndex: 3,
 }
 const TextContainStyled = styled.View`
   position: absolute;

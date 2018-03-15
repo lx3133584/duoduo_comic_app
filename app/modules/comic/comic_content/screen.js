@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { ContentList } from '.';
 import styled from "styled-components";
-
+import { StatusBar } from 'react-native';
 const ContainStyled = styled.ScrollView`
   background-color: #000;
 `
@@ -12,6 +12,7 @@ class ContentListScreen extends PureComponent {
   render() {
     return (
       <ContainStyled>
+        <StatusBar hidden />
         <ContentList />
       </ContainStyled>
   )};

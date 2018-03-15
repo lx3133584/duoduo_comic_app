@@ -1,14 +1,22 @@
 import React, { PureComponent } from 'react';
 import { SearchBar } from 'react-native-elements';
 import PropTypes from 'prop-types';
+import { brand_primary } from '../../../../theme';
 
 const containerStyle = {
-  backgroundColor: '#FFF',
+  borderTopWidth: 0,
+  borderBottomColor: brand_primary,
+  backgroundColor: brand_primary,
 }
 
 const inputStyle = {
-  backgroundColor: '#EDEDED',
-  color: '#000',
+  backgroundColor: '#e65d53',
+  color: '#fff',
+}
+const icon = {
+  type: 'material',
+  color: '#f1f2f6',
+  name: 'search'
 }
 
 class SearchBarComponent extends PureComponent {
@@ -46,6 +54,8 @@ class SearchBarComponent extends PureComponent {
         showLoading={loading}
         containerStyle={containerStyle}
         inputStyle={inputStyle}
+        placeholderTextColor="#f1f2f6"
+        icon={icon}
         onSubmitEditing={this.onSubmit}
         onChangeText={this.onChange}
       />
