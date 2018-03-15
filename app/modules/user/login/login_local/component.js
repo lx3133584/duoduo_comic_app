@@ -35,7 +35,7 @@ class LoginLocalComponent extends PureComponent {
     this.setState({ loading: true });
     loginLocal({ username, password }).then(res => {
       this.setState({ loading: false });
-      if (!res.error) navigation.navigate('User')
+      if (!res.error) navigation.goBack();
     });
   };
   changFunc(key) {

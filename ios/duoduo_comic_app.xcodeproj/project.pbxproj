@@ -51,6 +51,7 @@
 		1985C639EFCE49308775E6DC /* libRNCookieManagerIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBC99962CE4498488EF21FC /* libRNCookieManagerIOS.a */; };
 		8733889E65BE4C99842D0F32 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB20D7F8FA445E3AB54CCC1 /* libRNBlur.a */; };
 		0A1A964D196E4A9192FA83D8 /* libRNPhotoView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1716DD33DA449B865BF926 /* libRNPhotoView.a */; };
+		70343D26F40B408287939F48 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A21120B31B74C39B9DA737A /* libRNGestureHandler.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -319,6 +320,8 @@
 		5AB20D7F8FA445E3AB54CCC1 /* libRNBlur.a */ = {isa = PBXFileReference; name = "libRNBlur.a"; path = "libRNBlur.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		86FAEA612C274A9ABB12FA4C /* RNPhotoView.xcodeproj */ = {isa = PBXFileReference; name = "RNPhotoView.xcodeproj"; path = "../node_modules/react-native-photo-view/ios/RNPhotoView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		6E1716DD33DA449B865BF926 /* libRNPhotoView.a */ = {isa = PBXFileReference; name = "libRNPhotoView.a"; path = "libRNPhotoView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		647739E3C1B94AFD8FB38D9D /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; name = "RNGestureHandler.xcodeproj"; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		1A21120B31B74C39B9DA737A /* libRNGestureHandler.a */ = {isa = PBXFileReference; name = "libRNGestureHandler.a"; path = "libRNGestureHandler.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +354,7 @@
 				1985C639EFCE49308775E6DC /* libRNCookieManagerIOS.a in Frameworks */,
 				8733889E65BE4C99842D0F32 /* libRNBlur.a in Frameworks */,
 				0A1A964D196E4A9192FA83D8 /* libRNPhotoView.a in Frameworks */,
+				70343D26F40B408287939F48 /* libRNGestureHandler.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +536,7 @@
 				D3394B99146145A68FBFCE86 /* RNCookieManagerIOS.xcodeproj */,
 				30BF783C2E3248BB9A9CEB88 /* RNBlur.xcodeproj */,
 				86FAEA612C274A9ABB12FA4C /* RNPhotoView.xcodeproj */,
+				647739E3C1B94AFD8FB38D9D /* RNGestureHandler.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1137,6 +1142,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1144,6 +1150,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-cookies\ios\RNCookieManagerIOS",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 				);
 			};
 			name = Debug;
@@ -1168,6 +1175,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1175,6 +1183,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-cookies\ios\RNCookieManagerIOS",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 				);
 			};
 			name = Release;
@@ -1200,6 +1209,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-cookies\ios\RNCookieManagerIOS",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 				);
 			};
 			name = Debug;
@@ -1224,6 +1234,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-cookies\ios\RNCookieManagerIOS",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 				);
 			};
 			name = Release;
@@ -1257,6 +1268,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1264,6 +1276,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-cookies\ios\RNCookieManagerIOS",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 				);
 			};
 			name = Debug;
@@ -1297,6 +1310,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1304,6 +1318,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-cookies\ios\RNCookieManagerIOS",
 					"$(SRCROOT)\..\node_modules\react-native-blur\ios",
 					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 				);
 			};
 			name = Release;
@@ -1332,6 +1347,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1356,6 +1372,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

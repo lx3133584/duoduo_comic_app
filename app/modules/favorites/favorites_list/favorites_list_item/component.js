@@ -23,7 +23,7 @@ const TitleStyled = styled.Text`
 `
 const DescStyled = styled.Text`
   color: #999;
-  font-size: 8px;
+  font-size: 10px;
 `
 const imageStyle = {
   width: contentWidth,
