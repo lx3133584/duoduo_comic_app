@@ -1,22 +1,21 @@
 import { connect } from 'react-redux';
-import { getFavoritesList } from '../actions';
-import { comicDetailActions } from '../../../comic';
+import { getHistoryList } from '../actions';
 import Component from './component';
 import { withNavigation } from 'react-navigation';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    list: state.getIn(['favorites', 'favorites_list']),
+    list: state.getIn(['favorites', 'history_list']),
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   getList(params) {
-    return dispatch(getFavoritesList(params))
+    return dispatch(getHistoryList(params));
   },
   remove(params) {
-    return dispatch(comicDetailActions.removeFavorite(params))
-  },
+    return dispatch(getHistoryList(params));
+  }
 })
 
 export default withNavigation(connect(

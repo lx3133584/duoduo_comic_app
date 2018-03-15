@@ -12,10 +12,10 @@ const TextStyled = styled.Text`
 `
 const pattern = [0, 200];
 
-function FooterComponent() {
+function FooterComponent({text}) {
   return (
     <ContainStyled>
-      <TextStyled>下面什么都没有了哦.</TextStyled>
+      <TextStyled>{text || '下面什么都没有了哦.'}</TextStyled>
     </ContainStyled>
   )
 }
@@ -66,6 +66,8 @@ class LongListComponent extends PureComponent {
         callback && callback(this.page);
         this.page++;
       }
+    }).catch(e => {
+      this.setState({ loading: false });
     });
   };
   _itemOnLongPress(...params) {
@@ -78,7 +80,7 @@ class LongListComponent extends PureComponent {
     return <Item {...item} itemOnPress={itemOnPress} itemOnLongPress={this._itemOnLongPress} />
   };
   render() {
-    const { list, isLong, showFooter } = this.props;
+    const { list, isLong, showFooter, emptyText } = this.props;
     const { loading } = this.state;
     return (
       <FlatList
@@ -90,7 +92,7 @@ class LongListComponent extends PureComponent {
          onEndReachedThreshold={0.6}
          onRefresh={this._onRefresh}
          refreshing={loading}
-         ListEmptyComponent={ListEmpty}
+         ListEmptyComponent={() => <ListEmpty text={emptyText} />}
          ListFooterComponent={showFooter && list.length && FooterComponent}
        />
     );

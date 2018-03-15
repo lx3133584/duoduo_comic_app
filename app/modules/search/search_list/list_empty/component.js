@@ -21,7 +21,7 @@ const imageStyle = {
   height: 80,
 }
 
-export default function ListEmptyComponent() {
+export default function ListEmptyComponent({text}) {
   return (
     <ContainStyled>
       <ImageContainStyled>
@@ -30,7 +30,7 @@ export default function ListEmptyComponent() {
           imageStyle={imageStyle}
         />
       </ImageContainStyled>
-      <DescStyled>这里什么都没有呢~</DescStyled>
+      <DescStyled>{text || '这里什么都没有呢~'}</DescStyled>
     </ContainStyled>
   )
 }

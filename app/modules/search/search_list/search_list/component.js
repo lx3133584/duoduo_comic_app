@@ -29,6 +29,7 @@ class SearchListComponent extends PureComponent {
          Item={SearchListItem}
          onFetch={this.onFetch}
          itemOnPress={this.navigate}
+         emptyText="试着搜索看看吧~"
          isLong
          showFooter
        />

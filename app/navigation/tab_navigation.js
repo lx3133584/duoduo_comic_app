@@ -15,8 +15,9 @@ export default TabNavigator({
   navigationOptions: TabBar,
   tabBarOptions: {
     activeTintColor: brand_primary,
-    inactiveTintColor: '#949494',
+    inactiveTintColor: '#a3a3a3',
     indicatorStyle: { height: 0 },
+    style: { backgroundColor: '#fff' }
   },
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',

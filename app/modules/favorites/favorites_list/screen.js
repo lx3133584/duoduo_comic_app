@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { FavoritesList } from '.';
+import { FavoritesListTabs } from '.';
 import styled from "styled-components";
 import { brand_primary } from '../../../theme';
 import { StatusBar, Dimensions } from 'react-native';
@@ -8,17 +8,18 @@ const { height } = Dimensions.get('window');
 const ContainStyled = styled.View`
   background: #fff;
   min-height: ${height};
+  padding-bottom: 72px;
 `
 
 class FavoritesListScreen extends PureComponent {
   static navigationOptions = {
-    title: '收藏',
+    title: '书架',
   };
   render() {
     return (
     <ContainStyled>
       <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
-      <FavoritesList />
+      <FavoritesListTabs />
     </ContainStyled>)
   };
 }

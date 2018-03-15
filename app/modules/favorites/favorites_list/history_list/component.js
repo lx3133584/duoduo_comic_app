@@ -34,7 +34,7 @@ class FavoritesListComponent extends PureComponent {
     this.onFetch();
   };
   removeFavorite(id) {
-    this.setState({ isVisible: true });
+    // this.setState({ isVisible: true });
     this.id = id;
   };
   confirm() {
@@ -65,7 +65,7 @@ class FavoritesListComponent extends PureComponent {
            confirm={this.confirm}
            cancel={this.cancel}
            isVisible={isVisible}>
-           是否确认删除收藏？
+           是否确认删除此条浏览记录？
          </Modal>
       </ContainStyled>
     );
