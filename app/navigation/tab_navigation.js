@@ -1,7 +1,7 @@
 import React from 'React';
 import { TabNavigator, TabBarBottom  } from 'react-navigation';
 import { UserInfoScreen, SearchListScreen, FavoritesListScreen } from '../modules';
-import DEFAULT_THEME from '../../theme';
+import DEFAULT_THEME from '../theme';
 import { TabBar } from './components';
 
 export default TabNavigator({

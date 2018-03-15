@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Avatar, LoginNowButton } from '..';
-import { brand_primary } from '../../../../../theme';
+import { brand_primary } from '../../../../theme';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import styled from "styled-components";

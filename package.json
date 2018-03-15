@@ -3,11 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node scripts/custom-rn-theme && node node_modules/react-native/local-cli/cli.js start",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "dependencies": {
-    "antd-mobile": "^2.1.6",
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.6.5",
     "immutable": "^3.8.2",

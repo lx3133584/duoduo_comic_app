@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FavoritesListItem, Modal } from '..';
 import { View } from 'react-native';
 import { LongList } from '../../..';
-import { brand_primary } from '../../../../../theme';
+import { brand_primary } from '../../../../theme';
 
 class FavoritesListComponent extends PureComponent {
   static propTypes = {

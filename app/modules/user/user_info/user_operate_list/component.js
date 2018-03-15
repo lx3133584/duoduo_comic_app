@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { List, ListItem } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { brand_primary } from '../../../../../theme';
+import { brand_primary } from '../../../../theme';
 import { View } from 'react-native';
 import { Modal } from '../../..';
 

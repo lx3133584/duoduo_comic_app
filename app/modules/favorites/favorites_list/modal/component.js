@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { brand_primary } from '../../../../../theme';
+import { brand_primary } from '../../../../theme';
 import styled from "styled-components";
 import { Button } from 'react-native-elements';
 import { Dimensions } from 'react-native';
