@@ -64,7 +64,7 @@ class UserOperateListComponent extends PureComponent {
   };
   render() {
     const { isVisible } = this.state;
-    const { info } = this.props;
+    const { info, navigation } = this.props;
     return (
       <View>
         <List containerStyle={containerStyle}>

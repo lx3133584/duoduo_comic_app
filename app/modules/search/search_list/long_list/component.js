@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Vibration } from 'react-native';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
 import { ListEmpty } from '..';
@@ -10,6 +10,7 @@ const ContainStyled = styled.View`
 const TextStyled = styled.Text`
   text-align: center;
 `
+const pattern = [0, 200];
 
 function FooterComponent() {
   return (
@@ -46,6 +47,7 @@ class LongListComponent extends PureComponent {
     this._onFetch = this._onFetch.bind(this);
     this._renderItem = this._renderItem.bind(this);
     this._keyExtractor = this._keyExtractor.bind(this);
+    this._itemOnLongPress = this._itemOnLongPress.bind(this);
   };
   _keyExtractor(item, index) {
     return item[this.customkey]
@@ -66,9 +68,14 @@ class LongListComponent extends PureComponent {
       }
     });
   };
+  _itemOnLongPress(...params) {
+    Vibration.vibrate(pattern);
+    const { itemOnLongPress } = this.props;
+    itemOnLongPress(...params)
+  };
   _renderItem({ item }) {
-    const { Item, itemOnPress, itemOnLongPress } = this.props;
-    return <Item {...item} itemOnPress={itemOnPress} itemOnLongPress={itemOnLongPress} />
+    const { Item, itemOnPress } = this.props;
+    return <Item {...item} itemOnPress={itemOnPress} itemOnLongPress={this._itemOnLongPress} />
   };
   render() {
     const { list, isLong, showFooter } = this.props;

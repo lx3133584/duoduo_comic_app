@@ -1,7 +1,7 @@
 import React from 'React';
 import { TabNavigator, TabBarBottom  } from 'react-navigation';
 import { UserInfoScreen, SearchListScreen, FavoritesListScreen } from '../modules';
-import DEFAULT_THEME from '../theme';
+import { brand_primary } from '../theme';
 import { TabBar } from './components';
 
 export default TabNavigator({
@@ -11,10 +11,12 @@ export default TabNavigator({
 },
 {
   initialRouteName: 'Favorites',
+  backBehavior: 'none',
   navigationOptions: TabBar,
   tabBarOptions: {
-    activeTintColor: DEFAULT_THEME.brand_primary,
+    activeTintColor: brand_primary,
     inactiveTintColor: '#949494',
+    indicatorStyle: { height: 0 },
   },
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
