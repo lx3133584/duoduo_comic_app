@@ -1,2 +1,2 @@
 export { default } from './stack_navigation';
-export { Header } from './components';
+export { Header, LeftButton } from './components';

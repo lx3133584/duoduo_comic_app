@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 const ContainStyled = styled.View`
   flex-direction: row;
+  justify-content: center;
 `
 const TextStyled = styled.Text`
   color: #fff;
@@ -13,7 +14,7 @@ const TextStyled = styled.Text`
   margin-left: 5px;
 `
 
-const ICON_SIZE = 12;
+const ICON_SIZE = 14;
 const ICON_COLOR = '#fff';
 
 const IsChargingIcon = () => <Ionicons name="ios-battery-charging-outline" size={18} color={ICON_COLOR} />;
@@ -47,7 +48,7 @@ class BatteryComponent extends PureComponent {
     return (
       <ContainStyled>
         {is_charging ? <IsChargingIcon /> : <BatteryIcons name={battery_icon_name} />}
-        <TextStyled>{battery_level * 100 + '%'}</TextStyled>
+        <TextStyled>{(battery_level * 100).toFixed() + '%'}</TextStyled>
       </ContainStyled>
     );
   }

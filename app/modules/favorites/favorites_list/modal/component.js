@@ -8,16 +8,17 @@ import Modal from "react-native-modal";
 const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
-  height: 125px;
-  width: ${width * 0.6};
+  height: 150px;
+  width: ${width * 0.75};
   background-color: #fff;
-  padding: 10px;
-  border-radius: 4px;
+  padding: 15px 20px 0;
+  border-radius: 15px;
   justify-content: space-around;
 `
 const ContentContainStyled = styled.Text`
-  padding: 0 10px;
+  padding: 0 15px;
   color: #333;
+  font-size: 16px;
 `
 const ButtonContainStyled = styled.View`
   flex-direction: row;
@@ -30,26 +31,28 @@ const containStyle = {
 }
 const confirmButtonStyle = {
   backgroundColor: brand_primary,
-  width: 60,
-  height: 30,
+  width: 85,
+  height: 40,
   borderRadius: 100,
+  elevation: 0,
 }
 const confirmTextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: '#fff',
   textAlign: 'justify',
 }
 const cancelButtonStyle = {
   backgroundColor: '#fff',
-  width: 60,
-  height: 30,
+  width: 85,
+  height: 40,
   borderRadius: 100,
   borderWidth: 1,
   borderColor: '#999',
+  elevation: 0,
 }
 const cancelTextStyle = {
-  fontSize: 12,
-  color: '#999',
+  fontSize: 14,
+  color: '#666',
   textAlign: 'justify',
 }
 

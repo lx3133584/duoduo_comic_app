@@ -10,7 +10,7 @@ const ContainStyled = styled.View`
 const TextStyled = styled.Text`
   text-align: center;
 `
-const pattern = [0, 200];
+const pattern = [0, 50];
 
 function FooterComponent({text}) {
   return (

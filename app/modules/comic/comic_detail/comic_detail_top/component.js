@@ -5,10 +5,11 @@ import styled from "styled-components";
 import { BlurView } from 'react-native-blur';
 import { Image, Dimensions, findNodeHandle, View } from 'react-native';
 import { numberFormat } from '../../../../utils';
+
 const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
-  height: 200px;
+  height: 240px;
   background-color: #000;
 `
 const coverImageStyled = {
@@ -26,7 +27,7 @@ const blurImageStyled = {
   top: 0,
   left: 0,
   width,
-  height: 200,
+  height: 240,
   zIndex: 1,
 }
 const blackBgStyle = {
@@ -35,7 +36,7 @@ const blackBgStyle = {
 }
 const TextContainStyled = styled.View`
   position: absolute;
-  top: 60px;
+  top: 100px;
   left: 20px;
   bottom: 15px;
   z-index: 4;
@@ -88,7 +89,7 @@ class ComicDetailTopComponent extends PureComponent {
     return await getDetail(id);
   };
   render() {
-    const { detail } = this.props;
+    const { detail, navigation } = this.props;
     const { viewRef } = this.state;
     const cover = detail.get('cover');
     const title = detail.get('title');

@@ -4,7 +4,7 @@ import { Rating } from '..';
 
 const ContainStyled = styled.View`
   margin-bottom: 5px;
-  padding: 20px 10px 10px;
+  padding: 28px 10px 10px;
   background-color: #fff;
 `
 const TopContainStyled = styled.View`

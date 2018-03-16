@@ -24,8 +24,8 @@ class HeaderComponent extends PureComponent {
     return (
       <Header
         leftComponent={<LeftButton navigation={this.navigation} />}
-        centerComponent={{ text: title, style: { color: '#000' } }}
-        outerContainerStyles={{ backgroundColor: backgroundColor || '#fff' }}
+        centerComponent={{ text: title, style: { color: '#fff', fontSize: 16 } }}
+        outerContainerStyles={{ backgroundColor: backgroundColor || brand_primary }}
         rightComponent={null}
       />
     );
