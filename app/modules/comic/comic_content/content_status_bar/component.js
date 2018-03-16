@@ -36,7 +36,11 @@ class ContentStatusBarComponent extends PureComponent {
     const date = new Date;
     const hour = date.getHours();
     const minutes = date.getMinutes();
-    this.setState({ time: `${hour}:${minutes}`});
+    this.setState({ time: `${this.fillZero(hour)}:${this.fillZero(minutes)}`});
+  };
+  fillZero(num) {
+    if (num < 10) return `0${num}`;
+    return num;
   };
   componentDidMount() {
     this.getTime();

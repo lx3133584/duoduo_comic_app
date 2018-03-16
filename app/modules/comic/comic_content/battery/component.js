@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const ContainStyled = styled.View`
   flex-direction: row;
-  justify-content: center;
+  align-items: center;
 `
 const TextStyled = styled.Text`
   color: #fff;
@@ -14,11 +14,10 @@ const TextStyled = styled.Text`
   margin-left: 5px;
 `
 
-const ICON_SIZE = 14;
 const ICON_COLOR = '#fff';
 
-const IsChargingIcon = () => <Ionicons name="ios-battery-charging-outline" size={18} color={ICON_COLOR} />;
-const BatteryIcons = ({ name }) => <FontAwesome name={name} size={ICON_SIZE} color={ICON_COLOR} />;
+const IsChargingIcon = () => <Ionicons name="ios-battery-charging-outline" size={22} color={ICON_COLOR} />;
+const BatteryIcons = ({ name }) => <FontAwesome name={name} size={14} color={ICON_COLOR} />;
 
 class BatteryComponent extends PureComponent {
   constructor() {
