@@ -3,6 +3,7 @@ package com.duoduo_comic_app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.robinpowered.react.battery.DeviceBatteryPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.reactnative.photoview.PhotoViewPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new DeviceBatteryPackage(),
             new SplashScreenReactPackage(),
             new RNGestureHandlerPackage(),
             new PhotoViewPackage(),

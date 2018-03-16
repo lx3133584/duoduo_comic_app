@@ -1,4 +1,6 @@
 rootProject.name = 'duoduo_comic_app'
+include ':react-native-device-battery'
+project(':react-native-device-battery').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-battery/android')
 include ':react-native-splash-screen'
 project(':react-native-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-splash-screen/android')
 include ':react-native-gesture-handler'

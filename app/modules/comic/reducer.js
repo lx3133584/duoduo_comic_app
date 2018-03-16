@@ -6,6 +6,7 @@ const initialState = Immutable.Map({
   detail: Immutable.Map(),
   list: Immutable.List(),
   content: Immutable.List(),
+  content_index: 1,
 });
 export default handleActions({
   [comicDetailActions.getComicDetail]: (state, action) => {
@@ -30,5 +31,8 @@ export default handleActions({
     if (action.error) return state;
     state = state.setIn(['detail', 'chapter_id'], action.payload.id);
     return state.set('content', Immutable.List(action.payload.result.data));
+  },
+  [comicContentActions.getContentIndex]: (state, action) => {
+    return state.set('content_index', action.payload);
   },
 }, initialState)

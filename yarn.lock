@@ -3954,6 +3954,10 @@ react-native-cookies@^3.2.0:
   dependencies:
     invariant "^2.1.0"
 
+react-native-device-battery@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-device-battery/-/react-native-device-battery-1.0.0.tgz#3a50f78263fc1e3c8a701bd4aec521e5f86bda3d"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"

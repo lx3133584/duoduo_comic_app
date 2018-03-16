@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import { View, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { LongList } from '../../..';
 import { ContentListItem, ContentListCategory } from '..';
 
@@ -14,6 +14,7 @@ class ContentListComponent extends PureComponent {
   static propTypes = {
     content: ImmutablePropTypes.list.isRequired,
     getContent: PropTypes.func.isRequired,
+    getIndex: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
       state: PropTypes.shape({

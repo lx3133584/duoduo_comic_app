@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { ContentList } from '.';
+import { ContentList, ContentStatusBar } from '.';
 import styled from "styled-components";
 import { StatusBar } from 'react-native';
 const ContainStyled = styled.ScrollView`
@@ -10,12 +10,13 @@ class ContentListScreen extends PureComponent {
     title: '漫画内容',
   };
   render() {
-    return (
-      <ContainStyled>
+    return ([
+      <ContentStatusBar key="status_bar"/>,
+      <ContainStyled key="content">
         <StatusBar hidden />
         <ContentList />
       </ContainStyled>
-  )};
+    ])};
 }
 
 export default ContentListScreen;

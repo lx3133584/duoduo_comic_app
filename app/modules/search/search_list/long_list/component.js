@@ -50,7 +50,7 @@ class LongListComponent extends PureComponent {
     this._itemOnLongPress = this._itemOnLongPress.bind(this);
   };
   _keyExtractor(item, index) {
-    return item[this.customkey]
+    return item[this.customkey] + '';
   };
   async _onRefresh() {
     this.page = 0;

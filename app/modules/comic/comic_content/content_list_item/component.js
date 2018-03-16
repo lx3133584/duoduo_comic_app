@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Image } from 'react-native';
 import PhotoView from 'react-native-photo-view';
-import Progress from 'react-native-progress/Circle';
-import { brand_primary } from '../../../../theme';
 const { width, height } = Dimensions.get('window');
 const getSize = Image.getSize;
 const buttonStyle = {
@@ -45,7 +43,6 @@ class ContentListItem extends PureComponent {
     const {url} = this.props;
     return (
       <PhotoView
-        loadingIndicatorSource={() => <Progress color={brand_primary}/>}
         source={{ uri: url }}
         style={this.state}
       />

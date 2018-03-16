@@ -1,0 +1,56 @@
+import React, { PureComponent } from 'react';
+import DeviceBattery from 'react-native-device-battery';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import styled from "styled-components";
+
+const ContainStyled = styled.View`
+  flex-direction: row;
+`
+const TextStyled = styled.Text`
+  color: #fff;
+  font-size: 12px;
+  margin-left: 5px;
+`
+
+const ICON_SIZE = 12;
+const ICON_COLOR = '#fff';
+
+const IsChargingIcon = () => <Ionicons name="ios-battery-charging-outline" size={18} color={ICON_COLOR} />;
+const BatteryIcons = ({ name }) => <FontAwesome name={name} size={ICON_SIZE} color={ICON_COLOR} />;
+
+class BatteryComponent extends PureComponent {
+  constructor() {
+    super();
+    this.getBattery = this.getBattery.bind(this);
+  };
+  state = {
+    battery_level: 1,
+    is_charging: false,
+  };
+  getBattery(state) {
+    const { level, charging } = state;
+    this.setState({ battery_level: level, is_charging: charging });
+  };
+  componentDidMount() {
+    DeviceBattery.getBatteryLevel().then(battery_level => this.setState({ battery_level }));
+    DeviceBattery.isCharging().then(is_charging => this.setState({ is_charging }));
+    DeviceBattery.addListener(this.getBattery);
+  };
+  componentWillUnmount() {
+    console.log(DeviceBattery);
+    DeviceBattery.removeListener(this.getBattery);
+  };
+  render() {
+    const { is_charging, battery_level } = this.state;
+    const battery_icon_name = `battery-${Math.round(battery_level * 4)}`;
+    return (
+      <ContainStyled>
+        {is_charging ? <IsChargingIcon /> : <BatteryIcons name={battery_icon_name} />}
+        <TextStyled>{battery_level * 100 + '%'}</TextStyled>
+      </ContainStyled>
+    );
+  }
+}
+
+export default BatteryComponent;

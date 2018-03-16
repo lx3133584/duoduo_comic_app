@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Component from './component';
 import { withNavigation } from 'react-navigation';
-import { getContentList } from '../actions';
+import { getContentList, getContentIndex } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -11,7 +11,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   getContent(params) {
-    return dispatch(getContentList(params))
+    return dispatch(getContentList(params));
+  },
+  getIndex(params) {
+    return dispatch(getContentIndex(params));
   },
 })
 
