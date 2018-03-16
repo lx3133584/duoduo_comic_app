@@ -6,6 +6,7 @@ export const postFavorite = (id) => http.post(`favorites/${id}`); // 添加收�
 export const deleteFavorite = (id) => http.delete(`favorites/${id}`); // 删除收藏
 // 浏览记录
 export const fetchHistoryList = () => http.get('history_record'); // 浏览记录列表
+export const deleteHistory = (id) => http.delete(`history_record/${id}`); // 删除浏览记录
 // 搜索
 export const searchLocal = ({ keyword, page }) => http.get('searchLocal', {params: { keyword, page }});
 // 用户

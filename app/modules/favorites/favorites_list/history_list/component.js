@@ -34,7 +34,7 @@ class FavoritesListComponent extends PureComponent {
     this.onFetch();
   };
   removeFavorite(id) {
-    // this.setState({ isVisible: true });
+    this.setState({ isVisible: true });
     this.id = id;
   };
   confirm() {

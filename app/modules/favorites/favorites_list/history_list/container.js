@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getHistoryList } from '../actions';
+import { getHistoryList, removeHistory } from '../actions';
 import Component from './component';
 import { withNavigation } from 'react-navigation';
 
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     return dispatch(getHistoryList(params));
   },
   remove(params) {
-    return dispatch(getHistoryList(params));
+    return dispatch(removeHistory(params));
   }
 })
 
