@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { LoginInput, LoginButton } from '..';
 
 const ContainStyled = styled.View`
-  margin: 10px 0;
+  margin: 40px 0;
 `
 const InputContainStyled = styled.View`
   margin: 50px 0;

@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Brand, LoginLocal } from '.';
 import styled from "styled-components";
-import { StatusBar } from 'react-native';
+import { StatusBar, Dimensions } from 'react-native';
+const { height } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
-  padding: 100px 0 200px;
+  padding: 120px 0 200px;
+  min-height: ${height};
   background-color: #fff;
 `
 
