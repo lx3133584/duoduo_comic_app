@@ -3,7 +3,7 @@ import { ContentList, ContentStatusBar } from '.';
 import styled from "styled-components";
 import { StatusBar } from 'react-native';
 const ContainStyled = styled.ScrollView`
-  background-color: #000;
+  background-color: #282828;
 `
 class ContentListScreen extends PureComponent {
   static navigationOptions = {

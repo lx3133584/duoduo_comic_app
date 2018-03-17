@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from "styled-components";
-import { ComicList, ComicDetail } from '..';
+import { ComicList, ComicDetail, Progress } from '..';
 import { Dimensions } from 'react-native';
 import { TabViewAnimated, TabViewPagerExperimental, TabBar, SceneMap } from 'react-native-tab-view';
 import * as GestureHandler from 'react-native-gesture-handler';
@@ -45,22 +45,30 @@ class ComicDetailTabsComponent extends PureComponent {
   _handleIndexChange = index => this.setState({ index });
 
   _renderHeader = props => (<TabBar
+    {...props}
     style={tabBarStyle}
     labelStyle={labelStyle}
     indicatorStyle={tabBarUnderlineStyle}
-     {...props}
    />);
 
   _renderPager = props => (<TabViewPagerExperimental
-    swipeEnabled
     {...props}
     GestureHandler={GestureHandler}
   />);
 
-  _renderScene = SceneMap({
-    detail: ComicDetail,
-    list: ComicList,
-  });
+  _renderScene = ({ route, index }) => {
+    if (this.state.index !== index) {
+      return null;
+    }
+    switch (route.key) {
+      case 'detail':
+        return <ComicDetail />;
+      case 'list':
+        return <ComicList />;
+      default:
+        return null;
+    }
+  }
 
   render() {
     return (
@@ -72,6 +80,7 @@ class ComicDetailTabsComponent extends PureComponent {
         onIndexChange={this._handleIndexChange}
         initialLayout={initialLayout}
         useNativeDriver
+        swipeEnabled
       />
     );
   }

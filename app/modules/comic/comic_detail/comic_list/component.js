@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { View, FlatList } from 'react-native';
-import { ComicListItem, ComicListCategory } from '..';
+import { ComicListItem, ComicListCategory, Progress } from '..';
 import { LongList } from '../../..';
 
 const rowStyle = {
@@ -26,18 +26,23 @@ class ComicListComponent extends PureComponent {
     super(props);
     this.navigate = props.navigation.navigate.bind(this);
   };
+  state = {
+    show: false,
+  }
   componentDidMount() {
     this.onFetch();
   };
   async onFetch() {
     const { id } = this.props.navigation.state.params;
     const { getList } = this.props;
-    return await getList(id);
+    await getList(id);
+    this.setState({ show: true })
   };
   render() {
-    const { list } = this.props;
-    const { detail } = this.props;
+    const { list, detail } = this.props;
+    const { show } = this.state;
     const chapter_id = detail.get('chapter_id');
+    if (!show) return <Progress />
     return (
       <View>
         {

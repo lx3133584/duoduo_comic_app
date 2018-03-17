@@ -6,6 +6,7 @@ export { default as ComicList } from './comic_list/container';
 export { default as ComicDetail } from './comic_detail/container';
 export { default as Rating } from './rating/container';
 export { default as ComicListItem } from './comic_list_item/component';
+export { default as Progress } from './progress/component';
 export { default as ComicListCategory } from './comic_list_category/component';
 import * as comicDetailActions from './actions';
 export { comicDetailActions };
