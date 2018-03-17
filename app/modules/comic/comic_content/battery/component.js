@@ -38,7 +38,6 @@ class BatteryComponent extends PureComponent {
     DeviceBattery.addListener(this.getBattery);
   };
   componentWillUnmount() {
-    console.log(DeviceBattery);
     DeviceBattery.removeListener(this.getBattery);
   };
   render() {

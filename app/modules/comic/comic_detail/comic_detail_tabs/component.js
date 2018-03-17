@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from "styled-components";
-import { ComicList, ComicDetail, Progress } from '..';
+import { ComicList, ComicDetail } from '..';
 import { Dimensions } from 'react-native';
 import { TabViewAnimated, TabViewPagerExperimental, TabBar, SceneMap } from 'react-native-tab-view';
 import * as GestureHandler from 'react-native-gesture-handler';
@@ -69,7 +69,6 @@ class ComicDetailTabsComponent extends PureComponent {
         return null;
     }
   }
-
   render() {
     return (
       <TabViewAnimated

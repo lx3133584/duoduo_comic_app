@@ -1,24 +1,25 @@
 import React from 'react';
 import styled from "styled-components";
+import { brand_primary } from '../../../../theme';
 
 const ContainStyled = styled.View`
-  margin-bottom: 5px;
-  padding: 5px;
+  padding-left: 10px;
+  padding-top: 10px;
   background-color: #fff;
-`
-const ItemContainStyled = styled.View`
-  padding: 10px;
+  height: 40px;
+  margin-top: 10px;
 `
 const TitleStyled = styled.Text`
   font-size: 12px;
-  color: #999;
-  margin-bottom: 5px;
+  color: #333;
+  padding-left: 10px;
+  border-left-width: 3px;
+  border-left-color: ${brand_primary};
 `
-export default function ComicListCategory({ title, children }) {
+export default function ComicListCategory({ children }) {
   return (
     <ContainStyled>
-      <TitleStyled>{title}</TitleStyled>
-      <ItemContainStyled>{children}</ItemContainStyled>
+      <TitleStyled>{children}</TitleStyled>
     </ContainStyled>
   )
 }
