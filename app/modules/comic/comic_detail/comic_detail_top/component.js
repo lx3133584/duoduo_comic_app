@@ -30,10 +30,6 @@ const blurImageStyled = {
   height: 240,
   zIndex: 1,
 }
-const blackBgStyle = {
-  backgroundColor: '#000',
-  opacity: 0.6,
-}
 const TextContainStyled = styled.View`
   position: absolute;
   top: 100px;
@@ -76,8 +72,7 @@ class ComicDetailTopComponent extends PureComponent {
   constructor() {
     super();
     this.onFetch = this.onFetch.bind(this);
-    this.imageLoaded = this.imageLoaded.bind(this)
-    console.log(this);
+    this.imageLoaded = this.imageLoaded.bind(this);
   };
   componentDidMount() {
     const { id } = this.props.navigation.state.params;
@@ -113,13 +108,11 @@ class ComicDetailTopComponent extends PureComponent {
           onLoadEnd={this.imageLoaded}
           source={{uri: cover}}
         />
-        {viewRef ? <BlurView
+        {viewRef && <BlurView
           style={blurImageStyled}
           viewRef={viewRef}
           blurType="dark"
           blurAmount={6}
-        /> : <View
-          style={[blurImageStyled, blackBgStyle]}
         />}
         <Image
           style={coverImageStyled}

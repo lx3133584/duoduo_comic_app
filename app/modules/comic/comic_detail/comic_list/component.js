@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { SectionList, Dimensions } from 'react-native';
 import { ComicListItem, ComicListCategory, Progress } from '..';
 import styled from "styled-components";
-const { height } = Dimensions.get('window');
 import { wrapWithLoading } from '../../../../utils';
+const { height } = Dimensions.get('window');
 
 const rowStyle = {
   flexDirection: 'row',

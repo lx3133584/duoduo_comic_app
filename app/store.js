@@ -18,6 +18,4 @@ if (isNotProduction) {
 }
 let store = createStore(rootReducer, applyMiddleware(...middleware));
 
-store.dispatch(cookiesActions.getAllCookies())
-
 export default store;

@@ -27,6 +27,9 @@ class ContentListComponent extends PureComponent {
     super();
     this.onFetch = this.onFetch.bind(this);
   };
+  componentDidMount() {
+    this.onFetch();
+  };
   async onFetch() {
     const { id } = this.props.navigation.state.params;
     const { getContent, hideLoading } = this.props;
@@ -39,8 +42,6 @@ class ContentListComponent extends PureComponent {
       <LongList
          list={content}
          Item={ContentListItem}
-         onFetch={this.onFetch}
-         isLong
          customkey="index"
        />
     );

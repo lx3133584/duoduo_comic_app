@@ -2,12 +2,17 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Image } from 'react-native';
 import PhotoView from 'react-native-photo-view';
+import { ImgPlaceholder } from '..';
+import { wrapWithLoading } from '../../../../utils';
 const { width, height } = Dimensions.get('window');
 const getSize = Image.getSize;
 
 class ContentListItem extends PureComponent {
   static propTypes = {
     url: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
+    hideLoading: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
   };
   state = {
     width,
@@ -17,15 +22,18 @@ class ContentListItem extends PureComponent {
     super();
   };
   componentDidMount() {
-    const {url} = this.props;
+    const { url, hideLoading } = this.props;
     getSize(url, (imgWidth, imgHeight) => {
-      this.setState({ height: imgHeight / imgWidth * width })
+      this.setState({ height: imgHeight / imgWidth * width });
+      hideLoading();
     }, (error) => {
-      this.setState({ height })
+      this.setState({ height });
+      hideLoading();
     });
   };
   render() {
-    const { url } = this.props;
+    const { url, index, loading } = this.props;
+    if (loading) return <ImgPlaceholder style={this.state}>{index}</ImgPlaceholder>;
     return (
       <PhotoView
         source={{ uri: url }}
@@ -35,4 +43,4 @@ class ContentListItem extends PureComponent {
   }
 }
 
-export default ContentListItem;
+export default wrapWithLoading(ContentListItem);
