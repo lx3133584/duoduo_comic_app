@@ -14,6 +14,7 @@ class ContentListComponent extends PureComponent {
   static propTypes = {
     content: ImmutablePropTypes.list.isRequired,
     getContent: PropTypes.func.isRequired,
+    hideLoading: PropTypes.func.isRequired,
     getIndex: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
@@ -28,8 +29,9 @@ class ContentListComponent extends PureComponent {
   };
   async onFetch() {
     const { id } = this.props.navigation.state.params;
-    const { getContent } = this.props;
-    return await getContent(id);
+    const { getContent, hideLoading } = this.props;
+    await getContent(id);
+    hideLoading();
   };
   render() {
     const content = this.props.content.toJS();

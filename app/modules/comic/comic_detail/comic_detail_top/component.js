@@ -62,6 +62,7 @@ const BottomTextStyled = styled.Text`
 class ComicDetailTopComponent extends PureComponent {
   static propTypes = {
     getDetail: PropTypes.func.isRequired,
+    hideLoading: PropTypes.func.isRequired,
     detail: ImmutablePropTypes.map.isRequired,
     navigation: PropTypes.shape({
       state: PropTypes.shape({
@@ -76,18 +77,26 @@ class ComicDetailTopComponent extends PureComponent {
     super();
     this.onFetch = this.onFetch.bind(this);
     this.imageLoaded = this.imageLoaded.bind(this)
+    console.log(this);
   };
   componentDidMount() {
     const { id } = this.props.navigation.state.params;
     this.onFetch(id);
   };
   imageLoaded() {
-    this.setState({ viewRef: findNodeHandle(this.backgroundImage) });
+    this.setState({ viewRef: findNodeHandle(this.backgroundImage) }, this.hideLoading);
   };
   async onFetch(id) {
-    const { getDetail } = this.props;
-    return await getDetail(id);
+    const { getDetail, hideLoading } = this.props;
+    await getDetail(id);
+    this.fetchCompleted = true; // 标识请求已完成
+    this.hideLoading();
   };
+  hideLoading() {
+    const { hideLoading } = this.props;
+    if (!this.state.viewRef || !this.fetchCompleted) return; // blur组件未加载或者请求为完成时都不能隐藏loading
+    hideLoading();
+  }
   render() {
     const { detail, navigation } = this.props;
     const { viewRef } = this.state;

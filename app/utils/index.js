@@ -1,3 +1,5 @@
+import React, { PureComponent } from 'react'
+// 大数字格式化
 export const numberFormat = function(num) {
   const n = +num || 0;
   switch (true) {
@@ -8,4 +10,27 @@ export const numberFormat = function(num) {
     default:
       return n;
   }
+}
+// 提供loading状态的高阶组件
+export const wrapWithLoading = function(WrappedComponent) {
+  return class NewComponent extends PureComponent {
+    constructor() {
+      super();
+      this.state = {
+        loading: true,
+      };
+      this.hideLoading = this.hideLoading.bind(this);
+    }
+
+    hideLoading(bool) {
+      this.setState({ loading: bool || false });
+    }
+
+    render() {
+      const { loading } = this.state;
+      return <WrappedComponent {...this.props} loading={loading} hideLoading={this.hideLoading} />;
+    }
+  }
+
+  return NewComponent;
 }

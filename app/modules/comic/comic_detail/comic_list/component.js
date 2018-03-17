@@ -5,6 +5,7 @@ import { SectionList, Dimensions } from 'react-native';
 import { ComicListItem, ComicListCategory, Progress } from '..';
 import styled from "styled-components";
 const { height } = Dimensions.get('window');
+import { wrapWithLoading } from '../../../../utils';
 
 const rowStyle = {
   flexDirection: 'row',
@@ -21,6 +22,8 @@ class ComicListComponent extends PureComponent {
     list: ImmutablePropTypes.list.isRequired,
     detail: ImmutablePropTypes.map.isRequired,
     getList: PropTypes.func.isRequired,
+    hideLoading: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
       state: PropTypes.shape({
@@ -32,26 +35,22 @@ class ComicListComponent extends PureComponent {
     super(props);
     this.navigate = props.navigation.navigate.bind(this);
   };
-  state = {
-    show: false,
-  }
   componentDidMount() {
     this.onFetch();
   };
   async onFetch() {
     const { id } = this.props.navigation.state.params;
-    const { getList } = this.props;
+    const { getList, hideLoading } = this.props;
     await getList(id);
-    this.setState({ show: true })
+    hideLoading();
   };
   _keyExtractor(item, index) {
     return item.id + '';
   };
   render() {
-    const { list, detail } = this.props;
-    const { show } = this.state;
+    const { list, detail, loading } = this.props;
     const chapter_id = detail.get('chapter_id');
-    if (!show) return <Progress />;
+    if (loading) return <Progress />;
     const data = list.map(item => {
       item.data = item.chapters;
       return item;
@@ -70,4 +69,4 @@ class ComicListComponent extends PureComponent {
   }
 }
 
-export default ComicListComponent;
+export default wrapWithLoading(ComicListComponent);
