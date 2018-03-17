@@ -51,10 +51,7 @@ class ComicListComponent extends PureComponent {
     const { list, detail, loading } = this.props;
     const chapter_id = detail.get('chapter_id');
     if (loading) return <Progress />;
-    const data = list.map(item => {
-      item.data = item.chapters;
-      return item;
-    })
+    const data = list.toJS();
     const initNumber = Math.ceil(height / 40);
     return (
       <SectionList
@@ -63,7 +60,7 @@ class ComicListComponent extends PureComponent {
         ItemSeparatorComponent={ItemSeparatorComponent}
         keyExtractor={this._keyExtractor}
         initialNumToRender={initNumber}
-        sections={data.toJS()}
+        sections={data}
       />
     );
   }
