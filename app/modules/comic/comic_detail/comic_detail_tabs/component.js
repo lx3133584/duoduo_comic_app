@@ -56,11 +56,8 @@ class ComicDetailTabsComponent extends PureComponent {
     GestureHandler={GestureHandler}
   />);
 
-  _renderScene = ({ route, index }) => {
-    if (this.state.index !== index) {
-      return null;
-    }
-    switch (route.key) {
+  switchPage(key) {
+    switch (key) {
       case 'detail':
         return <ComicDetail />;
       case 'list':
@@ -68,6 +65,13 @@ class ComicDetailTabsComponent extends PureComponent {
       default:
         return null;
     }
+  }
+  _renderScene = ({ route, index }) => {
+    if (this.state.index !== index) {
+      return null;
+    }
+    // this._renderScene = ({route}) => this.switchPage(route.key);
+    return this.switchPage(route.key);
   }
   render() {
     return (
