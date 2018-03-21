@@ -67,11 +67,11 @@ class ComicDetailTabsComponent extends PureComponent {
     }
   }
   _renderScene = ({ route, index }) => {
-    if (this.state.index !== index) {
-      return null;
+    if (this.state.index === index) { // 懒加载, 其他标签页不渲染
+      this._renderScene = ({route}) => this.switchPage(route.key); // 覆盖原来的渲染函数
+      return this.switchPage(route.key);
     }
-    // this._renderScene = ({route}) => this.switchPage(route.key);
-    return this.switchPage(route.key);
+    return null;
   }
   render() {
     return (
