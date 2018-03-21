@@ -1,19 +1,19 @@
 import React, { PureComponent } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { Rating } from 'react-native-elements';
+import { RatingModal } from '..';
 import { TouchableOpacity } from 'react-native';
 import { numberFormat } from '../../../../utils';
 
 const ContainStyled = styled.View`
-  height: 70px;
+  height: 75px;
   width: 60px;
   background-color: #fff;
   margin-right: 8px;
   align-items: center;
   elevation: 3;
-  padding: 2px;
+  padding: 5px;
 `
 const TitleStyled = styled.Text`
   color: #666;
@@ -29,31 +29,41 @@ const ScoreNumberStyled = styled.Text`
   margin: 1px 0;
 `
 
-class ComicDetailBtnsComponent extends PureComponent {
+class RatingComponent extends PureComponent {
   static propTypes = {
-    detail: ImmutablePropTypes.map.isRequired,
+    score: PropTypes.number,
+    score_number: PropTypes.number,
   };
   constructor() {
     super();
+    this.cancel = this.cancel.bind(this);
+  };
+  state = {
+    isVisible: false,
+  };
+  cancel() {
+    this.setState({ isVisible: false });
   };
   render() {
-    const { detail } = this.props;
-    const score = detail.get('score');
-    const score_number = detail.get('score_number');
+    const { score, score_number } = this.props;
+    const { isVisible } = this.state;
     return (
-      <ContainStyled>
-        <TitleStyled>评分</TitleStyled>
-        <ScoreStyled>{score}</ScoreStyled>
-        <ScoreNumberStyled>({numberFormat(score_number)})</ScoreNumberStyled>
-        {!!score && <Rating
-          imageSize={8}
-          readonly
-          startingValue={score / 2}
-          fractions={2}
-        />}
-      </ContainStyled>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => this.setState({ isVisible: true })}>
+        <ContainStyled>
+          <TitleStyled>评分</TitleStyled>
+          <ScoreStyled>{Math.round(+score * 10) / 10}</ScoreStyled>
+          <ScoreNumberStyled>({numberFormat(score_number)})</ScoreNumberStyled>
+          {!!score && <Rating
+            imageSize={8}
+            readonly
+            startingValue={score / 2}
+            fractions={2}
+          />}
+          <RatingModal isVisible={isVisible} cancel={this.cancel} />
+        </ContainStyled>
+    </TouchableOpacity>
     );
   }
 }
 
-export default ComicDetailBtnsComponent;
+export default RatingComponent;

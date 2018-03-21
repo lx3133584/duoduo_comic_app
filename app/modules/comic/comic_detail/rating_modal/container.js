@@ -1,20 +1,17 @@
 import { connect } from 'react-redux';
 import Component from './component';
-import { addFavorite, removeFavorite } from '../actions';
+import { addScore } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    score: state.getIn(['comic', 'detail', 'score']),
-    score_number: state.getIn(['comic', 'detail', 'score_number']),
+    id: state.getIn(['comic', 'detail', 'id']),
+    my_score: state.getIn(['comic', 'detail', 'my_score']),
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   add(params) {
-    return dispatch(addFavorite(params))
-  },
-  remove(params) {
-    return dispatch(removeFavorite(params))
+    return dispatch(addScore(params))
   },
 })
 

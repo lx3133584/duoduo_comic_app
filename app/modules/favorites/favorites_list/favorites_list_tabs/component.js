@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { FavoritesList, HistoryList } from '..';
 import { Dimensions } from 'react-native';
-import { TabViewAnimated, TabViewPagerExperimental, TabBar, SceneMap } from 'react-native-tab-view';
+import { TabViewAnimated, TabViewPagerExperimental, TabViewPagerPan, TabBar, SceneMap } from 'react-native-tab-view';
 import * as GestureHandler from 'react-native-gesture-handler';
 import { brand_primary } from '../../../../theme';
 const { width } = Dimensions.get('window');
@@ -64,7 +64,7 @@ class ComicDetailTabsComponent extends PureComponent {
      {...props}
    />);
 
-  _renderPager = props => (<TabViewPagerExperimental
+  _renderPager = props => (<TabViewPagerPan
     swipeEnabled
     {...props}
     GestureHandler={GestureHandler}

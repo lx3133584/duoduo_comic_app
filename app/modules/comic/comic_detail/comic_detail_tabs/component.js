@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { ComicList, ComicDetail } from '..';
 import { Dimensions } from 'react-native';
-import { TabViewAnimated, TabViewPagerExperimental, TabBar, SceneMap } from 'react-native-tab-view';
+import { TabViewAnimated, TabViewPagerExperimental, TabViewPagerPan, TabBar, SceneMap } from 'react-native-tab-view';
 import * as GestureHandler from 'react-native-gesture-handler';
 
 const initialLayout = {
@@ -67,6 +67,7 @@ class ComicDetailTabsComponent extends PureComponent {
     }
   }
   _renderScene = ({ route, index }) => {
+    if (!index) return this.switchPage(route.key); // 详情页无论何时都加载
     if (this.state.index === index) { // 懒加载, 其他标签页不渲染
       this._renderScene = ({route}) => this.switchPage(route.key); // 覆盖原来的渲染函数
       return this.switchPage(route.key);

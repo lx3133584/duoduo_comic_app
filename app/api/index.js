@@ -17,3 +17,5 @@ export const logout = () => http.delete('logout'); // 注销
 export const fetchComicDetail = (id) => http.get(`comic/${id}/detail`); // 漫画详情
 export const fetchComicList = (id) => http.get(`comic/${id}/list`); // 漫画列表
 export const fetchContentList = (id) => http.get(`comic/content/${id}`); // 漫画内容
+// 评分
+export const postScore = ({id, score}) => http.post(`score/${id}`, { score }); // 评分
