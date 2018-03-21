@@ -8,20 +8,16 @@ const initialState = Immutable.Map({
   history_list: Immutable.List(),
 });
 export default handleActions({
-  [favoritesListActions.getFavoritesList]: (state, action) => {
-    if (action.error) return state;
+  [`${favoritesListActions.getFavoritesList}_FULFILLED`]: (state, action) => {
     return state.set('favorites_list', Immutable.List(action.payload.data));
   },
-  [favoritesListActions.getHistoryList]: (state, action) => {
-    if (action.error) return state;
+  [`${favoritesListActions.getHistoryList}_FULFILLED`]: (state, action) => {
     return state.set('history_list', Immutable.List(action.payload.data));
   },
-  [favoritesListActions.removeHistory]: (state, action) => {
-    if (action.error) return state;
+  [`${favoritesListActions.removeHistory}_PENDING`]: (state, action) => {
     return state.update('history_list', list => list.filter((item => item.id !== action.payload)));
   },
-  [comicDetailActions.removeFavorite]: (state, action) => {
-    if (action.error) return state;
+  [`${comicDetailActions.removeFavorite}_PENDING`]: (state, action) => {
     return state.update('favorites_list', list => list.filter((item => item.id !== action.payload)));
   },
 }, initialState)

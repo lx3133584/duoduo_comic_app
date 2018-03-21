@@ -9,8 +9,7 @@ const initialState = Immutable.Map({
   page: 0,
 });
 export default handleActions({
-  [searchListActions.getSearchList]: (state, action) => {
-    if (action.error) return state;
+  [`${searchListActions.getSearchList}_FULFILLED`]: (state, action) => {
     if (!action.payload.page) {
       state = state.update('list', (list) => list.clear());
     }

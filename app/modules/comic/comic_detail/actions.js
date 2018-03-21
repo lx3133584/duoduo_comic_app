@@ -10,12 +10,12 @@ export const { getComicDetail, getComicList, addFavorite, removeFavorite } = cre
     const result = await fetchComicList(id);
     return result;
   },
-  ADD_FAVORITE: async (id) => {
-    const result = await postFavorite(id);
-    return result;
+  ADD_FAVORITE: (id) => {
+    const promise = postFavorite(id);
+    return { promise, data: id };
   },
-  REMOVE_FAVORITE: async (id) => {
-    await deleteFavorite(id);
-    return id;
+  REMOVE_FAVORITE: (id) => {
+    const promise = deleteFavorite(id);
+    return { promise, data: id };
   },
 });

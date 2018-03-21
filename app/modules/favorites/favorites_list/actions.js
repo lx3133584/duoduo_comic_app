@@ -10,8 +10,8 @@ export const { getFavoritesList, getHistoryList, removeHistory } = createActions
     const result = await fetchHistoryList();
     return result;
   },
-  REMOVE_HISTORY: async (id) => {
-    await deleteHistory(id);
-    return id;
+  REMOVE_HISTORY: (id) => {
+    const promise = deleteHistory(id);
+    return { promise, data: id };
   },
 });

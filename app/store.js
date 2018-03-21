@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './modules';
 // middleware
-import promiseMiddleware from 'redux-promise';
+import promiseMiddleware from 'redux-promise-middleware';
 import { createLogger } from 'redux-logger';
 // actions
 import { cookiesActions } from './modules';
 
-const middleware = [promiseMiddleware];
+const middleware = [promiseMiddleware()];
 
 const isNotProduction = process.env.NODE_ENV !== 'production';
 

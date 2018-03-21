@@ -7,16 +7,13 @@ const initialState = Immutable.Map({
 });
 
 export default handleActions({
-  [userInfoActions.getUserInfo]: (state, action) => {
-    if (action.error) return state;
+  [`${userInfoActions.getUserInfo}_FULFILLED`]: (state, action) => {
     return state.set('info', Immutable.Map(action.payload.data));
   },
-  [userInfoActions.logoutAction]: (state, action) => {
-    if (action.error) return state;
+  [`${userInfoActions.logoutAction}_PENDING`]: (state, action) => {
     return state.update('info', (info) => info.clear());
   },
-  [loginActions.loginForLocal]: (state, action) => {
-    if (action.error) return state;
+  [`${loginActions.loginForLocal}_FULFILLED`]: (state, action) => {
     return state.set('info', Immutable.Map(action.payload.data));
   },
 }, initialState)

@@ -14,8 +14,10 @@ class ContentListComponent extends PureComponent {
   static propTypes = {
     content: ImmutablePropTypes.list.isRequired,
     getContent: PropTypes.func.isRequired,
+    getList: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
     getIndex: PropTypes.func.isRequired,
+    comic_id: PropTypes.number,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
       state: PropTypes.shape({
@@ -32,8 +34,13 @@ class ContentListComponent extends PureComponent {
   };
   async onFetch() {
     const { id } = this.props.navigation.state.params;
-    const { getContent, hideLoading } = this.props;
-    await getContent(id);
+    const { getContent, hideLoading, getList, comic_id } = this.props;
+    let chapter_id = id;
+    if (!+id) { // 如果没有传过来chapter_id则从list中取id
+      const res = await getList(comic_id);
+      chapter_id = res.action.payload.data[0].data[0].id
+    }
+    await getContent(chapter_id);
     hideLoading();
   };
   render() {
