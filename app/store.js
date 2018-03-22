@@ -3,10 +3,18 @@ import { rootReducer } from './modules';
 // middleware
 import promiseMiddleware from 'redux-promise-middleware';
 import { createLogger } from 'redux-logger';
-// actions
-import { cookiesActions } from './modules';
+import {
+  createReduxBoundAddListener,
+  createReactNavigationReduxMiddleware,
+} from 'react-navigation-redux-helpers';
 
-const middleware = [promiseMiddleware()];
+const navigationMiddleware = createReactNavigationReduxMiddleware(
+  "root",
+  state => state.get('nav'),
+);
+export const addListener = createReduxBoundAddListener("root");
+
+const middleware = [navigationMiddleware, promiseMiddleware()];
 
 const isNotProduction = process.env.NODE_ENV !== 'production';
 
@@ -16,6 +24,6 @@ if (isNotProduction) {
   });
   middleware.push(logger);
 }
-let store = createStore(rootReducer, applyMiddleware(...middleware));
+const store = createStore(rootReducer, applyMiddleware(...middleware));
 
 export default store;

@@ -35,7 +35,7 @@ export default function FavoritesListItem({ title, cover, itemOnPress, itemOnLon
       <TouchableOpacity
         activeOpacity={0.6}
         onLongPress={() => itemOnLongPress(id)}
-        onPress={() => itemOnPress('ComicDetail', { id, page_id: 1 })}>
+        onPress={() => itemOnPress('ComicDetail', { id, index: 1 })}>
         <Image
           source={{ uri: cover }}
           imageStyle={imageStyle}

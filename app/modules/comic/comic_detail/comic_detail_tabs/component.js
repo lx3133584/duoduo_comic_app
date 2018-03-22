@@ -32,9 +32,9 @@ class ComicDetailTabsComponent extends PureComponent {
   };
   constructor(props) {
     super(props);
-    const { page_id } = props.navigation.state.params;
+    const { index = 0 } = props.navigation.state.params;
     this.state = {
-      index: page_id || 0,
+      index,
       routes: [
         { title: '详情', key: 'detail' },
         { title: '目录', key: 'list' },

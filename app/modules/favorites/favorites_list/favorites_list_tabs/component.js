@@ -39,7 +39,7 @@ class ComicDetailTabsComponent extends PureComponent {
     super(props);
     const { params } = props.navigation.state;
     this.state = {
-      index: params ? params.page_id || 0 : 0,
+      index: params ? params.index || 0 : 0,
       routes: [
         { title: '收藏', key: 'favorite' },
         { title: '历史', key: 'history' },
@@ -49,8 +49,8 @@ class ComicDetailTabsComponent extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { params } = nextProps.navigation.state;
-    if (params && (params.page_id !== this.state.index)) {
-      this.setState({ index: params.page_id || 0 })
+    if (params && (params.index !== this.state.index)) {
+      this.setState({ index: params.index || 0 })
     }
   };
 

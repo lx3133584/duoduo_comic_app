@@ -10,17 +10,17 @@ const list = [
   {
     name: '我的收藏',
     route: 'Favorites',
-    page_id: 0,
+    index: 0,
   },
   {
     name: '浏览记录',
     route: 'Favorites',
-    page_id: 1,
+    index: 1,
   },
   {
     name: '我的下载',
     route: 'Favorites',
-    page_id: 2,
+    index: 2,
   },
 ]
 const containerStyle = {
@@ -72,13 +72,13 @@ class UserOperateListComponent extends PureComponent {
       <View>
         <List containerStyle={containerStyle}>
           {
-            list.map(({ name, route, page_id }, index) => (
+            list.map(({ name, route, index }) => (
               <ListItem
                 containerStyle={itemContainerStyle}
                 key={name}
                 title={name}
                 chevronColor="#999"
-                onPress={() => navigation.navigate(route, { page_id })}
+                onPress={() => navigation.navigate(route, { index })}
               />
             ))
           }
