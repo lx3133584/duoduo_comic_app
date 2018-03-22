@@ -20,7 +20,7 @@ const ItemSeparatorComponent = styled.View`
 class ComicListComponent extends PureComponent {
   static propTypes = {
     list: ImmutablePropTypes.list.isRequired,
-    detail: ImmutablePropTypes.map.isRequired,
+    chapter_id: PropTypes.number,
     getList: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
@@ -47,9 +47,18 @@ class ComicListComponent extends PureComponent {
   _keyExtractor(item, index) {
     return item.id + '';
   };
+  _getItemLayout(data, index) {
+    let len = 0;
+    let offset = 40;
+    data.forEach(({ data }, index) => { // 计算分类标题高度
+      len += data.length;
+      if (index < len) return;
+      offset += 40;
+    })
+    return {length: 41, offset: 41 * index + offset, index}
+  };
   render() {
-    const { list, detail, loading } = this.props;
-    const chapter_id = detail.get('chapter_id');
+    const { list, chapter_id, loading } = this.props;
     if (loading) return <Progress />;
     const data = list.toJS();
     const initNumber = Math.ceil(height / 40);
@@ -61,6 +70,7 @@ class ComicListComponent extends PureComponent {
         keyExtractor={this._keyExtractor}
         initialNumToRender={initNumber}
         sections={data}
+        getItemLayout={this._getItemLayout}
       />
     );
   }

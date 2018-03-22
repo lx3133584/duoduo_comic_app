@@ -22,8 +22,8 @@ export const wrapWithLoading = function(WrappedComponent) {
       this.hideLoading = this.hideLoading.bind(this);
     }
 
-    hideLoading(bool) {
-      this.setState({ loading: bool || false });
+    hideLoading(bool = false) {
+      this.setState({ loading: bool });
     }
 
     render() {

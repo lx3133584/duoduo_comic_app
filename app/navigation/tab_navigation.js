@@ -1,4 +1,3 @@
-import React from 'React';
 import { TabNavigator, TabBarBottom  } from 'react-navigation';
 import { UserInfoScreen, SearchListScreen, FavoritesListScreen } from '../modules';
 import { brand_primary } from '../theme';
