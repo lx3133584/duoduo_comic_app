@@ -80,7 +80,7 @@ class LongListComponent extends PureComponent {
     return <Item {...item} itemOnPress={itemOnPress} itemOnLongPress={this._itemOnLongPress} />
   };
   render() {
-    const { list, isLong, showFooter, emptyText } = this.props;
+    const { list, isLong, showFooter, emptyText, initialNum = 15 } = this.props;
     const { loading } = this.state;
     return (
       <FlatList
@@ -92,7 +92,7 @@ class LongListComponent extends PureComponent {
          onEndReachedThreshold={0.6}
          onRefresh={this._onRefresh}
          refreshing={loading}
-         initialNumToRender={15}
+         initialNumToRender={Math.ceil(initialNum)}
          ListEmptyComponent={() => <ListEmpty text={emptyText} />}
          ListFooterComponent={showFooter && list.length && FooterComponent}
        />

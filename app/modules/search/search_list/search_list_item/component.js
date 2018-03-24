@@ -9,6 +9,7 @@ const ContainStyled = styled.View`
   flex-direction: row;
   padding: 8px;
   background: #fff;
+  height: 40px;
 `
 const DescStyled = styled.Text`
   color: #999;
@@ -40,7 +41,7 @@ export default function SearchListItem(props) {
   const { desc, author, status, class_name } = props;
   return (
     <LongListItem {...props}>
-      <DescStyled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <DescStyled numberOfLines ={3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {desc.replace(':', '')}</DescStyled>
       <ContainStyled>
         <AuthorStyled>{author}</AuthorStyled>

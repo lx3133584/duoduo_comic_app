@@ -5,6 +5,8 @@ import { HistoryListItem, Modal } from '..';
 import { LongList } from '../../..';
 import { brand_primary } from '../../../../theme';
 import styled from "styled-components";
+import { Dimensions } from 'react-native';
+const { height } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   padding-top: 15px;
@@ -31,7 +33,7 @@ class FavoritesListComponent extends PureComponent {
     this.navigate = props.navigation.navigate.bind(this);
   };
   componentDidMount() {
-    this.onFetch();
+    this.onFetch(0);
   };
   removeFavorite(id) {
     this.setState({ isVisible: true });
@@ -44,9 +46,9 @@ class FavoritesListComponent extends PureComponent {
   cancel() {
     this.setState({ isVisible: false });
   };
-  async onFetch() {
+  async onFetch(page) {
     const { getList } = this.props;
-    return await getList();
+    return await getList(page);
   };
   render() {
     const list = this.props.list.toJS();
@@ -59,6 +61,7 @@ class FavoritesListComponent extends PureComponent {
            itemOnLongPress={this.removeFavorite}
            itemOnPress={this.navigate}
            onFetch={this.onFetch}
+           initialNum={height / 40}
            isLong
          />
          <Modal

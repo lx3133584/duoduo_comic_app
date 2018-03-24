@@ -9,6 +9,7 @@ const ContainStyled = styled.View`
   flex-direction: row;
   padding: 8px;
   background: #fff;
+  height: 40px;
 `
 const DescStyled = styled.Text`
   color: #999;
