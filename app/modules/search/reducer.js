@@ -4,7 +4,7 @@ import { searchListActions } from '.';
 
 const initialState = Immutable.Map({
   keyword: '',
-  curData: Immutable.List(),
+  cur_data: Immutable.List(),
   list: Immutable.List(),
   page: 0,
 });
@@ -13,9 +13,11 @@ export default handleActions({
     if (!action.payload.page) {
       state = state.update('list', (list) => list.clear());
     }
+    if (action.payload.keyword) {
+      state = state.set('keyword', action.payload.keyword);
+    }
     state = state.set('page', action.payload.page);
-    state = state.set('keyword', action.payload.keyword);
-    state = state.set('curData', Immutable.List(action.payload.result.data));
+    state = state.set('cur_data', Immutable.List(action.payload.result.data));
     return state.update('list', (oldList) => oldList.concat(action.payload.result.data));
   },
 }, initialState)

@@ -6,9 +6,9 @@ export const { getFavoritesList, getHistoryList, removeHistory } = createActions
     const result = await fetchFavoritesList();
     return result;
   },
-  GET_HISTORY_LIST: async () => {
-    const result = await fetchHistoryList();
-    return result;
+  GET_HISTORY_LIST: async (page) => {
+    const result = await fetchHistoryList(page);
+    return { result, page };
   },
   REMOVE_HISTORY: (id) => {
     const promise = deleteHistory(id);

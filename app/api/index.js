@@ -5,14 +5,14 @@ export const fetchFavoritesList = () => http.get('favorites'); // 收藏列表
 export const postFavorite = (id) => http.post(`favorites/${id}`); // 添加收藏
 export const deleteFavorite = (id) => http.delete(`favorites/${id}`); // 删除收藏
 // 浏览记录
-export const fetchHistoryList = () => http.get('history_record'); // 浏览记录列表
+export const fetchHistoryList = (page) => http.get('history_record', {params: { page }}); // 浏览记录列表
 export const deleteHistory = (id) => http.delete(`history_record/${id}`); // 删除浏览记录
 // 搜索
 export const searchLocal = ({ keyword, page }) => http.get('searchLocal', {params: { keyword, page }});
 // 发现
 export const fetchClassList = () => http.get('class'); // 分类列表
-export const fetchClassItemList = (id) => http.get(`class/${id}`); // 单分类漫画列表
-export const fetchRankItemList = (type) => http.get(`rank/${type}`); // 单种排行榜
+export const fetchClassItemList = ({ id, page }) => http.get(`class/${id}`, {params: { page }}); // 单分类漫画列表
+export const fetchRankItemList = ({ type, page }) => http.get(`rank/${type}`, {params: { page }}); // 单种排行榜
 // 用户
 export const fetchUserInfo = () => http.get('user'); // 用户信息
 export const loginLocal = ({ username, password }) => http.post('passport/local', { username, password }); // 登录local

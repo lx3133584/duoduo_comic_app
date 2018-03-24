@@ -59,6 +59,7 @@ class FavoritesListComponent extends PureComponent {
            itemOnLongPress={this.removeFavorite}
            itemOnPress={this.navigate}
            onFetch={this.onFetch}
+           isLong
          />
          <Modal
            confirm={this.confirm}

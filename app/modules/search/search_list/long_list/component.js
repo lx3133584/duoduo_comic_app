@@ -92,6 +92,7 @@ class LongListComponent extends PureComponent {
          onEndReachedThreshold={0.6}
          onRefresh={this._onRefresh}
          refreshing={loading}
+         initialNumToRender={15}
          ListEmptyComponent={() => <ListEmpty text={emptyText} />}
          ListFooterComponent={showFooter && list.length && FooterComponent}
        />

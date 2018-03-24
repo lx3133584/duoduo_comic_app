@@ -2,6 +2,12 @@ import { connect } from 'react-redux';
 import { getSearchList } from '../actions';
 import Component from './component';
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    keyword: state.getIn(['search', 'keyword']),
+  }
+}
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
   search(params) {
     return dispatch(getSearchList(params))
@@ -9,6 +15,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 })
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(Component)

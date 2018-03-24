@@ -22,13 +22,15 @@ const icon = {
 class SearchBarComponent extends PureComponent {
   static propTypes = {
     search: PropTypes.func.isRequired,
+    keyword: PropTypes.string,
   };
-  state = {
-    value: '',
-    loading: false,
-  };
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { keyword = '' } = props;
+    this.state = {
+      value: keyword,
+      loading: false,
+    };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   };
