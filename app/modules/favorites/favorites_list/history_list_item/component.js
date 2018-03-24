@@ -5,11 +5,9 @@ import { Badge } from 'react-native-elements';
 import { green, red, purple } from '../../../../theme';
 
 const ContainStyled = styled.View`
-  flex: 1;
   flex-direction: row;
   padding: 8px;
   background: #fff;
-  height: 40px;
 `
 const DescStyled = styled.Text`
   color: #999;

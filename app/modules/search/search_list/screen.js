@@ -8,7 +8,7 @@ const { height } = Dimensions.get('window');
 const ContainStyled = styled.View`
   background: #fff;
   min-height: ${height};
-  padding-bottom: 72px;
+  padding-bottom: 125px;
 `
 
 class SearchListScreen extends PureComponent {

@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { FlatList, Vibration } from 'react-native';
+import { Dimensions, FlatList, Vibration } from 'react-native';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
 import { ListEmpty } from '..';
+const { height } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   margin: 10px 0;
@@ -79,22 +80,27 @@ class LongListComponent extends PureComponent {
     const { Item, itemOnPress } = this.props;
     return <Item {...item} itemOnPress={itemOnPress} itemOnLongPress={this._itemOnLongPress} />
   };
+  _getItemLayout = (data, index) => {
+    const { itemHeight = 140 } = this.props;
+    return { length: itemHeight, offset: itemHeight * index, index }
+  };
   render() {
-    const { list, isLong, showFooter, emptyText, initialNum = 15 } = this.props;
+    const { list, isLong, showFooter, emptyText, itemHeight = 140 } = this.props;
     const { loading } = this.state;
     return (
       <FlatList
-         {...this.props}
          data={list}
          keyExtractor={this._keyExtractor}
          renderItem={this._renderItem}
          onEndReached={isLong && this._onFetch}
-         onEndReachedThreshold={0.6}
+         onEndReachedThreshold={1.6}
          onRefresh={this._onRefresh}
          refreshing={loading}
-         initialNumToRender={Math.ceil(initialNum)}
+         getItemLayout={this._getItemLayout}
+         initialNumToRender={Math.ceil(height / itemHeight)}
          ListEmptyComponent={() => <ListEmpty text={emptyText} />}
          ListFooterComponent={showFooter && list.length && FooterComponent}
+         {...this.props}
        />
     );
   }

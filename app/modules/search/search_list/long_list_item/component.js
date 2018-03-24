@@ -4,10 +4,10 @@ import { Image } from '..';
 import { TouchableOpacity } from 'react-native';
 
 const ContainStyled = styled.View`
-  flex: 1;
   flex-direction: row;
   padding: 8px;
   background: #fff;
+  height: 140px;
 `
 const LeftStyled = styled.View`
   width: 80px;

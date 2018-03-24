@@ -32,9 +32,6 @@ class FavoritesListComponent extends PureComponent {
     this.cancel = this.cancel.bind(this);
     this.navigate = props.navigation.navigate.bind(this);
   };
-  componentDidMount() {
-    this.onFetch(0);
-  };
   removeFavorite(id) {
     this.setState({ isVisible: true });
     this.id = id;
@@ -61,7 +58,6 @@ class FavoritesListComponent extends PureComponent {
            itemOnLongPress={this.removeFavorite}
            itemOnPress={this.navigate}
            onFetch={this.onFetch}
-           initialNum={height / 40}
            isLong
          />
          <Modal

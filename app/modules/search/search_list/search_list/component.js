@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { LongList, SearchListItem } from '..';
-import { Dimensions } from 'react-native';
-const { height } = Dimensions.get('window');
 
 class SearchListComponent extends PureComponent {
   static propTypes = {
@@ -31,7 +29,6 @@ class SearchListComponent extends PureComponent {
          Item={SearchListItem}
          onFetch={this.onFetch}
          itemOnPress={this.navigate}
-         initialNum={height / 40}
          emptyText="试着搜索看看吧~"
          isLong
          showFooter
