@@ -1,6 +1,3 @@
-import { createStore, applyMiddleware } from 'redux';
-import { rootReducer } from './modules';
-// middleware
 import promiseMiddleware from 'redux-promise-middleware';
 import { createLogger } from 'redux-logger';
 import {
@@ -24,6 +21,4 @@ if (isNotProduction) {
   });
   middleware.push(logger);
 }
-const store = createStore(rootReducer, applyMiddleware(...middleware));
-
-export default store;
+export default middleware;

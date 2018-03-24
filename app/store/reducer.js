@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux-immutable';
-import { comicReducer } from './comic';
-import { favoritesReducer } from './favorites';
-import { userReducer } from './user';
-import { searchReducer } from './search';
-import { discoveryReducer } from './discovery';
-import { cookiesReducer } from './cookies';
+import {
+  comicReducer,
+  favoritesReducer,
+  userReducer,
+  searchReducer,
+  discoveryReducer,
+  cookiesReducer,
+} from '../modules';
 import navReducer from '../navigation/reducer';
 
 export default combineReducers({
