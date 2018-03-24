@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Image } from '..';
 import { Badge } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
+import { green, red, purple } from '../../../../theme';
 
 const ContainStyled = styled.View`
   flex: 1;
@@ -48,13 +49,13 @@ const WhiteContainStyled = styled.View`
   background: #fff;
 `
 const greenBackground = {
-  backgroundColor: '#85d6cf',
+  backgroundColor: green,
 }
 const redBackground = {
-  backgroundColor: '#f98882',
+  backgroundColor: red,
 }
 const purpleBackground = {
-  backgroundColor: '#a0aae6',
+  backgroundColor: purple,
 }
 export default function SearchListItem({ id, title, cover, desc, author, status, class_name, itemOnPress }) {
   return (

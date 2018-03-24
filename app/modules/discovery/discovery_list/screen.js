@@ -1,15 +1,21 @@
 import React, { PureComponent } from 'react';
-import { ClassList } from '.';
-import styled from "styled-components";
-import { brand_primary } from '../../../theme';
 import { StatusBar, Dimensions } from 'react-native';
+import styled from "styled-components";
+import { ClassList, RankList } from '.';
+import { brand_primary } from '../../../theme';
 import { Header } from '../../../navigation';
-const { height } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
-const ContainStyled = styled.View`
+const ContainStyled = styled.ScrollView`
   background: #fff;
   min-height: ${height};
-  padding-bottom: 72px;
+  padding-top: 50px;
+`
+const HeaderContainStyled = styled.View`
+  position: absolute;
+  top: 0;
+  width: ${width};
+  z-index: 1;
 `
 
 class DiscoveryListScreen extends PureComponent {
@@ -17,12 +23,16 @@ class DiscoveryListScreen extends PureComponent {
     title: '发现',
   };
   render() {
-    return (
-    <ContainStyled>
-      <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
-      <Header isNoBack customTitle="漫画分类" />
-      <ClassList />
-    </ContainStyled>)
+    return [
+      <HeaderContainStyled key="header">
+        <Header isNoBack customTitle="漫画分类" />
+      </HeaderContainStyled>,
+      <ContainStyled key="main">
+        <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
+        <RankList />
+        <ClassList />
+      </ContainStyled>
+    ]
   };
 }
 

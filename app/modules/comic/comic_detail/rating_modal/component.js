@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { Rating, Button } from 'react-native-elements';
 import { Dimensions } from 'react-native';
+import { yellow } from '../../../../theme';
 import Modal from "react-native-modal";
 const { width } = Dimensions.get('window');
 
@@ -20,7 +21,7 @@ const TextStyled = styled.Text`
 `
 const NumberStyled = styled.Text`
   font-size: 32px;
-  color: #f1c40f;
+  color: ${yellow};
 `
 const containStyle = {
   flexDirection: 'column-reverse',
@@ -29,7 +30,7 @@ const containStyle = {
 }
 const buttonStyle = {
   marginTop: 20,
-  backgroundColor: '#f1c40f',
+  backgroundColor: yellow,
   width: 150,
   height: 40,
   borderRadius: 100,

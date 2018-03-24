@@ -2,9 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { Image } from '../../..';
 import { TouchableOpacity } from 'react-native';
-import { Dimensions } from 'react-native';
 import baseURL from '../../../../api/base_url';
-const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   margin: 5px 12px;
@@ -25,7 +23,7 @@ const imageStyle = {
   width: 80,
   height: 80,
 }
-export default function FavoritesListItem({ id, name, cover, itemOnPress }) {
+export default function ClassListItem({ id, name, cover, itemOnPress }) {
   return (
     <ContainStyled>
       <TouchableOpacity

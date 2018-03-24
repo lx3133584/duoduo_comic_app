@@ -1,8 +1,13 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
+import styled from "styled-components";
 import { ClassListItem } from '..';
 import { LongList } from '../../..';
+
+const ContainStyled = styled.View`
+  padding-bottom: 125px;
+`
 
 const columnWrapperStyle = {
   flexDirection: 'row',
@@ -19,7 +24,6 @@ class ClassListComponent extends PureComponent {
   };
   constructor(props) {
     super(props);
-    this.onFetch = this.onFetch.bind(this);
     this.navigate = props.navigation.navigate.bind(this);
   };
   componentDidMount() {
@@ -32,15 +36,16 @@ class ClassListComponent extends PureComponent {
   render() {
     const list = this.props.list.toJS();
     return (
-      <LongList
-         list={list}
-         Item={ClassListItem}
-         customkey="id"
-         itemOnPress={this.navigate}
-         onFetch={this.onFetch}
-         numColumns={3}
-         columnWrapperStyle={columnWrapperStyle}
-       />
+      <ContainStyled>
+        <LongList
+           list={list}
+           Item={ClassListItem}
+           customkey="id"
+           itemOnPress={this.navigate}
+           numColumns={3}
+           columnWrapperStyle={columnWrapperStyle}
+         />
+     </ContainStyled>
     );
   }
 }
