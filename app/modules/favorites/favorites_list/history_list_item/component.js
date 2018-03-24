@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { LongListItem } from '..';
+import { LongListItem } from '../../..';
 import { Badge } from 'react-native-elements';
 import { green, red, purple } from '../../../../theme';
 
@@ -13,12 +13,12 @@ const ContainStyled = styled.View`
 const DescStyled = styled.Text`
   color: #999;
   font-size: 14px;
-  margin: 10px 0;
+  margin: 5px 0;
 `
 const AuthorStyled = styled.Text`
   color: #666;
   font-size: 12px;
-  margin-right: 10px;
+  margin-right: 5px;
 `
 const textStyle = {
   fontSize: 10,
@@ -33,15 +33,12 @@ const greenBackground = {
 const redBackground = {
   backgroundColor: red,
 }
-const purpleBackground = {
-  backgroundColor: purple,
-}
-export default function SearchListItem(props) {
-  const { desc, author, status, class_name } = props;
+export default function HistoryListItem(props) {
+  const { cur_chapter, last_read_time, author, status } = props;
   return (
     <LongListItem {...props}>
-      <DescStyled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        {desc.replace(':', '')}</DescStyled>
+      <DescStyled>{cur_chapter ? `上次看到：${cur_chapter}` : '未看'}</DescStyled>
+      <DescStyled>浏览时间：{last_read_time}</DescStyled>
       <ContainStyled>
         <AuthorStyled>{author}</AuthorStyled>
         <Badge
@@ -50,12 +47,6 @@ export default function SearchListItem(props) {
           wrapperStyle={wrapperStyle}
           containerStyle={status === '完结' ? greenBackground : redBackground}
         />
-        {class_name && <Badge
-          value={class_name}
-          textStyle={textStyle}
-          wrapperStyle={wrapperStyle}
-          containerStyle={purpleBackground}
-        />}
       </ContainStyled>
     </LongListItem>
   )

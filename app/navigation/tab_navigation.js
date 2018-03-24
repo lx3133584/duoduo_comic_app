@@ -10,7 +10,7 @@ export default TabNavigator({
   User: { screen: UserInfoScreen },
 },
 {
-  initialRouteName: 'Discovery',
+  initialRouteName: 'Favorites',
   backBehavior: 'none',
   navigationOptions: TabBar,
   tabBarOptions: {

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import { FavoritesListItem, Modal } from '..';
+import { HistoryListItem, Modal } from '..';
 import { LongList } from '../../..';
 import { brand_primary } from '../../../../theme';
 import styled from "styled-components";
@@ -55,11 +55,10 @@ class FavoritesListComponent extends PureComponent {
       <ContainStyled>
         <LongList
            list={list}
-           Item={FavoritesListItem}
+           Item={HistoryListItem}
            itemOnLongPress={this.removeFavorite}
            itemOnPress={this.navigate}
            onFetch={this.onFetch}
-           numColumns={3}
          />
          <Modal
            confirm={this.confirm}
