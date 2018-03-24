@@ -25,8 +25,8 @@ class NavigationWithState extends React.Component {
     if (this.canExit) BackHandler.exitApp();
     const { dispatch, nav } = this.props;
     if (nav.index === 0) {
-      Toast.show('再按一次退出', {
-        position: -50,
+      Toast.show('再按一次退出应用', {
+        position: -70,
         duration: 1500,
       });
       this.canExit = true;

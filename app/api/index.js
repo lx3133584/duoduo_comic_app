@@ -9,6 +9,10 @@ export const fetchHistoryList = () => http.get('history_record'); // 浏览记�
 export const deleteHistory = (id) => http.delete(`history_record/${id}`); // 删除浏览记录
 // 搜索
 export const searchLocal = ({ keyword, page }) => http.get('searchLocal', {params: { keyword, page }});
+// 发现
+export const fetchClassList = () => http.get('class'); // 分类列表
+export const fetchClassItemList = (id) => http.get(`class/${id}`); // 单分类漫画列表
+export const fetchRankList = (type) => http.get(`rank/${type}`); // 单种排行榜
 // 用户
 export const fetchUserInfo = () => http.get('user'); // 用户信息
 export const loginLocal = ({ username, password }) => http.post('passport/local', { username, password }); // 登录local

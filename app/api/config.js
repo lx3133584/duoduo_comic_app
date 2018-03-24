@@ -7,7 +7,7 @@ import { cookiesActions } from '../modules';
 axios.defaults.timeout = 60000; // 响应时间
 axios.defaults.responseType = 'json';
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'; // 配置请求头
-axios.defaults.baseURL = baseURL; // 配置接口地址
+axios.defaults.baseURL = `${baseURL}/`; // 配置接口地址
 
 function interceptorsRequestSuccess (config) {
   store.dispatch(cookiesActions.getAllCookies())
@@ -23,7 +23,7 @@ function interceptorsResponseError (error) {
   // if (error.request.status !== 401) {
   // }
   error.response && error.response.data && Toast.show(error.response.data.message, {
-    position: -50,
+    position: -70,
   });
   return Promise.reject(error.response);
 }
