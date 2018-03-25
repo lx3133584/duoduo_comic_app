@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { TouchableOpacity } from 'react-native';
 import { Dimensions } from 'react-native';
 import baseURL from '../../../../api/base_url';
-import { green, red, purple, yellow } from '../../../../theme';
 const { width } = Dimensions.get('window');
 const containWidth = width / 2 - 25;
 
@@ -12,7 +11,6 @@ const ContainStyled = styled.View`
   width: ${containWidth};
   height: 50px;
   border-radius: 10px;
-  background: ${green};
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -28,13 +26,12 @@ const ImageBoxStyled = styled.View`
   height: 80;
   overflow: hidden;
 `
-const colors = [ red, green, purple, yellow ]
-export default function RankListItem({ id, name, Icon, navigation }) {
+export default function RankListItem({ id, name, color, Icon, navigation }) {
   return (
       <TouchableOpacity
-        onPress={() => navigation.navigate('ComicDetail', { id })}
+        onPress={() => navigation.navigate('RankItemList', { type: id })}
         activeOpacity={0.6}>
-          <ContainStyled style={{ backgroundColor: colors[id] }}>
+          <ContainStyled style={{ backgroundColor: color }}>
             <Icon />
             <TitleStyled>{name}</TitleStyled>
           </ContainStyled>

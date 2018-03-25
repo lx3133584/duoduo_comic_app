@@ -1,5 +1,7 @@
 import React from 'React';
 
+import { green, red, purple, yellow } from '../../../../theme';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -18,23 +20,27 @@ export default [
     name: '人气排行榜',
     key: 'popularity_number',
     Icon: FireIcon,
+    color: red,
   },
   {
     id: 1,
     name: '收藏排行榜',
     key: 'collection_number',
     Icon: FavoriteIcon,
+    color: green,
   },
   {
     id: 2,
     name: '评价数排行榜',
     key: 'score_number',
     Icon: YelpIcon,
+    color: purple,
   },
   {
     id: 3,
     name: '评分排行榜',
     key: 'score',
     Icon: StarIcon,
+    color: yellow,
   },
 ]

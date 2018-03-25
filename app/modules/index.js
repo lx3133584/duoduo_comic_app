@@ -19,6 +19,7 @@ export {
   ComicDetailScreen,
   ComicContentScreen,
   comicReducer,
+  LoadingPage,
 } from './comic';
 export {
   cookiesReducer,
@@ -26,5 +27,6 @@ export {
 } from './cookies';
 export {
   DiscoveryListScreen,
+  RankItemListScreen,
   discoveryReducer,
 } from './discovery';

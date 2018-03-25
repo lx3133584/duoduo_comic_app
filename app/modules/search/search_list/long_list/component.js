@@ -53,9 +53,9 @@ class LongListComponent extends PureComponent {
   _keyExtractor(item, index) {
     return item[this.customkey] + '';
   };
-  async _onRefresh() {
+  _onRefresh() {
     this.page = 0;
-    await this._onFetch()
+    this._onFetch()
   }
   _onFetch() {
     const { onFetch, callback } = this.props;

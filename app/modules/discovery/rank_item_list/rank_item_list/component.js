@@ -1,75 +1,70 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import { HistoryListItem, Modal } from '..';
-import { LongList } from '../../..';
+import { RankItemListItem } from '..';
+import { LongList, LoadingPage } from '../../..';
 import { brand_primary } from '../../../../theme';
+import { wrapWithLoading } from '../../../../utils';
 import styled from "styled-components";
 import { Dimensions } from 'react-native';
 const { height } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   padding-top: 15px;
+  padding-bottom: 100px;
 `
 
-class FavoritesListComponent extends PureComponent {
+class RankItemListComponent extends PureComponent {
   static propTypes = {
     getList: PropTypes.func.isRequired,
-    remove: PropTypes.func.isRequired,
+    hideLoading: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
     list: ImmutablePropTypes.list.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
+      state: PropTypes.shape({
+        params: PropTypes.object.isRequired,
+      }),
     }),
-  };
-  state = {
-    isVisible: false,
   };
   constructor(props) {
     super(props);
+    const { type = 0 } = props.navigation.state.params;
+    this.type = type;
     this.onFetch = this.onFetch.bind(this);
-    this.removeFavorite = this.removeFavorite.bind(this);
-    this.confirm = this.confirm.bind(this);
-    this.cancel = this.cancel.bind(this);
     this.navigate = props.navigation.navigate.bind(this);
   };
-  removeFavorite(id) {
-    this.setState({ isVisible: true });
-    this.id = id;
-  };
-  confirm() {
-    this.setState({ isVisible: false });
-    this.props.remove(this.id);
-  };
-  cancel() {
-    this.setState({ isVisible: false });
+  componentDidMount() {
+    this.onFetch(0);
   };
   async onFetch(page) {
-    const { getList } = this.props;
-    return await getList(page);
+    const { getList, hideLoading } = this.props;
+    const res = await getList({ page, type: this.type });
+    hideLoading();
+    return res;
+  };
+  renderItem = props => {
+    return <RankItemListItem {...props} type={this.type}  />
   };
   render() {
     const list = this.props.list.toJS();
-    const { isVisible } = this.state;
-    return (
-      <ContainStyled>
+    const { loading } = this.props;
+    return ([
+      <LoadingPage show={loading} key="loading" />,
+      <ContainStyled key="main">
         <LongList
            list={list}
-           Item={HistoryListItem}
+           Item={this.renderItem}
            itemOnLongPress={this.removeFavorite}
            itemOnPress={this.navigate}
            onFetch={this.onFetch}
+           extraData={{aa: 111}}
            isLong
            showFooter
          />
-         <Modal
-           confirm={this.confirm}
-           cancel={this.cancel}
-           isVisible={isVisible}>
-           是否确认删除此条浏览记录？
-         </Modal>
       </ContainStyled>
-    );
+    ]);
   }
 }
 
-export default FavoritesListComponent;
+export default wrapWithLoading(RankItemListComponent);

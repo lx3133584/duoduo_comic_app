@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import { LoginScreen, ComicDetailScreen, ComicContentScreen } from '../modules';
+import { LoginScreen, ComicDetailScreen, ComicContentScreen, RankItemListScreen } from '../modules';
 import { default as TabNavigator } from './tab_navigation';
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 
@@ -10,6 +10,7 @@ const RootStack = StackNavigator(
     Login: { screen: LoginScreen },
     ComicDetail: { screen: ComicDetailScreen },
     ComicContent: { screen: ComicContentScreen },
+    RankItemList: { screen: RankItemListScreen },
   },
   {
     navigationOptions: ({navigation}) => ({

@@ -82,7 +82,7 @@ class ComicDetailTopComponent extends PureComponent {
     this.setState({ viewRef: findNodeHandle(this.backgroundImage) }, this.hideLoading);
   };
   async onFetch(id) {
-    const { getDetail, hideLoading } = this.props;
+    const { getDetail } = this.props;
     await getDetail(id);
     this.fetchCompleted = true; // 标识请求已完成
     this.hideLoading();

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { RankListItem } from '..';
-import rankTypes from './rank_types';
+import { rankTypes } from '..';
 
 const ContainStyled = styled.View`
   margin: 10px 0;

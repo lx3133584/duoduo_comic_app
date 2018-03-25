@@ -5,6 +5,8 @@ export const numberFormat = function(num) {
   switch (true) {
     case n < 10000:
       return n;
+    case n >= 100000000:
+      return (n / 100000000).toFixed(1) + '亿';
     case n >= 10000:
       return (n / 10000).toFixed(1) + '万';
     default:
