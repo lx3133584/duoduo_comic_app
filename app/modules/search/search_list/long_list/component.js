@@ -73,11 +73,11 @@ class LongListComponent extends PureComponent {
   };
   _itemOnLongPress(...params) {
     Vibration.vibrate(pattern);
-    const { itemOnLongPress } = this.props;
+    const { itemOnLongPress = f => f } = this.props;
     itemOnLongPress(...params)
   };
   _renderItem({ item }) {
-    const { Item, itemOnPress } = this.props;
+    const { Item, itemOnPress = f => f } = this.props;
     return <Item {...item} itemOnPress={itemOnPress} itemOnLongPress={this._itemOnLongPress} />
   };
   _getItemLayout = (data, index) => {

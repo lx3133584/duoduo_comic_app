@@ -1,6 +1,6 @@
 import React from 'React';
 
-import { green, red, purple, yellow } from '../../../../theme';
+import { green, red, blue_purple, yellow } from '../../../../theme';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -34,7 +34,7 @@ export default [
     name: '评价数排行榜',
     key: 'score_number',
     Icon: YelpIcon,
-    color: purple,
+    color: blue_purple,
   },
   {
     id: 3,

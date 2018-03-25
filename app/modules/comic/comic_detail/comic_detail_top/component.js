@@ -120,7 +120,7 @@ class ComicDetailTopComponent extends PureComponent {
         />
         <TextContainStyled>
           <TitleStyled>{title}</TitleStyled>
-          <BottomTextStyled>{author}</BottomTextStyled>
+          <BottomTextStyled>{author || '佚名'}</BottomTextStyled>
           <BottomTextContainStyled>
             <BottomTextStyled>{class_name && (class_name + ' | ')}人气 {numberFormat(popularity_number)}</BottomTextStyled>
           </BottomTextContainStyled>

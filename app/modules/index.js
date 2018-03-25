@@ -8,6 +8,7 @@ export {
   searchReducer,
   LongList,
   LongListItem,
+  SearchListItem,
   Image,
 } from './search';
 export {
@@ -28,5 +29,6 @@ export {
 export {
   DiscoveryListScreen,
   RankItemListScreen,
+  ClasskItemListScreen,
   discoveryReducer,
 } from './discovery';

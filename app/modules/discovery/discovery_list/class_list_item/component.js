@@ -28,7 +28,7 @@ export default function ClassListItem({ id, name, cover, itemOnPress }) {
     <ContainStyled>
       <TouchableOpacity
         activeOpacity={0.6}
-        onPress={() => itemOnPress('ComicDetail', { id })}>
+        onPress={() => itemOnPress('ClasskItemList', { id, name })}>
         <ImageBoxStyled>
           <Image
             source={{ uri: baseURL + cover }}

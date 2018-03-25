@@ -42,7 +42,7 @@ export default function SearchListItem(props) {
       <DescStyled numberOfLines ={3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {desc.replace(':', '')}</DescStyled>
       <ContainStyled>
-        <AuthorStyled>{author}</AuthorStyled>
+        <AuthorStyled>{author || '佚名'}</AuthorStyled>
         <Badge
           value={status}
           textStyle={textStyle}

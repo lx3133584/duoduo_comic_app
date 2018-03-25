@@ -39,7 +39,7 @@ export default function HistoryListItem(props) {
       <DescStyled>{cur_chapter ? `上次看到：${cur_chapter}` : '未看'}</DescStyled>
       <DescStyled>浏览时间：{last_read_time}</DescStyled>
       <ContainStyled>
-        <AuthorStyled>{author}</AuthorStyled>
+        <AuthorStyled>{author || '佚名'}</AuthorStyled>
         <Badge
           value={status}
           textStyle={textStyle}

@@ -19,10 +19,12 @@ class SearchListComponent extends PureComponent {
   };
   async onFetch(page) {
     const { keyword, search } = this.props;
+    if (!keyword) return;
     return await search({ page, keyword });
   };
   render() {
     const list = this.props.list.toJS();
+    const { emptyText } = this.state;
     return (
       <LongList
          list={list}

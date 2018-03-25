@@ -48,7 +48,7 @@ export default function ComicDetailComponent({ detail }) {
         <LeftContainStyled>
           <AuthorContainStyled>
             作者：
-            <AuthorStyled>{author}</AuthorStyled>
+            <AuthorStyled>{author || '佚名'}</AuthorStyled>
           </AuthorContainStyled>
           <StatusStyled>{status} | {update_date}</StatusStyled>
         </LeftContainStyled>

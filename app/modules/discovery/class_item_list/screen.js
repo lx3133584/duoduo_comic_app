@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import { StatusBar, Dimensions } from 'react-native';
 import styled from "styled-components";
-import { RankItemList } from '.';
-import { rankTypes } from '..';
+import { ClassItemList } from '.';
 import { brand_primary } from '../../../theme';
 import { Header } from '../../../navigation';
 const { height } = Dimensions.get('window');
@@ -12,12 +11,11 @@ const ContainStyled = styled.View`
   min-height: ${height};
 `
 
-class RankItemListScreen extends PureComponent {
+class ClassItemListScreen extends PureComponent {
   static navigationOptions({ navigation }) {
-    const { type = 0 } = navigation.state.params;
-    const { name } = rankTypes[type];
+    const { name } = navigation.state.params;
     return {
-      title: '排行榜',
+      title: '分类',
       header: (props) => <Header {...props} customTitle={name} />
     }
   };
@@ -26,9 +24,9 @@ class RankItemListScreen extends PureComponent {
     return (
       <ContainStyled>
         <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
-        <RankItemList />
+        <ClassItemList />
       </ContainStyled>
     )};
 }
 
-export default RankItemListScreen;
+export default ClassItemListScreen;

@@ -34,7 +34,7 @@ export default function RankItemListItem(props) {
       <DescStyled numberOfLines ={3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {desc.replace(':', '')}</DescStyled>
       <ContainStyled>
-        <AuthorStyled>{author}</AuthorStyled>
+        <AuthorStyled>{author || '佚名'}</AuthorStyled>
         <Badge
           value={numberFormat(props[key])}
           textStyle={textStyle}

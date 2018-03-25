@@ -2,6 +2,7 @@ export {
   Screen as SearchListScreen,
   LongList,
   LongListItem,
+  SearchListItem,
   Image,
   searchListActions
 } from './search_list';

@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import { RankItemListItem } from '..';
-import { LongList, LoadingPage } from '../../..';
+import { LongList, LoadingPage, SearchListItem } from '../../..';
 import { brand_primary } from '../../../../theme';
 import { wrapWithLoading } from '../../../../utils';
 import styled from "styled-components";
@@ -14,7 +13,7 @@ const ContainStyled = styled.View`
   padding-bottom: 72px;
 `
 
-class RankItemListComponent extends PureComponent {
+class ClassItemListComponent extends PureComponent {
   static propTypes = {
     getList: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
@@ -29,8 +28,8 @@ class RankItemListComponent extends PureComponent {
   };
   constructor(props) {
     super(props);
-    const { type = 0 } = props.navigation.state.params;
-    this.type = type;
+    const { id = 0 } = props.navigation.state.params;
+    this.id = id;
     this.onFetch = this.onFetch.bind(this);
     this.navigate = props.navigation.navigate.bind(this);
   };
@@ -39,12 +38,9 @@ class RankItemListComponent extends PureComponent {
   };
   async onFetch(page) {
     const { getList, hideLoading } = this.props;
-    const res = await getList({ page, type: this.type });
+    const res = await getList({ page, id: this.id });
     hideLoading();
     return res;
-  };
-  renderItem = props => {
-    return <RankItemListItem {...props} type={this.type}  />
   };
   render() {
     const list = this.props.list.toJS();
@@ -54,7 +50,7 @@ class RankItemListComponent extends PureComponent {
       <ContainStyled key="main">
         <LongList
            list={list}
-           Item={this.renderItem}
+           Item={SearchListItem}
            itemOnPress={this.navigate}
            onFetch={this.onFetch}
            isLong
@@ -65,4 +61,4 @@ class RankItemListComponent extends PureComponent {
   }
 }
 
-export default wrapWithLoading(RankItemListComponent);
+export default wrapWithLoading(ClassItemListComponent);
