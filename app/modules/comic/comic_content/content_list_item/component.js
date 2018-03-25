@@ -16,20 +16,26 @@ class ContentListItem extends PureComponent {
   };
   state = {
     width,
-    height: 500,
+    height: 0,
   };
+  retry = 3; // 重试次数
   constructor() {
     super();
   };
-  componentDidMount() {
+  getImageSize() {
     const { url, hideLoading } = this.props;
     getSize(url, (imgWidth, imgHeight) => {
       this.setState({ height: imgHeight / imgWidth * width });
       hideLoading();
     }, (error) => {
-      this.setState({ height });
-      hideLoading();
+      if (!this.retry) {
+        this.getImageSize();
+        this.retry--;
+      }
     });
+  };
+  componentDidMount() {
+    this.getImageSize();
   };
   render() {
     const { url, index, loading } = this.props;

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from "styled-components";
-import { Battery, NetStatus, Time } from '..';
+import { Battery, NetStatus, Time, Title } from '..';
 
 const ContainStyled = styled.View`
   flex-direction: row;
@@ -29,6 +29,9 @@ export default function ContentStatusBarComponent() {
       </ItemStyled>
       <ItemStyled>
         <Time />
+      </ItemStyled>
+      <ItemStyled>
+        <Title />
       </ItemStyled>
     </ContainStyled>
   );

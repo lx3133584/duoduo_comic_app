@@ -27,7 +27,7 @@ export default function ComicListItem({ title, id, itemOnPress, active, item }) 
       text={title}
       buttonStyle={buttonStyle}
       textStyle={[textStyle, active && {color: brand_primary}]}
-      onPress={() => itemOnPress('ComicContent', { id })}
+      onPress={() => itemOnPress('ComicContent', { id, title })}
     />
   )
 }

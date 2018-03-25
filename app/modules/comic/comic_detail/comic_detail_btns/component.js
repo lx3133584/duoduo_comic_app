@@ -81,10 +81,14 @@ class ComicDetailBtnsComponent extends PureComponent {
   };
   startRead() {
     const { detail, list } = this.props;
-    const chapter_id = detail.get('chapter_id');
-    const default_id = list.size ? list.get(0).data[0].id : null
-    const id = chapter_id || default_id;
-    this.props.navigation.navigate('ComicContent', { id });
+    let chapter_id = detail.get('chapter_id');
+    let cur_chapter = detail.get('cur_chapter');
+    if (!chapter_id && list.size) {
+      const { id, title } = list.get(0).data[0]
+      chapter_id = id;
+      cur_chapter = title;
+    }
+    this.props.navigation.navigate('ComicContent', { id: chapter_id, title: cur_chapter });
   };
   render() {
     const { detail } = this.props;

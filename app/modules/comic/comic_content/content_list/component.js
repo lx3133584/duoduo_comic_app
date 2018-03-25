@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import { FlatList } from 'react-native';
+import { FlatList, Image } from 'react-native';
 import { LongList } from '../../..';
 import { ContentListItem, ContentListCategory } from '..';
 
@@ -16,7 +16,8 @@ class ContentListComponent extends PureComponent {
     getContent: PropTypes.func.isRequired,
     getList: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
-    getIndex: PropTypes.func.isRequired,
+    saveIndex: PropTypes.func.isRequired,
+    saveTitle: PropTypes.func.isRequired,
     comic_id: PropTypes.number,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
@@ -33,15 +34,27 @@ class ContentListComponent extends PureComponent {
     this.onFetch();
   };
   async onFetch() {
-    const { id } = this.props.navigation.state.params;
-    const { getContent, hideLoading, getList, comic_id } = this.props;
+    const { id, title } = this.props.navigation.state.params;
+    const { getContent, hideLoading, getList, comic_id, saveTitle } = this.props;
     let chapter_id = id;
-    if (!+id) { // 如果没有传过来chapter_id则从list中取id
+    let cur_chapter = title;
+    if (!+id) { // 如果chapter_id位null则从list中取
       const res = await getList(comic_id);
-      chapter_id = res.action.payload.data[0].data[0].id
+      const { id, title } = res.action.payload.data[0].data[0];
+      chapter_id = id;
+      cur_chapter = title;
     }
-    await getContent(chapter_id);
+    saveTitle(cur_chapter);
+    const { value } = await getContent(chapter_id);
+    for (const { url } of value.result.data.slice(0, 3)) { // 前三张图片都显示出来才结束loading
+      await Image.prefetch(url);
+    }
     hideLoading();
+  };
+  onScroll = (props) => {
+    for (const key in props) {
+      // console.log(key, props[key]);
+    }
   };
   render() {
     const content = this.props.content.toJS();
@@ -50,6 +63,7 @@ class ContentListComponent extends PureComponent {
          list={content}
          Item={ContentListItem}
          customkey="index"
+         onScroll={this.onScroll}
        />
     );
   }

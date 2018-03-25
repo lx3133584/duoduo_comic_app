@@ -5,6 +5,7 @@ import { comicDetailActions, comicContentActions } from '.';
 const initialState = Immutable.Map({
   detail: Immutable.Map(),
   list: Immutable.List(),
+  chapter_title: '',
   content: Immutable.List(),
   content_index: 1,
 });
@@ -40,7 +41,10 @@ export default handleActions({
     state = state.setIn(['detail', 'chapter_id'], action.payload.id);
     return state.set('content', Immutable.List(action.payload.result.data));
   },
-  [comicContentActions.getContentIndex]: (state, action) => {
+  [comicContentActions.saveChapterTitle]: (state, action) => {
+    return state.set('chapter_title', action.payload);
+  },
+  [comicContentActions.saveContentIndex]: (state, action) => {
     return state.set('content_index', action.payload);
   },
 }, initialState)

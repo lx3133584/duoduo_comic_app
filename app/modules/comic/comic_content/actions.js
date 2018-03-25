@@ -1,10 +1,11 @@
 import { createActions } from 'redux-actions';
 import { fetchContentList } from '../../../api';
 
-export const { getContentList, getContentIndex } = createActions({
+export const { getContentList, saveChapterTitle, saveContentIndex } = createActions({
   GET_CONTENT_LIST: async (id) => {
     const result = await fetchContentList(id);
     return {result, id};
   },
-  GET_CONTENT_INDEX: (index) => index,
+  SAVE_CHAPTER_TITLE: (name) => name,
+  SAVE_CONTENT_INDEX: (index) => index,
 });
