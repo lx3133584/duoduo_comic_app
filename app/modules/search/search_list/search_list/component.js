@@ -24,7 +24,6 @@ class SearchListComponent extends PureComponent {
   };
   render() {
     const list = this.props.list.toJS();
-    const { emptyText } = this.state;
     return (
       <LongList
          list={list}
