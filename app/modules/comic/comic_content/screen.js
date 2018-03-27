@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { wrapWithLoading } from '../../../utils';
 import { LoadingPage } from '..';
 
-const ContainStyled = styled.View`
+const ContainStyled = styled.ScrollView`
   background-color: #282828;
 `
 class ContentListScreen extends PureComponent {

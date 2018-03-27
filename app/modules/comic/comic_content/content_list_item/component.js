@@ -1,12 +1,13 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Image } from 'react-native';
 import { ImgPlaceholder } from '..';
 import { wrapWithLoading } from '../../../../utils';
 const { width, height } = Dimensions.get('window');
 const getSize = Image.getSize;
+const prefetch = Image.prefetch;
 
-class ContentListItem extends PureComponent {
+class ContentListItem extends Component {
   static propTypes = {
     url: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
@@ -22,10 +23,9 @@ class ContentListItem extends PureComponent {
     super();
   };
   getImageSize() {
-    const { url, hideLoading } = this.props;
+    const { url } = this.props;
     getSize(url, (imgWidth, imgHeight) => {
       this.setState({ height: imgHeight / imgWidth * width });
-      hideLoading();
     }, (error) => {
       if (!this.retry) {
         this.getImageSize();
@@ -33,12 +33,18 @@ class ContentListItem extends PureComponent {
       }
     });
   };
-  componentDidMount() {
+  async preFetchImage() {
+    const { url, hideLoading } = this.props;
+    await prefetch(url);
     this.getImageSize();
+    hideLoading();
+  };
+  componentDidMount() {
+    this.preFetchImage();
   };
   render() {
     const { url, index, loading } = this.props;
-    if (loading) return <ImgPlaceholder style={this.state}>{index}</ImgPlaceholder>;
+    if (loading) return <ImgPlaceholder>{index}</ImgPlaceholder>;
     return (
       <Image
         source={{ uri: url }}

@@ -2,8 +2,10 @@ import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { FlatList, Image } from 'react-native';
+import { TransformView } from 'teaset';
 import { LongList } from '../../..';
 import { ContentListItem, ContentListCategory } from '..';
+const prefetch = Image.prefetch;
 
 const rowStyle = {
   flexDirection: 'row',
@@ -47,7 +49,7 @@ class ContentListComponent extends PureComponent {
     saveTitle(cur_chapter);
     const { value } = await getContent(chapter_id);
     for (const { url } of value.result.data.slice(0, 3)) { // 前三张图片都显示出来才结束loading
-      await Image.prefetch(url);
+      await prefetch(url);
     }
     hideLoading();
   };
@@ -59,12 +61,13 @@ class ContentListComponent extends PureComponent {
   render() {
     const content = this.props.content.toJS();
     return (
+      <TransformView>
         <LongList
            list={content}
            Item={ContentListItem}
            customkey="index"
-           onScroll={this.onScroll}
          />
+      </TransformView>
     );
   }
 }
