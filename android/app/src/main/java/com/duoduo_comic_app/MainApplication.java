@@ -6,7 +6,6 @@ import com.facebook.react.ReactApplication;
 import com.robinpowered.react.battery.DeviceBatteryPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.reactnative.photoview.PhotoViewPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.psykar.cookiemanager.CookieManagerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -33,7 +32,6 @@ public class MainApplication extends Application implements ReactApplication {
             new DeviceBatteryPackage(),
             new SplashScreenReactPackage(),
             new RNGestureHandlerPackage(),
-            new PhotoViewPackage(),
             new BlurViewPackage(),
             new CookieManagerPackage(),
             new VectorIconsPackage()

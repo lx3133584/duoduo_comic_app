@@ -4,10 +4,9 @@ import { brand_primary } from '../../../../theme';
 import { Image } from 'react-native';
 
 const ContainStyled = styled.View`
-  flex: 1;
+  padding: 30px 0;
   justify-content: center;
   align-items: center;
-  height: 400px;
 `
 const ImageContainStyled = styled.View`
   background-color: ${brand_primary};

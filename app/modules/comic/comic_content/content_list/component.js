@@ -59,12 +59,12 @@ class ContentListComponent extends PureComponent {
   render() {
     const content = this.props.content.toJS();
     return (
-      <LongList
-         list={content}
-         Item={ContentListItem}
-         customkey="index"
-         onScroll={this.onScroll}
-       />
+        <LongList
+           list={content}
+           Item={ContentListItem}
+           customkey="index"
+           onScroll={this.onScroll}
+         />
     );
   }
 }

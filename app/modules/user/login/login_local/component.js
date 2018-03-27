@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
+import { View } from 'react-native';
 import { LoginInput, LoginButton } from '..';
 
-const ContainStyled = styled.View`
-  margin: 40px 0;
-`
 const InputContainStyled = styled.View`
-  margin: 50px 0;
+  margin-bottom: 30px;
 `
 
 class LoginLocalComponent extends PureComponent {
@@ -44,7 +42,7 @@ class LoginLocalComponent extends PureComponent {
   render() {
     const { username, password, loading } = this.state;
     return (
-      <ContainStyled>
+      <View>
         <InputContainStyled>
           <LoginInput
             placeholder="用户名"
@@ -68,7 +66,7 @@ class LoginLocalComponent extends PureComponent {
           loading={loading}
           onPress={this.onSubmit}
         />
-      </ContainStyled>
+    </View>
     );
   }
 }

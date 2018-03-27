@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Image } from 'react-native';
-import PhotoView from 'react-native-photo-view';
 import { ImgPlaceholder } from '..';
 import { wrapWithLoading } from '../../../../utils';
 const { width, height } = Dimensions.get('window');
@@ -41,7 +40,7 @@ class ContentListItem extends PureComponent {
     const { url, index, loading } = this.props;
     if (loading) return <ImgPlaceholder style={this.state}>{index}</ImgPlaceholder>;
     return (
-      <PhotoView
+      <Image
         source={{ uri: url }}
         style={this.state}
       />
