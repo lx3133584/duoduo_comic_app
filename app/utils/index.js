@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import {
+  isFirstTime,
+  markSuccess,
   Platform,
   View,
   Linking,
@@ -56,6 +58,10 @@ export const wrapWithUpdate = function(WrappedComponent) {
   class NewComponent extends PureComponent {
     constructor() {
       super();
+    }
+
+    componentWillMount(){
+      if (isFirstTime) markSuccess(); // 确认更新成功, 有报错则回滚版本
     }
 
     state = {
