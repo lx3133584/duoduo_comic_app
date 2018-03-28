@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
+import Toast from 'react-native-root-toast';
 import { LoginInput, LoginButton } from '..';
 
 const InputContainStyled = styled.View`
@@ -33,6 +34,9 @@ class LoginLocalComponent extends PureComponent {
     this.setState({ loading: true });
     loginLocal({ username, password }).then(res => {
       this.setState({ loading: false });
+      Toast.show('登陆成功', {
+        position: -70,
+      });
       if (!res.error) navigation.goBack();
     });
   };
