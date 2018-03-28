@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { FlatList, Image } from 'react-native';
-import { TransformView } from 'teaset';
 import { LongList } from '../../..';
 import { ContentListItem, ContentListCategory } from '..';
 const prefetch = Image.prefetch;
@@ -61,13 +60,11 @@ class ContentListComponent extends PureComponent {
   render() {
     const content = this.props.content.toJS();
     return (
-      <TransformView>
-        <LongList
-           list={content}
-           Item={ContentListItem}
-           customkey="index"
-         />
-      </TransformView>
+      <LongList
+         list={content}
+         Item={ContentListItem}
+         customkey="index"
+       />
     );
   }
 }
