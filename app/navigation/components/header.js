@@ -28,10 +28,13 @@ class HeaderComponent extends PureComponent {
   };
   constructor(props) {
     super(props);
+    this.options = {};
     const { getScreenDetails, scene, navigation } = props;
-    if (!getScreenDetails || !scene || !navigation) return;
-    const { options } = getScreenDetails(scene);
-    this.options = options;
+    if (!navigation) return;
+    if (getScreenDetails && scene) {
+      const { options } = getScreenDetails(scene);
+      this.options = options;
+    }
     this.navigation = navigation;
   };
   render() {

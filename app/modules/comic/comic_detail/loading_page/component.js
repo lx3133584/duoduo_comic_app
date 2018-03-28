@@ -16,6 +16,11 @@ const ContainStyled = styled.View`
   justify-content: center;
   align-items: center;
 `
+const OffetStyled = styled.View`
+  padding-bottom: 50px;
+  justify-content: center;
+  align-items: center;
+`
 const TextStyled = styled.Text`
   font-size: 14px;
   color: ${brand_primary};
@@ -26,8 +31,10 @@ export default function ProgressComponent({ show }) {
   if (!show) return null;
   return (
     <ContainStyled>
-      <Progress />
-      <TextStyled>页面正在加载中...</TextStyled>
+      <OffetStyled>
+        <Progress />
+        <TextStyled>页面正在加载中...</TextStyled>
+      </OffetStyled>
     </ContainStyled>
   )
 }

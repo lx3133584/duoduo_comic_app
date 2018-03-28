@@ -10,5 +10,7 @@ export { default as Progress } from './progress/component';
 export { default as LoadingPage } from './loading_page/component';
 export { default as ComicListCategory } from './comic_list_category/component';
 export { default as RatingModal } from './rating_modal/container';
+export { default as Parallax } from './parallax/component';
+export { default as DetailHeader } from './detail_header/container';
 import * as comicDetailActions from './actions';
 export { comicDetailActions };

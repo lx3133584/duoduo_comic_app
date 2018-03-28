@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import { ComicDetailTop, ComicDetailBtns, ComicDetailTabs, LoadingPage } from '.';
-import { ScrollView } from 'react-native';
+import { Parallax, LoadingPage } from '.';
 import { StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
 import { wrapWithLoading } from '../../../utils';
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 class ComicDetailScreen extends PureComponent {
   static propTypes = {
@@ -17,12 +17,8 @@ class ComicDetailScreen extends PureComponent {
     const { loading, hideLoading } = this.props;
     return ([
       <LoadingPage show={loading} key="loading" />,
-      <ScrollView key="main">
-        <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-        <ComicDetailTop hideLoading={hideLoading} />
-        <ComicDetailBtns />
-        <ComicDetailTabs />
-      </ScrollView>
+      <StatusBar key="status" barStyle="light-content" translucent backgroundColor="transparent" />,
+      <Parallax hideLoading={hideLoading} key="main" />
   ])};
 }
 
