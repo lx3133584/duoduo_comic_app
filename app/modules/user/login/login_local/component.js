@@ -34,10 +34,13 @@ class LoginLocalComponent extends PureComponent {
     this.setState({ loading: true });
     loginLocal({ username, password }).then(res => {
       this.setState({ loading: false });
+      if (!res.error) return;
       Toast.show('登陆成功', {
         position: -70,
       });
-      if (!res.error) navigation.goBack();
+      navigation.goBack();
+    }).catch(e => {
+      this.setState({ loading: false });
     });
   };
   changFunc(key) {

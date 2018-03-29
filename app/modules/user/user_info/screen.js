@@ -18,11 +18,12 @@ class UserInfoScreen extends PureComponent {
     checkUpdate();
   };
   render() {
+    const { checkUpdate } = this.props;
     return (
       <View>
         <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
         <UserTop />
-        <UserOperateList />
+        <UserOperateList checkUpdate={checkUpdate} />
       </View>
     );
   }

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { List, ListItem } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import Toast from 'react-native-root-toast';
 import { brand_primary } from '../../../../theme';
 import { View } from 'react-native';
 import { Modal } from '../../..';
@@ -40,29 +41,34 @@ class UserOperateListComponent extends PureComponent {
   static propTypes = {
     info: ImmutablePropTypes.map.isRequired,
     logout: PropTypes.func.isRequired,
+    checkUpdate: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
     }),
   };
   constructor(props) {
     super(props);
-    this.logout = this.logout.bind(this);
-    this.confirm = this.confirm.bind(this);
-    this.cancel = this.cancel.bind(this);
   };
   state = {
     isVisible: false,
   };
-  logout() {
+  logout = () => {
     this.setState({ isVisible: true });
   };
-  confirm() {
+  check = () => {
+    this.props.checkUpdate().then(res => {
+      if (!res) Toast.show('应用已是最新版本', {
+        position: -70,
+      });
+    })
+  };
+  confirm = () => {
     const { navigation, logout } = this.props;
     this.setState({ isVisible: false });
     logout();
     navigation.navigate('Login');
   };
-  cancel() {
+  cancel = ()  => {
     this.setState({ isVisible: false });
   };
   render() {
@@ -90,6 +96,13 @@ class UserOperateListComponent extends PureComponent {
             title='退出登录'
             chevronColor="#999"
             onPress={this.logout}
+          />
+          <ListItem
+            containerStyle={logoutItemStyle}
+            key='check'
+            title='检查更新'
+            chevronColor="#999"
+            onPress={this.check}
           />
         </List>}
         <Modal
