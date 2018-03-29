@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import {
-  isFirstTime,
-  markSuccess,
   Platform,
   View,
   Linking,
 } from 'react-native';
 import {
+  isFirstTime,
+  markSuccess,
   checkUpdate,
   downloadUpdate,
   switchVersion,
