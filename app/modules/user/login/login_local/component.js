@@ -36,7 +36,7 @@ class LoginLocalComponent extends PureComponent {
     this.setState({ loading: true });
     loginLocal({ username, password }).then(res => {
       this.setState({ loading: false });
-      if (!res.error) return;
+      if (res.error) return;
       getFavorites();
       getHistory();
       Toast.show('登陆成功', {

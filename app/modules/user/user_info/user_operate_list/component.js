@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Toast from 'react-native-root-toast';
 import { brand_primary } from '../../../../theme';
-import { View } from 'react-native';
 import { Modal } from '../../..';
+import styled from "styled-components";
+
+const ContainStyled = styled.View`
+  padding-bottom: 20px;
+`
 
 const list = [
   {
@@ -30,10 +34,6 @@ const containerStyle = {
 }
 const itemContainerStyle = {
   borderTopWidth: 0,
-  borderBottomColor: '#ddd',
-}
-const logoutItemStyle = {
-  borderTopColor: '#ddd',
   borderBottomColor: '#ddd',
 }
 
@@ -75,7 +75,7 @@ class UserOperateListComponent extends PureComponent {
     const { isVisible } = this.state;
     const { info, navigation } = this.props;
     return (
-      <View>
+      <ContainStyled>
         <List containerStyle={containerStyle}>
           {
             list.map(({ name, route, index }) => (
@@ -89,29 +89,29 @@ class UserOperateListComponent extends PureComponent {
             ))
           }
         </List>
-        {!!info.size && <List containerStyle={containerStyle}>
+        <List containerStyle={containerStyle}>
           <ListItem
-            containerStyle={logoutItemStyle}
-            key='logout'
-            title='退出登录'
-            chevronColor="#999"
-            onPress={this.logout}
-          />
-          <ListItem
-            containerStyle={logoutItemStyle}
+            containerStyle={itemContainerStyle}
             key='check'
             title='检查更新'
             chevronColor="#999"
             onPress={this.check}
           />
-        </List>}
+          {!!info.size && <ListItem
+            containerStyle={itemContainerStyle}
+            key='logout'
+            title='退出登录'
+            chevronColor="#999"
+            onPress={this.logout}
+          />}
+        </List>
         <Modal
           confirm={this.confirm}
           cancel={this.cancel}
           isVisible={isVisible}>
           是否确认退出登录？
         </Modal>
-      </View>
+      </ContainStyled>
     );
   }
 }
