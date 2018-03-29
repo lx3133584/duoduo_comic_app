@@ -13,6 +13,7 @@ export {
 } from './search';
 export {
   FavoritesListScreen,
+  favoritesListActions,
   favoritesReducer,
   Modal,
 } from './favorites';

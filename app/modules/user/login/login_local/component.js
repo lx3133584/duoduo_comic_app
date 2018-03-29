@@ -12,6 +12,8 @@ const InputContainStyled = styled.View`
 class LoginLocalComponent extends PureComponent {
   static propTypes = {
     loginLocal: PropTypes.func.isRequired,
+    getFavorites: PropTypes.func.isRequired,
+    getHistory: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired
     }),
@@ -28,13 +30,15 @@ class LoginLocalComponent extends PureComponent {
     this.onSubmit = this.onSubmit.bind(this);
   };
   onSubmit() {
-    const { loginLocal, navigation } = this.props;
+    const { loginLocal, navigation, getFavorites, getHistory } = this.props;
     const { username, password } = this.state;
     if (username.length < 8 || password.length < 8) return;
     this.setState({ loading: true });
     loginLocal({ username, password }).then(res => {
       this.setState({ loading: false });
       if (!res.error) return;
+      getFavorites();
+      getHistory();
       Toast.show('登陆成功', {
         position: -70,
       });
