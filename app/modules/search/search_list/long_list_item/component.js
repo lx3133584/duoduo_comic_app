@@ -44,7 +44,7 @@ export default function LongListItem({ id, title, cover, children, itemOnPress, 
             />
           </LeftStyled>
           <RightStyled>
-            <TitleStyled>{title}</TitleStyled>
+            <TitleStyled numberOfLines={1}>{title}</TitleStyled>
             {children}
           </RightStyled>
         </ContainStyled>

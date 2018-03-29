@@ -39,7 +39,7 @@ export default function SearchListItem(props) {
   const { desc, author, status, class_name } = props;
   return (
     <LongListItem {...props}>
-      <DescStyled numberOfLines ={3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <DescStyled numberOfLines={3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {desc.replace(':', '')}</DescStyled>
       <ContainStyled>
         <AuthorStyled>{author || '佚名'}</AuthorStyled>
