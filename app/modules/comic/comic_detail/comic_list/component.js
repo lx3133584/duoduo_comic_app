@@ -49,24 +49,25 @@ class ComicListComponent extends PureComponent {
   };
   _getItemLayout(data, index) {
     let len = 0;
-    let offset = 40;
+    let offset = 50;
     data.forEach(({ data }, index) => { // 计算分类标题高度
       len += data.length;
       if (index < len) return;
-      offset += 40;
+      offset += 50;
     })
-    return {length: 41, offset: 41 * index + offset, index}
+    return {length: 51, offset: 51 * (index - 1) + offset, index}
   };
   render() {
     const { list, chapter_id, loading } = this.props;
     if (loading) return <Progress />;
     const data = list.toJS();
-    const initNumber = Math.ceil(height / 40);
+    const initNumber = Math.ceil(height / 50);
     return (
       <SectionList
         renderItem={({ item }) => <ComicListItem {...item} itemOnPress={this.navigate} active={item.id === chapter_id} />}
         renderSectionHeader={({ section }) => <ComicListCategory>{section.name}</ComicListCategory>}
         ItemSeparatorComponent={ItemSeparatorComponent}
+        stickySectionHeadersEnabled
         keyExtractor={this._keyExtractor}
         initialNumToRender={initNumber}
         sections={data}
