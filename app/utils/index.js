@@ -58,6 +58,9 @@ export const wrapWithUpdate = function(WrappedComponent) {
   class NewComponent extends PureComponent {
     constructor() {
       super();
+      this.type = 'download'; // 当前状态类型
+      this.info = null; // 更新信息
+      this.hash = null; // 安装包hash值
     }
 
     componentWillMount(){
@@ -67,7 +70,6 @@ export const wrapWithUpdate = function(WrappedComponent) {
     state = {
       tips: '您的应用版本已更新，请前往应用商店下载新的版本',
       isVisible: false,
-      type: 'download',
     };
 
     checkUpdate = () => {
@@ -76,8 +78,8 @@ export const wrapWithUpdate = function(WrappedComponent) {
           this.setState({
             isVisible: true,
             tips: '您的应用版本已更新，请前往应用商店下载新的版本',
-            type: 'download',
           });
+          this.type = 'download';
           this.info = info;
           return true;
         } else if (info.upToDate) {
@@ -86,8 +88,8 @@ export const wrapWithUpdate = function(WrappedComponent) {
           this.setState({
             isVisible: true,
             tips: `检查到新的版本${info.name}，是否下载更新？\n${info.description}`,
-            type: 'doUpdate',
           });
+          this.type = 'doUpdate'
           this.info = info;
           return true;
         }
@@ -98,8 +100,8 @@ export const wrapWithUpdate = function(WrappedComponent) {
         this.setState({
           isVisible: true,
           tips: '下载更新完成，是否重启应用？',
-          type: 'switchVersion',
         });
+        this.type = 'switchVersion'
         this.hash = hash;
       });
     };
@@ -114,6 +116,7 @@ export const wrapWithUpdate = function(WrappedComponent) {
       if (type === 'switchVersion') switchVersion(this.hash);
     };
     cancel = () => {
+      const { type } = this.state;
       this.setState({ isVisible: false });
       if (type === 'switchVersion') switchVersionLater(this.hash);
     };
