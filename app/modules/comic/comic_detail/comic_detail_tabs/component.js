@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { ComicList, ComicDetail } from '..';
 import { Dimensions } from 'react-native';
-import { TabViewAnimated, TabViewPagerExperimental, TabViewPagerPan, TabBar, SceneMap } from 'react-native-tab-view';
-import * as GestureHandler from 'react-native-gesture-handler';
+import { TabViewAnimated, TabViewPagerPan, TabBar, SceneMap } from 'react-native-tab-view';
 
 const initialLayout = {
   height: 0,
@@ -51,9 +50,9 @@ class ComicDetailTabsComponent extends PureComponent {
     indicatorStyle={tabBarUnderlineStyle}
    />);
 
-  _renderPager = props => (<TabViewPagerExperimental
+  _renderPager = props => (<TabViewPagerPan
     {...props}
-    GestureHandler={GestureHandler}
+    swipeEnabled={false}
   />);
 
   switchPage(key) {

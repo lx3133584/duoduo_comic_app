@@ -3,10 +3,10 @@ package com.duoduo_comic_app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import cn.reactnative.modules.update.UpdatePackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.robinpowered.react.battery.DeviceBatteryPackage;
 import com.psykar.cookiemanager.CookieManagerPackage;
 import com.cmcewen.blurview.BlurViewPackage;
@@ -36,10 +36,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFetchBlobPackage(),
             new VectorIconsPackage(),
             new UpdatePackage(),
             new SplashScreenReactPackage(),
-            new RNGestureHandlerPackage(),
             new DeviceBatteryPackage(),
             new CookieManagerPackage(),
             new BlurViewPackage()
