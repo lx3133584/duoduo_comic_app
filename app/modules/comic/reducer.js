@@ -7,6 +7,7 @@ const initialState = Immutable.Map({
   list: Immutable.List(),
   chapter_title: '',
   content: Immutable.List(),
+  pre_content: Immutable.List(),
   content_index: 1,
 });
 export default handleActions({
@@ -37,7 +38,13 @@ export default handleActions({
     state = state.updateIn(['detail', 'score'], score => (score_number * score + action.payload.score) / (score_number + 1));
     return state.setIn(['detail', 'my_score'], action.payload.score);
   },
+  [comicContentActions.preContentList]: (state, action) => {
+    state = state.setIn(['detail', 'chapter_id'], action.payload);
+    state = state.set('content', state.get('pre_content'));
+    return state.update('pre_content', list => list.clear());
+  },
   [`${comicContentActions.getContentList}_FULFILLED`]: (state, action) => {
+    if (action.payload.pre) return state.set('pre_content', Immutable.List(action.payload.result.data)); // 预加载
     state = state.setIn(['detail', 'chapter_id'], action.payload.id);
     return state.set('content', Immutable.List(action.payload.result.data));
   },

@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import styled from "styled-components";
 import { Button } from 'react-native-elements';
+import { Image } from 'react-native';
+const prefetch = Image.prefetch;
 
 const ContainStyled = styled.View`
   background-color: #ededed;
@@ -21,7 +23,6 @@ const buttonStyle = {
   borderWidth: 0,
   borderRadius: 0,
   height: 50,
-  paddingLeft: 30,
   elevation: 0,
 }
 const textStyle = {
@@ -29,7 +30,7 @@ const textStyle = {
   color: '#666',
   fontSize: 14,
 }
-export default function ContentListFooterComponent({ chapter_id, list, navigation }) {
+export default function ContentListFooterComponent({ chapter_id, list, navigation, getList }) {
   let chapters = []; // 全部章节列表
   let index = 0; // 当前章节的索引
   let isOver = false; // 是否已经看完的标识
@@ -49,6 +50,11 @@ export default function ContentListFooterComponent({ chapter_id, list, navigatio
     const c = chapters[index + 1];
     title = c.title;
     id = c.id;
+    getList({ id, pre: true }).then(({ value }) => { // 预加载
+      for (const { url } of value.result.data.slice(0, 3)) { // 前三张图片
+        prefetch(url);
+      }
+    });
   }
   return (
     <ContainStyled>
@@ -56,7 +62,7 @@ export default function ContentListFooterComponent({ chapter_id, list, navigatio
         text={`下一章：${title}`}
         buttonStyle={buttonStyle}
         textStyle={textStyle}
-        onPress={() => navigation.replace('ComicContent', { id })}
+        onPress={() => navigation.replace('ComicContent', { id, title })}
       />}
       <Button
         text="返回目录"

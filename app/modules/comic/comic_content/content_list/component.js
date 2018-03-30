@@ -14,7 +14,9 @@ const rowStyle = {
 class ContentListComponent extends PureComponent {
   static propTypes = {
     content: ImmutablePropTypes.list.isRequired,
+    pre_content: ImmutablePropTypes.list.isRequired,
     getContent: PropTypes.func.isRequired,
+    preContent: PropTypes.func.isRequired,
     getList: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
     saveIndex: PropTypes.func.isRequired,
@@ -36,7 +38,7 @@ class ContentListComponent extends PureComponent {
   };
   async onFetch() {
     const { id, title } = this.props.navigation.state.params;
-    const { getContent, hideLoading, getList, comic_id, saveTitle } = this.props;
+    const { getContent, preContent, hideLoading, getList, comic_id, saveTitle, pre_content } = this.props;
     let chapter_id = id;
     let cur_chapter = title;
     if (!+id) { // 如果chapter_id位null则从list中取
@@ -46,9 +48,13 @@ class ContentListComponent extends PureComponent {
       cur_chapter = title;
     }
     saveTitle(cur_chapter);
-    const { value } = await getContent(chapter_id);
-    for (const { url } of value.result.data.slice(0, 3)) { // 前三张图片都显示出来才结束loading
-      await prefetch(url);
+    if (pre_content.size) {
+      preContent(chapter_id);
+    } else {
+      const { value } = await getContent({ id: chapter_id });
+      for (const { url } of value.result.data.slice(0, 3)) { // 前三张图片都显示出来才结束loading
+        await prefetch(url);
+      }
     }
     hideLoading();
   };

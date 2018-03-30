@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import Component from './component';
 import { withNavigation } from 'react-navigation';
-import { getContentList, saveChapterTitle, saveContentIndex } from '../actions';
+import { getContentList, preContentList, saveChapterTitle, saveContentIndex } from '../actions';
 import { comicDetailActions } from '../..';
 
 const mapStateToProps = (state, ownProps) => {
   return {
     comic_id: state.getIn(['comic', 'detail', 'id']),
     content: state.getIn(['comic', 'content']),
+    pre_content: state.getIn(['comic', 'pre_content']),
   }
 }
 
@@ -17,6 +18,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   getContent(params) {
     return dispatch(getContentList(params));
+  },
+  preContent(params) {
+    return dispatch(preContentList(params));
   },
   saveTitle(params) {
     return dispatch(saveChapterTitle(params));
