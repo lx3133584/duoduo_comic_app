@@ -49,7 +49,7 @@ export default function ContentListFooterComponent({ next, navigation, getList }
         text={`下一章：${title}`}
         buttonStyle={buttonStyle}
         textStyle={textStyle}
-        onPress={() => navigation.replace('ComicContent', { id, title })}
+        onPress={() => navigation.replace('ComicContent', { id, title, pre: true })}
       />}
       <Button
         text="返回目录"

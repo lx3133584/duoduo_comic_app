@@ -37,7 +37,7 @@ class ContentListComponent extends PureComponent {
     this.onFetch();
   };
   async onFetch() {
-    const { id, title } = this.props.navigation.state.params;
+    const { id, title, pre } = this.props.navigation.state.params;
     const { getContent, preContent, hideLoading, getList, comic_id, saveTitle, pre_content } = this.props;
     let chapter_id = id;
     let cur_chapter = title;
@@ -48,7 +48,7 @@ class ContentListComponent extends PureComponent {
       cur_chapter = title;
     }
     saveTitle(cur_chapter);
-    if (pre_content.size) {
+    if (pre && pre_content.size) {
       preContent(chapter_id);
     } else {
       const { value } = await getContent({ id: chapter_id });
@@ -57,11 +57,6 @@ class ContentListComponent extends PureComponent {
       }
     }
     hideLoading();
-  };
-  onScroll = (props) => {
-    for (const key in props) {
-      // console.log(key, props[key]);
-    }
   };
   render() {
     const content = this.props.content.toJS();
