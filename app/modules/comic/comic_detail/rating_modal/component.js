@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from "styled-components";
-import { Rating, Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
+import Rating from 'react-native-star-rating';
 import { Dimensions } from 'react-native';
 import { yellow } from '../../../../theme';
 import Modal from "react-native-modal";
@@ -83,11 +84,13 @@ class RatingModalComponent extends PureComponent {
             : <TextStyled>未评价：<NumberStyled>{score}</NumberStyled>/10</TextStyled>
           }
           <Rating
-            imageSize={42}
-            startingValue={my_score / 2 || score / 2}
-            fractions={1}
-            readonly={!!my_score}
-            onFinishRating={this.onFinishRating}
+            starSize={48}
+            rating={my_score / 2 || score / 2}
+            disabled={!!my_score}
+            fullStarColor={yellow}
+            halfStarEnabled
+            emptyStarColor="#dedede"
+            selectedStar={this.onFinishRating}
           />
           {!my_score && <Button
             text="确定"

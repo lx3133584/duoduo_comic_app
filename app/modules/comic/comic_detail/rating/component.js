@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from "styled-components";
-import { Rating } from 'react-native-elements';
+import Rating from 'react-native-star-rating';
 import { RatingModal } from '..';
 import { TouchableOpacity } from 'react-native';
 import { numberFormat } from '../../../../utils';
+import { yellow } from '../../../../theme';
 
 const ContainStyled = styled.View`
   height: 75px;
@@ -54,10 +55,12 @@ class RatingComponent extends PureComponent {
           <ScoreStyled>{Math.round(+score * 10) / 10}</ScoreStyled>
           <ScoreNumberStyled>({numberFormat(score_number)})</ScoreNumberStyled>
           {!!score && <Rating
-            imageSize={8}
-            readonly
-            startingValue={score / 2}
-            fractions={2}
+            starSize={8}
+            rating={score / 2}
+            disabled
+            fullStarColor={yellow}
+            halfStarEnabled
+            emptyStarColor="#dedede"
           />}
           <RatingModal isVisible={isVisible} cancel={this.cancel} />
         </ContainStyled>

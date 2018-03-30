@@ -52,7 +52,6 @@ class ComicDetailTabsComponent extends PureComponent {
 
   _renderPager = props => (<TabViewPagerPan
     {...props}
-    swipeEnabled={false}
   />);
 
   switchPage(key) {
