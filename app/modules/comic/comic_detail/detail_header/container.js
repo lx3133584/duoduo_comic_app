@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    title: state.getIn(['comic', 'detail', 'title']),
+    title: state['comic'].getIn(['detail', 'title']),
   }
 }
 

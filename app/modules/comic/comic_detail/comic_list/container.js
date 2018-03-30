@@ -5,8 +5,8 @@ import { getComicList } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    list: state.getIn(['comic', 'list']),
-    chapter_id: state.getIn(['comic', 'detail', 'chapter_id']),
+    list: state['comic'].get('list'),
+    chapter_id: state['comic'].getIn(['detail', 'chapter_id']),
   }
 }
 

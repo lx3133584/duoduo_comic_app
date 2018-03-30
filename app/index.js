@@ -1,9 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import Navigation from './navigation';
-import store from './store';
+import store, { persistor } from './store';
 import './api/config';
 import SplashScreen from 'react-native-splash-screen';
+import { PersistGate } from 'redux-persist/integration/react';
 
 class App extends React.Component {
     componentDidMount() {
@@ -14,7 +15,9 @@ class App extends React.Component {
     render() {
       return (
         <Provider store={store}>
-          <Navigation />
+          <PersistGate loading={null} persistor={persistor}>
+            <Navigation />
+          </PersistGate>
         </Provider>
       )
     }

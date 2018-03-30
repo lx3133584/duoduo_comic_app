@@ -5,8 +5,8 @@ import { withNavigation } from 'react-navigation';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    list: state.getIn(['search', 'list']),
-    keyword: state.getIn(['search', 'keyword']),
+    list: state['search'].get('list'),
+    keyword: state['search'].get('keyword'),
   }
 }
 

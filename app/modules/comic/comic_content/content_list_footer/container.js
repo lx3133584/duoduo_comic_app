@@ -4,16 +4,18 @@ import { withNavigation } from 'react-navigation';
 import { getContentList } from '../actions';
 import { createSelector } from 'reselect';
 
-const listSelector = state => state.getIn(['comic', 'list']);
-const chapterIdSelector = state => state.getIn(['comic', 'detail', 'chapter_id']);
+const listSelector = state => state['comic'].get('list');
+const chapterIdSelector = state => state['comic'].getIn(['detail', 'chapter_id']);
 const chaptersSelector = createSelector(
   listSelector,
-  list => list.reduce((total, cur) => {
-    let t = total;
-    if (!total.length) return t = total.data;
-    return t.concat(cur.data);
-  })
-);
+  list => {
+    let chapters = [];
+    list.forEach(({ data }) => {
+      chapters = chapters.concat(data);
+    })
+    return chapters;
+  }
+)
 const indexSelector = createSelector(
   [chaptersSelector, chapterIdSelector],
   (chapters, id) => {

@@ -36,7 +36,7 @@ const TextContainStyled = styled.View`
   left: 20px;
   bottom: 15px;
   z-index: 4;
-  width: ${width};
+  width: ${width - 110};
 `
 const TitleStyled = styled.Text`
   color: #fff;

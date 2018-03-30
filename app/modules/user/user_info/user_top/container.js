@@ -5,7 +5,7 @@ import { getUserInfo } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    info: state.getIn(['user', 'info']),
+    info: state['user'].get('info'),
   }
 }
 

@@ -6,9 +6,9 @@ import { comicDetailActions } from '../..';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    comic_id: state.getIn(['comic', 'detail', 'id']),
-    content: state.getIn(['comic', 'content']),
-    pre_content: state.getIn(['comic', 'pre_content']),
+    comic_id: state['comic'].getIn(['detail', 'id']),
+    content: state['comic'].get('content'),
+    pre_content: state['comic'].get('pre_content'),
   }
 }
 

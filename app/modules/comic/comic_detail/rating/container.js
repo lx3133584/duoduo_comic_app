@@ -4,8 +4,8 @@ import { addFavorite, removeFavorite } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    score: state.getIn(['comic', 'detail', 'score']),
-    score_number: state.getIn(['comic', 'detail', 'score_number']),
+    score: state['comic'].getIn(['detail', 'score']),
+    score_number: state['comic'].getIn(['detail', 'score_number']),
   }
 }
 

@@ -4,7 +4,7 @@ import Component from './component';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    keyword: state.getIn(['search', 'keyword']),
+    keyword: state['search'].get('keyword'),
   }
 }
 

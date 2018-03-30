@@ -4,8 +4,8 @@ import { addScore } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    id: state.getIn(['comic', 'detail', 'id']),
-    my_score: state.getIn(['comic', 'detail', 'my_score']),
+    id: state['comic'].getIn(['detail', 'id']),
+    my_score: state['comic'].getIn(['detail', 'my_score']),
   }
 }
 

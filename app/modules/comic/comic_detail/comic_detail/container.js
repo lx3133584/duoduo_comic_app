@@ -3,7 +3,7 @@ import Component from './component';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    detail: state.getIn(['comic', 'detail']),
+    detail: state['comic'].get('detail'),
   }
 }
 

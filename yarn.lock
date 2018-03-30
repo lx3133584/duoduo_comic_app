@@ -3059,6 +3059,10 @@ js-yaml@^3.7.0:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+jsan@^3.1.9:
+  version "3.1.9"
+  resolved "https://registry.yarnpkg.com/jsan/-/jsan-3.1.9.tgz#2705676c1058f0a7d9ac266ad036a5769cfa7c96"
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
@@ -4300,10 +4304,6 @@ react-native-splash-screen@^3.0.6:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/react-native-splash-screen/-/react-native-splash-screen-3.0.6.tgz#c0bbf2c8ae40a313c4c7044f55e569414ff68332"
 
-react-native-storage@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-storage/-/react-native-storage-0.2.2.tgz#4449197f122b2da0650e3704e1f050260ed58d9f"
-
 react-native-tab-view@^0.0.74:
   version "0.0.74"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.74.tgz#62c0c882d9232b461ce181d440d683b4f99d1bd8"
@@ -4538,15 +4538,21 @@ redux-actions@^2.2.1:
     lodash-es "^4.17.4"
     reduce-reducers "^0.1.0"
 
-redux-immutable@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/redux-immutable/-/redux-immutable-4.0.0.tgz#3a1a32df66366462b63691f0e1dc35e472bbc9f3"
-
 redux-logger@^3.0.6:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
   dependencies:
     deep-diff "^0.3.5"
+
+redux-persist-transform-immutable@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/redux-persist-transform-immutable/-/redux-persist-transform-immutable-5.0.0.tgz#0ae277b4d8d662016f62af394df2572525ad6671"
+  dependencies:
+    remotedev-serialize "^0.1.0"
+
+redux-persist@^5.9.1:
+  version "5.9.1"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-5.9.1.tgz#83bd4abd526ef768f63fceee338fa9d8ed6552d6"
 
 redux-promise-middleware@^5.0.0:
   version "5.0.0"
@@ -4610,6 +4616,12 @@ regjsparser@^0.1.4:
   resolved "https://registry.yarnpkg.com/regjsparser/-/regjsparser-0.1.5.tgz#7ee8f84dc6fa792d3fd0ae228d24bd949ead205c"
   dependencies:
     jsesc "~0.5.0"
+
+remotedev-serialize@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/remotedev-serialize/-/remotedev-serialize-0.1.1.tgz#0f598000b7dd7515d67f9b51a61d211e18ce9554"
+  dependencies:
+    jsan "^3.1.9"
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"

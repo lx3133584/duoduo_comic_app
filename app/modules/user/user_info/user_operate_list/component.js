@@ -66,6 +66,9 @@ class UserOperateListComponent extends PureComponent {
     const { navigation, logout } = this.props;
     this.setState({ isVisible: false });
     logout();
+    Toast.show('注销成功', {
+      position: -70,
+    });
     navigation.navigate('Login');
   };
   cancel = ()  => {

@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    list: state.getIn(['favorites', 'history_list']),
+    list: state['favorites'].get('history_list'),
   }
 }
 

@@ -1,6 +1,7 @@
 export {
   UserInfoScreen,
   LoginScreen,
+  userInfoActions,
   userReducer,
 } from './user';
 export {

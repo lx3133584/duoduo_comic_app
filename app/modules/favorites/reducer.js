@@ -24,7 +24,7 @@ export default handleActions({
   [`${comicDetailActions.removeFavorite}_PENDING`]: (state, action) => {
     return state.update('favorites_list', list => list.filter((item => item.id !== action.payload)));
   },
-  [`${userInfoActions.logoutAction}_FULFILLED`]: (state, action) => {
+  [`${userInfoActions.logoutAction}_PENDING`]: (state, action) => {
     state = state.update('history_list', list => list.clear());
     return state.update('favorites_list', list => list.clear());
   },

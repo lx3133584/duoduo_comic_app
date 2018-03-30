@@ -51,7 +51,7 @@ class NavigationWithState extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  nav: state.get('nav'),
+  nav: state['nav'],
 });
 
 export default connect(mapStateToProps)(NavigationWithState);
