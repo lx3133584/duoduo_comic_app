@@ -3,7 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { FlatList, Image } from 'react-native';
 import { LongList } from '../../..';
-import { ContentListItem, ContentListCategory } from '..';
+import { ContentListItem, ContentListCategory, ContentListFooter } from '..';
 const prefetch = Image.prefetch;
 
 const rowStyle = {
@@ -64,6 +64,7 @@ class ContentListComponent extends PureComponent {
          list={content}
          Item={ContentListItem}
          customkey="index"
+         ListFooterComponent={ContentListFooter}
        />
     );
   }
