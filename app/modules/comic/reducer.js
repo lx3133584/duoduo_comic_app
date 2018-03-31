@@ -45,8 +45,12 @@ export default handleActions({
   },
   [`${comicContentActions.getContentList}_FULFILLED`]: (state, action) => {
     if (action.payload.pre) return state.set('pre_content', Immutable.List(action.payload.result.data)); // 预加载
+    if (!action.payload.page) {
+      state = state.update('content', (list) => list.clear());
+    }
     state = state.setIn(['detail', 'chapter_id'], action.payload.id);
-    return state.set('content', Immutable.List(action.payload.result.data));
+    return state.update('content', (oldList) => oldList.concat(action.payload.result.data));
+
   },
   [comicContentActions.saveChapterTitle]: (state, action) => {
     return state.set('chapter_title', action.payload);

@@ -7,16 +7,14 @@ const ContainStyled = styled.View`
   background-color: #999;
   justify-content: center;
   align-items: center;
-  width: ${width};
-  height: 600px;
 `
 const TitleStyled = styled.Text`
   font-size: 32px;
   color: #eee;
 `
-export default function ImagePlaceholder({ children }) {
+export default function ImagePlaceholder({ children, style }) {
   return (
-    <ContainStyled>
+    <ContainStyled style={style}>
       <TitleStyled>{children}</TitleStyled>
     </ContainStyled>
   )

@@ -37,9 +37,9 @@ export default function ContentListFooterComponent({ next, navigation, getList }
     title = next.title;
     id = next.id;
     getList({ id, pre: true }).then(({ value }) => { // 预加载
-      for (const { url } of value.result.data.slice(0, 3)) { // 前三张图片
-        prefetch(url);
-      }
+      const data = value.result.data.slice(0, 3);
+      const tasks = data.map(item => prefetch(item.url));
+      Promise.all(tasks);
     });
   }
 

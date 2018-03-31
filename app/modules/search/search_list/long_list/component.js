@@ -55,11 +55,13 @@ class LongListComponent extends PureComponent {
   };
   _onRefresh() {
     this.page = 0;
-    this._onFetch()
+    this._onFetch();
   }
   _onFetch() {
     const { onFetch, callback } = this.props;
     if (!onFetch) return;
+    const { loading } = this.state;
+    if (loading) return;
     this.setState({ loading: true });
     onFetch(this.page).then(res => {
       this.setState({ loading: false });
@@ -96,7 +98,6 @@ class LongListComponent extends PureComponent {
          onEndReachedThreshold={1.6}
          onRefresh={this._onRefresh}
          refreshing={loading}
-         getItemLayout={this._getItemLayout}
          initialNumToRender={Math.ceil(height / itemHeight)}
          ListEmptyComponent={() => <ListEmpty text={emptyText} />}
          ListFooterComponent={showFooter && list.length && FooterComponent}
