@@ -87,10 +87,11 @@ class LongListComponent extends PureComponent {
     return { length: itemHeight, offset: itemHeight * index, index };
   };
   render() {
-    const { list, isLong, showFooter, emptyText, itemHeight = 140 } = this.props;
+    const { list, getRef, isLong, showFooter, emptyText, itemHeight = 140 } = this.props;
     const { loading } = this.state;
     return (
       <FlatList
+         ref={getRef}
          data={list}
          keyExtractor={this._keyExtractor}
          renderItem={this._renderItem}

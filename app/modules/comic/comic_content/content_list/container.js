@@ -15,8 +15,9 @@ const formatContentSelector = createSelector(
 const mapStateToProps = (state, ownProps) => {
   return {
     comic_id: state['comic'].getIn(['detail', 'id']),
+    chapter_id: state['comic'].getIn(['detail', 'chapter_id']),
     content: formatContentSelector(state),
-    content_index: state['comic'].get('content_index'),
+    content_index: state['comic'].getIn(['detail', 'index']),
     pre_content: state['comic'].get('pre_content'),
   }
 }

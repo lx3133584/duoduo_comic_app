@@ -10,7 +10,6 @@ const initialState = Immutable.Map({
   content_total: 0,
   pre_content: Immutable.List(),
   pre_content_total: 0,
-  content_index: 0,
 });
 export default handleActions({
   [`${comicDetailActions.getComicDetail}_PENDING`]: (state, action) => {
@@ -43,7 +42,7 @@ export default handleActions({
   [comicContentActions.preContentList]: (state, action) => {
     state = state.setIn(['detail', 'chapter_id'], action.payload);
     state = state.set('content', state.get('pre_content'));
-    state = state.set('content_index', 0);
+    state = state.setIn(['detail', 'index'], 0);
     state = state.set('content_total', state.get('pre_content_total'));
     return state.update('pre_content', list => list.clear());
   },
@@ -54,7 +53,7 @@ export default handleActions({
     }
     if (!action.payload.page) {
       state = state.update('content', (list) => list.clear());
-      state = state.set('content_index', 0);
+      state = state.setIn(['detail', 'index'], 0);
     }
     state = state.setIn(['detail', 'chapter_id'], action.payload.id);
     state = state.set('content_total', action.payload.result.total);
@@ -65,6 +64,6 @@ export default handleActions({
     return state.set('chapter_title', action.payload);
   },
   [comicContentActions.saveContentIndex]: (state, action) => {
-    return state.set('content_index', action.payload);
+    return state.setIn(['detail', 'index'], action.payload);
   },
 }, initialState)

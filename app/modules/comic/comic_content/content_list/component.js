@@ -6,7 +6,7 @@ import { LongList } from '../../..';
 import { ContentListItem, ContentListFooter } from '..';
 const { width } = Dimensions.get('window');
 const prefetch = Image.prefetch;
-
+const page_size = 5;
 class ContentListComponent extends Component {
   static propTypes = {
     content: PropTypes.arrayOf(PropTypes.shape({
@@ -26,6 +26,7 @@ class ContentListComponent extends Component {
     saveIndex: PropTypes.func.isRequired,
     saveTitle: PropTypes.func.isRequired,
     comic_id: PropTypes.number,
+    chapter_id: PropTypes.number,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
       state: PropTypes.shape({
@@ -44,10 +45,20 @@ class ContentListComponent extends Component {
   };
   init = async () => {
     const { id, title, pre } = this.props.navigation.state.params;
-    const { getContent, preContent, hideLoading, getList, comic_id, saveTitle, pre_content } = this.props;
+    const {
+      getContent,
+      preContent,
+      hideLoading,
+      getList,
+      comic_id,
+      saveTitle,
+      pre_content,
+      content_index,
+      chapter_id,
+    } = this.props;
     this.chapter_id = id;
     let cur_chapter = title;
-    if (!+id) { // 如果chapter_id位null则从list中取
+    if (!+id) { // 如果chapter_id为null则从list中取
       const res = await getList(comic_id);
       const { id, title } = res.action.payload.data[0].data[0];
       this.chapter_id = id;
@@ -57,11 +68,20 @@ class ContentListComponent extends Component {
     if (pre && pre_content.size) {
       preContent(this.chapter_id);
     } else {
+      // this.init_page = (chapter_id === this.chapter_id )
+      //   ? Math.floor(content_index / page_size)
+      //   : 0;
       const { value } = await getContent({ id: this.chapter_id, page: 0 });
       const data = value.result.data.slice(0, 3);
       const tasks = data.map(item => prefetch(item.url));
       await Promise.all(tasks);  // 前三张图片都显示出来才结束loading
     }
+    // content_index && this.content_ref && this.content_ref.scrollToIndex({
+    //   viewPosition: 0,
+    //   index: content_index % page_size,
+    //   animated: false,
+    //   viewOffset: false,
+    // });
     hideLoading();
   };
   onFetch = async (page) => {
@@ -88,12 +108,14 @@ class ContentListComponent extends Component {
     data.forEach((t, i) => {
       if (i < index) offset += this.getHeight(t.size);
     })
-    return { length: this.getHeight(item.size), offset, index }
+    return { length: this.getHeight(item.size), offset, index };
   };
+  _getRef = ref => this.content_ref = ref;
   render() {
     const { content } = this.props;
     return (
       <LongList
+         getRef={this._getRef}
          list={content}
          Item={ContentListItem}
          customkey="index"
