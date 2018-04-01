@@ -7,8 +7,10 @@ const initialState = Immutable.Map({
   list: Immutable.List(),
   chapter_title: '',
   content: Immutable.List(),
+  content_total: 0,
   pre_content: Immutable.List(),
-  content_index: 1,
+  pre_content_total: 0,
+  content_index: 0,
 });
 export default handleActions({
   [`${comicDetailActions.getComicDetail}_PENDING`]: (state, action) => {
@@ -41,14 +43,21 @@ export default handleActions({
   [comicContentActions.preContentList]: (state, action) => {
     state = state.setIn(['detail', 'chapter_id'], action.payload);
     state = state.set('content', state.get('pre_content'));
+    state = state.set('content_index', 0);
+    state = state.set('content_total', state.get('pre_content_total'));
     return state.update('pre_content', list => list.clear());
   },
   [`${comicContentActions.getContentList}_FULFILLED`]: (state, action) => {
-    if (action.payload.pre) return state.set('pre_content', Immutable.List(action.payload.result.data)); // 预加载
+    if (action.payload.pre) { // 预加载
+      state = state.set('pre_content_total', action.payload.result.total);
+      return state.set('pre_content', Immutable.List(action.payload.result.data));
+    }
     if (!action.payload.page) {
       state = state.update('content', (list) => list.clear());
+      state = state.set('content_index', 0);
     }
     state = state.setIn(['detail', 'chapter_id'], action.payload.id);
+    state = state.set('content_total', action.payload.result.total);
     return state.update('content', (oldList) => oldList.concat(action.payload.result.data));
 
   },

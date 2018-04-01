@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { SectionList, Dimensions } from 'react-native';
 import { ComicListItem, ComicListCategory, Progress } from '..';
 import styled from "styled-components";
 import { wrapWithLoading } from '../../../../utils';
 const { height } = Dimensions.get('window');
+const initNumber = Math.ceil(height / 50);
 
 const rowStyle = {
   flexDirection: 'row',
@@ -19,7 +19,7 @@ const ItemSeparatorComponent = styled.View`
 
 class ComicListComponent extends PureComponent {
   static propTypes = {
-    list: ImmutablePropTypes.list.isRequired,
+    list: PropTypes.array.isRequired,
     chapter_id: PropTypes.number,
     getList: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
@@ -60,8 +60,6 @@ class ComicListComponent extends PureComponent {
   render() {
     const { list, chapter_id, loading } = this.props;
     if (loading) return <Progress />;
-    const data = list.toJS();
-    const initNumber = Math.ceil(height / 50);
     return (
       <SectionList
         renderItem={({ item }) => <ComicListItem {...item} itemOnPress={this.navigate} active={item.id === chapter_id} />}
@@ -70,7 +68,7 @@ class ComicListComponent extends PureComponent {
         stickySectionHeadersEnabled
         keyExtractor={this._keyExtractor}
         initialNumToRender={initNumber}
-        sections={data}
+        sections={list}
         getItemLayout={this._getItemLayout}
       />
     );

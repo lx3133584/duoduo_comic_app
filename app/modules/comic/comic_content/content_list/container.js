@@ -3,11 +3,20 @@ import Component from './component';
 import { withNavigation } from 'react-navigation';
 import { getContentList, preContentList, saveChapterTitle, saveContentIndex } from '../actions';
 import { comicDetailActions } from '../..';
+import { createSelector } from 'reselect';
+
+const contentSelector = state => state['comic'].get('content');
+
+const formatContentSelector = createSelector(
+  contentSelector,
+  list => list.toJS()
+);
 
 const mapStateToProps = (state, ownProps) => {
   return {
     comic_id: state['comic'].getIn(['detail', 'id']),
-    content: state['comic'].get('content'),
+    content: formatContentSelector(state),
+    content_index: state['comic'].get('content_index'),
     pre_content: state['comic'].get('pre_content'),
   }
 }

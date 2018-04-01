@@ -30,33 +30,40 @@ const textStyle = {
   color: '#666',
   fontSize: 14,
 }
-export default function ContentListFooterComponent({ next, navigation, getList }) {
-  let title = '';
-  let id = '';
-  if (next) {
-    title = next.title;
-    id = next.id;
-    getList({ id, pre: true }).then(({ value }) => { // 预加载
-      const data = value.result.data.slice(0, 3);
-      const tasks = data.map(item => prefetch(item.url));
-      Promise.all(tasks);
-    });
+class ContentListFooterComponent extends PureComponent {
+  componentDidMount() {
+    this.init();
+  };
+  init = () => {
+    const { next, getList } = this.props;
+    if (next) {
+      getList({ id: next.id, pre: true, page: 0 }).then(({ value }) => { // 预加载
+        const data = value.result.data.slice(0, 3);
+        const tasks = data.map(item => prefetch(item.url));
+        Promise.all(tasks);
+      });
+    }
+  };
+  render() {
+    const { next, navigation } = this.props;
+    const { id, title } = next || {};
+    return (
+      <ContainStyled>
+        {!next ? <TextStyled>已经看完啦</TextStyled> : <Button
+          text={`下一章：${title}`}
+          buttonStyle={buttonStyle}
+          textStyle={textStyle}
+          onPress={() => navigation.replace('ComicContent', { id, title, pre: true })}
+        />}
+        <Button
+          text="返回目录"
+          buttonStyle={buttonStyle}
+          textStyle={textStyle}
+          onPress={() => navigation.goBack(null)}
+        />
+      </ContainStyled>
+    );
   }
-
-  return (
-    <ContainStyled>
-      {!next ? <TextStyled>已经看完啦</TextStyled> : <Button
-        text={`下一章：${title}`}
-        buttonStyle={buttonStyle}
-        textStyle={textStyle}
-        onPress={() => navigation.replace('ComicContent', { id, title, pre: true })}
-      />}
-      <Button
-        text="返回目录"
-        buttonStyle={buttonStyle}
-        textStyle={textStyle}
-        onPress={() => navigation.goBack(null)}
-      />
-    </ContainStyled>
-  );
 }
+
+export default ContentListFooterComponent;

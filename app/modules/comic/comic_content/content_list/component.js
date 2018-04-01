@@ -1,21 +1,24 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { FlatList, Image, Dimensions } from 'react-native';
 import { LongList } from '../../..';
-import { ContentListItem, ContentListCategory, ContentListFooter } from '..';
-const { width, height } = Dimensions.get('window');
+import { ContentListItem, ContentListFooter } from '..';
+const { width } = Dimensions.get('window');
 const prefetch = Image.prefetch;
 
-const rowStyle = {
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-}
-
-class ContentListComponent extends PureComponent {
+class ContentListComponent extends Component {
   static propTypes = {
-    content: ImmutablePropTypes.list.isRequired,
+    content: PropTypes.arrayOf(PropTypes.shape({
+      url: PropTypes.string,
+      index: PropTypes.number,
+      size: PropTypes.shape({
+        height: PropTypes.number,
+        width: PropTypes.number,
+      }),
+    })).isRequired,
     pre_content: ImmutablePropTypes.list.isRequired,
+    content_index: PropTypes.number,
     getContent: PropTypes.func.isRequired,
     preContent: PropTypes.func.isRequired,
     getList: PropTypes.func.isRequired,
@@ -35,6 +38,9 @@ class ContentListComponent extends PureComponent {
   };
   componentDidMount() {
     this.init();
+  };
+  shouldComponentUpdate(nextProps) {
+    return nextProps.content !== this.props.content;
   };
   init = async () => {
     const { id, title, pre } = this.props.navigation.state.params;
@@ -62,26 +68,41 @@ class ContentListComponent extends PureComponent {
     const { getContent } = this.props;
     return await getContent({ page, id: this.chapter_id });
   };
+  getHeight = ({ height: itemHeight, width: itemWidth }) => {
+    return itemHeight / itemWidth * width;
+  };
+  onScroll = (e) => {
+    const { saveIndex, content, content_index } = this.props;
+    const scrollY = e.nativeEvent.contentOffset.y;
+    let offset = 0;
+    let index = 0;
+    content.forEach((t, i) => {
+      if (scrollY > offset) index = i;
+      offset += this.getHeight(t.size);
+    })
+    if (index !== content_index) saveIndex(index);
+  };
   _getItemLayout = (data, index) => {
     let offset = 0;
     const item = data[index];
     data.forEach((t, i) => {
-      if (i < index) offset += t.size.height / t.size.width * width;
+      if (i < index) offset += this.getHeight(t.size);
     })
-    return { length: item.size.height / item.size.width * width, offset, index }
+    return { length: this.getHeight(item.size), offset, index }
   };
   render() {
-    const content = this.props.content.toJS();
+    const { content } = this.props;
     return (
       <LongList
          list={content}
          Item={ContentListItem}
          customkey="index"
          onFetch={this.onFetch}
+         onScroll={this.onScroll}
          ListFooterComponent={ContentListFooter}
          getItemLayout={this._getItemLayout}
          initialNumToRender={3}
-         removeClippedSubviews={false}
+         initPage={1}
          isLong
        />
     );

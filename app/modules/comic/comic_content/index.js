@@ -7,6 +7,7 @@ export { default as ImgPlaceholder } from './img_placeholder/component';
 export { default as Battery } from './battery/component';
 export { default as Time } from './time/component';
 export { default as Title } from './title/container';
+export { default as ReadingProgress } from './reading_progress/container';
 export { default as NetStatus } from './net_status/component';
 import * as comicContentActions from './actions';
 export { comicContentActions };

@@ -56,7 +56,7 @@ class LongListComponent extends PureComponent {
   _onRefresh() {
     this.page = 0;
     this._onFetch();
-  }
+  };
   _onFetch() {
     const { onFetch, callback } = this.props;
     if (!onFetch) return;
@@ -76,7 +76,7 @@ class LongListComponent extends PureComponent {
   _itemOnLongPress(...params) {
     Vibration.vibrate(pattern);
     const { itemOnLongPress = f => f } = this.props;
-    itemOnLongPress(...params)
+    itemOnLongPress(...params);
   };
   _renderItem({ item }) {
     const { Item, itemOnPress = f => f } = this.props;
@@ -84,7 +84,7 @@ class LongListComponent extends PureComponent {
   };
   _getItemLayout = (data, index) => {
     const { itemHeight = 140 } = this.props;
-    return { length: itemHeight, offset: itemHeight * index, index }
+    return { length: itemHeight, offset: itemHeight * index, index };
   };
   render() {
     const { list, isLong, showFooter, emptyText, itemHeight = 140 } = this.props;
@@ -98,6 +98,7 @@ class LongListComponent extends PureComponent {
          onEndReachedThreshold={1.6}
          onRefresh={this._onRefresh}
          refreshing={loading}
+         getItemLayout={this._getItemLayout}
          initialNumToRender={Math.ceil(height / itemHeight)}
          ListEmptyComponent={() => <ListEmpty text={emptyText} />}
          ListFooterComponent={showFooter && list.length && FooterComponent}

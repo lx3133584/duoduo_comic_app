@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Image } from 'react-native';
 import { ImgPlaceholder } from '..';
 import { wrapWithLoading } from '../../../../utils';
-const { width, height } = Dimensions.get('window');
-// const getSize = Image.getSize;
+const { width } = Dimensions.get('window');
 const prefetch = Image.prefetch;
 
-class ContentListItem extends Component {
+class ContentListItem extends PureComponent {
   static propTypes = {
     url: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
@@ -18,29 +17,12 @@ class ContentListItem extends Component {
       width: PropTypes.number.isRequired,
     }),
   };
-  // state = {
-  //   width,
-  //   height: 0,
-  // };
-  // retry = 3; // 重试次数
   constructor() {
     super();
   };
-  // getImageSize() {
-  //   const { url } = this.props;
-  //   getSize(url, (imgWidth, imgHeight) => {
-  //     this.setState({ height: imgHeight / imgWidth * width });
-  //   }, (error) => {
-  //     if (!this.retry) {
-  //       this.getImageSize();
-  //       this.retry--;
-  //     }
-  //   });
-  // };
   async preFetchImage() {
     const { url, hideLoading } = this.props;
     await prefetch(url);
-    // this.getImageSize();
     hideLoading();
   };
   componentDidMount() {
