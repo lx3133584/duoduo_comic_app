@@ -1,12 +1,21 @@
 import { createActions } from 'redux-actions';
-import { fetchContentList } from '../../../api';
+import { fetchContentList, postHistory } from '../../../api';
 
-export const { getContentList, preContentList, saveChapterTitle, saveContentIndex } = createActions({
-  GET_CONTENT_LIST: async ({ id, pre, page }) => {
+export const {
+  getContentList,
+  preContentList,
+  saveChapterTitle,
+  saveContentIndex,
+  saveHistory,
+} = createActions({
+  GET_CONTENT_LIST: async ({ id, pre, page, init }) => {
     const result = await fetchContentList({ id, page, pre });
-    return {result, id, pre, page};
+    return {result, id, pre, page, init};
   },
   PRE_CONTENT_LIST: (ID) => ID,
   SAVE_CHAPTER_TITLE: (name) => name,
   SAVE_CONTENT_INDEX: (index) => index,
+  SAVE_HISTORY: async ({ chapter_id, index }) => {
+    return await postHistory({ chapter_id, index });
+  },
 });

@@ -51,9 +51,8 @@ export default handleActions({
       state = state.set('pre_content_total', action.payload.result.total);
       return state.set('pre_content', Immutable.List(action.payload.result.data));
     }
-    if (!action.payload.page) {
+    if (action.payload.init) {
       state = state.update('content', (list) => list.clear());
-      state = state.setIn(['detail', 'index'], 0);
     }
     state = state.setIn(['detail', 'chapter_id'], action.payload.id);
     state = state.set('content_total', action.payload.result.total);

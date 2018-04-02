@@ -49,18 +49,18 @@ class ContentListFooterComponent extends PureComponent {
     const { id, title } = next || {};
     return (
       <ContainStyled>
-        {!next ? <TextStyled>已经看完啦</TextStyled> : <Button
-          text={`下一章：${title}`}
-          buttonStyle={buttonStyle}
-          textStyle={textStyle}
-          onPress={() => navigation.replace('ComicContent', { id, title, pre: true })}
-        />}
         <Button
           text="返回目录"
           buttonStyle={buttonStyle}
           textStyle={textStyle}
           onPress={() => navigation.goBack(null)}
         />
+        {!next ? <TextStyled>已经看完啦</TextStyled> : <Button
+          text={`下一章：${title}`}
+          buttonStyle={buttonStyle}
+          textStyle={textStyle}
+          onPress={() => navigation.replace('ComicContent', { id, title, pre: true })}
+        />}
       </ContainStyled>
     );
   }

@@ -38,11 +38,11 @@ class LongListComponent extends PureComponent {
   };
   constructor(props) {
     super(props);
-    const { initPage, customkey } = props;
+    const { page, customkey } = props;
     this.state = {
       loading: false,
     }
-    this.page = initPage || 0;
+    this.page = page || 0;
     this.customkey = customkey || 'title';
     this._onRefresh = this._onRefresh.bind(this);
     this._onFetch = this._onFetch.bind(this);
@@ -50,23 +50,26 @@ class LongListComponent extends PureComponent {
     this._keyExtractor = this._keyExtractor.bind(this);
     this._itemOnLongPress = this._itemOnLongPress.bind(this);
   };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.page !== this.props.page) this.page = nextProps.page;
+  };
   _keyExtractor(item, index) {
     return item[this.customkey] + '';
   };
   _onRefresh() {
     this.page = 0;
-    this._onFetch();
+    this._onFetch({ init: true });
   };
-  _onFetch() {
+  _onFetch({ init }) {
     const { onFetch, callback } = this.props;
     if (!onFetch) return;
     const { loading } = this.state;
     if (loading) return;
     this.setState({ loading: true });
-    onFetch(this.page).then(res => {
+    onFetch(this.page, init).then(res => {
       this.setState({ loading: false });
       if (!res.error) {
-        callback && callback(this.page);
+        callback && callback(this.page, init);
         this.page++;
       }
     }).catch(e => {

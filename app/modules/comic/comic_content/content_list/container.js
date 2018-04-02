@@ -1,7 +1,13 @@
 import { connect } from 'react-redux';
 import Component from './component';
 import { withNavigation } from 'react-navigation';
-import { getContentList, preContentList, saveChapterTitle, saveContentIndex } from '../actions';
+import {
+  getContentList,
+  preContentList,
+  saveChapterTitle,
+  saveContentIndex,
+  saveHistory,
+} from '../actions';
 import { comicDetailActions } from '../..';
 import { createSelector } from 'reselect';
 
@@ -37,6 +43,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   saveIndex(params) {
     return dispatch(saveContentIndex(params));
+  },
+  postHistory(params) {
+    return dispatch(saveHistory(params));
   },
 })
 
