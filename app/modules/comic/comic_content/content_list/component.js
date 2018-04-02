@@ -18,6 +18,7 @@ class ContentListComponent extends Component {
         width: PropTypes.number,
       }),
     })).isRequired,
+    img_positon_arr: ImmutablePropTypes.list.isRequired,
     pre_content: ImmutablePropTypes.list.isRequired,
     content_index: PropTypes.number,
     getContent: PropTypes.func.isRequired,
@@ -128,24 +129,24 @@ class ContentListComponent extends Component {
     this.page = 0;
   };
   onScroll = (e) => {
-    const { saveIndex, content, content_index } = this.props;
+    const { saveIndex, content, content_index, img_positon_arr } = this.props;
     const scrollY = e.nativeEvent.contentOffset.y;
-    let offset = 0;
     let index = 0;
-    content.forEach((t, i) => {
-      if (scrollY > offset) index = i;
-      offset += getImgHeight(t.size);
-    })
+    for (let len = img_positon_arr.size, i = len - 1; i >= 0; i--) {
+      if (scrollY > img_positon_arr.get(i)) {
+        index = i;
+        break;
+      }
+    }
     const offsetIndex = this.page * page_size;
     if (index !== content_index - offsetIndex) saveIndex(index + offsetIndex);
   };
   _getItemLayout = (data, index) => {
-    let offset = 0;
+    const { img_positon_arr } = this.props;
     const item = data[index];
-    data.forEach((t, i) => {
-      if (i < index) offset += getImgHeight(t.size);
-    })
-    return { length: getImgHeight(item.size), offset, index };
+    const length = getImgHeight(item.size);
+    const offset = img_positon_arr.get(index);
+    return { length, offset, index };
   };
   _getRef = ref => this.content_ref = ref;
   render() {
