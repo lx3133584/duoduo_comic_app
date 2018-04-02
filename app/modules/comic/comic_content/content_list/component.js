@@ -106,7 +106,7 @@ class ContentListComponent extends Component {
   goPage = async (page, offset, init) => {
     const { value } = await this.onFetch(page, init);
     const data = value.result.data.slice(offset, offset + pre_num);
-    if (offset > page_size - pre_num) await this.goPage(page + 1, pre_num - page_size + offset, false); // 如果后面不足3张图片则加载下一页
+    if (offset > page_size - pre_num) await this.goPage(page + 1, 0, false); // 如果后面不足3张图片则加载下一页
     const tasks = data.map(item => prefetch(item.url));
     await Promise.all(tasks);  // 前三张图片都显示出来才结束loading
   };
