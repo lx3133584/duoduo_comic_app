@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Image } from 'react-native';
 import { ImgPlaceholder } from '..';
-import { wrapWithLoading } from '../../../../utils';
+import { wrapWithLoading, getImgHeight } from '../../../../utils';
 const { width } = Dimensions.get('window');
 const prefetch = Image.prefetch;
 
@@ -32,7 +32,7 @@ class ContentListItem extends PureComponent {
     const { url, index, loading, size } = this.props;
     const style = {
       width,
-      height: size.height / size.width * width,
+      height: getImgHeight(size),
     };
     if (loading) return <ImgPlaceholder style={style}>{index}</ImgPlaceholder>;
     return (

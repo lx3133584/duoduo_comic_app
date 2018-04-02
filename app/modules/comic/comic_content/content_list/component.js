@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import { FlatList, Image, Dimensions } from 'react-native';
+import { FlatList, Image } from 'react-native';
 import { LongList } from '../../..';
 import { ContentListItem, ContentListFooter } from '..';
-const { width } = Dimensions.get('window');
+import { getImgHeight } from '../../../../utils';
 const prefetch = Image.prefetch;
 const page_size = 5;
 const pre_num = 3;
@@ -127,9 +127,6 @@ class ContentListComponent extends Component {
     saveIndex(0);
     this.page = 0;
   };
-  getHeight = ({ height: itemHeight, width: itemWidth }) => {
-    return itemHeight / itemWidth * width;
-  };
   onScroll = (e) => {
     const { saveIndex, content, content_index } = this.props;
     const scrollY = e.nativeEvent.contentOffset.y;
@@ -137,7 +134,7 @@ class ContentListComponent extends Component {
     let index = 0;
     content.forEach((t, i) => {
       if (scrollY > offset) index = i;
-      offset += this.getHeight(t.size);
+      offset += getImgHeight(t.size);
     })
     const offsetIndex = this.page * page_size;
     if (index !== content_index - offsetIndex) saveIndex(index + offsetIndex);
@@ -146,9 +143,9 @@ class ContentListComponent extends Component {
     let offset = 0;
     const item = data[index];
     data.forEach((t, i) => {
-      if (i < index) offset += this.getHeight(t.size);
+      if (i < index) offset += getImgHeight(t.size);
     })
-    return { length: this.getHeight(item.size), offset, index };
+    return { length: getImgHeight(item.size), offset, index };
   };
   _getRef = ref => this.content_ref = ref;
   render() {
