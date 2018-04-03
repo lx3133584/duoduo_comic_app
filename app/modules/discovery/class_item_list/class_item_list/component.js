@@ -12,7 +12,7 @@ const ContainStyled = styled.View`
   padding-top: 15px;
   padding-bottom: 72px;
 `
-
+@wrapWithLoading
 class ClassItemListComponent extends PureComponent {
   static propTypes = {
     getList: PropTypes.func.isRequired,
@@ -61,4 +61,4 @@ class ClassItemListComponent extends PureComponent {
   }
 }
 
-export default wrapWithLoading(ClassItemListComponent);
+export default ClassItemListComponent;

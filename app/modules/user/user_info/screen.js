@@ -6,6 +6,7 @@ import { brand_primary } from '../../../theme';
 import { StatusBar } from 'react-native';
 import { wrapWithUpdate } from '../../../utils';
 
+@wrapWithUpdate
 class UserInfoScreen extends PureComponent {
   static navigationOptions = {
     title: '用户',
@@ -29,4 +30,4 @@ class UserInfoScreen extends PureComponent {
   }
 }
 
-export default wrapWithUpdate(UserInfoScreen);
+export default UserInfoScreen;

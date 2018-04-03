@@ -16,7 +16,7 @@ const ItemSeparatorComponent = styled.View`
   border-bottom-color: #ddd;
   border-bottom-width: 1px;
 `
-
+@wrapWithLoading
 class ComicListComponent extends PureComponent {
   static propTypes = {
     list: PropTypes.array.isRequired,
@@ -75,4 +75,4 @@ class ComicListComponent extends PureComponent {
   }
 }
 
-export default wrapWithLoading(ComicListComponent);
+export default ComicListComponent;

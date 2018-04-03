@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { wrapWithLoading } from '../../../utils';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
+@wrapWithLoading
 class ComicDetailScreen extends PureComponent {
   static propTypes = {
     hideLoading: PropTypes.func.isRequired,
@@ -22,4 +23,4 @@ class ComicDetailScreen extends PureComponent {
   ])};
 }
 
-export default wrapWithLoading(ComicDetailScreen);
+export default ComicDetailScreen;

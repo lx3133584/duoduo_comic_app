@@ -9,6 +9,7 @@ import { LoadingPage } from '..';
 const ContainStyled = styled.View`
   background-color: #282828;
 `
+@wrapWithLoading
 class ContentListScreen extends PureComponent {
   static propTypes = {
     hideLoading: PropTypes.func.isRequired,
@@ -29,4 +30,4 @@ class ContentListScreen extends PureComponent {
     ])};
 }
 
-export default wrapWithLoading(ContentListScreen);
+export default ContentListScreen;

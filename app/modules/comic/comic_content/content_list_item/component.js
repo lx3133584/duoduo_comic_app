@@ -6,6 +6,7 @@ import { wrapWithLoading, getImgHeight } from '../../../../utils';
 const { width } = Dimensions.get('window');
 const prefetch = Image.prefetch;
 
+@wrapWithLoading
 class ContentListItem extends PureComponent {
   static propTypes = {
     url: PropTypes.string.isRequired,
@@ -44,4 +45,4 @@ class ContentListItem extends PureComponent {
   }
 }
 
-export default wrapWithLoading(ContentListItem);
+export default ContentListItem;
