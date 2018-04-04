@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
+import Toast from 'react-native-root-toast';
 import { FlatList, Image } from 'react-native';
 import { LongList } from '../../..';
 import { ContentListItem, ContentListFooter } from '..';
@@ -41,6 +42,7 @@ class ContentListComponent extends Component {
     super();
     this.chapter_id = 0; // 本章节ID
     this.page = 0; // 续读页码
+    this.offset_index = 0; // 续读后偏移的index
   };
   state = {
     initialized: false, // 是否初始化完成
@@ -87,13 +89,16 @@ class ContentListComponent extends Component {
       let offset = 0;
       if (chapter_id === this.chapter_id) {
         this.page = Math.floor((content_index + 1) / (page_size + 0.000001));
+        this.offset_index = this.page * page_size;
         offset = content_index % page_size;
       } else {
-        this.page = 0;
-        saveIndex(0);
+        this.onRefresh(0, true);
       }
       this.setState({ initialized: true }); // 初始化完成
-      await this.goPage(this.page, offset, true);
+      await this.goPage({ page: this.page, offset, init: true });
+      if (offset > page_size - pre_num) {
+        await this.goPage({ page: ++this.page, offset: 0, init: false }); // 如果后面不足3张图片则加载下一页
+      }
       this.scrollTo(offset);
     }
     hideLoading();
@@ -103,12 +108,17 @@ class ContentListComponent extends Component {
     const res = await getList(comic_id);
     return res.action.payload.data[0].data[0];
   };
-  goPage = async (page, offset, init) => {
+  goPage = async ({ page, offset, init }) => {
     const { value } = await this.onFetch(page, init);
     const data = value.result.data.slice(offset, offset + pre_num);
-    if (offset > page_size - pre_num) await this.goPage(page + 1, 0, false); // 如果后面不足3张图片则加载下一页
     const tasks = data.map(item => prefetch(item.url));
-    await Promise.all(tasks);  // 前三张图片都显示出来才结束loading
+    try {
+      await Promise.all(tasks);  // 前三张图片都显示出来才结束loading
+    } catch(e) {
+      Toast.show('图片加载失败', {
+        position: -70,
+      });
+    }
   };
   scrollTo = index => {
     index > 0 && this.content_ref && this.content_ref.scrollToIndex({
@@ -120,13 +130,14 @@ class ContentListComponent extends Component {
   };
   onFetch = async (page, init = false) => {
     const { getContent } = this.props;
-    return await getContent({ id: this.chapter_id, page, init });
+    return await getContent({ id: this.chapter_id, page, init, pre: false });
   };
   onRefresh = (page, init) => {
     const { saveIndex } = this.props;
     if (!init) return;
     saveIndex(0);
     this.page = 0;
+    this.offset_index = 0;
   };
   onScroll = (e) => {
     const { saveIndex, content, content_index, img_positon_arr } = this.props;
@@ -138,8 +149,7 @@ class ContentListComponent extends Component {
         break;
       }
     }
-    const offsetIndex = this.page * page_size;
-    if (index !== content_index - offsetIndex) saveIndex(index + offsetIndex);
+    if (index !== content_index - this.offset_index) saveIndex(index + this.offset_index);
   };
   _getItemLayout = (data, index) => {
     const { img_positon_arr } = this.props;

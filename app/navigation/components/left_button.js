@@ -17,7 +17,6 @@ class LeftButton extends PureComponent {
     }),
   };
   render() {
-    const { navigation } = this.props;
     return (
       <TouchableOpacity onPress={() => this.props.navigation.goBack(null)}>
         <ContainStyled>

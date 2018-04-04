@@ -88,7 +88,7 @@ class ComicDetailBtnsComponent extends PureComponent {
       chapter_id = id;
       cur_chapter = title;
     }
-    this.props.navigation.navigate('ComicContent', { id: chapter_id, title: cur_chapter });
+    this.props.navigation.navigate('ComicContent', { id: chapter_id, title: cur_chapter, pre: false });
   };
   render() {
     const { detail } = this.props;

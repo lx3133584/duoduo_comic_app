@@ -51,13 +51,12 @@ export default handleActions({
       state = state.set('pre_content_total', action.payload.result.total);
       return state.set('pre_content', Immutable.List(action.payload.result.data));
     }
-    if (action.payload.init) {
+    if (action.payload.init) { // 初始化(非懒加载的情况)
       state = state.update('content', (list) => list.clear());
+      state = state.setIn(['detail', 'chapter_id'], action.payload.id);
+      state = state.set('content_total', action.payload.result.total);
     }
-    state = state.setIn(['detail', 'chapter_id'], action.payload.id);
-    state = state.set('content_total', action.payload.result.total);
     return state.update('content', (oldList) => oldList.concat(action.payload.result.data));
-
   },
   [comicContentActions.saveChapterTitle]: (state, action) => {
     return state.set('chapter_title', action.payload);
