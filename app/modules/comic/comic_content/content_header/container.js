@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import Component from './component';
+import { withNavigation } from 'react-navigation';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    index: state['comic'].getIn(['detail', 'index']) + 1,
-    total: state['comic'].get('content_total'),
+    title: state['comic'].get('chapter_title'),
   }
 }
 
-export default connect(
+export default withNavigation(connect(
     mapStateToProps,
     null
-)(Component);
+  )(Component));

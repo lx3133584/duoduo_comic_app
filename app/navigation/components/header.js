@@ -39,12 +39,12 @@ class HeaderComponent extends PureComponent {
   };
   render() {
     const { title, backgroundColor } = this.options;
-    const { isNoBack, customTitle } = this.props;
+    const { isNoBack, customTitle, customBackgroundColor } = this.props;
     return (
       <Header
         leftComponent={isNoBack ? null : <LeftButton navigation={this.navigation} />}
         centerComponent={{ text: customTitle || title, style: centerTextStyle }}
-        outerContainerStyles={{ backgroundColor: backgroundColor || brand_primary, ...outerContainerStyles }}
+        outerContainerStyles={{ backgroundColor: customBackgroundColor || backgroundColor || brand_primary, ...outerContainerStyles }}
         rightComponent={null}
       />
     );

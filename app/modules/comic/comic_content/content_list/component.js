@@ -2,24 +2,14 @@ import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-root-toast';
-import { FlatList, Image } from 'react-native';
-import { LongList } from '../../..';
-import { ContentListItem, ContentListFooter } from '..';
+import { TouchableWithoutFeedback, Image, View } from 'react-native';
+import { ContentListScroll } from '..';
 import { getImgHeight } from '../../../../utils';
 const prefetch = Image.prefetch;
 const page_size = 5;
 const pre_num = 3;
 class ContentListComponent extends Component {
   static propTypes = {
-    content: PropTypes.arrayOf(PropTypes.shape({
-      url: PropTypes.string,
-      index: PropTypes.number,
-      size: PropTypes.shape({
-        height: PropTypes.number,
-        width: PropTypes.number,
-      }),
-    })).isRequired,
-    img_positon_arr: ImmutablePropTypes.list.isRequired,
     pre_content: ImmutablePropTypes.list.isRequired,
     content_index: PropTypes.number,
     getContent: PropTypes.func.isRequired,
@@ -29,6 +19,7 @@ class ContentListComponent extends Component {
     hideLoading: PropTypes.func.isRequired,
     saveIndex: PropTypes.func.isRequired,
     saveTitle: PropTypes.func.isRequired,
+    toggleDrawer: PropTypes.func.isRequired,
     comic_id: PropTypes.number,
     chapter_id: PropTypes.number,
     navigation: PropTypes.shape({
@@ -59,9 +50,6 @@ class ContentListComponent extends Component {
   };
   componentWillUnmount() {
     this.willBlurSubscription.remove();
-  };
-  shouldComponentUpdate(nextProps) {
-    return nextProps.content !== this.props.content;
   };
   init = async () => {
     const { id, title, pre } = this.props.navigation.state.params;
@@ -94,16 +82,15 @@ class ContentListComponent extends Component {
       } else {
         this.onRefresh(0, true);
       }
-      this.setState({ initialized: true }); // 初始化完成
       await this.goPage({ page: this.page, offset, init: true });
+      this.setState({ initialized: true }); // 初始化完成
       if (offset > page_size - pre_num) {
         await this.goPage({ page: ++this.page, offset: 0, init: false }); // 如果后面不足3张图片则加载下一页
       }
-      this.scrollTo(offset);
     }
     hideLoading();
   };
-  getChapterFromList = async () => {
+  getChapterFromList = async () => { // 从目录中取第一个章节
     const { getList, comic_id } = this.props;
     const res = await getList(comic_id);
     return res.action.payload.data[0].data[0];
@@ -120,18 +107,6 @@ class ContentListComponent extends Component {
       });
     }
   };
-  scrollTo = index => {
-    index > 0 && this.content_ref && this.content_ref.scrollToIndex({
-      viewPosition: 0,
-      index,
-      animated: false,
-      viewOffset: false,
-    });
-  };
-  onFetch = async (page, init = false) => {
-    const { getContent } = this.props;
-    return await getContent({ id: this.chapter_id, page, init, pre: false });
-  };
   onRefresh = (page, init) => {
     const { saveIndex } = this.props;
     if (!init) return;
@@ -139,44 +114,26 @@ class ContentListComponent extends Component {
     this.page = 0;
     this.offset_index = 0;
   };
-  onScroll = (e) => {
-    const { saveIndex, content, content_index, img_positon_arr } = this.props;
-    const scrollY = e.nativeEvent.contentOffset.y;
-    let index = 0;
-    for (let len = img_positon_arr.size, i = len - 1; i >= 0; i--) {
-      if (scrollY > img_positon_arr.get(i)) {
-        index = i;
-        break;
-      }
-    }
-    if (index !== content_index - this.offset_index) saveIndex(index + this.offset_index);
+  onFetch = async (page, init = false) => {
+    const { getContent } = this.props;
+    return await getContent({ id: this.chapter_id, page, init, pre: false });
   };
-  _getItemLayout = (data, index) => {
-    const { img_positon_arr } = this.props;
-    const item = data[index];
-    const length = getImgHeight(item.size);
-    const offset = img_positon_arr.get(index);
-    return { length, offset, index };
-  };
-  _getRef = ref => this.content_ref = ref;
   render() {
-    const { content } = this.props;
     const { initialized } = this.state;
+    const { toggleDrawer } = this.props;
+    const ContentList = ContentListScroll;
     return (
-      initialized && <LongList
-         getRef={this._getRef}
-         list={content}
-         Item={ContentListItem}
-         customkey="index"
-         onFetch={this.onFetch}
-         onScroll={this.onScroll}
-         ListFooterComponent={ContentListFooter}
-         getItemLayout={this._getItemLayout}
-         initialNumToRender={pre_num}
-         page={this.page + 1}
-         callback={this.onRefresh}
-         isLong
-       />
+      <TouchableWithoutFeedback onPress={toggleDrawer}>
+        <View>
+          {initialized && <ContentList
+            offset={this.offset_index}
+            page={this.page}
+            pageSize={page_size}
+            onFetch={this.onFetch}
+            onRefresh={this.onRefresh}
+          />}
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
