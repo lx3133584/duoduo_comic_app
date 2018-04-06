@@ -3,7 +3,12 @@ import { Dimensions } from 'react-native';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
 import * as Animatable from 'react-native-animatable';
-import { ContentHeader, ContentDrawerMenu, ContentDrawerProgress } from '..';
+import {
+  ContentHeader,
+  ContentDrawerMenu,
+  ContentDrawerProgress,
+  ContentDrawerSetting,
+} from '..';
 const { width } = Dimensions.get('window');
 const HEADER_HEIGHT = 60;
 const containStyle = {
@@ -22,6 +27,10 @@ const bottom_map = {
   progress: {
     Component: ContentDrawerProgress,
     height: ContentDrawerProgress.height,
+  },
+  setting: {
+    Component: ContentDrawerSetting,
+    height: ContentDrawerSetting.height,
   },
 }
 

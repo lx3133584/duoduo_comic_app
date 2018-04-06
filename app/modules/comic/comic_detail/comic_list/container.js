@@ -13,6 +13,7 @@ const formatListSelector = createSelector(
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    comic_id: state['comic'].getIn(['detail', 'id']),
     list: formatListSelector(state),
     chapter_id: state['comic'].getIn(['detail', 'chapter_id']),
   }

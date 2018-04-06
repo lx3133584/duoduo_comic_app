@@ -21,6 +21,7 @@ export {
 export {
   ComicDetailScreen,
   ComicContentScreen,
+  ComicContentListDrawerScreen,
   comicReducer,
   LoadingPage,
 } from './comic';

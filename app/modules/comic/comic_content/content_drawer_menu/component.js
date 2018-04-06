@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 import { ContentDrawerIcon } from '..';
 
 const ContainStyled = styled.View`
@@ -9,14 +10,20 @@ const ContainStyled = styled.View`
 `
 
 class ContentDrawerMenuComponent extends PureComponent {
+  static propTypes = {
+    switchBottomType: PropTypes.func.isRequired,
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }),
+  };
   constructor(props) {
     super(props);
-    const { switchBottomType } = props;
+    const { switchBottomType, navigation } = props;
     this.menu_list = [
       {
         icon_type: 'list',
         title: '目录',
-        onPress: f => f,
+        onPress: () => navigation.navigate('DrawerToggle'),
       },
       {
         icon_type: 'progress',
@@ -32,7 +39,6 @@ class ContentDrawerMenuComponent extends PureComponent {
   };
   static height = 80;
   render() {
-
     return (
       <ContainStyled style={{ height: ContentDrawerMenuComponent.height }}>
         {

@@ -21,13 +21,15 @@ class ComicListComponent extends PureComponent {
   static propTypes = {
     list: PropTypes.array.isRequired,
     chapter_id: PropTypes.number,
+    comic_id: PropTypes.number,
     getList: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
+      getParam: PropTypes.func.isRequired,
       state: PropTypes.shape({
-        params: PropTypes.object.isRequired,
+        params: PropTypes.object,
       }),
     }),
   };
@@ -39,9 +41,9 @@ class ComicListComponent extends PureComponent {
     this.onFetch();
   };
   async onFetch() {
-    const { id } = this.props.navigation.state.params;
-    const { getList, hideLoading } = this.props;
-    await getList(id);
+    const id = this.props.navigation.getParam('id', null);
+    const { getList, hideLoading, comic_id } = this.props;
+    await getList(id || comic_id);
     hideLoading();
   };
   _keyExtractor(item, index) {
