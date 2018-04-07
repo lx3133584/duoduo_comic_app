@@ -13,7 +13,7 @@ const persistConfig = {
   transforms: [immutableTransform({
     blacklist: ['nav'],
   })],
-  blacklist: ['nav'], // 暂时忽略路由缓存
+  // blacklist: ['nav'], // 暂时忽略路由缓存
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
