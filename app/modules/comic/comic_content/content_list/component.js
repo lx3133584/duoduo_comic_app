@@ -52,7 +52,7 @@ class ContentListComponent extends Component {
     this.willBlurSubscription.remove();
   };
   init = async () => {
-    const { id, title, pre } = this.props.navigation.state.params;
+    const { chapter_id: id, title, pre } = this.props.navigation.state.params;
     const {
       preContent,
       hideLoading,
@@ -93,7 +93,7 @@ class ContentListComponent extends Component {
   getChapterFromList = async () => { // 从目录中取第一个章节
     const { getList, comic_id } = this.props;
     const res = await getList(comic_id);
-    return res.action.payload.data[0].data[0];
+    return res.value.data[0].data[0];
   };
   goPage = async ({ page, offset, init }) => {
     const { value } = await this.onFetch(page, init);

@@ -12,7 +12,7 @@ const LocationIcon = <Entypo name="location-pin" size={ICON_SIZE} color={ICON_CO
 const { width } = Dimensions.get('window');
 
 const buttonStyle = {
-  backgroundColor: '#fff',
+  backgroundColor: 'transparent',
   borderWidth: 0,
   borderRadius: 0,
   height: 50,
@@ -27,14 +27,14 @@ const textStyle = {
   fontSize: 14,
 }
 
-export default function ComicListItem({ title, id, itemOnPress, active, item }) {
+export default function ComicListItem({ title, id, itemOnPress, active, item, dark }) {
   return (
     <Button
       icon={active ? LocationIcon : null}
       text={title}
-      buttonStyle={[buttonStyle, active && {backgroundColor: brand_primary}]}
-      textStyle={[textStyle, active && {color: '#fff'}]}
-      onPress={() => itemOnPress('ComicContent', { id, title, pre: false })}
+      buttonStyle={[buttonStyle, active && {backgroundColor: brand_primary}, dark && {width: width * 0.7}]}
+      textStyle={[textStyle, dark && {color: '#eee'}, active && {color: '#fff'}]}
+      onPress={() => itemOnPress('ComicContent', { chapter_id: id, title, pre: false })}
     />
   )
 }

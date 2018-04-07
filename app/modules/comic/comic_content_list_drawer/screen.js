@@ -5,9 +5,24 @@ class ComicContentListDrawerScreen extends PureComponent {
   static navigationOptions = {
     title: '目录',
   };
+  state = {
+    initialized: false, // 是否初始化完成
+  };
+  componentDidMount() {
+    this.didFocusSubscription = this.props.navigation.addListener(
+      'didFocus',
+      () => {
+        this.setState({ initialized: true });
+      }
+    );
+  };
+  componentWillUnmount() {
+    this.didFocusSubscription.remove();
+  };
   render() {
+    const { initialized } = this.state;
     return (
-      <ComicList {...this.props}/>
+      initialized && <ComicList {...this.props} dark replace />
   )};
 }
 

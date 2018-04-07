@@ -9,6 +9,10 @@ const initialLayout = {
   height: 0,
   width: Dimensions.get('window').width,
 }
+const ListStyled = styled.View`
+  background-color: #fff;
+  margin-top: 10px;
+`
 const tabBarStyle = {
   backgroundColor: '#fff',
 }
@@ -59,7 +63,11 @@ class ComicDetailTabsComponent extends PureComponent {
       case 'detail':
         return <ComicDetail />;
       case 'list':
-        return <ComicList />;
+        return (
+        <ListStyled>
+          <ComicList />
+        </ListStyled>
+      );
       default:
         return null;
     }

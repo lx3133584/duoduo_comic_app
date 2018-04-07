@@ -11,9 +11,8 @@ const rowStyle = {
   flexDirection: 'row',
   flexWrap: 'wrap',
 }
-
 const ItemSeparatorComponent = styled.View`
-  border-bottom-color: #ddd;
+  border-bottom-color: #c0c0c0;
   border-bottom-width: 1px;
 `
 @wrapWithLoading
@@ -36,15 +35,36 @@ class ComicListComponent extends PureComponent {
   constructor(props) {
     super(props);
     this.navigate = props.navigation.navigate.bind(this);
+    this.replace = props.navigation.replace.bind(this);
   };
   componentDidMount() {
     this.onFetch();
   };
   async onFetch() {
     const id = this.props.navigation.getParam('id', null);
-    const { getList, hideLoading, comic_id } = this.props;
-    await getList(id || comic_id);
+    const { getList, hideLoading, comic_id, chapter_id } = this.props;
+    const res = await getList(id || comic_id);
+    let sectionIndex = 0;
+    let itemIndex = 0;
+    res.value && res.value.data.forEach((outer, o) => {
+      outer.data.forEach((inner, i) => {
+        if (inner.id === chapter_id) {
+          sectionIndex = o;
+          itemIndex = i;
+        }
+      })
+    })
+    setTimeout(() => this.scrollTo({ sectionIndex, itemIndex }), 0);
     hideLoading();
+  };
+  scrollTo = ({ sectionIndex = 0, itemIndex = 0 }) => {
+    this.comic_list_ref && this.comic_list_ref.scrollToLocation({
+      sectionIndex,
+      itemIndex,
+      viewPosition: 0,
+      viewOffset: 150,
+      animated: false,
+    });
   };
   _keyExtractor(item, index) {
     return item.id + '';
@@ -59,13 +79,18 @@ class ComicListComponent extends PureComponent {
     })
     return {length: 51, offset: 51 * (index - 1) + offset, index}
   };
+  _getRef = ref => this.comic_list_ref = ref;
   render() {
-    const { list, chapter_id, loading } = this.props;
+    const { list, chapter_id, loading, dark, replace } = this.props;
     if (loading) return <Progress />;
     return (
       <SectionList
-        renderItem={({ item }) => <ComicListItem {...item} itemOnPress={this.navigate} active={item.id === chapter_id} />}
-        renderSectionHeader={({ section }) => <ComicListCategory>{section.name}</ComicListCategory>}
+        ref={this._getRef}
+        renderItem={({ item }) => <ComicListItem
+          {...item} dark={dark}
+          itemOnPress={replace ? this.replace : this.navigate}
+          active={item.id === chapter_id} />}
+        renderSectionHeader={({ section }) => <ComicListCategory dark={dark}>{section.name}</ComicListCategory>}
         ItemSeparatorComponent={ItemSeparatorComponent}
         stickySectionHeadersEnabled
         keyExtractor={this._keyExtractor}

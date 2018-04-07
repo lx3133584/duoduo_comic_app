@@ -23,7 +23,7 @@ class ContentDrawerMenuComponent extends PureComponent {
       {
         icon_type: 'list',
         title: '目录',
-        onPress: () => navigation.navigate('DrawerToggle'),
+        onPress: () => navigation.navigate('DrawerOpen'),
       },
       {
         icon_type: 'progress',

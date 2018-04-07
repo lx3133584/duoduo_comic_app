@@ -15,13 +15,13 @@ const { width } = Dimensions.get('window');
 
 const ComicContentDrawer = DrawerNavigator(
   {
-    ComicContent: { screen: ComicContentScreen },
+    ComicContentDrawer: { screen: ComicContentScreen },
   },
   {
     drawerWidth: width * 0.7,
     drawerPosition: 'right',
     contentComponent: ComicContentListDrawerScreen,
-    drawerBackgroundColor: 'transparent',
+    drawerBackgroundColor: '#333',
   },
 );
 const RootStack = StackNavigator(
@@ -29,7 +29,7 @@ const RootStack = StackNavigator(
     TabStack: { screen: TabNavigator },
     Login: { screen: LoginScreen },
     ComicDetail: { screen: ComicDetailScreen },
-    ComicContentDrawer: { screen: ComicContentDrawer },
+    ComicContent: { screen: ComicContentDrawer },
     RankItemList: { screen: RankItemListScreen },
     ClasskItemList: { screen: ClasskItemListScreen },
   },
