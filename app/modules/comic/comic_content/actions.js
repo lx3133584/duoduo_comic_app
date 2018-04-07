@@ -7,6 +7,7 @@ export const {
   saveChapterTitle,
   saveContentIndex,
   saveHistory,
+  goToIndex,
 } = createActions({
   GET_CONTENT_LIST: async ({ id, pre, page, init }) => {
     const result = await fetchContentList({ id, page, pre });
@@ -18,4 +19,5 @@ export const {
   SAVE_HISTORY: async ({ chapter_id, index }) => {
     return await postHistory({ chapter_id, index });
   },
+  GO_TO_INDEX: (index) => index,
 });

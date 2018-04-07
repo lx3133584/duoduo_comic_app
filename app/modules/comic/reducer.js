@@ -10,6 +10,7 @@ const initialState = Immutable.Map({
   content_total: 0,
   pre_content: Immutable.List(),
   pre_content_total: 0,
+  go_to_flag: false, // 标志go_to_index被触发
 });
 export default handleActions({
   [`${comicDetailActions.getComicDetail}_PENDING`]: (state, action) => {
@@ -63,5 +64,9 @@ export default handleActions({
   },
   [comicContentActions.saveContentIndex]: (state, action) => {
     return state.setIn(['detail', 'index'], action.payload);
+  },
+  [comicContentActions.goToIndex]: (state, action) => {
+    state = state.setIn(['detail', 'index'], action.payload);
+    return state.update('go_to_flag', flag => !flag);
   },
 }, initialState)

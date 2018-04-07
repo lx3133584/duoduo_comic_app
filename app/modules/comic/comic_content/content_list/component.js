@@ -35,9 +35,6 @@ class ContentListComponent extends Component {
     this.page = 0; // 续读页码
     this.offset_index = 0; // 续读后偏移的index
   };
-  state = {
-    initialized: false, // 是否初始化完成
-  };
   componentDidMount() {
     this.init();
     this.willBlurSubscription = this.props.navigation.addListener(
@@ -50,6 +47,11 @@ class ContentListComponent extends Component {
   };
   componentWillUnmount() {
     this.willBlurSubscription.remove();
+  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.go_to_flag !== this.props.go_to_flag) {
+      this.goToIndex(nextProps.content_index);
+    }
   };
   init = async () => {
     const { chapter_id: id, title, pre } = this.props.navigation.state.params;
@@ -72,7 +74,6 @@ class ContentListComponent extends Component {
     saveTitle(cur_chapter);
     if (pre && pre_content.size) {
       preContent(this.chapter_id);
-      this.setState({ initialized: true });
     } else {
       let offset = 0;
       if (chapter_id === this.chapter_id) {
@@ -83,13 +84,29 @@ class ContentListComponent extends Component {
         this.onRefresh(0, true);
       }
       await this.goPage({ page: this.page, offset, init: true });
-      this.setState({ initialized: true }); // 初始化完成
+      this.scrollTo(offset);
       if (offset > page_size - pre_num) {
         await this.goPage({ page: ++this.page, offset: 0, init: false }); // 如果后面不足3张图片则加载下一页
       }
     }
     hideLoading();
   };
+  goToIndex = async (index) => { // 跳页
+    const page = Math.floor((index + 1) / (page_size + 0.000001));
+    const offset = index % page_size;
+    if (page !== this.page) {
+      this.page = page;
+      this.offset_index = this.page * page_size;
+      await this.goPage({ page: this.page, offset, init: true });
+    }
+    this.scrollTo(offset);
+  };
+  scrollTo = index => {
+    if (!this.content_list_ref || !this.content_list_ref.scrollTo) return;
+    setTimeout(() => {
+      this.content_list_ref.scrollTo(index);
+    }, 0);
+  }
   getChapterFromList = async () => { // 从目录中取第一个章节
     const { getList, comic_id } = this.props;
     const res = await getList(comic_id);
@@ -118,20 +135,20 @@ class ContentListComponent extends Component {
     const { getContent } = this.props;
     return await getContent({ id: this.chapter_id, page, init, pre: false });
   };
+  _getRef = ref => this.content_list_ref = ref;
   render() {
-    const { initialized } = this.state;
     const { toggleDrawer } = this.props;
     const ContentList = ContentListScroll;
     return (
       <TouchableWithoutFeedback onPress={toggleDrawer}>
         <View>
-          {initialized && <ContentList
+          <ContentList
+            getRef={this._getRef}
             offset={this.offset_index}
             page={this.page}
-            pageSize={page_size}
             onFetch={this.onFetch}
             onRefresh={this.onRefresh}
-          />}
+          />
         </View>
       </TouchableWithoutFeedback>
     );

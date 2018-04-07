@@ -19,16 +19,16 @@ class ContentListScrollComponent extends Component {
     content_index: PropTypes.number,
     saveIndex: PropTypes.func.isRequired,
   };
-  componentDidMount() {
-    const { content_index, pageSize } = this.props;
-    let offset = content_index % pageSize;
-    setTimeout(() => this.scrollTo(offset), 0);
+  constructor(props) {
+    super(props);
+    const { getRef } = props;
+    getRef(this);
   };
   shouldComponentUpdate(nextProps) {
     return nextProps.content !== this.props.content;
   };
-  scrollTo = index => {
-    index > 0 && this.content_ref && this.content_ref.scrollToIndex({
+  scrollTo = (index = 0) => {
+    this.content_ref && this.content_ref.scrollToIndex({
       viewPosition: 0,
       index,
       animated: false,

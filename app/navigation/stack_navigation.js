@@ -15,7 +15,7 @@ const { width } = Dimensions.get('window');
 
 const ComicContentDrawer = DrawerNavigator(
   {
-    ComicContentDrawer: { screen: ComicContentScreen },
+    ComicContent: { screen: ComicContentScreen },
   },
   {
     drawerWidth: width * 0.7,
