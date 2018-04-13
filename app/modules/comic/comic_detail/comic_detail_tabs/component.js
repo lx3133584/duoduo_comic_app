@@ -73,12 +73,12 @@ class ComicDetailTabsComponent extends PureComponent {
     }
   }
   _renderScene = ({ route, index }) => {
-    if (!index) return this.switchPage(route.key); // 详情页无论何时都加载
-    if (this.state.index === index) { // 懒加载, 其他标签页不渲染
-      this._renderScene = ({route}) => this.switchPage(route.key); // 覆盖原来的渲染函数
+    // if (!index) return this.switchPage(route.key); // 详情页无论何时都加载
+    // if (this.state.index === index) { // 懒加载, 其他标签页不渲染
+    //   this._renderScene = ({route}) => this.switchPage(route.key); // 覆盖原来的渲染函数
       return this.switchPage(route.key);
-    }
-    return null;
+    // }
+    // return null;
   }
   render() {
     return (
