@@ -9,15 +9,15 @@ class ComicContentListDrawerScreen extends PureComponent {
     initialized: false, // 是否初始化完成
   };
   componentDidMount() {
-    this.didFocusSubscription = this.props.navigation.addListener(
-      'didFocus',
+    this.willBlurSubscription = this.props.navigation.addListener(
+      'willBlur',
       () => {
         this.setState({ initialized: true });
       }
     );
   };
   componentWillUnmount() {
-    this.didFocusSubscription.remove();
+    this.willBlurSubscription.remove();
   };
   render() {
     const { initialized } = this.state;

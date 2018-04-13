@@ -4,6 +4,7 @@ import { SectionList, Dimensions } from 'react-native';
 import { ComicListItem, ComicListCategory, Progress } from '..';
 import styled from "styled-components";
 import { wrapWithLoading } from '../../../../utils';
+import { NavigationActions } from 'react-navigation';
 const { height } = Dimensions.get('window');
 const initNumber = Math.ceil(height / 50);
 
@@ -40,6 +41,13 @@ class ComicListComponent extends PureComponent {
   componentDidMount() {
     this.onFetch();
   };
+  // replace = ({ routeName, params }) => {
+  //   this.props.navigation.dispatch(NavigationActions.replace({
+  //     key,
+  //     routeName,
+  //     params,
+  //   }))
+  // };
   async onFetch() {
     const id = this.props.navigation.getParam('id', null);
     const { getList, hideLoading, comic_id, chapter_id } = this.props;

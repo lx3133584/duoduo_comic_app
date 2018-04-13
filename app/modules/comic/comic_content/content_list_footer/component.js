@@ -59,7 +59,7 @@ class ContentListFooterComponent extends PureComponent {
           text={`下一章：${title}`}
           buttonStyle={buttonStyle}
           textStyle={textStyle}
-          onPress={() => navigation.replace('ComicContent', { chapter_id: id, title, pre: true })}
+          onPress={() => navigation.replace('ComicContentDrawer', { chapter_id: id, title, pre: true })}
         />}
       </ContainStyled>
     );
