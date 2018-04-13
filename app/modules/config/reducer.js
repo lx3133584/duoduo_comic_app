@@ -1,9 +1,9 @@
 import { handleActions } from 'redux-actions';
 import Immutable from 'immutable';
 import {
-  toggleReadingMode,
-  toggleCuttingMode,
-  toggleOrientation,
+  switchReadingMode,
+  switchCuttingMode,
+  switchOrientation,
   switchBrightness,
 } from './actions';
 
@@ -15,16 +15,16 @@ const initialState = Immutable.Map({
 });
 
 export default handleActions({
-  [toggleReadingMode]: (state, action) => {
-    return state.update('mode', m => m === 'scroll' ? 'page_turning' : 'scroll');
+  [switchReadingMode]: (state, action) => {
+    return state.set('mode', action.payload);
   },
-  [toggleCuttingMode]: (state, action) => {
-    return state.update('whether_to_cut', c => !c);
+  [switchCuttingMode]: (state, action) => {
+    return state.set('whether_to_cut', action.payload);
   },
   [switchBrightness]: (state, action) => {
     return state.set('brightness', action.payload);
   },
-  [toggleOrientation]: (state, action) => {
-    return state.update('orientation', o => o === 'vertical' ? 'horizon' : 'vertical');
+  [switchOrientation]: (state, action) => {
+    return state.set('orientation', action.payload);
   },
 }, initialState)

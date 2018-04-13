@@ -1,13 +1,13 @@
 import { createActions } from 'redux-actions';
 
 export const {
-  toggleReadingMode,
-  toggleCuttingMode,
-  toggleOrientation,
+  switchReadingMode,
+  switchCuttingMode,
+  switchOrientation,
   switchBrightness,
 } = createActions({
-    TOGGLE_READING_MODE: null,
-    TOGGLE_CUTTING_MODE: null,
-    TOGGLE_ORIENTATION: null,
+    SWITCH_READING_MODE: value => value,
+    SWITCH_CUTTING_MODE: value => value,
+    SWITCH_ORIENTATION: value => value,
     SWITCH_BRIGHTNESS: value => value,
 });
