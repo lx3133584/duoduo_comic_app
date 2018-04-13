@@ -1,0 +1,20 @@
+import { connect } from 'react-redux';
+import Component from './component';
+import { configActions } from '../../..';
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    brightness: state['config'].get('brightness'),
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  switchBrightness(params) {
+    return dispatch(configActions.switchBrightness(params));
+  },
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Component);

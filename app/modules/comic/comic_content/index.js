@@ -13,6 +13,7 @@ export { default as NetStatus } from './net_status/component';
 export { default as ContentDrawerIcon } from './content_drawer_icon/component';
 export { default as ContentDrawerMenu } from './content_drawer_menu/container';
 export { default as ContentDrawerProgress } from './content_drawer_progress/container';
+export { default as ContentDrawerBrightness } from './content_drawer_brightness/container';
 export { default as ContentDrawerSetting } from './content_drawer_setting/container';
 export { default as ContentDrawerManager } from './content_drawer_manager/component';
 export { default as ContentHeader } from './content_header/container';

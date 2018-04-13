@@ -21,7 +21,7 @@ export default handleActions({
   [toggleCuttingMode]: (state, action) => {
     return state.update('whether_to_cut', c => !c);
   },
-  [toggleOrientation]: (state, action) => {
+  [switchBrightness]: (state, action) => {
     return state.set('brightness', action.payload);
   },
   [toggleOrientation]: (state, action) => {
