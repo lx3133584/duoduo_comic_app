@@ -15,7 +15,7 @@ const { width } = Dimensions.get('window');
 
 const ComicContentDrawer = DrawerNavigator(
   {
-    ComicContent: { screen: ComicContentScreen },
+    ComicContentNavigator: { screen: ComicContentScreen },
   },
   {
     drawerWidth: width * 0.7,
@@ -30,7 +30,7 @@ const RootStack = StackNavigator(
     Login: { screen: LoginScreen },
     ComicDetail: { screen: ComicDetailScreen },
     // ComicContent: { screen: ComicContentScreen },
-    ComicContentDrawer: { screen: ComicContentDrawer },
+    ComicContent: { screen: ComicContentDrawer },
     RankItemList: { screen: RankItemListScreen },
     ClasskItemList: { screen: ClasskItemListScreen },
   },

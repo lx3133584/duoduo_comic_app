@@ -41,13 +41,6 @@ class ComicListComponent extends PureComponent {
   componentDidMount() {
     this.onFetch();
   };
-  // replace = ({ routeName, params }) => {
-  //   this.props.navigation.dispatch(NavigationActions.replace({
-  //     key,
-  //     routeName,
-  //     params,
-  //   }))
-  // };
   async onFetch() {
     const id = this.props.navigation.getParam('id', null);
     const { getList, hideLoading, comic_id, chapter_id } = this.props;
