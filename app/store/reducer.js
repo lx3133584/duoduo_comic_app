@@ -6,6 +6,7 @@ import {
   searchReducer,
   discoveryReducer,
   cookiesReducer,
+  configReducer,
 } from '../modules';
 import navReducer from '../navigation/reducer';
 
@@ -16,5 +17,6 @@ export default combineReducers({
   search: searchReducer,
   discovery: discoveryReducer,
   cookies: cookiesReducer,
+  config:configReducer,
   nav: navReducer,
 })

@@ -30,6 +30,10 @@ export {
   cookiesActions,
 } from './cookies';
 export {
+  configReducer,
+  configActions,
+} from './config';
+export {
   DiscoveryListScreen,
   RankItemListScreen,
   ClasskItemListScreen,

@@ -56,6 +56,8 @@
 		56D4B6E439BE468BA144F83D /* libDeviceBattery.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEFBE66A529340A892349930 /* libDeviceBattery.a */; };
 		71B19B84218842629E3881E7 /* libRCTHotUpdate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 026D0DD13260478396C3AF7B /* libRCTHotUpdate.a */; };
 		A21FD29FCD7349CB9CF483C7 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26B14F79892B481BB5A146F5 /* libRNFetchBlob.a */; };
+		42F041C131DF45DFB8FDB47B /* libRNDeviceBrightness.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8773691A1884833BEF537C1 /* libRNDeviceBrightness.a */; };
+		104B050DFA2F43BD80BD5A19 /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B958337F104463A25995D9 /* libRCTOrientation.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -334,6 +336,10 @@
 		026D0DD13260478396C3AF7B /* libRCTHotUpdate.a */ = {isa = PBXFileReference; name = "libRCTHotUpdate.a"; path = "libRCTHotUpdate.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		8793A8CDF7B04BC49EBBFBA0 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		26B14F79892B481BB5A146F5 /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		FB00C86B6A324BBE997D0A53 /* RNDeviceBrightness.xcodeproj */ = {isa = PBXFileReference; name = "RNDeviceBrightness.xcodeproj"; path = "../node_modules/react-native-device-brightness/RNDeviceBrightness.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		E8773691A1884833BEF537C1 /* libRNDeviceBrightness.a */ = {isa = PBXFileReference; name = "libRNDeviceBrightness.a"; path = "libRNDeviceBrightness.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		641D38E2BF834BE5A1BF2FD5 /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; name = "RCTOrientation.xcodeproj"; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		F2B958337F104463A25995D9 /* libRCTOrientation.a */ = {isa = PBXFileReference; name = "libRCTOrientation.a"; path = "libRCTOrientation.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +377,8 @@
 				56D4B6E439BE468BA144F83D /* libDeviceBattery.a in Frameworks */,
 				71B19B84218842629E3881E7 /* libRCTHotUpdate.a in Frameworks */,
 				A21FD29FCD7349CB9CF483C7 /* libRNFetchBlob.a in Frameworks */,
+				42F041C131DF45DFB8FDB47B /* libRNDeviceBrightness.a in Frameworks */,
+				104B050DFA2F43BD80BD5A19 /* libRCTOrientation.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +565,8 @@
 				383BE705ED8744FB8E1BEA8D /* DeviceBattery.xcodeproj */,
 				7E2A5FFC2E3F444B94F3B9B1 /* RCTHotUpdate.xcodeproj */,
 				8793A8CDF7B04BC49EBBFBA0 /* RNFetchBlob.xcodeproj */,
+				FB00C86B6A324BBE997D0A53 /* RNDeviceBrightness.xcodeproj */,
+				641D38E2BF834BE5A1BF2FD5 /* RCTOrientation.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1167,6 +1177,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1179,6 +1191,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-device-battery\ios\DeviceBattery",
 					"$(SRCROOT)\..\node_modules\react-native-update\ios\RCTHotUpdate/**",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-device-brightness\RNDeviceBrightness",
+					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
 				);
 			};
 			name = Debug;
@@ -1208,6 +1222,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1220,6 +1236,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-device-battery\ios\DeviceBattery",
 					"$(SRCROOT)\..\node_modules\react-native-update\ios\RCTHotUpdate/**",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-device-brightness\RNDeviceBrightness",
+					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
 				);
 			};
 			name = Release;
@@ -1250,6 +1268,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-device-battery\ios\DeviceBattery",
 					"$(SRCROOT)\..\node_modules\react-native-update\ios\RCTHotUpdate/**",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-device-brightness\RNDeviceBrightness",
+					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
 				);
 			};
 			name = Debug;
@@ -1279,6 +1299,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-device-battery\ios\DeviceBattery",
 					"$(SRCROOT)\..\node_modules\react-native-update\ios\RCTHotUpdate/**",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-device-brightness\RNDeviceBrightness",
+					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
 				);
 			};
 			name = Release;
@@ -1317,6 +1339,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1329,6 +1353,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-device-battery\ios\DeviceBattery",
 					"$(SRCROOT)\..\node_modules\react-native-update\ios\RCTHotUpdate/**",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-device-brightness\RNDeviceBrightness",
+					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
 				);
 			};
 			name = Debug;
@@ -1367,6 +1393,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1379,6 +1407,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-device-battery\ios\DeviceBattery",
 					"$(SRCROOT)\..\node_modules\react-native-update\ios\RCTHotUpdate/**",
 					"$(SRCROOT)\..\node_modules\react-native-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-device-brightness\RNDeviceBrightness",
+					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
 				);
 			};
 			name = Release;
@@ -1412,6 +1442,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1436,6 +1468,8 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
