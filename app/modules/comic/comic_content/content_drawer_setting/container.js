@@ -3,8 +3,7 @@ import Component from './component';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    index: state['comic'].getIn(['detail', 'index']) + 1,
-    total: state['comic'].get('content_total'),
+    orientation: state['config'].get('orientation'),
   }
 }
 

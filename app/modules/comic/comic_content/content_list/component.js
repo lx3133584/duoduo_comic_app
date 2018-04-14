@@ -3,7 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-root-toast';
 import { TouchableWithoutFeedback, Image, View } from 'react-native';
-import { ContentListScroll } from '..';
+import { ContentListScroll, ContentListPageTurning } from '..';
 import { getImgHeight } from '../../../../utils';
 const prefetch = Image.prefetch;
 const page_size = 5;
@@ -12,6 +12,7 @@ class ContentListComponent extends Component {
   static propTypes = {
     pre_content: ImmutablePropTypes.list.isRequired,
     content_index: PropTypes.number,
+    mode: PropTypes.string.isRequired,
     getContent: PropTypes.func.isRequired,
     preContent: PropTypes.func.isRequired,
     postHistory: PropTypes.func.isRequired,
@@ -64,6 +65,7 @@ class ContentListComponent extends Component {
       content_index,
       chapter_id,
       saveIndex,
+      mode,
     } = this.props;
     this.chapter_id = id;
     let cur_chapter = title;
@@ -85,7 +87,7 @@ class ContentListComponent extends Component {
         this.onRefresh(0, true);
       }
       await this.goPage({ page: this.page, offset, init: true });
-      this.scrollTo(offset);
+      mode === 'scroll' && this.scrollTo(offset);
       if (offset > page_size - pre_num) {
         await this.goPage({ page: ++this.page, offset: 0, init: false }); // 如果后面不足3张图片则加载下一页
       }
@@ -138,8 +140,18 @@ class ContentListComponent extends Component {
   };
   _getRef = ref => this.content_list_ref = ref;
   render() {
-    const { toggleDrawer } = this.props;
-    const ContentList = ContentListScroll;
+    const { toggleDrawer, mode } = this.props;
+    let ContentList;
+    switch (mode) {
+      case 'page_turning':
+        ContentList = ContentListPageTurning;
+        break;
+      case 'scroll':
+        ContentList = ContentListScroll;
+        break;
+      default:
+        ContentList = ContentListScroll;
+    };
     return (
       <TouchableWithoutFeedback onPress={toggleDrawer}>
         <View>
@@ -149,6 +161,7 @@ class ContentListComponent extends Component {
             page={this.page}
             onFetch={this.onFetch}
             onRefresh={this.onRefresh}
+            toggleDrawer={toggleDrawer}
           />
         </View>
       </TouchableWithoutFeedback>

@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
+import { Dimensions } from 'react-native';
 import { brand_primary } from '../../../../theme';
 import Orientation from 'react-native-orientation';
 import { ContentDrawerSettingCheckbox } from '..';
-import { Dimensions } from 'react-native';
-const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   flex-direction: row;

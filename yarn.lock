@@ -4285,6 +4285,12 @@ react-native-image-progress@^1.1.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-image-zoom-viewer@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-image-zoom-viewer/-/react-native-image-zoom-viewer-2.1.2.tgz#e21b0667c7a4681b105ea92e8b7d23f6bd5b5335"
+  dependencies:
+    react-native-image-pan-zoom "^2.1.2"
+
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.0.2.tgz#7dbca530930f7c1ce8633cc8fd13ba94102992e1"

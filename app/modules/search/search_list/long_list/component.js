@@ -41,7 +41,7 @@ class LongListComponent extends PureComponent {
     const { page, customkey } = props;
     this.state = {
       loading: false,
-    }
+    };
     this.page = page || 0;
     this.customkey = customkey || 'title';
     this._onRefresh = this._onRefresh.bind(this);

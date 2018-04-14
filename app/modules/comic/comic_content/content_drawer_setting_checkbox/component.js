@@ -13,11 +13,10 @@ const ContainStyled = styled.View`
 const buttonStyle = {
   backgroundColor: 'transparent',
   borderWidth: 1,
-  borderRadius: 3,
   borderColor: '#fff',
-  height: 45,
-  marginTop: 5,
-  marginBottom: 5,
+  borderRadius: 5,
+  marginTop: 25,
+  marginBottom: 25,
   elevation: 0,
 }
 const textStyle = {
@@ -39,13 +38,13 @@ function ButtonComponent({ icon, text, value, changeValue, active }) {
 export default function ContentDrawerSettingCheckboxComponent({ options, value, changeValue }) {
   return (
     <ContainStyled>
-      {options.map(item => {
-        return <ButtonComponent
+      {options.map(item =>
+        <ButtonComponent
           {...item}
           active={value === item.value}
           changeValue={changeValue}
           key={item.value} />
-      })}
+      )}
     </ContainStyled>
   );
 }

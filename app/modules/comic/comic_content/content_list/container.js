@@ -17,6 +17,7 @@ const mapStateToProps = (state, ownProps) => {
     content_index: state['comic'].getIn(['detail', 'index']),
     pre_content: state['comic'].get('pre_content'),
     go_to_flag: state['comic'].get('go_to_flag'),
+    mode: state['config'].get('mode'),
   }
 }
 

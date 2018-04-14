@@ -17,8 +17,12 @@ class ContentListScrollComponent extends Component {
     })).isRequired,
     img_positon_arr: ImmutablePropTypes.list.isRequired,
     content_index: PropTypes.number,
+    offset: PropTypes.number,
     width: PropTypes.number.isRequired,
+    page: PropTypes.number.isRequired,
     saveIndex: PropTypes.func.isRequired,
+    onRefresh: PropTypes.func.isRequired,
+    onFetch: PropTypes.func.isRequired,
   };
   constructor(props) {
     super(props);
