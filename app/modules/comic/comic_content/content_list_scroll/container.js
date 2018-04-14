@@ -5,6 +5,7 @@ import { getImgHeight } from '../../../../utils';
 import { createSelector } from 'reselect';
 
 const contentSelector = state => state['comic'].get('content');
+const widthSelector = state => state['config'].get('width');
 
 const formatContentSelector = createSelector(
   contentSelector,
@@ -12,9 +13,9 @@ const formatContentSelector = createSelector(
 );
 
 const imgPositonArrSelector = createSelector(
-  contentSelector,
-  list => {
-    const imgHeightArr = list.map(item => getImgHeight(item.size));
+  [contentSelector, widthSelector],
+  (list, width) => {
+    const imgHeightArr = list.map(item => getImgHeight(item.size, width));
     return imgHeightArr.map((item, index) => imgHeightArr.slice(0, index).reduce((total, cur) => {
       return total + cur;
     }, 0))
@@ -26,6 +27,7 @@ const mapStateToProps = (state, ownProps) => {
     content: formatContentSelector(state),
     img_positon_arr: imgPositonArrSelector(state),
     content_index: state['comic'].getIn(['detail', 'index']),
+    width: widthSelector(state),
   }
 }
 

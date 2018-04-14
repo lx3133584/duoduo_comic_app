@@ -12,6 +12,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   switchOrientation(params) {
     return dispatch(configActions.switchOrientation(params));
   },
+  changeWidth(params) {
+    return dispatch(configActions.changeWidth(params));
+  },
 })
 
 export default connect(

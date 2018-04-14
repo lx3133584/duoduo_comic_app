@@ -23,6 +23,7 @@ class ContentListComponent extends Component {
     comic_id: PropTypes.number,
     chapter_id: PropTypes.number,
     navigation: PropTypes.shape({
+      addListener: PropTypes.func.isRequired,
       navigate: PropTypes.func.isRequired,
       state: PropTypes.shape({
         params: PropTypes.object.isRequired,

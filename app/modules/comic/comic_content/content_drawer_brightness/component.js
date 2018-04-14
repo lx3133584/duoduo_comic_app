@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
 import styled from "styled-components";
 import { Slider } from 'react-native-elements';
-import { Dimensions, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { brand_primary } from '../../../../theme';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DeviceBrightness from 'react-native-device-brightness';
-const { width } = Dimensions.get('window');
 
 const ICON_SIZE = 20;
 const ICON_COLOR = "#fff";
@@ -15,13 +14,11 @@ const IncreaseBrightnessIcon = () => <Ionicons name="ios-sunny-outline" size={IC
 const DecreaseBrightnessIcon = () => <Ionicons name="ios-sunny" size={ICON_SIZE} color={ICON_COLOR} />;
 
 const ContainStyled = styled.View`
-  width: ${width};
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 `
 const silderStyle = {
-  width: width - 90,
   height: 40,
 }
 const thumbTouchSize = {
@@ -33,6 +30,7 @@ class ContentDrawerBrightnessComponent extends PureComponent {
   static propTypes = {
     switchBrightness: PropTypes.func.isRequired,
     brightness: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
   };
   componentDidMount() {
     this.init();
@@ -54,14 +52,14 @@ class ContentDrawerBrightnessComponent extends PureComponent {
     return () => this.switchBrightness(newValue);
   };
   render() {
-    const { brightness } = this.props;
+    const { brightness, width } = this.props;
     return (
-      <ContainStyled>
+      <ContainStyled style={{ width }}>
         <TouchableOpacity onPress={this.increaseBrightness(-0.1)}>
           <DecreaseBrightnessIcon />
         </TouchableOpacity>
         <Slider
-          style={silderStyle}
+          style={[silderStyle, { width: width - 90 }]}
           value={brightness}
           minimumValue={0}
           maximumValue={1}

@@ -2,7 +2,7 @@ export { default as Screen } from './screen';
 export { default as ContentList } from './content_list/container';
 export { default as ContentListScroll } from './content_list_scroll/container';
 export { default as ContentStatusBar } from './content_status_bar/component';
-export { default as ContentListItem } from './content_list_item/component';
+export { default as ContentListItem } from './content_list_item/container';
 export { default as ContentListFooter } from './content_list_footer/container';
 export { default as ImgPlaceholder } from './img_placeholder/component';
 export { default as Battery } from './battery/component';
@@ -17,7 +17,7 @@ export { default as ContentDrawerBrightness } from './content_drawer_brightness/
 export { default as ContentDrawerSettingCheckbox } from './content_drawer_setting_checkbox/component';
 export { default as ContentDrawerSetting } from './content_drawer_setting/container';
 export { default as ContentDrawerOrientation } from './content_drawer_orientation/container';
-export { default as ContentDrawerManager } from './content_drawer_manager/component';
+export { default as ContentDrawerManager } from './content_drawer_manager/container';
 export { default as ContentHeader } from './content_header/container';
 import * as comicContentActions from './actions';
 export { comicContentActions };

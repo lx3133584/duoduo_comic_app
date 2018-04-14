@@ -47,6 +47,7 @@ const mapStateToProps = (state, ownProps) => {
     total: state['comic'].get('content_total'),
     prev: prevItemSelector(state),
     next: nextItemSelector(state),
+    width: state['config'].get('width'),
   }
 }
 

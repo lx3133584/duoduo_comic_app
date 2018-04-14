@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import styled from "styled-components";
 import { Slider } from 'react-native-elements';
-import { Dimensions, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { brand_primary } from '../../../../theme';
 import Feather from 'react-native-vector-icons/Feather';
-const { width } = Dimensions.get('window');
 
 const ICON_SIZE = 20;
 const ICON_COLOR = "#fff";
@@ -19,7 +18,6 @@ const ContainStyled = styled.View`
   align-items: center;
 `
 const silderStyle = {
-  width: width - 90,
   height: 40,
 }
 const thumbTouchSize = {
@@ -31,6 +29,7 @@ class ContentDrawerProgressComponent extends PureComponent {
   static propTypes = {
     goIndex: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
     prev: PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -62,14 +61,14 @@ class ContentDrawerProgressComponent extends PureComponent {
     navigation.replace('ComicContent', { chapter_id: id, title, pre: false });
   };
   render() {
-    const { index, total } = this.props;
+    const { index, total, width } = this.props;
     return (
-      <ContainStyled style={{ height: ContentDrawerProgressComponent.height }}>
+      <ContainStyled style={{ height: ContentDrawerProgressComponent.height, width }}>
         <TouchableOpacity onPress={this.goPrev}>
           <PrevIcon />
         </TouchableOpacity>
         <Slider
-          style={silderStyle}
+          style={[silderStyle, { width: width - 90 }]}
           value={index}
           minimumValue={0}
           maximumValue={total - 1}

@@ -1,15 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, Image } from 'react-native';
+import { Image } from 'react-native';
 import { ImgPlaceholder } from '..';
 import { wrapWithLoading, getImgHeight } from '../../../../utils';
-const { width } = Dimensions.get('window');
 const prefetch = Image.prefetch;
 
 @wrapWithLoading
 class ContentListItem extends PureComponent {
   static propTypes = {
     url: PropTypes.string.isRequired,
+    width: PropTypes.number.isRequired,
     index: PropTypes.number.isRequired,
     hideLoading: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
@@ -30,10 +30,10 @@ class ContentListItem extends PureComponent {
     this.preFetchImage();
   };
   render() {
-    const { url, index, loading, size } = this.props;
+    const { url, index, loading, size, width } = this.props;
     const style = {
       width,
-      height: getImgHeight(size),
+      height: getImgHeight(size, width),
     };
     if (loading) return <ImgPlaceholder style={style}>{index}</ImgPlaceholder>;
     return (

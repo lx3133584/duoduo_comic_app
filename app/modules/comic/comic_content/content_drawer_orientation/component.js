@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { brand_primary } from '../../../../theme';
 import Orientation from 'react-native-orientation';
 import { ContentDrawerSettingCheckbox } from '..';
+import { Dimensions } from 'react-native';
+const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   flex-direction: row;
@@ -24,20 +26,15 @@ const options = [
 class ContentDrawerOrientationComponent extends PureComponent {
   static propTypes = {
     switchOrientation: PropTypes.func.isRequired,
+    changeWidth: PropTypes.func.isRequired,
     orientation: PropTypes.string.isRequired,
   };
-  componentDidMount() {
-    this.init();
-  };
-  init = () => {
-    const { orientation } = this.props;
-    this.switchOrientation(orientation);
-  };
   switchOrientation = value => {
-    const { switchOrientation } = this.props;
-    // Orientation.setOrientationLevel(value);
+    const { switchOrientation, changeWidth, toggleDrawer } = this.props;
+    toggleDrawer();
     if (value === 'vertical') Orientation.lockToPortrait();
     if (value === 'horizon') Orientation.lockToLandscape();
+    changeWidth(Dimensions.get('window').height);
     switchOrientation(value);
   };
   render() {

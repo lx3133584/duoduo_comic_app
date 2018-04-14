@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-import { Dimensions } from 'react-native';
-const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   background-color: #999;

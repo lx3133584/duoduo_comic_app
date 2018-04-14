@@ -16,6 +16,6 @@ export const numberFormat = function(num) {
   }
 }
 // 获取图片的高
-export const getImgHeight = function({ height, width }) {
-  return Math.round(height / width * clientWidth);
+export const getImgHeight = function({ height, width }, myClientWidth = clientWidth) {
+  return Math.round(height / width * myClientWidth);
 };

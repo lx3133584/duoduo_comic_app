@@ -37,6 +37,7 @@ const bottom_map = {
 class ContentDrawerManagerComponent extends PureComponent {
   static propTypes = {
     show: PropTypes.bool.isRequired,
+    width: PropTypes.number.isRequired,
   };
   state = {
     bottomType: 'main',
@@ -47,13 +48,13 @@ class ContentDrawerManagerComponent extends PureComponent {
   _getRef = type => ref => this[type] = ref;
   toggleDrawer = () => {
     const { bottomType } = this.state;
-    const { show } = this.props;
+    const { show, width } = this.props;
     show || this.setState({ bottomType: 'main' });
     const { height } = bottom_map[show ? bottomType : 'main'];
     const ease = show ? 'ease-out': 'ease-in';
     const duration = 200;
-    this.topComponent.transitionTo({ top: show ? -HEADER_HEIGHT : 0 }, duration, ease);
-    this.bottomComponent.transitionTo({ bottom: show ? -height : 0, height }, duration, ease);
+    this.topComponent.transitionTo({ top: show ? -HEADER_HEIGHT : 0, width }, duration, ease);
+    this.bottomComponent.transitionTo({ bottom: show ? -height : 0, height, width }, duration, ease);
   };
   switchBottomType = type => {
     const { height } = bottom_map[type];
@@ -63,19 +64,20 @@ class ContentDrawerManagerComponent extends PureComponent {
   };
   render() {
     const { bottomType } = this.state;
+    const { width } = this.props;
     const { Component, height } = bottom_map[bottomType];
     return ([
       <Animatable.View
         ref={this._getRef('topComponent')}
-        style={[ containStyle, { top: -HEADER_HEIGHT, height: HEADER_HEIGHT } ]}
+        style={[ containStyle, { top: -HEADER_HEIGHT, height: HEADER_HEIGHT, width } ]}
         key="top">
         <ContentHeader />
       </Animatable.View>,
       <Animatable.View
         ref={this._getRef('bottomComponent')}
-        style={[ containStyle, { bottom: -height, height } ]}
+        style={[ containStyle, { bottom: -height, height, width } ]}
         key="bottom">
-        <Component switchBottomType={this.switchBottomType} />
+        <Component switchBottomType={this.switchBottomType} toggleDrawer={this.toggleDrawer} />
       </Animatable.View>
     ]);
   }

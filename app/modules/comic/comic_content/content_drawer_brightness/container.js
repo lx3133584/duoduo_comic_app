@@ -5,6 +5,7 @@ import { configActions } from '../../..';
 const mapStateToProps = (state, ownProps) => {
   return {
     brightness: state['config'].get('brightness'),
+    width: state['config'].get('width'),
   }
 }
 

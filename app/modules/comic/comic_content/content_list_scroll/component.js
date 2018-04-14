@@ -17,6 +17,7 @@ class ContentListScrollComponent extends Component {
     })).isRequired,
     img_positon_arr: ImmutablePropTypes.list.isRequired,
     content_index: PropTypes.number,
+    width: PropTypes.number.isRequired,
     saveIndex: PropTypes.func.isRequired,
   };
   constructor(props) {
@@ -48,9 +49,9 @@ class ContentListScrollComponent extends Component {
     if (index !== content_index - offset) saveIndex(index + offset);
   };
   _getItemLayout = (data, index) => {
-    const { img_positon_arr } = this.props;
+    const { img_positon_arr, width } = this.props;
     const item = data[index];
-    const length = getImgHeight(item.size);
+    const length = getImgHeight(item.size, width);
     const offset = img_positon_arr.get(index);
     return { length, offset, index };
   };
