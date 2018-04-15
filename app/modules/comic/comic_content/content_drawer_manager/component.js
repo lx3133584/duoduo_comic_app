@@ -49,7 +49,7 @@ class ContentDrawerManagerComponent extends PureComponent {
   toggleDrawer = () => {
     const { bottomType } = this.state;
     const { show, width } = this.props;
-    show || this.setState({ bottomType: 'main' });
+    show || this.switchBottomType('main');
     const { height } = bottom_map[show ? bottomType : 'main'];
     const ease = show ? 'ease-out': 'ease-in';
     const duration = 200;

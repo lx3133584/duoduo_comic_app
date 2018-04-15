@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
+import { TouchableWithoutFeedback, View } from 'react-native';
 import { LongList } from '../../..';
 import { ContentListItem, ContentListFooter } from '..';
 import { getImgHeight } from '../../../../utils';
@@ -22,6 +23,7 @@ class ContentListScrollComponent extends Component {
     page: PropTypes.number.isRequired,
     saveIndex: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
+    toggleDrawer: PropTypes.func.isRequired,
     onFetch: PropTypes.func.isRequired,
   };
   constructor(props) {
@@ -59,6 +61,16 @@ class ContentListScrollComponent extends Component {
     const offset = img_positon_arr.get(index);
     return { length, offset, index };
   };
+  renderItem = (props) => {
+    const { toggleDrawer } = this.props;
+    return (
+      <TouchableWithoutFeedback onPress={toggleDrawer}>
+        <View>
+          <ContentListItem {...props} />
+        </View>
+      </TouchableWithoutFeedback>
+    )
+  };
   _getRef = ref => this.content_ref = ref;
   render() {
     const { content, page, onRefresh, onFetch } = this.props;
@@ -66,7 +78,7 @@ class ContentListScrollComponent extends Component {
       <LongList
          getRef={this._getRef}
          list={content}
-         Item={ContentListItem}
+         Item={this.renderItem}
          customkey="index"
          onFetch={onFetch}
          onScroll={this.onScroll}

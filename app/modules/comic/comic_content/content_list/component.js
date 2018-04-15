@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-root-toast';
-import { TouchableWithoutFeedback, Image, View } from 'react-native';
+import { Image } from 'react-native';
 import { ContentListScroll, ContentListPageTurning } from '..';
 import { getImgHeight } from '../../../../utils';
 const prefetch = Image.prefetch;
@@ -155,18 +155,14 @@ class ContentListComponent extends Component {
         ContentList = ContentListScroll;
     };
     return (
-      <TouchableWithoutFeedback onPress={toggleDrawer}>
-        <View>
-          <ContentList
-            getRef={this._getRef}
-            offset={this.offset_index}
-            page={this.page + 1}
-            onFetch={this.onFetch}
-            onRefresh={this.onRefresh}
-            toggleDrawer={toggleDrawer}
-          />
-        </View>
-      </TouchableWithoutFeedback>
+      <ContentList
+        getRef={this._getRef}
+        offset={this.offset_index}
+        page={this.page + 1}
+        onFetch={this.onFetch}
+        onRefresh={this.onRefresh}
+        toggleDrawer={toggleDrawer}
+      />
     );
   }
 }
