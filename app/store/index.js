@@ -11,7 +11,7 @@ const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   transforms: [immutableTransform({
-    blacklist: ['nav'],
+    blacklist: ['nav', 'search'],
   })],
   // blacklist: ['nav'], // 暂时忽略路由缓存
 }

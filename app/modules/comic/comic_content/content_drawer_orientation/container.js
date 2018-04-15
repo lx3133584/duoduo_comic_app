@@ -15,6 +15,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   changeWidth(params) {
     return dispatch(configActions.changeWidth(params));
   },
+  switchReadingMode(params) {
+    return dispatch(configActions.switchReadingMode(params));
+  },
 })
 
 export default connect(

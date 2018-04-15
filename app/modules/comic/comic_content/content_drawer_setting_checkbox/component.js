@@ -15,8 +15,8 @@ const buttonStyle = {
   borderWidth: 1,
   borderColor: '#fff',
   borderRadius: 5,
-  marginTop: 25,
-  marginBottom: 25,
+  marginTop: 5,
+  marginBottom: 5,
   elevation: 0,
 }
 const textStyle = {

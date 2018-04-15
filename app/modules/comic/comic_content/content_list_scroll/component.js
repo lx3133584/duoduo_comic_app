@@ -73,7 +73,7 @@ class ContentListScrollComponent extends Component {
          ListFooterComponent={ContentListFooter}
          getItemLayout={this._getItemLayout}
          initialNumToRender={3}
-         page={page + 1}
+         page={page}
          callback={onRefresh}
          isLong
        />

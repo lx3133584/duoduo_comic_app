@@ -25,14 +25,18 @@ const options = [
 class ContentDrawerOrientationComponent extends PureComponent {
   static propTypes = {
     switchOrientation: PropTypes.func.isRequired,
+    switchReadingMode: PropTypes.func.isRequired,
     changeWidth: PropTypes.func.isRequired,
     orientation: PropTypes.string.isRequired,
   };
   switchOrientation = value => {
-    const { switchOrientation, changeWidth, toggleDrawer } = this.props;
+    const { switchOrientation, changeWidth, toggleDrawer, switchReadingMode } = this.props;
     toggleDrawer();
     if (value === 'vertical') Orientation.lockToPortrait();
-    if (value === 'horizon') Orientation.lockToLandscape();
+    if (value === 'horizon') {
+      Orientation.lockToLandscape();
+      switchReadingMode('scroll');
+    }
     changeWidth(Dimensions.get('window').height);
     switchOrientation(value);
   };

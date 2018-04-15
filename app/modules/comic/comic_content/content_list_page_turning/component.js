@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImageViewer from 'react-native-image-zoom-viewer';
-import { Modal, Dimensions } from 'react-native';
+import { Modal, Dimensions, Image } from 'react-native';
+import { ImgPlaceholder } from '..';
 import { ContentListItem, ContentListFooter } from '..';
 import styled from "styled-components";
 const { width, height } = Dimensions.get('window');
@@ -28,10 +29,13 @@ class ContentListPageTurningComponent extends Component {
     this.state = {
       loading: false,
     };
-    this.page = page || 0;
+    this.page = page;
   };
   shouldComponentUpdate(nextProps) {
-    return nextProps.content !== this.props.content;
+    return (nextProps.content !== this.props.content) || (nextProps.content_index !== this.props.content_index);
+  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.page !== this.props.page) this.page = nextProps.page;
   };
   _onFetch() {
     const { onFetch } = this.props;
@@ -39,7 +43,7 @@ class ContentListPageTurningComponent extends Component {
     const { loading } = this.state;
     if (loading) return;
     this.setState({ loading: true });
-    onFetch(this.page, false).then(res => {
+    onFetch(this.page).then(res => {
       this.setState({ loading: false });
       if (!res.error) {
         this.page++;
@@ -49,10 +53,11 @@ class ContentListPageTurningComponent extends Component {
     });
   };
   onChange = index => {
-    const { saveIndex, content, content_index, offset, onFetch } = this.props;
-    if (index < content.length - 2) this._onFetch();
+    const { saveIndex, content, content_index, offset } = this.props;
+    if (index > content.length - 3) this._onFetch();
     if (index !== content_index - offset) saveIndex(index + offset);
   };
+  _renderLoading = () => <ImgPlaceholder style={{ width, height }}>loading</ImgPlaceholder>;
   render() {
     const { content, content_index, offset, toggleDrawer } = this.props;
     if (!content.length) return null;
@@ -62,6 +67,8 @@ class ContentListPageTurningComponent extends Component {
           index={content_index - offset}
           imageUrls={content}
           onChange={this.onChange}
+          failImageSource={require('./fail.jpg')}
+          loadingRender={this._renderLoading}
           onClick={toggleDrawer}
           renderIndicator={() => null}/>
       </ContainStyled>

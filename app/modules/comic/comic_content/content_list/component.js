@@ -18,6 +18,7 @@ class ContentListComponent extends Component {
     postHistory: PropTypes.func.isRequired,
     getList: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
     saveIndex: PropTypes.func.isRequired,
     saveTitle: PropTypes.func.isRequired,
     toggleDrawer: PropTypes.func.isRequired,
@@ -140,7 +141,8 @@ class ContentListComponent extends Component {
   };
   _getRef = ref => this.content_list_ref = ref;
   render() {
-    const { toggleDrawer, mode } = this.props;
+    const { toggleDrawer, mode, loading } = this.props;
+    if (loading) return null;
     let ContentList;
     switch (mode) {
       case 'page_turning':
@@ -158,7 +160,7 @@ class ContentListComponent extends Component {
           <ContentList
             getRef={this._getRef}
             offset={this.offset_index}
-            page={this.page}
+            page={this.page + 1}
             onFetch={this.onFetch}
             onRefresh={this.onRefresh}
             toggleDrawer={toggleDrawer}

@@ -14,15 +14,16 @@ const ContainStyled = styled.View`
 class ContentDrawerSettingComponent extends PureComponent {
   static propTypes = {
     toggleDrawer: PropTypes.func.isRequired,
+    orientation: PropTypes.string.isRequired,
   };
   static height = 200;
   render() {
-    const { toggleDrawer } = this.props;
+    const { toggleDrawer, orientation } = this.props;
     return (
       <ContainStyled style={{ height: ContentDrawerSettingComponent.height }}>
         <ContentDrawerBrightness />
         <ContentDrawerOrientation toggleDrawer={toggleDrawer} />
-        <ContentDrawerReadingMode />
+        {orientation === 'horizon' || <ContentDrawerReadingMode />}
       </ContainStyled>
     );
   }

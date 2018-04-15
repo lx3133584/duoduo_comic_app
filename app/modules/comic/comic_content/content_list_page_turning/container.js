@@ -7,8 +7,13 @@ import { getImgHeight } from '../../../../utils';
 const contentSelector = state => state['comic'].get('content');
 const widthSelector = state => state['config'].get('width');
 
+const formatContentSelector = createSelector(
+  contentSelector,
+  list => list.toJS()
+);
+
 const imageUrlsSelector = createSelector(
-  [contentSelector, widthSelector],
+  [formatContentSelector, widthSelector],
   (list, width) => list.map(item => {
     item.height = getImgHeight(item.size, width);
     item.width = width;
@@ -16,14 +21,9 @@ const imageUrlsSelector = createSelector(
   })
 );
 
-const formatContentSelector = createSelector(
-  imageUrlsSelector,
-  list => list.toJS()
-);
-
 const mapStateToProps = (state, ownProps) => {
   return {
-    content: formatContentSelector(state),
+    content: imageUrlsSelector(state),
     content_index: state['comic'].getIn(['detail', 'index']),
   }
 }
