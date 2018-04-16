@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import styled from "styled-components";
 import { Button } from 'react-native-elements';
-import { Image } from 'react-native';
+import { Image, Dimensions } from 'react-native';
+const { width } = Dimensions.get('window');
 const prefetch = Image.prefetch;
 
 const ContainStyled = styled.View`
+  width: ${width};
   background-color: #ededed;
   flex-direction: row;
   justify-content: space-around;

@@ -23,6 +23,7 @@ class ContentListScrollComponent extends Component {
     page: PropTypes.number.isRequired,
     saveIndex: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
+    increasePage: PropTypes.func.isRequired,
     toggleDrawer: PropTypes.func.isRequired,
     onFetch: PropTypes.func.isRequired,
   };
@@ -35,6 +36,10 @@ class ContentListScrollComponent extends Component {
     return nextProps.content !== this.props.content;
   };
   scrollTo = (index = 0) => {
+    const { content } = this.props;
+    const len = content.length - 1;
+    if (index > len) index = len;
+    if (index < 0) return;
     this.content_ref && this.content_ref.scrollToIndex({
       viewPosition: 0,
       index,
@@ -73,7 +78,7 @@ class ContentListScrollComponent extends Component {
   };
   _getRef = ref => this.content_ref = ref;
   render() {
-    const { content, page, onRefresh, onFetch } = this.props;
+    const { content, page, onRefresh, onFetch, increasePage } = this.props;
     return (
       <LongList
          getRef={this._getRef}
@@ -86,6 +91,7 @@ class ContentListScrollComponent extends Component {
          getItemLayout={this._getItemLayout}
          initialNumToRender={3}
          page={page}
+         increasePage={increasePage}
          callback={onRefresh}
          isLong
        />

@@ -31,6 +31,7 @@ class LongListComponent extends PureComponent {
     ]).isRequired,
     list: PropTypes.array.isRequired,
     onFetch: PropTypes.func,
+    increasePage: PropTypes.func,
     callback: PropTypes.func,
     isLong: PropTypes.bool,
     horizontal: PropTypes.bool,
@@ -57,20 +58,23 @@ class LongListComponent extends PureComponent {
     return item[this.customkey] + '';
   };
   _onRefresh() {
+    const { increasePage } = this.props;
     this.page = 0;
+    increasePage && increasePage(0);
     this._onFetch({ init: true });
   };
   _onFetch({ init }) {
-    const { onFetch, callback } = this.props;
+    const { onFetch, callback, increasePage } = this.props;
     if (!onFetch) return;
     const { loading } = this.state;
     if (loading) return;
     this.setState({ loading: true });
     onFetch(this.page, init).then(res => {
       this.setState({ loading: false });
-      if (!res.error) {
+      if (!res.error && res.value.result.data.length) {
         callback && callback(this.page, init);
         this.page++;
+        increasePage && increasePage();
       }
     }).catch(e => {
       this.setState({ loading: false });

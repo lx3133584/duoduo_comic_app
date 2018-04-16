@@ -34,7 +34,7 @@ class ContentListComponent extends Component {
   constructor() {
     super();
     this.chapter_id = 0; // 本章节ID
-
+    this.init_page = 0; // 初始化时的页码
   };
   state = {
     page: 0, // 续读页码
@@ -88,6 +88,7 @@ class ContentListComponent extends Component {
       } else {
         this.onRefresh(0, true);
       }
+      this.init_page = page;
       await this.goPage({ page, offset, init: true });
       mode === 'scroll' && this.scrollTo(offset);
       // if (offset > page_size - pre_num) {
@@ -99,6 +100,14 @@ class ContentListComponent extends Component {
   };
   // 根据index计算page
   computePage = index => Math.floor((index + 1) / (page_size + 0.000001));
+  // 增加页码
+  increasePage = (newPage) => {
+    if (newPage !== undefined) { // 传入参数则为设定页码
+      this.setState({ page: newPage });
+    } else {
+      this.setState(({ page }) => ({ page: page + 1 }));
+    }
+  };
   // 跳页
   goToIndex = async (index) => {
     const page = this.computePage(index);
@@ -162,8 +171,9 @@ class ContentListComponent extends Component {
     return (
       <ContentList
         getRef={this._getRef}
-        offset={page * page_size}
+        offset={this.init_page * page_size}
         page={page + 1}
+        increasePage={this.increasePage}
         onFetch={this.onFetch}
         onRefresh={this.onRefresh}
         toggleDrawer={toggleDrawer}
