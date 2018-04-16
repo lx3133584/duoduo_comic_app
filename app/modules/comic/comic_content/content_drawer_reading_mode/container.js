@@ -1,16 +1,21 @@
 import { connect } from 'react-redux';
 import Component from './component';
 import { configActions } from '../../..';
+import { goToIndex } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
     mode: state['config'].get('mode'),
+    index: state['comic'].getIn(['detail', 'index']),
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   switchReadingMode(params) {
     return dispatch(configActions.switchReadingMode(params));
+  },
+  goIndex(params) {
+    return dispatch(goToIndex(params));
   },
 })
 

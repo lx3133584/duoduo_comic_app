@@ -64,7 +64,6 @@ class ComicListComponent extends PureComponent {
       itemIndex,
       viewPosition: 0,
       viewOffset: 150,
-      animated: false,
     });
   };
   _keyExtractor(item, index) {
@@ -81,18 +80,34 @@ class ComicListComponent extends PureComponent {
     return {length: 51, offset: 51 * (index - 1) + offset, index}
   };
   _getRef = ref => this.comic_list_ref = ref;
+  renderItem = ({ item }) => {
+    const { chapter_id, replace, dark } = this.props;
+    return (
+      <ComicListItem
+        {...item} dark={dark}
+        itemOnPress={replace ? this.replace : this.navigate}
+        active={item.id === chapter_id} />
+    )
+  };
+  renderSectionHeader = ({ section }) => {
+    const { dark } = this.props;
+    return (
+      <ComicListCategory dark={dark}>{section.name}</ComicListCategory>
+    )
+  };
+  renderItemSeparator = () => {
+    const { dark } = this.props;
+    return <ItemSeparatorComponent style={dark && { borderBottomColor: '#fff' }} />
+  };
   render() {
-    const { list, chapter_id, loading, dark, replace } = this.props;
+    const { list, loading } = this.props;
     if (loading) return <Progress />;
     return (
       <SectionList
         ref={this._getRef}
-        renderItem={({ item }) => <ComicListItem
-          {...item} dark={dark}
-          itemOnPress={replace ? this.replace : this.navigate}
-          active={item.id === chapter_id} />}
-        renderSectionHeader={({ section }) => <ComicListCategory dark={dark}>{section.name}</ComicListCategory>}
-        ItemSeparatorComponent={ItemSeparatorComponent}
+        renderItem={this.renderItem}
+        renderSectionHeader={this.renderSectionHeader}
+        ItemSeparatorComponent={this.renderItemSeparator}
         stickySectionHeadersEnabled
         keyExtractor={this._keyExtractor}
         initialNumToRender={initNumber}

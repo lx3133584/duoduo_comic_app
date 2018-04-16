@@ -18,7 +18,6 @@ class ContentListComponent extends Component {
     postHistory: PropTypes.func.isRequired,
     getList: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired,
     saveIndex: PropTypes.func.isRequired,
     saveTitle: PropTypes.func.isRequired,
     toggleDrawer: PropTypes.func.isRequired,
@@ -35,8 +34,10 @@ class ContentListComponent extends Component {
   constructor() {
     super();
     this.chapter_id = 0; // 本章节ID
-    this.page = 0; // 续读页码
-    this.offset_index = 0; // 续读后偏移的index
+
+  };
+  state = {
+    page: 0, // 续读页码
   };
   componentDidMount() {
     this.init();
@@ -65,7 +66,6 @@ class ContentListComponent extends Component {
       pre_content,
       content_index,
       chapter_id,
-      saveIndex,
       mode,
     } = this.props;
     this.chapter_id = id;
@@ -80,38 +80,44 @@ class ContentListComponent extends Component {
       preContent(this.chapter_id);
     } else {
       let offset = 0;
+      let page = 0;
       if (chapter_id === this.chapter_id) {
-        this.page = Math.floor((content_index + 1) / (page_size + 0.000001));
-        this.offset_index = this.page * page_size;
+        page = this.computePage(content_index);
+        this.setState({ page });
         offset = content_index % page_size;
       } else {
         this.onRefresh(0, true);
       }
-      await this.goPage({ page: this.page, offset, init: true });
+      await this.goPage({ page, offset, init: true });
       mode === 'scroll' && this.scrollTo(offset);
-      if (offset > page_size - pre_num) {
-        await this.goPage({ page: ++this.page, offset: 0, init: false }); // 如果后面不足3张图片则加载下一页
-      }
+      // if (offset > page_size - pre_num) {
+      //   this.setState(({ page }) => { page: page + 1 });
+      //   await this.goPage({ page: page + 1, offset: 0, init: false }); // 如果后面不足3张图片则加载下一页
+      // }
     }
     hideLoading();
   };
-  goToIndex = async (index) => { // 跳页
-    const page = Math.floor((index + 1) / (page_size + 0.000001));
+  // 根据index计算page
+  computePage = index => Math.floor((index + 1) / (page_size + 0.000001));
+  // 跳页
+  goToIndex = async (index) => {
+    const page = this.computePage(index);
     const offset = index % page_size;
-    if (page !== this.page) {
-      this.page = page;
-      this.offset_index = this.page * page_size;
-      await this.goPage({ page: this.page, offset, init: true });
+    if (page !== this.state.page) {
+      this.setState({ page });
+      await this.goPage({ page, offset, init: true });
     }
     this.scrollTo(offset);
   };
+  // 调用滚动列表的滚动方法
   scrollTo = index => {
     if (!this.content_list_ref || !this.content_list_ref.scrollTo) return;
     setTimeout(() => {
       this.content_list_ref.scrollTo(index);
     }, 0);
-  }
-  getChapterFromList = async () => { // 从目录中取第一个章节
+  };
+  // 从目录中取第一个章节
+  getChapterFromList = async () => {
     const { getList, comic_id } = this.props;
     const res = await getList(comic_id);
     return res.value.data[0].data[0];
@@ -132,8 +138,7 @@ class ContentListComponent extends Component {
     const { saveIndex } = this.props;
     if (!init) return;
     saveIndex(0);
-    this.page = 0;
-    this.offset_index = 0;
+    this.setState({ page: 0 });
   };
   onFetch = async (page, init = false) => {
     const { getContent } = this.props;
@@ -141,8 +146,8 @@ class ContentListComponent extends Component {
   };
   _getRef = ref => this.content_list_ref = ref;
   render() {
-    const { toggleDrawer, mode, loading } = this.props;
-    if (loading) return null;
+    const { toggleDrawer, mode } = this.props;
+    const { page } = this.state;
     let ContentList;
     switch (mode) {
       case 'page_turning':
@@ -157,8 +162,8 @@ class ContentListComponent extends Component {
     return (
       <ContentList
         getRef={this._getRef}
-        offset={this.offset_index}
-        page={this.page + 1}
+        offset={page * page_size}
+        page={page + 1}
         onFetch={this.onFetch}
         onRefresh={this.onRefresh}
         toggleDrawer={toggleDrawer}

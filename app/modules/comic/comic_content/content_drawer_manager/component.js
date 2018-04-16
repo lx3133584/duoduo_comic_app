@@ -15,7 +15,7 @@ const containStyle = {
   position: 'absolute',
   left: 0,
   width,
-  backgroundColor:'rgba(0, 0, 0, 0.8)',
+  backgroundColor:'rgba(0, 0, 0, 0.85)',
   zIndex: 2,
 }
 

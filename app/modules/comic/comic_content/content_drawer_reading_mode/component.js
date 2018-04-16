@@ -22,11 +22,14 @@ const options = [
 
 class ContentDrawerReadingModeComponent extends PureComponent {
   static propTypes = {
+    goIndex: PropTypes.func.isRequired,
     switchReadingMode: PropTypes.func.isRequired,
     mode: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
   };
   switchReadingMode = value => {
-    const { switchReadingMode } = this.props;
+    const { switchReadingMode, goIndex, index } = this.props;
+    if (value === 'scroll') goIndex(index);
     switchReadingMode(value);
   };
   render() {

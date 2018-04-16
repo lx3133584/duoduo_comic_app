@@ -71,7 +71,7 @@ class ContentListScreen extends PureComponent {
       <ContentStatusBar key="status_bar"/>,
       <ContainStyled key="content">
         <StatusBar hidden />
-        <ContentList loading={loading} toggleDrawer={this.toggleDrawer} hideLoading={hideLoading} />
+        <ContentList toggleDrawer={this.toggleDrawer} hideLoading={hideLoading} />
       </ContainStyled>
     ])};
 }
