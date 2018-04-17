@@ -58,9 +58,10 @@ class ContentDrawerManagerComponent extends PureComponent {
   };
   switchBottomType = type => {
     const { height } = bottom_map[type];
-    this.topComponent.transitionTo({ top: -HEADER_HEIGHT }, 200, 'ease-out');
+    const duration = 200;
+    this.topComponent.transitionTo({ top: -HEADER_HEIGHT }, duration, 'ease-out');
     this.setState({ bottomType: type });
-    this.bottomComponent.transitionTo({ height }, 200, 'ease');
+    this.bottomComponent.transitionTo({ height }, duration, 'ease');
   };
   render() {
     const { bottomType } = this.state;

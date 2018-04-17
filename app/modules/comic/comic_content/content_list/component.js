@@ -147,6 +147,7 @@ class ContentListComponent extends Component {
     const { saveIndex } = this.props;
     if (!init) return;
     saveIndex(0);
+    this.init_page = 0;
     this.setState({ page: 0 });
   };
   onFetch = async (page, init = false) => {

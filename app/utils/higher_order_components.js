@@ -14,8 +14,10 @@ import {
 } from 'react-native-update';
 import { Modal } from '../modules';
 import _updateConfig from '../../update.json';
-
-const { appKey } = _updateConfig[Platform.OS];
+import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
+import { createSelector } from 'reselect';
 
 // 提供loading状态的高阶组件
 export const wrapWithLoading = function(WrappedComponent) {
@@ -40,6 +42,9 @@ export const wrapWithLoading = function(WrappedComponent) {
   NewComponent.navigationOptions = WrappedComponent.navigationOptions;
   return NewComponent;
 }
+
+const { appKey } = _updateConfig[Platform.OS];
+
 // 提供热更新功能的高阶组件
 export const wrapWithUpdate = function(WrappedComponent) {
   class NewComponent extends PureComponent {
@@ -125,4 +130,45 @@ export const wrapWithUpdate = function(WrappedComponent) {
 
   NewComponent.navigationOptions = WrappedComponent.navigationOptions;
   return NewComponent;
+}
+
+// 提供路由replace函数的高阶组件
+export const wrapWithReplace = function(routeName) {
+  return function(WrappedComponent) {
+    class NewComponent extends PureComponent {
+      replace = params => {
+        const { navigation, route_key: key } = this.props;
+        const replaceAction = NavigationActions.replace({
+          key,
+          routeName,
+          params,
+        });
+        navigation.dispatch(replaceAction);
+      };
+      render() {
+        return <WrappedComponent {...this.props} replace={this.replace} />;
+      }
+    }
+    const routesSelector = state => state['nav']['routes'];
+
+    const keySelector = createSelector(
+      routesSelector,
+      routes => {
+        const arr = routes.filter(route => route.routeName === routeName);
+        if (!arr.length) return null;
+        return arr[0].key
+      }
+    )
+
+    const mapStateToProps = (state, ownProps) => {
+      return {
+        route_key: keySelector(state),
+      }
+    }
+    NewComponent.height = WrappedComponent.height;
+    return withNavigation(connect(
+        mapStateToProps,
+        null
+      )(NewComponent));
+  }
 }

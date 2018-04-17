@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import Component from './component';
 import { goToIndex } from '../actions';
 import { createSelector } from 'reselect';
-import { withNavigation } from 'react-navigation';
 
 const listSelector = state => state['comic'].get('list');
 const chapterIdSelector = state => state['comic'].getIn(['detail', 'chapter_id']);
@@ -57,7 +56,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 })
 
-export default withNavigation(connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Component));
+)(Component);

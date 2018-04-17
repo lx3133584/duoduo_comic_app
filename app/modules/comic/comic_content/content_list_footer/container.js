@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import Component from './component';
-import { withNavigation } from 'react-navigation';
 import { getContentList } from '../actions';
 import { createSelector } from 'reselect';
 
@@ -46,7 +45,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 })
 
-export default withNavigation(connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Component));
+  )(Component);

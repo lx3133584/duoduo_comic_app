@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { brand_primary } from '../../../../theme';
 import Feather from 'react-native-vector-icons/Feather';
+import { wrapWithReplace } from '../../../../utils';
 
 const ICON_SIZE = 20;
 const ICON_COLOR = "#fff";
@@ -24,7 +25,7 @@ const thumbTouchSize = {
   width: 25,
   height: 25,
 }
-
+@wrapWithReplace('ComicContent')
 class ContentDrawerProgressComponent extends PureComponent {
   static propTypes = {
     goIndex: PropTypes.func.isRequired,
@@ -39,9 +40,7 @@ class ContentDrawerProgressComponent extends PureComponent {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
     }),
-    navigation: PropTypes.shape({
-      replace: PropTypes.func.isRequired,
-    }),
+    replace: PropTypes.func.isRequired,
   };
   static height = 50;
   goIndex = value => {
@@ -57,8 +56,8 @@ class ContentDrawerProgressComponent extends PureComponent {
     this.goChapter(next);
   };
   goChapter = ({ id, title }) => {
-    const { navigation } = this.props;
-    navigation.replace('ComicContent', { chapter_id: id, title, pre: false });
+    const { replace } = this.props;
+    replace({ chapter_id: id, title, pre: false });
   };
   render() {
     const { index, total, width } = this.props;

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import styled from "styled-components";
 import { Button } from 'react-native-elements';
 import { Image, Dimensions } from 'react-native';
+import { wrapWithReplace } from '../../../../utils';
 const { width } = Dimensions.get('window');
 const prefetch = Image.prefetch;
 
@@ -32,6 +33,7 @@ const textStyle = {
   color: '#666',
   fontSize: 14,
 }
+@wrapWithReplace('ComicContent')
 class ContentListFooterComponent extends PureComponent {
   componentDidMount() {
     this.init();
@@ -46,6 +48,15 @@ class ContentListFooterComponent extends PureComponent {
       });
     }
   };
+  goNext = () => {
+    const { next, replace } = this.props;
+    const { id, title } = next || {};
+    replace({ chapter_id: id, title, pre: true });
+  };
+  goBack = () => {
+    const { navigation } = this.props;
+    navigation.goBack(null);
+  };
   render() {
     const { next, navigation } = this.props;
     const { id, title } = next || {};
@@ -55,13 +66,13 @@ class ContentListFooterComponent extends PureComponent {
           text="返回目录"
           buttonStyle={buttonStyle}
           textStyle={textStyle}
-          onPress={() => navigation.goBack(null)}
+          onPress={this.goBack}
         />
         {!next ? <TextStyled>已经看完啦</TextStyled> : <Button
           text={`下一章：${title}`}
           buttonStyle={buttonStyle}
           textStyle={textStyle}
-          onPress={() => navigation.replace('ComicContent', { chapter_id: id, title, pre: true })}
+          onPress={this.goNext}
         />}
       </ContainStyled>
     );
