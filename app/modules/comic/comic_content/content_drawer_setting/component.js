@@ -1,10 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
-import { Dimensions } from 'react-native';
 import { ContentDrawerBrightness, ContentDrawerOrientation, ContentDrawerReadingMode } from '..';
-const { width } = Dimensions.get('window');
-
 
 const ContainStyled = styled.View`
   justify-content: space-around;
@@ -18,7 +15,7 @@ class ContentDrawerSettingComponent extends PureComponent {
   };
   static height = 200;
   render() {
-    const { toggleDrawer, orientation } = this.props;
+    const { toggleDrawer, orientation, width } = this.props;
     return (
       <ContainStyled style={{ height: ContentDrawerSettingComponent.height }}>
         <ContentDrawerBrightness />

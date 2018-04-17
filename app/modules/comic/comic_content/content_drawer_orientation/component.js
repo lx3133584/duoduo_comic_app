@@ -45,6 +45,7 @@ class ContentDrawerOrientationComponent extends PureComponent {
     return (
       <ContainStyled>
         <ContentDrawerSettingCheckbox
+          title="屏幕方向："
           changeValue={this.switchOrientation}
           value={orientation}
           options={options} />

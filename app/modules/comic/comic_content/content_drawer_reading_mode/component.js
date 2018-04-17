@@ -37,6 +37,7 @@ class ContentDrawerReadingModeComponent extends PureComponent {
     return (
       <ContainStyled>
         <ContentDrawerSettingCheckbox
+          title="阅读模式："
           changeValue={this.switchReadingMode}
           value={mode}
           options={options} />

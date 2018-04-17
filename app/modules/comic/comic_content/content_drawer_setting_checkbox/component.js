@@ -6,9 +6,19 @@ import { brand_primary } from '../../../../theme';
 const ContainStyled = styled.View`
   flex: 1;
   flex-direction: row;
+  margin: 0 15px;
+  align-items: center;
+`
+const ButtonsContainStyled = styled.View`
+  flex: 1;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+`
+const TextStyled = styled.Text`
+  font-size: 16px;
+  color: #fff;
 `
 const buttonStyle = {
   backgroundColor: 'transparent',
@@ -35,16 +45,19 @@ function ButtonComponent({ icon, text, value, changeValue, active }) {
     />
   )
 }
-export default function ContentDrawerSettingCheckboxComponent({ options, value, changeValue }) {
+export default function ContentDrawerSettingCheckboxComponent({ title, options, value, changeValue }) {
   return (
     <ContainStyled>
-      {options.map(item =>
-        <ButtonComponent
-          {...item}
-          active={value === item.value}
-          changeValue={changeValue}
-          key={item.value} />
-      )}
+      <TextStyled>{title}</TextStyled>
+      <ButtonsContainStyled>
+        {options.map(item =>
+          <ButtonComponent
+            {...item}
+            active={value === item.value}
+            changeValue={changeValue}
+            key={item.value} />
+        )}
+      </ButtonsContainStyled>
     </ContainStyled>
   );
 }
