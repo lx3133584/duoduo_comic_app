@@ -36,7 +36,7 @@ const textStyle = {
 @wrapWithReplace('ComicContent')
 class ContentListFooterComponent extends PureComponent {
   componentDidMount() {
-    this.init();
+    setTimeout(this.init, 3000);
   };
   init = () => {
     const { next, getList } = this.props;

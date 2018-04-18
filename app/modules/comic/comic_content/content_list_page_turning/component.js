@@ -19,6 +19,7 @@ class ContentListPageTurningComponent extends Component {
     })).isRequired,
     content_index: PropTypes.number,
     width: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
     saveIndex: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     onFetch: PropTypes.func.isRequired,
@@ -48,12 +49,12 @@ class ContentListPageTurningComponent extends Component {
     });
   };
   onChange = index => {
-    const { saveIndex, content, content_index, offset } = this.props;
+    const { saveIndex, content, content_index, total, offset } = this.props;
     const len = content.length;
     if (index > len - 3) {
       if (!this.loading) this._onFetch();
     };
-    this.setState({ showFooter: len - 1 === index });
+    this.setState({ showFooter: total - 1 === index + offset });
     if (index !== content_index - offset) saveIndex(index + offset);
   };
   renderLoading = () => (<ImgPlaceholder style={{ width, height }}>loading</ImgPlaceholder>);

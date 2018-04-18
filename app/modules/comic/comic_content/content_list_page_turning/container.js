@@ -26,6 +26,7 @@ const mapStateToProps = (state, ownProps) => {
     content: imageUrlsSelector(state),
     content_index: state['comic'].getIn(['detail', 'index']),
     width: state['config'].get('width'),
+    total: state['comic'].get('content_total'),
   }
 }
 
