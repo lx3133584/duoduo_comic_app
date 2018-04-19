@@ -8,7 +8,6 @@ import { numberFormat } from '../../../../utils';
 const ContainStyled = styled.View`
   flex-direction: row;
   padding: 8px;
-  background: #fff;
 `
 const DescStyled = styled.Text`
   color: #999;

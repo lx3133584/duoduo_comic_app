@@ -4,6 +4,7 @@ export {
   LongListItem,
   SearchListItem,
   Image,
+  TouchableNativeFeedback,
   searchListActions
 } from './search_list';
 export { default as searchReducer } from './reducer';

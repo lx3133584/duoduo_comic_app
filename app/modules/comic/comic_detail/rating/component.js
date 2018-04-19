@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from "styled-components";
 import Rating from 'react-native-star-rating';
 import { RatingModal } from '..';
-import { TouchableOpacity } from 'react-native';
+import { TouchableNativeFeedback } from '../../..';
 import { numberFormat } from '../../../../utils';
 import { yellow } from '../../../../theme';
 
@@ -13,7 +13,7 @@ const ContainStyled = styled.View`
   background-color: #fff;
   margin-right: 8px;
   align-items: center;
-  elevation: 3;
+  elevation: 2;
   padding: 5px;
 `
 const TitleStyled = styled.Text`
@@ -49,7 +49,7 @@ class RatingComponent extends PureComponent {
     const { score, score_number } = this.props;
     const { isVisible } = this.state;
     return (
-      <TouchableOpacity activeOpacity={0.8} onPress={() => this.setState({ isVisible: true })}>
+      <TouchableNativeFeedback onPress={() => this.setState({ isVisible: true })}>
         <ContainStyled>
           <TitleStyled>评分</TitleStyled>
           <ScoreStyled>{Math.round(+score * 10) / 10}</ScoreStyled>
@@ -64,7 +64,7 @@ class RatingComponent extends PureComponent {
           />}
           <RatingModal isVisible={isVisible} cancel={this.cancel} />
         </ContainStyled>
-    </TouchableOpacity>
+    </TouchableNativeFeedback>
     );
   }
 }

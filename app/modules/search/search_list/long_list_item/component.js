@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { Image } from '..';
-import { TouchableOpacity } from 'react-native';
+import { Image, TouchableNativeFeedback } from '..';
 
 const ContainStyled = styled.View`
   flex-direction: row;
@@ -32,8 +31,7 @@ const WhiteContainStyled = styled.View`
 export default function LongListItem({ id, title, cover, children, itemOnPress, itemOnLongPress }) {
   return (
     <WhiteContainStyled>
-      <TouchableOpacity
-        activeOpacity={0.6}
+      <TouchableNativeFeedback
         onLongPress={() => itemOnLongPress(id)}
         onPress={() => itemOnPress('ComicDetail', { id })}>
         <ContainStyled>
@@ -48,7 +46,7 @@ export default function LongListItem({ id, title, cover, children, itemOnPress, 
             {children}
           </RightStyled>
         </ContainStyled>
-      </TouchableOpacity>
+      </TouchableNativeFeedback>
     </WhiteContainStyled>
 
   )
