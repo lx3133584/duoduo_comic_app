@@ -71,7 +71,8 @@ class LongListComponent extends PureComponent {
     this.setState({ loading: true });
     onFetch(this.page, init).then(res => {
       this.setState({ loading: false });
-      if (!res.error && res.value.result.data.length) {
+      const data = res.value.result ? res.value.result.data : res.value.data;
+      if (!res.error && data.length) {
         callback && callback(this.page, init);
         this.page++;
         increasePage && increasePage();
