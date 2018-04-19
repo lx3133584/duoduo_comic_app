@@ -1,12 +1,18 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from "styled-components";
 import { FavoritesList, HistoryList } from '..';
+import { LoginNowButton } from '../../..'
 import { Dimensions } from 'react-native';
 import { TabViewAnimated, TabViewPagerPan, TabBar, SceneMap } from 'react-native-tab-view';
 import { brand_primary } from '../../../../theme';
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
+const ContainStyled = styled.View`
+  height: ${height * 0.7};
+  justify-content: center;
+`
 const initialLayout = {
   height: 0,
   width,
@@ -28,6 +34,7 @@ const tabBarUnderlineStyle = {
 
 class ComicDetailTabsComponent extends PureComponent {
   static propTypes = {
+    info: ImmutablePropTypes.map.isRequired,
     navigation: PropTypes.shape({
       state: PropTypes.shape({
         params: PropTypes.object,
@@ -63,15 +70,29 @@ class ComicDetailTabsComponent extends PureComponent {
      {...props}
    />);
 
+   switchPage(key) {
+     switch (key) {
+       case 'favorite':
+         return <FavoritesList />;
+       case 'history':
+         return <HistoryList />;
+       default:
+         return null;
+     }
+   }
+
   _renderPager = props => (<TabViewPagerPan
     swipeEnabled
     {...props}
   />);
 
-  _renderScene = SceneMap({
-    favorite: FavoritesList,
-    history: HistoryList,
-  });
+  _renderScene = ({ route, index }) => {
+    const { info } = this.props;
+    if (!info.size) return (<ContainStyled>
+      <LoginNowButton large />
+    </ContainStyled>);
+    return this.switchPage(route.key);
+  }
 
   render() {
     return (

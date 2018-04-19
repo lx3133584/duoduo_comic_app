@@ -13,13 +13,17 @@ const textStyle = {
   fontSize: 12,
   color: brand_primary,
 }
+const largeStyle = {
+  width: 120,
+  height: 40,
+}
 
-export default function LoginNowButtonComponent({ navigation }) {
+export default function LoginNowButtonComponent({ navigation, large }) {
   return (
     <Button
       text='立即登录'
-      textStyle={textStyle}
-      buttonStyle={buttonStyle}
+      textStyle={[textStyle, large && { fontSize: 14 }]}
+      buttonStyle={[buttonStyle, large && largeStyle]}
       onPress={() => navigation.navigate('Login')}
     />
   );

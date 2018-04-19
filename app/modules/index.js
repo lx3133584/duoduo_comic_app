@@ -3,6 +3,7 @@ export {
   LoginScreen,
   userInfoActions,
   userReducer,
+  LoginNowButton,
 } from './user';
 export {
   SearchListScreen,
