@@ -20,12 +20,12 @@ class LoginScreen extends PureComponent {
   render() {
     return (
       <ContainStyled>
+        <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
         <KeyboardAwareScrollView
           enableOnAndroid
           enableAutomaticScroll
           extraScrollHeight={60}
           extraHeight={60}>
-            <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
             <Brand />
             <LoginLocal />
         </KeyboardAwareScrollView>

@@ -43,10 +43,7 @@ class ContentListComponent extends Component {
     this.init();
     this.willBlurSubscription = this.props.navigation.addListener(
       'willBlur',
-      () => {
-        const { content_index, postHistory } = this.props;
-        postHistory({ chapter_id: this.chapter_id, index: content_index })
-      }
+      this.saveHistory,
     );
   };
   componentWillUnmount() {
@@ -66,7 +63,6 @@ class ContentListComponent extends Component {
       pre_content,
       content_index,
       chapter_id,
-      mode,
     } = this.props;
     this.chapter_id = id;
     let cur_chapter = title;
@@ -88,18 +84,23 @@ class ContentListComponent extends Component {
       } else {
         this.onRefresh(0, true);
       }
-      this.init_page = page;
       await this.goPage({ page, offset, init: true });
-      mode === 'scroll' && this.scrollTo(offset);
+      this.scrollTo(offset);
       // if (offset > page_size - pre_num) {
       //   this.setState(({ page }) => { page: page + 1 });
       //   await this.goPage({ page: page + 1, offset: 0, init: false }); // 如果后面不足3张图片则加载下一页
       // }
     }
+    this.saveHistory();
     hideLoading();
   };
+  // 保存阅读进度
+  saveHistory = () => {
+    const { content_index, postHistory } = this.props;
+    postHistory({ chapter_id: this.chapter_id, index: content_index });
+  };
   // 根据index计算page
-  computePage = index => Math.floor((index + 1) / (page_size + 0.000001));
+  computePage = index => ~~((index + 1) / (page_size + 0.000001));
   // 增加页码
   increasePage = (newPage) => {
     if (newPage !== undefined) { // 传入参数则为设定页码
@@ -120,6 +121,7 @@ class ContentListComponent extends Component {
   };
   // 调用滚动列表的滚动方法
   scrollTo = index => {
+    if (this.props.mode !== 'scroll') return;
     if (!this.content_list_ref || !this.content_list_ref.scrollTo) return;
     setTimeout(() => {
       this.content_list_ref.scrollTo(index);
@@ -132,6 +134,7 @@ class ContentListComponent extends Component {
     return res.value.data[0].data[0];
   };
   goPage = async ({ page, offset, init }) => {
+    init && (this.init_page = page);
     const { value } = await this.onFetch(page, init);
     const data = value.result.data.slice(offset, offset + pre_num);
     const tasks = data.map(item => prefetch(item.url));
