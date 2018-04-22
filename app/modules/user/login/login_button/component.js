@@ -8,6 +8,9 @@ const buttonStyle = {
   width: 300,
   height: 40,
   borderRadius: 100,
+  marginTop: 10,
+  borderWidth: 1,
+  borderColor: brand_primary,
 }
 const textStyle = {
   fontSize: 14,
@@ -15,13 +18,13 @@ const textStyle = {
   textAlign: 'justify',
 }
 
-export default function LoginButtonComponent({ loading, onPress }) {
+export default function LoginButtonComponent({ text, loading, onPress, outline }) {
   return (
       <Button
-        text='登  录'
+        text={text || '登  录'}
         loading={loading}
-        textStyle={textStyle}
-        buttonStyle={buttonStyle}
+        textStyle={[textStyle, outline && { color: brand_primary }]}
+        buttonStyle={[buttonStyle, outline && { backgroundColor: '#fff' } ]}
         onPress={onPress}
       />
   );

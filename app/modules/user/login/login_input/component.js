@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input  } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { brand_primary } from '../../../../theme';
+import { brand_primary, red } from '../../../../theme';
 import styled from "styled-components";
 
 const ContainStyled = styled.View`
@@ -29,7 +29,7 @@ export default function LoginInputComponent({ password, displayError, errorMessa
         onChangeText={onChange}
         onSubmitEditing={onSubmit}
         displayError={!!displayError}
-        errorStyle={{ color: 'red' }}
+        errorStyle={{ color: red }}
         errorMessage={errorMessage}
         leftIcon={
           <Icon

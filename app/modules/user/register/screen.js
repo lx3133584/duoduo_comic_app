@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 import styled from "styled-components";
 import { StatusBar, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Brand, LoginLocal } from '.';
 import { brand_primary } from '../../../theme';
+import { RegisterLocal } from '.';
+import { Brand } from '..';
 import { Header } from '../../../navigation';
 const { height } = Dimensions.get('window');
 
@@ -12,9 +13,9 @@ const ContainStyled = styled.View`
   background-color: #fff;
 `
 
-class LoginScreen extends PureComponent {
+class RegisterScreen extends PureComponent {
   static navigationOptions = {
-    title: '登录',
+    title: '注册',
     header: (props) => <Header {...props} />,
   };
   render() {
@@ -27,11 +28,11 @@ class LoginScreen extends PureComponent {
           extraScrollHeight={60}
           extraHeight={60}>
             <Brand />
-            <LoginLocal />
+            <RegisterLocal />
         </KeyboardAwareScrollView>
       </ContainStyled>
     );
   }
 }
 
-export default LoginScreen;
+export default RegisterScreen;

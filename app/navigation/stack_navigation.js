@@ -3,6 +3,7 @@ import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Dimensions } from 'react-native';
 import {
   LoginScreen,
+  RegisterScreen,
   ComicDetailScreen,
   ComicContentScreen,
   RankItemListScreen,
@@ -28,6 +29,7 @@ const RootStack = StackNavigator(
   {
     TabStack: { screen: TabNavigator },
     Login: { screen: LoginScreen },
+    Register: { screen: RegisterScreen },
     ComicDetail: { screen: ComicDetailScreen },
     // ComicContent: { screen: ComicContentScreen },
     ComicContent: { screen: ComicContentDrawer },

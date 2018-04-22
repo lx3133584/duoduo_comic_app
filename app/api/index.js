@@ -17,6 +17,7 @@ export const fetchRankItemList = ({ type, page }) => http.get(`rank/${type}`, {p
 // 用户
 export const fetchUserInfo = () => http.get('user'); // 用户信息
 export const loginLocal = ({ username, password }) => http.post('passport/local', { username, password }); // 登录local
+export const registerLocal = ({ username, password, rePassword }) => http.post('user', { username, password, ['re-password']: rePassword, tel: '', name: '', email: '', avatar: '' }); // 注册local
 export const logout = () => http.delete('logout'); // 注销
 // 漫画
 export const fetchComicDetail = (id) => http.get(`comic/${id}/detail`); // 漫画详情

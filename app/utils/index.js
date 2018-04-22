@@ -7,4 +7,5 @@ export {
   wrapWithLoading,
   wrapWithUpdate,
   wrapWithReplace,
+  wrapWithGoBack,
 } from './higher_order_components';

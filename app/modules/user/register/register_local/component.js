@@ -3,52 +3,59 @@ import styled from "styled-components";
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Toast from 'react-native-root-toast';
-import { LoginInput, LoginButton } from '..';
+import { LoginInput, LoginButton } from '../..';
+import { wrapWithGoBack } from '../../../../utils';
 
 const InputContainStyled = styled.View`
   margin-bottom: 30px;
 `
-
-class LoginLocalComponent extends PureComponent {
+@wrapWithGoBack
+class RegisterLocalComponent extends PureComponent {
   static propTypes = {
-    loginLocal: PropTypes.func.isRequired,
+    registerLocal: PropTypes.func.isRequired,
     getFavorites: PropTypes.func.isRequired,
     getHistory: PropTypes.func.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired
-    }),
+    goBack: PropTypes.func.isRequired,
   };
   state = {
     username: '',
     password: '',
+    rePassword: '',
     loading: false,
   };
   constructor() {
     super();
     this.onChangeUsername = this.changFunc('username');
     this.onChangePassword = this.changFunc('password');
+    this.onChangeRePassword = this.changFunc('rePassword');
   };
   onSubmit = () => {
-    const { loginLocal, navigation, getFavorites, getHistory } = this.props;
-    const { username, password } = this.state;
-    if (username.length < 8 || password.length < 8) return;
+    const { registerLocal, getFavorites, getHistory, goBack } = this.props;
+    const { username, password, rePassword } = this.state;
+    if (
+      username.length < 8
+      || password.length < 8
+      || rePassword.length < 8
+      || password !== rePassword
+    ) return;
     this.setState({ loading: true });
-    loginLocal({ username, password }).then(res => {
+    registerLocal({ username, password, rePassword }).then(res => {
       this.setState({ loading: false });
       if (res.error) return;
       getFavorites();
       getHistory();
-      Toast.show('登陆成功', {
+      Toast.show('注册成功', {
         position: -70,
       });
-      navigation.goBack();
+      goBack(2);
     }).catch(e => {
       this.setState({ loading: false });
     });
   };
   changFunc = key => value => this.setState({ [key]: value });
   render() {
-    const { username, password, loading } = this.state;
+    const { username, password, rePassword, loading } = this.state;
+    const { goBack } = this.props;
     return (
       <View>
         <InputContainStyled>
@@ -69,20 +76,29 @@ class LoginLocalComponent extends PureComponent {
             displayError={password && password.length < 8}
             errorMessage="密码必须大于8位"
           />
+          <LoginInput
+            placeholder="确认密码"
+            onChange={this.onChangeRePassword}
+            iconName="lock"
+            onSubmit={this.onSubmit}
+            password
+            displayError={rePassword && rePassword !== password}
+            errorMessage="两次输入密码不一致"
+          />
         </InputContainStyled>
         <LoginButton
-          text="登  录"
+          text="注  册"
           loading={loading}
           onPress={this.onSubmit}
         />
         <LoginButton
           outline
-          text="立即注册"
-          onPress={() => this.props.navigation.navigate('Register')}
+          text="返回登录"
+          onPress={() => goBack(1)}
         />
     </View>
     );
   }
 }
 
-export default LoginLocalComponent;
+export default RegisterLocalComponent;

@@ -172,3 +172,36 @@ export const wrapWithReplace = function(routeName) {
       )(NewComponent));
   }
 }
+
+// 提供选择路由返回步数的高阶组件
+export const wrapWithGoBack = function(WrappedComponent) {
+  class NewComponent extends PureComponent {
+    goBack = step => {
+      const { navigation } = this.props;
+      const key = this.getKey(step);
+      navigation.goBack(key);
+    };
+    getKey = step => {
+      const { routes } = this.props;
+      const pos = routes.length - step;
+      if (pos < 0) return null;
+      const route = routes[pos];
+      if (!route) return null;
+      return route.key;
+    };
+    render() {
+      return <WrappedComponent {...this.props} goBack={this.goBack} />;
+    }
+  }
+
+  const mapStateToProps = (state, ownProps) => {
+    return {
+      routes: state['nav']['routes'],
+    }
+  }
+  NewComponent.navigationOptions = WrappedComponent.navigationOptions;
+  return withNavigation(connect(
+      mapStateToProps,
+      null
+    )(NewComponent));
+}

@@ -1,6 +1,7 @@
 export {
   UserInfoScreen,
   LoginScreen,
+  RegisterScreen,
   userInfoActions,
   userReducer,
   LoginNowButton,
