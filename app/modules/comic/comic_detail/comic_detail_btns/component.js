@@ -42,6 +42,10 @@ const startButtonStyle = {
   borderRadius: 100,
   width: width / 2 - 20,
 }
+const containerStyle = {
+  justifyContent: 'center',
+  alignItems: 'center',
+}
 
 class ComicDetailBtnsComponent extends PureComponent {
   static propTypes = {
@@ -111,10 +115,11 @@ class ComicDetailBtnsComponent extends PureComponent {
           </TouchableOpacity>
         </CollectionContainStyled>
         <Button
-          textStyle={startTextStyle}
+          containerStyle={containerStyle}
+          titleStyle={startTextStyle}
           buttonStyle={startButtonStyle}
           onPress={this.startRead}
-          text={chapter_id ? '续看' : '开始阅读'}
+          title={chapter_id ? '续看' : '开始阅读'}
         />
         <Modal
           confirm={this.confirm}

@@ -17,13 +17,18 @@ const textStyle = {
   color: '#fff',
   textAlign: 'justify',
 }
+const containerStyle = {
+  justifyContent: 'center',
+  alignItems: 'center',
+}
 
 export default function LoginButtonComponent({ text, loading, onPress, outline }) {
   return (
       <Button
-        text={text || '登  录'}
+        title={text || '登  录'}
         loading={loading}
-        textStyle={[textStyle, outline && { color: brand_primary }]}
+        containerStyle={containerStyle}
+        titleStyle={[textStyle, outline && { color: brand_primary }]}
         buttonStyle={[buttonStyle, outline && { backgroundColor: '#fff' } ]}
         onPress={onPress}
       />

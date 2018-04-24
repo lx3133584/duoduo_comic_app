@@ -56,7 +56,6 @@ const cancelTextStyle = {
   textAlign: 'justify',
 }
 
-
 class ModalComponent extends PureComponent {
   static propTypes = {
     confirm: PropTypes.func,
@@ -92,14 +91,14 @@ class ModalComponent extends PureComponent {
           <ContentContainStyled>{children}</ContentContainStyled>
           <ButtonContainStyled>
             <Button
-              text='取  消'
-              textStyle={cancelTextStyle}
+              title='取  消'
+              titleStyle={cancelTextStyle}
               buttonStyle={cancelButtonStyle}
               onPress={this._cancel}
             />
             <Button
-              text='确  定'
-              textStyle={confirmTextStyle}
+              title='确  定'
+              titleStyle={confirmTextStyle}
               buttonStyle={confirmButtonStyle}
               onPress={this._confirm}
             />

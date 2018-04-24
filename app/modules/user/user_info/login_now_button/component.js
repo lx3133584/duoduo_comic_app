@@ -17,12 +17,17 @@ const largeStyle = {
   width: 120,
   height: 40,
 }
+const containerStyle = {
+  justifyContent: 'center',
+  alignItems: 'center',
+}
 
 export default function LoginNowButtonComponent({ navigation, large }) {
   return (
     <Button
-      text='立即登录'
-      textStyle={[textStyle, large && { fontSize: 14 }]}
+      title='立即登录'
+      containerStyle={containerStyle}
+      titleStyle={[textStyle, large && { fontSize: 14 }]}
       buttonStyle={[buttonStyle, large && largeStyle]}
       onPress={() => navigation.navigate('Login')}
     />

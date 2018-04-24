@@ -38,9 +38,9 @@ function ButtonComponent({ icon, text, value, changeValue, active }) {
   return (
     <Button
       icon={icon || null}
-      text={text}
       buttonStyle={[buttonStyle, active && {borderColor: brand_primary}]}
-      textStyle={[textStyle, active && {color: brand_primary}]}
+      title={text}
+      titleStyle={[textStyle, active && {color: brand_primary}]}
       onPress={() => changeValue(value)}
     />
   )

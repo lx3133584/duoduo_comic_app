@@ -64,8 +64,7 @@ class RegisterLocalComponent extends PureComponent {
             iconName="user"
             onChange={this.onChangeUsername}
             onSubmit={this.onSubmit}
-            displayError={username && username.length < 8}
-            errorMessage="用户名必须大于8位"
+            errorMessage={username && username.length < 8 && "用户名必须大于8位"}
           />
           <LoginInput
             placeholder="密码"
@@ -73,8 +72,7 @@ class RegisterLocalComponent extends PureComponent {
             iconName="lock"
             onSubmit={this.onSubmit}
             password
-            displayError={password && password.length < 8}
-            errorMessage="密码必须大于8位"
+            errorMessage={password && password.length < 8 && "密码必须大于8位"}
           />
           <LoginInput
             placeholder="确认密码"
@@ -82,8 +80,7 @@ class RegisterLocalComponent extends PureComponent {
             iconName="lock"
             onSubmit={this.onSubmit}
             password
-            displayError={rePassword && rePassword !== password}
-            errorMessage="两次输入密码不一致"
+            errorMessage={rePassword && rePassword !== password && "两次输入密码不一致"}
           />
         </InputContainStyled>
         <LoginButton

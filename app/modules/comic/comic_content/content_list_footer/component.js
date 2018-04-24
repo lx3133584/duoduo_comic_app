@@ -63,15 +63,15 @@ class ContentListFooterComponent extends PureComponent {
     return (
       <ContainStyled>
         <Button
-          text="返回目录"
           buttonStyle={buttonStyle}
-          textStyle={textStyle}
+          title="返回目录"
+          titleStyle={textStyle}
           onPress={this.goBack}
         />
         {!next ? <TextStyled>已经看完啦</TextStyled> : <Button
-          text={`下一章：${title}`}
           buttonStyle={buttonStyle}
-          textStyle={textStyle}
+          title={`下一章：${title}`}
+          titleStyle={textStyle}
           onPress={this.goNext}
         />}
       </ContainStyled>

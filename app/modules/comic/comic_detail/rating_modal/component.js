@@ -93,9 +93,9 @@ class RatingModalComponent extends PureComponent {
             selectedStar={this.onFinishRating}
           />
           {!my_score && <Button
-            text="确定"
+            title="确定"
             onPress={this.onSubmit}
-            textStyle={textStyle}
+            titleStyle={textStyle}
             buttonStyle={buttonStyle}
           />}
         </ContainStyled>

@@ -58,7 +58,7 @@ class UserTopComponent extends PureComponent {
     getUser();
   };
   render() {
-    const { info } = this.props;
+    const { info, navigation } = this.props;
     return (
       <ContainStyled>
         <TransparentContainStyled>
@@ -67,6 +67,7 @@ class UserTopComponent extends PureComponent {
             <AvatarStyled>
               <Avatar
                 src={info.get('avatar')}
+                onPress={info.size ? () => navigation.navigate('UserInfoEdit') : null}
               />
             </AvatarStyled>
           </AvatarContainStyled>

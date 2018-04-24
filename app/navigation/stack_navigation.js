@@ -4,6 +4,7 @@ import { Dimensions } from 'react-native';
 import {
   LoginScreen,
   RegisterScreen,
+  UserInfoEditScreen,
   ComicDetailScreen,
   ComicContentScreen,
   RankItemListScreen,
@@ -30,6 +31,7 @@ const RootStack = StackNavigator(
     TabStack: { screen: TabNavigator },
     Login: { screen: LoginScreen },
     Register: { screen: RegisterScreen },
+    UserInfoEdit: { screen: UserInfoEditScreen },
     ComicDetail: { screen: ComicDetailScreen },
     // ComicContent: { screen: ComicContentScreen },
     ComicContent: { screen: ComicContentDrawer },

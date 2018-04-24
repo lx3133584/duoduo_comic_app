@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input  } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { brand_primary, red } from '../../../../theme';
 import styled from "styled-components";
@@ -15,7 +15,7 @@ const containerStyle = {
   borderBottomColor: brand_primary,
 }
 
-export default function LoginInputComponent({ password, displayError, errorMessage, iconName, placeholder, value, onChange, onSubmit }) {
+export default function LoginInputComponent({ password, errorMessage, iconName, placeholder, value, onChange, onSubmit }) {
   return (
     <ContainStyled>
       <Input
@@ -24,13 +24,12 @@ export default function LoginInputComponent({ password, displayError, errorMessa
         maxLength={32}
         shake
         inputStyle={textStyle}
-        containerStyle={containerStyle}
+        inputContainerStyle={containerStyle}
         secureTextEntry={password}
         onChangeText={onChange}
         onSubmitEditing={onSubmit}
-        displayError={!!displayError}
         errorStyle={{ color: red }}
-        errorMessage={errorMessage}
+        errorMessage={errorMessage || null}
         leftIcon={
           <Icon
             name={iconName || 'user'}

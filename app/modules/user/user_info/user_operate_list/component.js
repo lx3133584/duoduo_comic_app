@@ -1,14 +1,19 @@
 import React, { PureComponent } from 'react';
-import { List, ListItem } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import styled from "styled-components";
 import Toast from 'react-native-root-toast';
 import { brand_primary } from '../../../../theme';
 import { Modal } from '../../..';
-import styled from "styled-components";
+import { ListItem } from '..';
 
 const ContainStyled = styled.View`
   padding-bottom: 20px;
+`
+
+const ItemContainStyled = styled.View`
+  margin-top: 10px;
+  background: #fff;
 `
 
 const list = [
@@ -28,14 +33,6 @@ const list = [
     index: 2,
   },
 ]
-const containerStyle = {
-  borderTopWidth: 0,
-  borderBottomWidth: 0,
-}
-const itemContainerStyle = {
-  borderTopWidth: 0,
-  borderBottomColor: '#ddd',
-}
 
 class UserOperateListComponent extends PureComponent {
   static propTypes = {
@@ -69,7 +66,7 @@ class UserOperateListComponent extends PureComponent {
     Toast.show('注销成功', {
       position: -70,
     });
-    navigation.navigate('Login');
+    // navigation.navigate('Login');
   };
   cancel = ()  => {
     this.setState({ isVisible: false });
@@ -79,35 +76,38 @@ class UserOperateListComponent extends PureComponent {
     const { info, navigation } = this.props;
     return (
       <ContainStyled>
-        <List containerStyle={containerStyle}>
+        <ItemContainStyled>
+          {!!info.size && <ListItem
+            chevron
+            key="user_info_edit"
+            title="个人中心"
+            onPress={() => navigation.navigate('UserInfoEdit')}
+          />}
           {
             list.map(({ name, route, index }) => (
               <ListItem
-                containerStyle={itemContainerStyle}
+                chevron
                 key={name}
                 title={name}
-                chevronColor="#999"
                 onPress={() => navigation.navigate(route, { index })}
               />
             ))
           }
-        </List>
-        <List containerStyle={containerStyle}>
+        </ItemContainStyled>
+        <ItemContainStyled>
           <ListItem
-            containerStyle={itemContainerStyle}
+            chevron
             key='check'
             title='检查更新'
-            chevronColor="#999"
             onPress={this.check}
           />
           {!!info.size && <ListItem
-            containerStyle={itemContainerStyle}
+            chevron
             key='logout'
             title='退出登录'
-            chevronColor="#999"
             onPress={this.logout}
           />}
-        </List>
+        </ItemContainStyled>
         <Modal
           confirm={this.confirm}
           cancel={this.cancel}
