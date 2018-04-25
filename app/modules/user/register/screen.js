@@ -25,6 +25,7 @@ class RegisterScreen extends PureComponent {
         <KeyboardAwareScrollView
           enableOnAndroid
           enableAutomaticScroll
+          keyboardShouldPersistTaps="always"
           extraScrollHeight={60}
           extraHeight={60}>
             <Brand />
