@@ -3,6 +3,8 @@ package com.duoduo_comic_app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import me.listenzz.modal.TranslucentModalReactPackage;
+import com.imagepicker.ImagePickerPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import org.capslock.RNDeviceBrightness.RNDeviceBrightness;
 import com.RNFetchBlob.RNFetchBlobPackage;
@@ -38,6 +40,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new TranslucentModalReactPackage(),
+            new ImagePickerPackage(),
             new OrientationPackage(),
             new RNDeviceBrightness(),
             new RNFetchBlobPackage(),
