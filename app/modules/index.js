@@ -1,6 +1,7 @@
 export {
   UserInfoScreen,
   UserInfoEditScreen,
+  PasswordEditScreen,
   LoginScreen,
   RegisterScreen,
   userInfoActions,

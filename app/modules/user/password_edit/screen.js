@@ -1,20 +1,20 @@
 import React, { PureComponent } from 'react';
 import { StatusBar, View } from 'react-native';
 import { brand_primary } from '../../../theme';
-import { UserInfoEditList } from '.';
+import { PasswordEdit } from '.';
 
-class UserInfoEditScreen extends PureComponent {
+class PasswordEditScreen extends PureComponent {
   static navigationOptions = {
-    title: '个人资料',
+    title: '修改密码',
   };
   render() {
     return (
       <View>
         <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
-        <UserInfoEditList />
+        <PasswordEdit />
       </View>
     );
   }
 }
 
-export default UserInfoEditScreen;
+export default PasswordEditScreen;

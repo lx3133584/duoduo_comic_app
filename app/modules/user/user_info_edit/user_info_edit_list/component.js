@@ -18,7 +18,7 @@ const HeaderContainStyled = styled.View`
   background: ${brand_primary};
 `
 const itemContainStyle = {
-  height: 80,
+  height: 75,
 }
 const inputStyle = {
   color: '#666',
@@ -32,6 +32,7 @@ const CancelTextStyled = styled.Text`
   font-size: 18px;
 `
 const SaveTextStyled = styled.Text`
+  padding: 0 10px;
   color: #fff;
   font-size: 16px;
 `
@@ -99,9 +100,10 @@ class UserInfoEditListComponent extends PureComponent {
     this.showToast('上传成功');
   };
   saveUserInfo = async () => {
-    const { editUserInfo } = this.props;
+    const { editUserInfo, navigation } = this.props;
     await editUserInfo(this.state);
     this.showToast('修改成功');
+    navigation.goBack();
   };
   changFunc = key => value => this.setState({ [key]: value });
   renderAvatar = () => {
@@ -117,7 +119,7 @@ class UserInfoEditListComponent extends PureComponent {
     );
   };
   render() {
-    const { info } = this.props;
+    const { info, navigation } = this.props;
     const { name } = this.state;
     const username = info.get('username');
     return (
@@ -151,6 +153,13 @@ class UserInfoEditListComponent extends PureComponent {
             inputStyle,
             onChangeText: this.onChangeName,
           }}
+        />
+        <ListItem
+          key="password"
+          title="修改密码"
+          chevron
+          containerStyle={itemContainStyle}
+          onPress={() => navigation.navigate('PasswordEdit')}
         />
         <ActionSheet
             ref={o => this.ActionSheet = o}
