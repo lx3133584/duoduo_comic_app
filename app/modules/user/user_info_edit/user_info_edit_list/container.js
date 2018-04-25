@@ -5,6 +5,7 @@ import Component from './component';
 const mapStateToProps = (state, ownProps) => {
   return {
     info: state['user'].get('info'),
+    csrf: state['cookies'].get('csrfToken'),
   }
 }
 

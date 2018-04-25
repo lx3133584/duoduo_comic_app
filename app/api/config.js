@@ -9,11 +9,15 @@ axios.defaults.responseType = 'json';
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'; // 配置请求头
 axios.defaults.baseURL = `${baseURL}/`; // 配置接口地址
 
+function getCsrf() {
+  const state = store.getState();
+  return state['cookies'].get('csrfToken');
+};
+
 function interceptorsRequestSuccess (config) {
   store.dispatch(cookiesActions.getAllCookies());
   if (config.method !== 'get') {
-    const state = store.getState();
-    config.headers['x-csrf-token'] = state['cookies'].get('csrfToken');
+    config.headers['x-csrf-token'] = getCsrf();
   }
   return config;
 }
@@ -34,3 +38,4 @@ axios.interceptors.request.use(interceptorsRequestSuccess);
 // json 响应拦截器
 axios.interceptors.response.use(interceptorsResponseSuccess, interceptorsResponseError);
 export default axios;
+export { getCsrf };

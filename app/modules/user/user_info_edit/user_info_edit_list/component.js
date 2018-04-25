@@ -3,7 +3,9 @@ import styled from "styled-components";
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Toast from 'react-native-root-toast';
-// import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-picker';
+import ActionSheet from 'react-native-actionsheet';
+import { brand_primary } from '../../../../theme';
 import { Avatar, ListItem } from '../..';
 
 const ContainStyled = styled.View`
@@ -15,22 +17,40 @@ const itemContainStyle = {
 const inputStyle = {
   color: '#666',
 }
+const TextStyled = styled.Text`
+  color: ${brand_primary};
+  font-size: 18px;
+`
+const CancelTextStyled = styled.Text`
+  color: #666;
+  font-size: 18px;
+`
 
-const options = {
-  title: '请选择图片',
-  cancelButtonTitle: '取消',
-  takePhotoButtonTitle: '相机',
-  chooseFromLibraryButtonTitle: '图库',
-  storageOptions: {
-    skipBackup: true,
-    path: 'images'
+const options = { // ImagePicker的设置选项
+  cameraType: 'front',
+  mediaType: 'photo',
+  allowsEditing: true,
+  noData: true,
+  permissionDenied: {
+    title: '获取权限',
+    text: '是否同意本app使用你的照相和文件功能？',
+    reTryTitle: '重试',
+    okTitle: '我同意',
   },
 };
+
+const ActionSheetOptions = [
+  <TextStyled>相机</TextStyled>,
+  <TextStyled>图库</TextStyled>,
+  <CancelTextStyled>取消</CancelTextStyled>,
+]; // ActionSheet选项
+const fn = ['launchCamera', 'launchImageLibrary']; // ActionSheet-index对应的ImagePicker方法
 
 class UserInfoEditListComponent extends PureComponent {
   static propTypes = {
     info: ImmutablePropTypes.map.isRequired,
     uploadUserAvatar: PropTypes.func.isRequired,
+    csrf: PropTypes.string.isRequired,
   };
   constructor(props) {
     super(props);
@@ -41,10 +61,31 @@ class UserInfoEditListComponent extends PureComponent {
     };
     this.onChangeName = this.changFunc('name');
   };
-  beforeUpload = () => {
-    // ImagePicker.showImagePicker(options, res => {
-    //   console.log(res);
-    // })
+  showActionSheet = () => {
+    this.ActionSheet && this.ActionSheet.show();
+  };
+  showToast = message => {
+    Toast.show(message, {
+      position: -70,
+    });
+  };
+  beforeUpload = index => {
+    if (!/[0-1]/.test(index)) return;
+    const key = fn[index];
+    ImagePicker[key](options, res => {
+      this.uploadAvatar(res.path, res.fileName);
+    });
+  };
+  uploadAvatar = async (path, filename) => {
+    if (!path) return;
+    const { uploadUserAvatar, csrf } = this.props;
+    try {
+      await uploadUserAvatar({ path, csrf, filename });
+    } catch(e) {
+      this.showToast('上传失败');
+      return;
+    }
+    this.showToast('上传成功');
   };
   renderAvatar = () => {
     const { info } = this.props;
@@ -69,7 +110,7 @@ class UserInfoEditListComponent extends PureComponent {
           title="头像"
           containerStyle={itemContainStyle}
           rightAvatar={this.renderAvatar()}
-          onPress={this.beforeUpload}
+          onPress={this.showActionSheet}
         />
         <ListItem
           key="name"
@@ -81,6 +122,13 @@ class UserInfoEditListComponent extends PureComponent {
             onChangeText: this.onChangeName,
           }}
         />
+        <ActionSheet
+            ref={o => this.ActionSheet = o}
+            title={null}
+            options={ActionSheetOptions}
+            cancelButtonIndex={2}
+            onPress={this.beforeUpload}
+          />
       </ContainStyled>
     )
   }
