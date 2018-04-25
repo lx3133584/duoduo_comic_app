@@ -25,6 +25,7 @@ class LoginScreen extends PureComponent {
           enableOnAndroid
           enableAutomaticScroll
           extraScrollHeight={60}
+          keyboardShouldPersistTaps="always"
           extraHeight={60}>
             <Brand />
             <LoginLocal />
