@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { uploadAvatar } from '../actions';
+import { withNavigation } from 'react-navigation';
+import { uploadAvatar, changeUserInfo } from '../actions';
 import Component from './component';
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,9 +14,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   uploadUserAvatar(params) {
     return dispatch(uploadAvatar(params))
   },
+  editUserInfo(params) {
+    return dispatch(changeUserInfo(params))
+  },
 })
 
-export default connect(
+export default withNavigation(connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Component);
+  )(Component));

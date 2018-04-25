@@ -10,7 +10,7 @@ const centerTextStyle = {
 }
 const outerContainerStyles = {
   padding: 0,
-  paddingBottom: 15,
+  paddingBottom: 10,
   height: 50,
   borderBottomWidth: 0,
 }
@@ -39,13 +39,13 @@ class HeaderComponent extends PureComponent {
   };
   render() {
     const { title, backgroundColor } = this.options;
-    const { isNoBack, customTitle, customBackgroundColor } = this.props;
+    const { isNoBack, customTitle, customBackgroundColor, rightComponent = null } = this.props;
     return (
       <Header
         leftComponent={isNoBack ? null : <LeftButton navigation={this.navigation} />}
         centerComponent={{ text: customTitle || title, style: centerTextStyle }}
         outerContainerStyles={{ backgroundColor: customBackgroundColor || backgroundColor || brand_primary, ...outerContainerStyles }}
-        rightComponent={null}
+        rightComponent={rightComponent}
       />
     );
   }

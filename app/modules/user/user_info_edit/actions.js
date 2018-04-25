@@ -1,9 +1,12 @@
 import { createActions } from 'redux-actions';
-import { uploadUserAvatar } from '../../../api';
+import { uploadUserAvatar, editUserInfo } from '../../../api';
 
-export const { uploadAvatar } = createActions({
+export const { uploadAvatar, changeUserInfo } = createActions({
   UPLOAD_AVATAR: async ({ path, csrf, filename }) => {
-    const result = await uploadUserAvatar({ path, csrf, filename });
-    return result;
+    return await uploadUserAvatar({ path, csrf, filename });
+  },
+  CHANGE_USER_INFO: ({ tel, email, name }) => {
+    const promise = editUserInfo({ tel, email, name });
+    return { promise, data: { tel, email, name } };
   },
 });

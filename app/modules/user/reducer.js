@@ -22,4 +22,7 @@ export default handleActions({
   [`${userInfoEditActions.uploadAvatar}_FULFILLED`]: (state, action) => {
     return state.setIn(['info', 'avatar'], action.payload.data);
   },
+  [`${userInfoEditActions.changeUserInfo}_PENDING`]: (state, action) => {
+    return state.setIn(['info', 'name'], action.payload.name);
+  },
 }, initialState)

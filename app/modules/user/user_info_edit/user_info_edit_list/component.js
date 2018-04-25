@@ -5,11 +5,17 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Toast from 'react-native-root-toast';
 import ImagePicker from 'react-native-image-picker';
 import ActionSheet from 'react-native-actionsheet';
+import { TouchableOpacity } from 'react-native';
+import { Header } from '../../../../navigation';
 import { brand_primary } from '../../../../theme';
 import { Avatar, ListItem } from '../..';
 
 const ContainStyled = styled.View`
   background: #fff;
+`
+const HeaderContainStyled = styled.View`
+  padding-top: 5px;
+  background: ${brand_primary};
 `
 const itemContainStyle = {
   height: 80,
@@ -25,6 +31,10 @@ const CancelTextStyled = styled.Text`
   color: #666;
   font-size: 18px;
 `
+const SaveTextStyled = styled.Text`
+  color: #fff;
+  font-size: 16px;
+`
 
 const options = { // ImagePicker的设置选项
   cameraType: 'front',
@@ -39,17 +49,18 @@ const options = { // ImagePicker的设置选项
   },
 };
 
-const ActionSheetOptions = [
+const ActionSheetOptions = [ // ActionSheet选项
   <TextStyled>相机</TextStyled>,
   <TextStyled>图库</TextStyled>,
   <CancelTextStyled>取消</CancelTextStyled>,
-]; // ActionSheet选项
+];
 const fn = ['launchCamera', 'launchImageLibrary']; // ActionSheet-index对应的ImagePicker方法
 
 class UserInfoEditListComponent extends PureComponent {
   static propTypes = {
     info: ImmutablePropTypes.map.isRequired,
     uploadUserAvatar: PropTypes.func.isRequired,
+    editUserInfo: PropTypes.func.isRequired,
     csrf: PropTypes.string.isRequired,
   };
   constructor(props) {
@@ -87,18 +98,37 @@ class UserInfoEditListComponent extends PureComponent {
     }
     this.showToast('上传成功');
   };
+  saveUserInfo = async () => {
+    const { editUserInfo } = this.props;
+    await editUserInfo(this.state);
+    this.showToast('修改成功');
+  };
+  changFunc = key => value => this.setState({ [key]: value });
   renderAvatar = () => {
     const { info } = this.props;
     const avatar = info.get('avatar');
     return <Avatar src={avatar} medium />;
   };
-  changFunc = key => value => this.setState({ [key]: value });
+  renderSaveButton = () => {
+    return (
+      <TouchableOpacity onPress={this.saveUserInfo} >
+        <SaveTextStyled>保存</SaveTextStyled>
+      </TouchableOpacity>
+    );
+  };
   render() {
     const { info } = this.props;
     const { name } = this.state;
     const username = info.get('username');
     return (
       <ContainStyled>
+        <HeaderContainStyled>
+          <Header
+            customTitle="个人资料"
+            rightComponent={this.renderSaveButton()}
+            {...this.props}
+          />
+        </HeaderContainStyled>
         <ListItem
           key="username"
           title="用户名"

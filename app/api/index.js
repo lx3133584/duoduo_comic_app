@@ -17,6 +17,7 @@ export const fetchClassItemList = ({ id, page }) => http.get(`class/${id}`, {par
 export const fetchRankItemList = ({ type, page }) => http.get(`rank/${type}`, {params: { page }}); // 单种排行榜
 // 用户
 export const fetchUserInfo = () => http.get('user'); // 用户信息
+export const editUserInfo = ({ tel = '', email = '', name }) => http.put('user', { tel, email, name }); // 修改用户信息
 export const loginLocal = ({ username, password }) => http.post('passport/local', { username, password }); // 登录local
 export const registerLocal = ({ username, password, rePassword }) => http.post('user', { username, password, ['re-password']: rePassword, tel: '', name: '', email: '', avatar: '' }); // 注册local
 export const logout = () => http.delete('logout'); // 注销

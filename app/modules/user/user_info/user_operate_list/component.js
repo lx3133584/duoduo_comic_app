@@ -27,11 +27,11 @@ const list = [
     route: 'Favorites',
     index: 1,
   },
-  {
-    name: '我的下载',
-    route: 'Favorites',
-    index: 2,
-  },
+  // {
+  //   name: '我的下载',
+  //   route: 'Favorites',
+  //   index: 2,
+  // },
 ]
 
 class UserOperateListComponent extends PureComponent {
