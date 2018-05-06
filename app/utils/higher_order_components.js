@@ -18,6 +18,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { createSelector } from 'reselect';
+import hoistNonReactStatics from 'hoist-non-react-statics';
 
 // 提供loading状态的高阶组件
 export const wrapWithLoading = function(WrappedComponent) {
@@ -39,7 +40,7 @@ export const wrapWithLoading = function(WrappedComponent) {
       return <WrappedComponent {...this.props} loading={loading} hideLoading={this.hideLoading} />;
     }
   }
-  NewComponent.navigationOptions = WrappedComponent.navigationOptions;
+  hoistNonReactStatics(NewComponent, WrappedComponent);
   return NewComponent;
 }
 
@@ -128,7 +129,7 @@ export const wrapWithUpdate = function(WrappedComponent) {
     }
   }
 
-  NewComponent.navigationOptions = WrappedComponent.navigationOptions;
+  hoistNonReactStatics(NewComponent, WrappedComponent);
   return NewComponent;
 }
 
@@ -165,7 +166,7 @@ export const wrapWithReplace = function(routeName) {
         route_key: keySelector(state),
       }
     }
-    NewComponent.height = WrappedComponent.height;
+    hoistNonReactStatics(NewComponent, WrappedComponent);
     return withNavigation(connect(
         mapStateToProps,
         null
@@ -199,7 +200,7 @@ export const wrapWithGoBack = function(WrappedComponent) {
       routes: state['nav']['routes'],
     }
   }
-  NewComponent.navigationOptions = WrappedComponent.navigationOptions;
+  hoistNonReactStatics(NewComponent, WrappedComponent);
   return withNavigation(connect(
       mapStateToProps,
       null
