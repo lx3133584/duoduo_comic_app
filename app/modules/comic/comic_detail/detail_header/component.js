@@ -13,6 +13,7 @@ export default function DetailHeaderComponent({ navigation, title }) {
       <Header
         navigation={navigation}
         customTitle={title}
+        isNoBack
       />
     </ContainStyled>
   )
