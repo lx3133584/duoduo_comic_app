@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "hoist-non-react-statics": "^2.5.0",
     "immutable": "^3.8.2",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
