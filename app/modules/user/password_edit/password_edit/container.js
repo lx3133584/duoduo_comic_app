@@ -5,11 +5,11 @@ import Component from './component';
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   changePassword(params) {
-    return dispatch(editPassword(params))
+    return dispatch(editPassword(params));
   },
-})
+});
 
 export default withNavigation(connect(
-    null,
-    mapDispatchToProps
-  )(Component));
+  null,
+  mapDispatchToProps,
+)(Component));

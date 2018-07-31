@@ -5,8 +5,8 @@ export const { getRankItemList } = createActions({
   GET_RANK_ITEM_LIST: [
     ({ type, page }) => {
       const promise = fetchRankItemList({ type, page });
-      return { promise, data: { type }};
+      return { promise, data: { type } };
     },
     ({ page }) => ({ page }),
-  ]
+  ],
 });

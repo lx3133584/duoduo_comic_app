@@ -1,21 +1,19 @@
 import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 import { getComicDetail } from '../actions';
 import Component from './component';
-import { withNavigation } from 'react-navigation';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    detail: state['comic'].get('detail'),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  detail: state.comic.get('detail'),
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   getDetail(params) {
-    return dispatch(getComicDetail(params))
+    return dispatch(getComicDetail(params));
   },
-})
+});
 
 export default withNavigation(connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Component));
+  mapStateToProps,
+  mapDispatchToProps,
+)(Component));

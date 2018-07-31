@@ -1,21 +1,19 @@
 import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 import { getRankItemList } from '../actions';
 import Component from './component';
-import { withNavigation } from 'react-navigation';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    list: state['discovery'].get('rank_item_list'),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  list: state.discovery.get('rank_item_list'),
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   getList(params) {
     return dispatch(getRankItemList(params));
   },
-})
+});
 
 export default withNavigation(connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Component));
+  mapStateToProps,
+  mapDispatchToProps,
+)(Component));

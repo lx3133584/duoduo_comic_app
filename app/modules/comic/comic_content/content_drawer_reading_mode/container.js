@@ -3,12 +3,10 @@ import Component from './component';
 import { configActions } from '../../..';
 import { goToIndex } from '../actions';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    mode: state['config'].get('mode'),
-    index: state['comic'].getIn(['detail', 'index']),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  mode: state.config.get('mode'),
+  index: state.comic.getIn(['detail', 'index']),
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   switchReadingMode(params) {
@@ -17,9 +15,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   goIndex(params) {
     return dispatch(goToIndex(params));
   },
-})
+});
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(Component);

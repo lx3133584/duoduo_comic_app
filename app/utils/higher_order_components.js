@@ -12,16 +12,16 @@ import {
   switchVersion,
   switchVersionLater,
 } from 'react-native-update';
-import { Modal } from '../modules';
-import _updateConfig from '../../update.json';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { createSelector } from 'reselect';
 import hoistNonReactStatics from 'hoist-non-react-statics';
+import _updateConfig from '../../update.json';
+import { Modal } from '../modules';
 
 // 提供loading状态的高阶组件
-export const wrapWithLoading = function(WrappedComponent) {
+export const wrapWithLoading = function (WrappedComponent) {
   class NewComponent extends PureComponent {
     constructor() {
       super();
@@ -42,18 +42,18 @@ export const wrapWithLoading = function(WrappedComponent) {
   }
   hoistNonReactStatics(NewComponent, WrappedComponent);
   return NewComponent;
-}
+};
 
 const { appKey } = _updateConfig[Platform.OS];
 
 // 提供热更新功能的高阶组件
-export const wrapWithUpdate = function(WrappedComponent) {
+export const wrapWithUpdate = function (WrappedComponent) {
   class NewComponent extends PureComponent {
     constructor() {
       super();
     }
 
-    componentWillMount(){
+    componentWillMount() {
       if (isFirstTime) markSuccess(); // 确认更新成功, 有报错则回滚版本
     }
 
@@ -65,31 +65,29 @@ export const wrapWithUpdate = function(WrappedComponent) {
       hash: null, // 安装包hash值
     };
 
-    checkUpdate = () => {
-      return checkUpdate(appKey).then(info => {
-        if (info.expired) {
-          this.setState({
-            isVisible: true,
-            tips: '您的应用版本已更新，请前往应用商店下载新的版本',
-            type: 'download',
-            info,
-          });
-          return true;
-        } else if (info.upToDate) {
-          return false;
-        } else {
-          this.setState({
-            isVisible: true,
-            tips: `检查到新的版本${info.name}，是否下载更新？\n${info.description}`,
-            type: 'doUpdate',
-            info,
-          });
-          return true;
-        }
+    checkUpdate = () => checkUpdate(appKey).then((info) => {
+      if (info.expired) {
+        this.setState({
+          isVisible: true,
+          tips: '您的应用版本已更新，请前往应用商店下载新的版本',
+          type: 'download',
+          info,
+        });
+        return true;
+      } if (info.upToDate) {
+        return false;
+      }
+      this.setState({
+        isVisible: true,
+        tips: `检查到新的版本${info.name}，是否下载更新？\n${info.description}`,
+        type: 'doUpdate',
+        info,
       });
-    };
-    doUpdate = info => {
-      downloadUpdate(info).then(hash => {
+      return true;
+    });
+
+    doUpdate = (info) => {
+      downloadUpdate(info).then((hash) => {
         this.setState({
           isVisible: true,
           tips: '下载更新完成，是否重启应用？',
@@ -98,9 +96,11 @@ export const wrapWithUpdate = function(WrappedComponent) {
         });
       });
     };
-    download = info => {
+
+    download = (info) => {
       info.downloadUrl && Linking.openURL(info.downloadUrl);
     };
+
     confirm = () => {
       const { type, info, hash } = this.state;
       this.setState({ isVisible: false });
@@ -108,6 +108,7 @@ export const wrapWithUpdate = function(WrappedComponent) {
       if (type === 'download') this.download(info);
       if (type === 'switchVersion') switchVersion(hash);
     };
+
     cancel = () => {
       const { type, hash } = this.state;
       this.setState({ isVisible: false });
@@ -117,27 +118,28 @@ export const wrapWithUpdate = function(WrappedComponent) {
     render() {
       const { tips, isVisible } = this.state;
       return ([
-          <WrappedComponent key="wrapped" {...this.props} checkUpdate={this.checkUpdate} />,
-          <Modal
-            key="modal"
-            confirm={this.confirm}
-            cancel={this.cancel}
-            isVisible={isVisible}>
-            {tips}
-          </Modal>
+        <WrappedComponent key="wrapped" {...this.props} checkUpdate={this.checkUpdate} />,
+        <Modal
+          key="modal"
+          confirm={this.confirm}
+          cancel={this.cancel}
+          isVisible={isVisible}
+        >
+          {tips}
+        </Modal>,
       ]);
     }
   }
 
   hoistNonReactStatics(NewComponent, WrappedComponent);
   return NewComponent;
-}
+};
 
 // 提供路由replace函数的高阶组件
-export const wrapWithReplace = function(routeName) {
-  return function(WrappedComponent) {
+export const wrapWithReplace = function (routeName) {
+  return function (WrappedComponent) {
     class NewComponent extends PureComponent {
-      replace = params => {
+      replace = (params) => {
         const { navigation, route_key: key } = this.props;
         const replaceAction = NavigationActions.replace({
           key,
@@ -146,43 +148,43 @@ export const wrapWithReplace = function(routeName) {
         });
         navigation.dispatch(replaceAction);
       };
+
       render() {
         return <WrappedComponent {...this.props} replace={this.replace} />;
       }
     }
-    const routesSelector = state => state['nav']['routes'];
+    const routesSelector = state => state.nav.routes;
 
     const keySelector = createSelector(
       routesSelector,
-      routes => {
+      (routes) => {
         const arr = routes.filter(route => route.routeName === routeName);
         if (!arr.length) return null;
-        return arr[0].key
-      }
-    )
+        return arr[0].key;
+      },
+    );
 
-    const mapStateToProps = (state, ownProps) => {
-      return {
-        route_key: keySelector(state),
-      }
-    }
+    const mapStateToProps = (state, ownProps) => ({
+      route_key: keySelector(state),
+    });
     hoistNonReactStatics(NewComponent, WrappedComponent);
     return withNavigation(connect(
-        mapStateToProps,
-        null
-      )(NewComponent));
-  }
-}
+      mapStateToProps,
+      null,
+    )(NewComponent));
+  };
+};
 
 // 提供选择路由返回步数的高阶组件
-export const wrapWithGoBack = function(WrappedComponent) {
+export const wrapWithGoBack = function (WrappedComponent) {
   class NewComponent extends PureComponent {
-    goBack = step => {
+    goBack = (step) => {
       const { navigation } = this.props;
       const key = this.getKey(step);
       navigation.goBack(key);
     };
-    getKey = step => {
+
+    getKey = (step) => {
       const { routes } = this.props;
       const pos = routes.length - step;
       if (pos < 0) return null;
@@ -190,19 +192,18 @@ export const wrapWithGoBack = function(WrappedComponent) {
       if (!route) return null;
       return route.key;
     };
+
     render() {
       return <WrappedComponent {...this.props} goBack={this.goBack} />;
     }
   }
 
-  const mapStateToProps = (state, ownProps) => {
-    return {
-      routes: state['nav']['routes'],
-    }
-  }
+  const mapStateToProps = (state, ownProps) => ({
+    routes: state.nav.routes,
+  });
   hoistNonReactStatics(NewComponent, WrappedComponent);
   return withNavigation(connect(
-      mapStateToProps,
-      null
-    )(NewComponent));
-}
+    mapStateToProps,
+    null,
+  )(NewComponent));
+};

@@ -17,6 +17,6 @@ export default combineReducers({
   search: searchReducer,
   discovery: discoveryReducer,
   cookies: cookiesReducer,
-  config:configReducer,
+  config: configReducer,
   nav: navReducer,
-})
+});

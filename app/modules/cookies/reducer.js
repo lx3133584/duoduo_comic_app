@@ -14,4 +14,4 @@ export default handleActions({
     }
     return state;
   },
-}, initialState)
+}, initialState);

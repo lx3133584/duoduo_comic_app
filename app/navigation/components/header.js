@@ -1,19 +1,19 @@
 import React, { PureComponent } from 'react';
 import { Header } from 'react-native-elements';
+import PropTypes from 'prop-types';
 import { brand_primary } from '../../theme';
 import LeftButton from './left_button';
-import PropTypes from 'prop-types';
 
 const centerTextStyle = {
   color: '#fff',
   fontSize: 16,
-}
+};
 const outerContainerStyles = {
   padding: 0,
   paddingBottom: 10,
   height: 50,
   borderBottomWidth: 0,
-}
+};
 
 class HeaderComponent extends PureComponent {
   static propTypes = {
@@ -24,8 +24,10 @@ class HeaderComponent extends PureComponent {
     getScreenDetails: PropTypes.func,
     isNoBack: PropTypes.bool,
   };
+
   options = {
   };
+
   constructor(props) {
     super(props);
     this.options = {};
@@ -36,10 +38,13 @@ class HeaderComponent extends PureComponent {
       this.options = options;
     }
     this.navigation = navigation;
-  };
+  }
+
   render() {
     const { title, backgroundColor } = this.options;
-    const { isNoBack, customTitle, customBackgroundColor, rightComponent = null } = this.props;
+    const {
+      isNoBack, customTitle, customBackgroundColor, rightComponent = null,
+    } = this.props;
     return (
       <Header
         leftComponent={isNoBack ? null : <LeftButton navigation={this.navigation} />}

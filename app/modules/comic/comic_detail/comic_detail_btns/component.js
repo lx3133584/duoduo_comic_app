@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Button } from 'react-native-elements';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { brand_primary } from '../../../../theme';
 import { Modal } from '../../..';
 import { numberFormat } from '../../../../utils';
+
 const { width } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
@@ -16,36 +17,36 @@ const ContainStyled = styled.View`
   justify-content: space-around;
   flex-direction: row;
   width: ${width};
-`
+`;
 const CollectionContainStyled = styled.View`
   justify-content: center;
   width: ${width / 2 - 20};
-`
+`;
 const CollectionStyled = styled.View`
   flex-direction: row;
   justify-content: center;
-`
+`;
 const CollectionTextStyled = styled.Text`
   color: #666;
   font-size: 14px;
   margin-left: 8px;
-`
+`;
 const CollectionNumberStyled = styled.Text`
   font-size: 12px;
-`
+`;
 const startTextStyle = {
   color: '#fff',
-}
+};
 const startButtonStyle = {
   backgroundColor: brand_primary,
   borderWidth: 0,
   borderRadius: 100,
   width: width / 2 - 20,
-}
+};
 const containerStyle = {
   justifyContent: 'center',
   alignItems: 'center',
-}
+};
 
 class ComicDetailBtnsComponent extends PureComponent {
   static propTypes = {
@@ -57,9 +58,11 @@ class ComicDetailBtnsComponent extends PureComponent {
       navigate: PropTypes.func.isRequired,
     }),
   };
+
   state = {
     isVisible: false,
   };
+
   constructor() {
     super();
     this.startRead = this.startRead.bind(this);
@@ -67,33 +70,39 @@ class ComicDetailBtnsComponent extends PureComponent {
     this.removeFavorite = this.removeFavorite.bind(this);
     this.confirm = this.confirm.bind(this);
     this.cancel = this.cancel.bind(this);
-  };
+  }
+
   removeFavorite() {
     this.setState({ isVisible: true });
-  };
+  }
+
   confirm() {
     this.setState({ isVisible: false });
     const id = this.props.detail.get('id');
     this.props.remove(id);
-  };
+  }
+
   cancel() {
     this.setState({ isVisible: false });
-  };
+  }
+
   addFavorite() {
     const id = this.props.detail.get('id');
     this.props.add(id);
-  };
+  }
+
   startRead() {
     const { detail, list } = this.props;
     let chapter_id = detail.get('chapter_id');
     let cur_chapter = detail.get('cur_chapter');
     if (!chapter_id && list.size) {
-      const { id, title } = list.get(0).data[0]
+      const { id, title } = list.get(0).data[0];
       chapter_id = id;
       cur_chapter = title;
     }
     this.props.navigation.navigate('ComicContent', { chapter_id, title: cur_chapter, pre: false });
-  };
+  }
+
   render() {
     const { detail } = this.props;
     const { isVisible } = this.state;
@@ -110,7 +119,16 @@ class ComicDetailBtnsComponent extends PureComponent {
                 size={18}
                 color={brand_primary}
               />
-              <CollectionTextStyled>{favorite_id? '已' : ''}收藏 <CollectionNumberStyled>({numberFormat(collection_number)})</CollectionNumberStyled></CollectionTextStyled>
+              <CollectionTextStyled>
+                {favorite_id ? '已' : ''}
+收藏
+                {' '}
+                <CollectionNumberStyled>
+(
+                  {numberFormat(collection_number)}
+)
+                </CollectionNumberStyled>
+              </CollectionTextStyled>
             </CollectionStyled>
           </TouchableOpacity>
         </CollectionContainStyled>
@@ -124,7 +142,9 @@ class ComicDetailBtnsComponent extends PureComponent {
         <Modal
           confirm={this.confirm}
           cancel={this.cancel}
-          isVisible={isVisible}>
+          isVisible={isVisible}
+        >
+
           是否确认取消收藏？
         </Modal>
       </ContainStyled>

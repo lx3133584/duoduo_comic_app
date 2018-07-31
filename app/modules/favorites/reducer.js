@@ -9,23 +9,17 @@ const initialState = Immutable.Map({
   history_list: Immutable.List(),
 });
 export default handleActions({
-  [`${favoritesListActions.getFavoritesList}_FULFILLED`]: (state, action) => {
-    return state.set('favorites_list', Immutable.List(action.payload.data));
-  },
+  [`${favoritesListActions.getFavoritesList}_FULFILLED`]: (state, action) => state.set('favorites_list', Immutable.List(action.payload.data)),
   [`${favoritesListActions.getHistoryList}_FULFILLED`]: (state, action) => {
     if (!action.payload.page) {
       state = state.update('history_list', list => list.clear());
     }
     return state.update('history_list', list => list.concat(action.payload.result.data));
   },
-  [`${favoritesListActions.removeHistory}_PENDING`]: (state, action) => {
-    return state.update('history_list', list => list.filter((item => item.id !== action.payload)));
-  },
-  [`${comicDetailActions.removeFavorite}_PENDING`]: (state, action) => {
-    return state.update('favorites_list', list => list.filter((item => item.id !== action.payload)));
-  },
+  [`${favoritesListActions.removeHistory}_PENDING`]: (state, action) => state.update('history_list', list => list.filter((item => item.id !== action.payload))),
+  [`${comicDetailActions.removeFavorite}_PENDING`]: (state, action) => state.update('favorites_list', list => list.filter((item => item.id !== action.payload))),
   [`${userInfoActions.logoutAction}_PENDING`]: (state, action) => {
     state = state.update('history_list', list => list.clear());
     return state.update('favorites_list', list => list.clear());
   },
-}, initialState)
+}, initialState);

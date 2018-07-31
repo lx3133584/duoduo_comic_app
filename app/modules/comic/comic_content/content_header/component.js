@@ -1,10 +1,10 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Header } from '../../../../navigation';
 
 const ContainStyled = styled.View`
   padding-top: 10px;
-`
+`;
 
 export default function ContentHeaderComponent({ navigation, title }) {
   return (
@@ -15,5 +15,5 @@ export default function ContentHeaderComponent({ navigation, title }) {
         customBackgroundColor="transparent"
       />
     </ContainStyled>
-  )
+  );
 }

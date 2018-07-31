@@ -1,3 +1,5 @@
+import * as comicDetailActions from './actions';
+
 export { default as Screen } from './screen';
 export { default as ComicDetailTop } from './comic_detail_top/container';
 export { default as ComicDetailBtns } from './comic_detail_btns/container';
@@ -13,5 +15,4 @@ export { default as RatingModal } from './rating_modal/container';
 export { default as Parallax } from './parallax/component';
 export { default as DetailHeader } from './detail_header/container';
 export { default as DetailBackButton } from './detail_back_button/container';
-import * as comicDetailActions from './actions';
 export { comicDetailActions };

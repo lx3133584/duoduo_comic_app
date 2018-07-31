@@ -7,6 +7,7 @@ class UserInfoEditScreen extends PureComponent {
   static navigationOptions = {
     title: '个人资料',
   };
+
   render() {
     return (
       <View>

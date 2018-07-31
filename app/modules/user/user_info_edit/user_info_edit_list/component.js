@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Toast from 'react-native-root-toast';
@@ -12,30 +12,30 @@ import { Avatar, ListItem } from '../..';
 
 const ContainStyled = styled.View`
   background: #fff;
-`
+`;
 const HeaderContainStyled = styled.View`
   padding-top: 5px;
   background: ${brand_primary};
-`
+`;
 const itemContainStyle = {
   height: 75,
-}
+};
 const inputStyle = {
   color: '#666',
-}
+};
 const TextStyled = styled.Text`
   color: ${brand_primary};
   font-size: 18px;
-`
+`;
 const CancelTextStyled = styled.Text`
   color: #666;
   font-size: 18px;
-`
+`;
 const SaveTextStyled = styled.Text`
   padding: 0 10px;
   color: #fff;
   font-size: 16px;
-`
+`;
 
 const options = { // ImagePicker的设置选项
   cameraType: 'front',
@@ -51,9 +51,15 @@ const options = { // ImagePicker的设置选项
 };
 
 const ActionSheetOptions = [ // ActionSheet选项
-  <TextStyled>相机</TextStyled>,
-  <TextStyled>图库</TextStyled>,
-  <CancelTextStyled>取消</CancelTextStyled>,
+  <TextStyled>
+相机
+  </TextStyled>,
+  <TextStyled>
+图库
+  </TextStyled>,
+  <CancelTextStyled>
+取消
+  </CancelTextStyled>,
 ];
 const fn = ['launchCamera', 'launchImageLibrary']; // ActionSheet-index对应的ImagePicker方法
 
@@ -64,6 +70,7 @@ class UserInfoEditListComponent extends PureComponent {
     editUserInfo: PropTypes.func.isRequired,
     csrf: PropTypes.string.isRequired,
   };
+
   constructor(props) {
     super(props);
     const { info } = props;
@@ -72,52 +79,61 @@ class UserInfoEditListComponent extends PureComponent {
       name: name || '',
     };
     this.onChangeName = this.changFunc('name');
-  };
+  }
+
   showActionSheet = () => {
     this.ActionSheet && this.ActionSheet.show();
   };
-  showToast = message => {
+
+  showToast = (message) => {
     Toast.show(message, {
       position: -70,
     });
   };
-  beforeUpload = index => {
+
+  beforeUpload = (index) => {
     if (!/[0-1]/.test(index)) return;
     const key = fn[index];
-    ImagePicker[key](options, res => {
+    ImagePicker[key](options, (res) => {
       this.uploadAvatar(res.path, res.fileName);
     });
   };
+
   uploadAvatar = async (path, filename) => {
     if (!path) return;
     const { uploadUserAvatar, csrf } = this.props;
     try {
       await uploadUserAvatar({ path, csrf, filename });
-    } catch(e) {
+    } catch (e) {
       this.showToast('上传失败');
       return;
     }
     this.showToast('上传成功');
   };
+
   saveUserInfo = async () => {
     const { editUserInfo, navigation } = this.props;
     await editUserInfo(this.state);
     this.showToast('修改成功');
     navigation.goBack();
   };
+
   changFunc = key => value => this.setState({ [key]: value });
+
   renderAvatar = () => {
     const { info } = this.props;
     const avatar = info.get('avatar');
     return <Avatar src={avatar} medium />;
   };
-  renderSaveButton = () => {
-    return (
-      <TouchableOpacity onPress={this.saveUserInfo} >
-        <SaveTextStyled>保存</SaveTextStyled>
-      </TouchableOpacity>
-    );
-  };
+
+  renderSaveButton = () => (
+    <TouchableOpacity onPress={this.saveUserInfo}>
+      <SaveTextStyled>
+保存
+      </SaveTextStyled>
+    </TouchableOpacity>
+  );
+
   render() {
     const { info, navigation } = this.props;
     const { name } = this.state;
@@ -162,14 +178,14 @@ class UserInfoEditListComponent extends PureComponent {
           onPress={() => navigation.navigate('PasswordEdit')}
         />
         <ActionSheet
-            ref={o => this.ActionSheet = o}
-            title={null}
-            options={ActionSheetOptions}
-            cancelButtonIndex={2}
-            onPress={this.beforeUpload}
-          />
+          ref={o => this.ActionSheet = o}
+          title={null}
+          options={ActionSheetOptions}
+          cancelButtonIndex={2}
+          onPress={this.beforeUpload}
+        />
       </ContainStyled>
-    )
+    );
   }
 }
 

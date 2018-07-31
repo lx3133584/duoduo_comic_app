@@ -2,20 +2,21 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { SectionList, Dimensions } from 'react-native';
 import { ComicListItem, ComicListCategory, Progress } from '..';
-import styled from "styled-components";
-import { wrapWithLoading } from '../../../../utils';
+import styled from 'styled-components';
 import { NavigationActions } from 'react-navigation';
+import { wrapWithLoading } from '../../../../utils';
+
 const { height } = Dimensions.get('window');
 const initNumber = Math.ceil(height / 50);
 
 const rowStyle = {
   flexDirection: 'row',
   flexWrap: 'wrap',
-}
+};
 const ItemSeparatorComponent = styled.View`
   border-bottom-color: #c0c0c0;
   border-bottom-width: 1px;
-`
+`;
 @wrapWithLoading
 class ComicListComponent extends PureComponent {
   static propTypes = {
@@ -33,17 +34,22 @@ class ComicListComponent extends PureComponent {
       }),
     }),
   };
+
   constructor(props) {
     super(props);
     this.navigate = props.navigation.navigate.bind(this);
     this.replace = props.navigation.replace.bind(this);
-  };
+  }
+
   componentDidMount() {
     this.onFetch();
-  };
+  }
+
   async onFetch() {
     const id = this.props.navigation.getParam('id', null);
-    const { getList, hideLoading, comic_id, chapter_id } = this.props;
+    const {
+      getList, hideLoading, comic_id, chapter_id,
+    } = this.props;
     const res = await getList(id || comic_id);
     let sectionIndex = 0;
     let itemIndex = 0;
@@ -53,11 +59,12 @@ class ComicListComponent extends PureComponent {
           sectionIndex = o;
           itemIndex = i;
         }
-      })
-    })
+      });
+    });
     setTimeout(() => this.scrollTo({ sectionIndex, itemIndex }), 0);
     hideLoading();
-  };
+  }
+
   scrollTo = ({ sectionIndex = 0, itemIndex = 0 }) => {
     this.comic_list_ref && this.comic_list_ref.scrollToLocation({
       sectionIndex,
@@ -66,9 +73,11 @@ class ComicListComponent extends PureComponent {
       viewOffset: 150,
     });
   };
+
   _keyExtractor(item, index) {
-    return item.id + '';
-  };
+    return `${item.id}`;
+  }
+
   _getItemLayout(data, index) {
     let len = 0;
     let offset = 50;
@@ -76,29 +85,38 @@ class ComicListComponent extends PureComponent {
       len += data.length;
       if (index < len) return;
       offset += 50;
-    })
-    return {length: 51, offset: 51 * (index - 1) + offset, index}
-  };
+    });
+    return { length: 51, offset: 51 * (index - 1) + offset, index };
+  }
+
   _getRef = ref => this.comic_list_ref = ref;
+
   renderItem = ({ item }) => {
     const { chapter_id, replace, dark } = this.props;
     return (
       <ComicListItem
-        {...item} dark={dark}
+        {...item}
+        dark={dark}
         itemOnPress={replace ? this.replace : this.navigate}
-        active={item.id === chapter_id} />
-    )
+        active={item.id === chapter_id}
+      />
+    );
   };
+
   renderSectionHeader = ({ section }) => {
     const { dark } = this.props;
     return (
-      <ComicListCategory dark={dark}>{section.name}</ComicListCategory>
-    )
+      <ComicListCategory dark={dark}>
+        {section.name}
+      </ComicListCategory>
+    );
   };
+
   renderItemSeparator = () => {
     const { dark } = this.props;
-    return <ItemSeparatorComponent style={dark && { borderBottomColor: '#fff' }} />
+    return <ItemSeparatorComponent style={dark && { borderBottomColor: '#fff' }} />;
   };
+
   render() {
     const { list, loading } = this.props;
     if (loading) return <Progress />;

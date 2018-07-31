@@ -1,14 +1,12 @@
 import { connect } from 'react-redux';
 import Component from './component';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    index: state['comic'].getIn(['detail', 'index']) + 1,
-    total: state['comic'].get('content_total'),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  index: state.comic.getIn(['detail', 'index']) + 1,
+  total: state.comic.get('content_total'),
+});
 
 export default connect(
-    mapStateToProps,
-    null
+  mapStateToProps,
+  null,
 )(Component);

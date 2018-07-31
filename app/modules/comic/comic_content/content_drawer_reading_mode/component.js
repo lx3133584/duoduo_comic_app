@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { brand_primary } from '../../../../theme';
 import { ContentDrawerSettingCheckbox } from '..';
@@ -8,7 +8,7 @@ const ContainStyled = styled.View`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-`
+`;
 const options = [
   {
     text: '滚动模式',
@@ -18,7 +18,7 @@ const options = [
     text: '翻页模式',
     value: 'page_turning',
   },
-]
+];
 
 class ContentDrawerReadingModeComponent extends PureComponent {
   static propTypes = {
@@ -27,11 +27,13 @@ class ContentDrawerReadingModeComponent extends PureComponent {
     mode: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
   };
-  switchReadingMode = value => {
+
+  switchReadingMode = (value) => {
     const { switchReadingMode, goIndex, index } = this.props;
     if (value === 'scroll') goIndex(index);
     switchReadingMode(value);
   };
+
   render() {
     const { mode } = this.props;
     return (
@@ -40,7 +42,8 @@ class ContentDrawerReadingModeComponent extends PureComponent {
           title="阅读模式："
           changeValue={this.switchReadingMode}
           value={mode}
-          options={options} />
+          options={options}
+        />
       </ContainStyled>
     );
   }

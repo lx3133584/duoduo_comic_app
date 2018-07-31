@@ -1,7 +1,11 @@
 import { createActions } from 'redux-actions';
-import { fetchComicDetail, fetchComicList, postFavorite, deleteFavorite, postScore } from '../../../api';
+import {
+  fetchComicDetail, fetchComicList, postFavorite, deleteFavorite, postScore,
+} from '../../../api';
 
-export const { getComicDetail, getComicList, addFavorite, removeFavorite, addScore } = createActions({
+export const {
+  getComicDetail, getComicList, addFavorite, removeFavorite, addScore,
+} = createActions({
   GET_COMIC_DETAIL: async (id) => {
     const result = await fetchComicDetail(id);
     return result;

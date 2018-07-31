@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { RankListItem } from '..';
 import { rankTypes } from '..';
 
@@ -8,12 +8,12 @@ const ContainStyled = styled.View`
   justify-content: space-around;
   flex-direction: row;
   flex-wrap: wrap;
-`
+`;
 
-export default function RankListComponent(){
+export default function RankListComponent() {
   return (
     <ContainStyled>
       {rankTypes.map(item => <RankListItem {...item} />)}
     </ContainStyled>
-  )
+  );
 }

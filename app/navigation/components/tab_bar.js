@@ -29,7 +29,7 @@ const TabBar = ({ navigation }) => ({
         TabBarIcon = UserIcon;
         break;
     }
-    return <TabBarIcon color={tintColor} />
+    return <TabBarIcon color={tintColor} />;
   },
-})
+});
 export default TabBar;

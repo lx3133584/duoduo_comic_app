@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Toast from 'react-native-root-toast';
@@ -8,7 +8,7 @@ import { wrapWithGoBack } from '../../../../utils';
 
 const InputContainStyled = styled.View`
   margin-bottom: 30px;
-`
+`;
 @wrapWithGoBack
 class RegisterLocalComponent extends PureComponent {
   static propTypes = {
@@ -17,20 +17,25 @@ class RegisterLocalComponent extends PureComponent {
     getHistory: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired,
   };
+
   state = {
     username: '',
     password: '',
     rePassword: '',
     loading: false,
   };
+
   constructor() {
     super();
     this.onChangeUsername = this.changFunc('username');
     this.onChangePassword = this.changFunc('password');
     this.onChangeRePassword = this.changFunc('rePassword');
-  };
+  }
+
   onSubmit = () => {
-    const { registerLocal, getFavorites, getHistory, goBack } = this.props;
+    const {
+      registerLocal, getFavorites, getHistory, goBack,
+    } = this.props;
     const { username, password, rePassword } = this.state;
     if (
       username.length < 8
@@ -39,7 +44,7 @@ class RegisterLocalComponent extends PureComponent {
       || password !== rePassword
     ) return;
     this.setState({ loading: true });
-    registerLocal({ username, password, rePassword }).then(res => {
+    registerLocal({ username, password, rePassword }).then((res) => {
       this.setState({ loading: false });
       if (res.error) return;
       getFavorites();
@@ -48,13 +53,17 @@ class RegisterLocalComponent extends PureComponent {
         position: -70,
       });
       goBack(2);
-    }).catch(e => {
+    }).catch((e) => {
       this.setState({ loading: false });
     });
   };
+
   changFunc = key => value => this.setState({ [key]: value });
+
   render() {
-    const { username, password, rePassword, loading } = this.state;
+    const {
+      username, password, rePassword, loading,
+    } = this.state;
     const { goBack } = this.props;
     return (
       <View>
@@ -64,7 +73,7 @@ class RegisterLocalComponent extends PureComponent {
             iconName="user"
             onChange={this.onChangeUsername}
             onSubmit={this.onSubmit}
-            errorMessage={username && username.length < 8 && "用户名必须大于8位"}
+            errorMessage={username && username.length < 8 && '用户名必须大于8位'}
           />
           <LoginInput
             placeholder="密码"
@@ -72,7 +81,7 @@ class RegisterLocalComponent extends PureComponent {
             iconName="lock"
             onSubmit={this.onSubmit}
             password
-            errorMessage={password && password.length < 8 && "密码必须大于8位"}
+            errorMessage={password && password.length < 8 && '密码必须大于8位'}
           />
           <LoginInput
             placeholder="确认密码"
@@ -80,7 +89,7 @@ class RegisterLocalComponent extends PureComponent {
             iconName="lock"
             onSubmit={this.onSubmit}
             password
-            errorMessage={rePassword && rePassword !== password && "两次输入密码不一致"}
+            errorMessage={rePassword && rePassword !== password && '两次输入密码不一致'}
           />
         </InputContainStyled>
         <LoginButton
@@ -93,7 +102,7 @@ class RegisterLocalComponent extends PureComponent {
           text="返回登录"
           onPress={() => goBack(1)}
         />
-    </View>
+      </View>
     );
   }
 }

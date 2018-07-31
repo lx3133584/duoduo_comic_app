@@ -5,8 +5,8 @@ export const { getClassItemList } = createActions({
   GET_CLASS_ITEM_LIST: [
     ({ id, page }) => {
       const promise = fetchClassItemList({ id, page });
-      return { promise, data: { id }};
+      return { promise, data: { id } };
     },
     ({ page }) => ({ page }),
-  ]
+  ],
 });

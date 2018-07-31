@@ -1,5 +1,7 @@
-import { TabNavigator, TabBarBottom  } from 'react-navigation';
-import { FavoritesListScreen, SearchListScreen, DiscoveryListScreen, UserInfoScreen } from '../modules';
+import { TabNavigator, TabBarBottom } from 'react-navigation';
+import {
+  FavoritesListScreen, SearchListScreen, DiscoveryListScreen, UserInfoScreen,
+} from '../modules';
 import { brand_primary } from '../theme';
 import { TabBar } from './components';
 
@@ -17,7 +19,7 @@ export default TabNavigator({
     activeTintColor: brand_primary,
     inactiveTintColor: '#a3a3a3',
     indicatorStyle: { height: 0 },
-    style: { backgroundColor: '#fff' }
+    style: { backgroundColor: '#fff' },
   },
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',

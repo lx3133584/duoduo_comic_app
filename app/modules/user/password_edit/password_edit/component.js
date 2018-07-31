@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-root-toast';
 import { TouchableOpacity } from 'react-native';
@@ -9,44 +9,48 @@ import { ListItem } from '../..';
 
 const ContainStyled = styled.View`
   background: #fff;
-`
+`;
 const HeaderContainStyled = styled.View`
   padding-top: 5px;
   background: ${brand_primary};
-`
+`;
 const itemContainStyle = {
   height: 100,
-}
+};
 const inputStyle = {
   color: '#666',
-}
+};
 const SaveTextStyled = styled.Text`
   color: #fff;
   font-size: 16px;
   padding: 0 10px;
-`
-const errorStyle = { color: red, textAlign: 'right' }
+`;
+const errorStyle = { color: red, textAlign: 'right' };
 
 class PasswordEditComponent extends PureComponent {
   static propTypes = {
     changePassword: PropTypes.func.isRequired,
   };
+
   constructor(props) {
     super(props);
     this.onChangeOldPassword = this.changFunc('oldPassword');
     this.onChangePassword = this.changFunc('password');
     this.onChangeRePassword = this.changFunc('rePassword');
-  };
+  }
+
   state = {
     oldPassword: '',
     password: '',
     rePassword: '',
   };
-  showToast = message => {
+
+  showToast = (message) => {
     Toast.show(message, {
       position: -70,
     });
   };
+
   savePassword = async () => {
     const { changePassword, navigation } = this.props;
     const { oldPassword, password, rePassword } = this.state;
@@ -60,21 +64,24 @@ class PasswordEditComponent extends PureComponent {
     this.showToast('修改成功');
     navigation.goBack();
   };
+
   changFunc = key => value => this.setState({ [key]: value });
-  renderSaveButton = () => {
-    return (
-      <TouchableOpacity onPress={this.savePassword} >
-        <SaveTextStyled>保存</SaveTextStyled>
-      </TouchableOpacity>
-    );
-  };
+
+  renderSaveButton = () => (
+    <TouchableOpacity onPress={this.savePassword}>
+      <SaveTextStyled>
+保存
+      </SaveTextStyled>
+    </TouchableOpacity>
+  );
+
   render() {
     const { oldPassword, password, rePassword } = this.state;
     const errorMessage = {
-      oldPassword: oldPassword && oldPassword.length < 8 && "密码必须大于8位",
-      password: password && password.length < 8 && "密码必须大于8位",
-      rePassword: rePassword && rePassword !== password && "两次输入密码不一致",
-    }
+      oldPassword: oldPassword && oldPassword.length < 8 && '密码必须大于8位',
+      password: password && password.length < 8 && '密码必须大于8位',
+      rePassword: rePassword && rePassword !== password && '两次输入密码不一致',
+    };
     return (
       <ContainStyled>
         <HeaderContainStyled>
@@ -94,7 +101,7 @@ class PasswordEditComponent extends PureComponent {
             onChangeText: this.onChangeOldPassword,
             maxLength: 32,
             secureTextEntry: true,
-            errorMessage: errorMessage['oldPassword'] || null,
+            errorMessage: errorMessage.oldPassword || null,
             errorStyle,
           }}
         />
@@ -108,7 +115,7 @@ class PasswordEditComponent extends PureComponent {
             onChangeText: this.onChangePassword,
             maxLength: 32,
             secureTextEntry: true,
-            errorMessage: errorMessage['password'] || null,
+            errorMessage: errorMessage.password || null,
             errorStyle,
           }}
         />
@@ -122,12 +129,12 @@ class PasswordEditComponent extends PureComponent {
             onChangeText: this.onChangeRePassword,
             maxLength: 32,
             secureTextEntry: true,
-            errorMessage: errorMessage['rePassword'] || null,
+            errorMessage: errorMessage.rePassword || null,
             errorStyle,
           }}
         />
       </ContainStyled>
-    )
+    );
   }
 }
 

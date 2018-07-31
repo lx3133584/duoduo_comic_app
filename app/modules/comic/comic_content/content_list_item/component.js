@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Image } from 'react-native';
 import { ImgPlaceholder } from '..';
 import { wrapWithLoading, getImgHeight } from '../../../../utils';
+
 const prefetch = Image.prefetch;
 
 @wrapWithLoading
@@ -18,24 +19,36 @@ class ContentListItem extends PureComponent {
       width: PropTypes.number.isRequired,
     }),
   };
+
   constructor() {
     super();
-  };
+  }
+
   async preFetchImage() {
     const { url, hideLoading } = this.props;
     await prefetch(url);
     hideLoading();
-  };
+  }
+
   componentDidMount() {
     this.preFetchImage();
-  };
+  }
+
   render() {
-    const { url, index, loading, size, width } = this.props;
+    const {
+      url, index, loading, size, width,
+    } = this.props;
     const style = {
       width,
       height: getImgHeight(size, width),
     };
-    if (loading) return <ImgPlaceholder style={style}>{index}</ImgPlaceholder>;
+    if (loading) {
+      return (
+        <ImgPlaceholder style={style}>
+          {index}
+        </ImgPlaceholder>
+      );
+    }
     return (
       <Image
         source={{ uri: url }}

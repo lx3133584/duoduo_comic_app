@@ -27,14 +27,17 @@ class ContentListScrollComponent extends Component {
     toggleDrawer: PropTypes.func.isRequired,
     onFetch: PropTypes.func.isRequired,
   };
+
   constructor(props) {
     super(props);
     const { getRef } = props;
     getRef(this);
-  };
+  }
+
   shouldComponentUpdate(nextProps) {
     return nextProps.content !== this.props.content;
-  };
+  }
+
   scrollTo = (index = 0) => {
     const { content } = this.props;
     const len = content.length - 1;
@@ -47,8 +50,11 @@ class ContentListScrollComponent extends Component {
       viewOffset: false,
     });
   };
+
   onScroll = (e) => {
-    const { saveIndex, content, content_index, img_positon_arr, offset } = this.props;
+    const {
+      saveIndex, content, content_index, img_positon_arr, offset,
+    } = this.props;
     const scrollY = e.nativeEvent.contentOffset.y;
     let index = 0;
     for (let len = img_positon_arr.size, i = len - 1; i >= 0; i--) {
@@ -59,6 +65,7 @@ class ContentListScrollComponent extends Component {
     }
     if (index !== content_index - offset) saveIndex(index + offset);
   };
+
   _getItemLayout = (data, index) => {
     const { img_positon_arr, width } = this.props;
     const item = data[index];
@@ -66,6 +73,7 @@ class ContentListScrollComponent extends Component {
     const offset = img_positon_arr.get(index);
     return { length, offset, index };
   };
+
   renderItem = (props) => {
     const { toggleDrawer } = this.props;
     return (
@@ -74,27 +82,31 @@ class ContentListScrollComponent extends Component {
           <ContentListItem {...props} />
         </View>
       </TouchableWithoutFeedback>
-    )
+    );
   };
+
   _getRef = ref => this.content_ref = ref;
+
   render() {
-    const { content, page, onRefresh, onFetch, increasePage } = this.props;
+    const {
+      content, page, onRefresh, onFetch, increasePage,
+    } = this.props;
     return (
       <LongList
-         getRef={this._getRef}
-         list={content}
-         Item={this.renderItem}
-         customkey="index"
-         onFetch={onFetch}
-         onScroll={this.onScroll}
-         ListFooterComponent={ContentListFooter}
-         getItemLayout={this._getItemLayout}
-         initialNumToRender={3}
-         page={page}
-         increasePage={increasePage}
-         callback={onRefresh}
-         isLong
-       />
+        getRef={this._getRef}
+        list={content}
+        Item={this.renderItem}
+        customkey="index"
+        onFetch={onFetch}
+        onScroll={this.onScroll}
+        ListFooterComponent={ContentListFooter}
+        getItemLayout={this._getItemLayout}
+        initialNumToRender={3}
+        page={page}
+        increasePage={increasePage}
+        callback={onRefresh}
+        isLong
+      />
     );
   }
 }

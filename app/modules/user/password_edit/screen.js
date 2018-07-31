@@ -7,6 +7,7 @@ class PasswordEditScreen extends PureComponent {
   static navigationOptions = {
     title: '修改密码',
   };
+
   render() {
     return (
       <View>

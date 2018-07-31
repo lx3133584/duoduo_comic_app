@@ -1,6 +1,8 @@
 import React from 'react';
-import styled from "styled-components";
-import { Battery, NetStatus, Time, Title, ReadingProgress } from '..';
+import styled from 'styled-components';
+import {
+  Battery, NetStatus, Time, Title, ReadingProgress,
+} from '..';
 
 const ContainStyled = styled.View`
   flex-direction: row;
@@ -12,11 +14,11 @@ const ContainStyled = styled.View`
   background-color: rgba(0, 0, 0, 0.4);
   border-bottom-right-radius: 4px;
   z-index: 1;
-`
+`;
 const ItemStyled = styled.View`
   justify-content: center;
   margin-right: 8px;
-`
+`;
 
 export default function ContentStatusBarComponent() {
   return (

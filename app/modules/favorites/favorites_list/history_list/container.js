@@ -1,13 +1,11 @@
 import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 import { getHistoryList, removeHistory } from '../actions';
 import Component from './component';
-import { withNavigation } from 'react-navigation';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    list: state['favorites'].get('history_list'),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  list: state.favorites.get('history_list'),
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   getList(params) {
@@ -15,10 +13,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   remove(params) {
     return dispatch(removeHistory(params));
-  }
-})
+  },
+});
 
 export default withNavigation(connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Component));
+  mapStateToProps,
+  mapDispatchToProps,
+)(Component));

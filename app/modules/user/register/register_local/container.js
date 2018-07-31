@@ -5,17 +5,17 @@ import Component from './component';
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   registerLocal(params) {
-    return dispatch(registerForLocal(params))
+    return dispatch(registerForLocal(params));
   },
   getFavorites(params) {
-    return dispatch(favoritesListActions.getFavoritesList(params))
+    return dispatch(favoritesListActions.getFavoritesList(params));
   },
   getHistory(params) {
     return dispatch(favoritesListActions.getHistoryList(params));
   },
-})
+});
 
 export default connect(
-    null,
-    mapDispatchToProps
-  )(Component);
+  null,
+  mapDispatchToProps,
+)(Component);

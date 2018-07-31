@@ -1,11 +1,12 @@
 import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './reducer';
-import middleware from './middleware';
-export { addListener } from './middleware';
 // persist
 import { persistStore, persistReducer } from 'redux-persist';
 import immutableTransform from 'redux-persist-transform-immutable';
 import { AsyncStorage } from 'react-native';
+import middleware from './middleware';
+import rootReducer from './reducer';
+
+export { addListener } from './middleware';
 
 const persistConfig = {
   key: 'root',
@@ -14,7 +15,7 @@ const persistConfig = {
     blacklist: ['nav'],
   })],
   blacklist: ['search'],
-}
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

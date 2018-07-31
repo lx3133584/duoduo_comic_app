@@ -1,23 +1,25 @@
 import React, { PureComponent } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { StatusBar, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { brand_primary } from '../../../theme';
 import { RegisterLocal } from '.';
 import { Brand } from '..';
 import { Header } from '../../../navigation';
+
 const { height } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   min-height: ${height};
   background-color: #fff;
-`
+`;
 
 class RegisterScreen extends PureComponent {
   static navigationOptions = {
     title: '注册',
-    header: (props) => <Header {...props} />,
+    header: props => <Header {...props} />,
   };
+
   render() {
     return (
       <ContainStyled>
@@ -27,9 +29,10 @@ class RegisterScreen extends PureComponent {
           enableAutomaticScroll
           keyboardShouldPersistTaps="always"
           extraScrollHeight={60}
-          extraHeight={60}>
-            <Brand />
-            <RegisterLocal />
+          extraHeight={60}
+        >
+          <Brand />
+          <RegisterLocal />
         </KeyboardAwareScrollView>
       </ContainStyled>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BackHandler, Platform } from "react-native";
+import { BackHandler, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, NavigationActions } from 'react-navigation';
 import Toast from 'react-native-root-toast';
@@ -11,16 +11,19 @@ class NavigationWithState extends React.Component {
     super();
     this.canExit = false;
   }
+
   componentWillMount() {
     if (Platform.OS === 'android') {
       BackHandler.addEventListener('handwareBackPress', this.onBackAndroid);
     }
-  };
+  }
+
   componentWillUnmount() {
     if (Platform.OS === 'android') {
       BackHandler.addEventListener('handwareBackPress', this.onBackAndroid);
     }
-  };
+  }
+
   onBackAndroid = () => {
     if (this.canExit) BackHandler.exitApp();
     const { dispatch, nav } = this.props;
@@ -30,11 +33,12 @@ class NavigationWithState extends React.Component {
         duration: 1500,
       });
       this.canExit = true;
-      setTimeout(() => this.canExit = false, 2000)
+      setTimeout(() => this.canExit = false, 2000);
     }
     dispatch(NavigationActions.back());
     return true;
   };
+
   render() {
     const { dispatch, nav } = this.props;
     const navigation = addNavigationHelpers({
@@ -50,8 +54,8 @@ class NavigationWithState extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  nav: state['nav'],
+const mapStateToProps = state => ({
+  nav: state.nav,
 });
 
 export default connect(mapStateToProps)(NavigationWithState);

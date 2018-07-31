@@ -7,23 +7,24 @@ const containerStyle = {
   borderTopWidth: 0,
   borderBottomColor: brand_primary,
   backgroundColor: brand_primary,
-}
+};
 
 const inputStyle = {
   backgroundColor: '#e65d53',
   color: '#fff',
-}
+};
 const icon = {
   type: 'material',
   color: '#f1f2f6',
-  name: 'search'
-}
+  name: 'search',
+};
 
 class SearchBarComponent extends PureComponent {
   static propTypes = {
     search: PropTypes.func.isRequired,
     keyword: PropTypes.string,
   };
+
   constructor(props) {
     super(props);
     const { keyword = '' } = props;
@@ -33,10 +34,12 @@ class SearchBarComponent extends PureComponent {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-  };
+  }
+
   onChange(value) {
     this.setState({ value });
-  };
+  }
+
   async onSubmit() {
     const { value } = this.state;
     if (!value) return;
@@ -44,7 +47,8 @@ class SearchBarComponent extends PureComponent {
     this.setState({ loading: true });
     await search({ keyword: value, page: 0 });
     this.setState({ loading: false });
-  };
+  }
+
   render() {
     const { value, loading } = this.state;
     return (

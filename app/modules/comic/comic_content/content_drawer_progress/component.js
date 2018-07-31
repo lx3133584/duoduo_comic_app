@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Slider } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import { brand_primary } from '../../../../theme';
 import Feather from 'react-native-vector-icons/Feather';
+import { brand_primary } from '../../../../theme';
 import { wrapWithReplace } from '../../../../utils';
 
 const ICON_SIZE = 20;
-const ICON_COLOR = "#fff";
+const ICON_COLOR = '#fff';
 
 const NextIcon = () => <Feather name="chevron-right" size={ICON_SIZE} color={ICON_COLOR} />;
 const PrevIcon = () => <Feather name="chevron-left" size={ICON_SIZE} color={ICON_COLOR} />;
@@ -17,14 +17,14 @@ const ContainStyled = styled.View`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-`
+`;
 const silderStyle = {
   height: 40,
-}
+};
 const thumbTouchSize = {
   width: 25,
   height: 25,
-}
+};
 @wrapWithReplace('ComicContent')
 class ContentDrawerProgressComponent extends PureComponent {
   static propTypes = {
@@ -42,23 +42,29 @@ class ContentDrawerProgressComponent extends PureComponent {
     }),
     replace: PropTypes.func.isRequired,
   };
+
   static height = 50;
-  goIndex = value => {
+
+  goIndex = (value) => {
     const { goIndex } = this.props;
     goIndex(value);
   };
+
   goPrev = () => {
     const { prev } = this.props;
     this.goChapter(prev);
   };
+
   goNext = () => {
     const { next } = this.props;
     this.goChapter(next);
   };
+
   goChapter = ({ id, title }) => {
     const { replace } = this.props;
     replace({ chapter_id: id, title, pre: false });
   };
+
   render() {
     const { index, total, width } = this.props;
     return (
@@ -76,7 +82,8 @@ class ContentDrawerProgressComponent extends PureComponent {
           minimumTrackTintColor={brand_primary}
           maximumTrackTintColor="#ddd"
           step={1}
-          onSlidingComplete={this.goIndex} />
+          onSlidingComplete={this.goIndex}
+        />
         <TouchableOpacity onPress={this.goNext}>
           <NextIcon />
         </TouchableOpacity>

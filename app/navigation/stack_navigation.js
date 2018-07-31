@@ -1,6 +1,7 @@
 import React from 'react';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Dimensions } from 'react-native';
+import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import {
   LoginScreen,
   RegisterScreen,
@@ -13,7 +14,7 @@ import {
   ComicContentListDrawerScreen,
 } from '../modules';
 import { default as TabNavigator } from './tab_navigation';
-import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
+
 const { width } = Dimensions.get('window');
 
 const ComicContentDrawer = DrawerNavigator(
@@ -41,7 +42,7 @@ const RootStack = StackNavigator(
     ClasskItemList: { screen: ClasskItemListScreen },
   },
   {
-    navigationOptions: ({navigation}) => ({
+    navigationOptions: ({ navigation }) => ({
       header: null,
     }),
     transitionConfig: () => ({

@@ -1,24 +1,27 @@
 import React, { PureComponent } from 'react';
 import { Dimensions, FlatList, Vibration } from 'react-native';
-import styled from "styled-components";
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { ListEmpty } from '..';
+
 const { height } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   margin: 10px 0;
-`
+`;
 const TextStyled = styled.Text`
   text-align: center;
-`
+`;
 const pattern = [0, 20];
 
-function FooterComponent({text}) {
+function FooterComponent({ text }) {
   return (
     <ContainStyled>
-      <TextStyled>{text || '下面什么都没有了哦.'}</TextStyled>
+      <TextStyled>
+        {text || '下面什么都没有了哦.'}
+      </TextStyled>
     </ContainStyled>
-  )
+  );
 }
 
 class LongListComponent extends PureComponent {
@@ -37,6 +40,7 @@ class LongListComponent extends PureComponent {
     horizontal: PropTypes.bool,
     numColumns: PropTypes.number,
   };
+
   constructor(props) {
     super(props);
     const { page, customkey } = props;
@@ -50,26 +54,30 @@ class LongListComponent extends PureComponent {
     this._renderItem = this._renderItem.bind(this);
     this._keyExtractor = this._keyExtractor.bind(this);
     this._itemOnLongPress = this._itemOnLongPress.bind(this);
-  };
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.page !== this.props.page) this.page = nextProps.page;
-  };
+  }
+
   _keyExtractor(item, index) {
-    return item[this.customkey] + '';
-  };
+    return `${item[this.customkey]}`;
+  }
+
   _onRefresh() {
     const { increasePage } = this.props;
     this.page = 0;
     increasePage && increasePage(0);
     this._onFetch({ init: true });
-  };
+  }
+
   _onFetch({ init }) {
     const { onFetch, callback, increasePage } = this.props;
     if (!onFetch) return;
     const { loading } = this.state;
     if (loading) return;
     this.setState({ loading: true });
-    onFetch(this.page, init).then(res => {
+    onFetch(this.page, init).then((res) => {
       this.setState({ loading: false });
       const data = res.value.result ? res.value.result.data : res.value.data;
       if (!res.error && data.length) {
@@ -77,42 +85,48 @@ class LongListComponent extends PureComponent {
         this.page++;
         increasePage && increasePage();
       }
-    }).catch(e => {
+    }).catch((e) => {
       this.setState({ loading: false });
     });
-  };
+  }
+
   _itemOnLongPress(...params) {
     Vibration.vibrate(pattern);
     const { itemOnLongPress = f => f } = this.props;
     itemOnLongPress(...params);
-  };
+  }
+
   _renderItem({ item }) {
     const { Item, itemOnPress = f => f } = this.props;
-    return <Item {...item} itemOnPress={itemOnPress} itemOnLongPress={this._itemOnLongPress} />
-  };
+    return <Item {...item} itemOnPress={itemOnPress} itemOnLongPress={this._itemOnLongPress} />;
+  }
+
   _getItemLayout = (data, index) => {
     const { itemHeight = 140 } = this.props;
     return { length: itemHeight, offset: itemHeight * index, index };
   };
+
   render() {
-    const { list, getRef, isLong, showFooter, emptyText, itemHeight = 140 } = this.props;
+    const {
+      list, getRef, isLong, showFooter, emptyText, itemHeight = 140,
+    } = this.props;
     const { loading } = this.state;
     return (
       <FlatList
-         ref={getRef}
-         data={list}
-         keyExtractor={this._keyExtractor}
-         renderItem={this._renderItem}
-         onEndReached={isLong && this._onFetch}
-         onEndReachedThreshold={1.6}
-         onRefresh={this._onRefresh}
-         refreshing={loading}
-         getItemLayout={this._getItemLayout}
-         initialNumToRender={Math.ceil(height / itemHeight)}
-         ListEmptyComponent={() => <ListEmpty text={emptyText} />}
-         ListFooterComponent={showFooter && list.length && FooterComponent}
-         {...this.props}
-       />
+        ref={getRef}
+        data={list}
+        keyExtractor={this._keyExtractor}
+        renderItem={this._renderItem}
+        onEndReached={isLong && this._onFetch}
+        onEndReachedThreshold={1.6}
+        onRefresh={this._onRefresh}
+        refreshing={loading}
+        getItemLayout={this._getItemLayout}
+        initialNumToRender={Math.ceil(height / itemHeight)}
+        ListEmptyComponent={() => <ListEmpty text={emptyText} />}
+        ListFooterComponent={showFooter && list.length && FooterComponent}
+        {...this.props}
+      />
     );
   }
 }

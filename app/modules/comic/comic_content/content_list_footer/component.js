@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Button } from 'react-native-elements';
 import { Image, Dimensions } from 'react-native';
 import { wrapWithReplace } from '../../../../utils';
+
 const { width } = Dimensions.get('window');
 const prefetch = Image.prefetch;
 
@@ -11,7 +12,7 @@ const ContainStyled = styled.View`
   background-color: #ededed;
   flex-direction: row;
   justify-content: space-around;
-`
+`;
 const TextStyled = styled.Text`
   background-color: #ededed;
   text-align: center;
@@ -20,24 +21,25 @@ const TextStyled = styled.Text`
   height: 50px;
   line-height: 50px;
   text-align: center;
-`
+`;
 const buttonStyle = {
   backgroundColor: '#ededed',
   borderWidth: 0,
   borderRadius: 0,
   height: 50,
   elevation: 0,
-}
+};
 const textStyle = {
   fontWeight: 'normal',
   color: '#666',
   fontSize: 14,
-}
+};
 @wrapWithReplace('ComicContent')
 class ContentListFooterComponent extends PureComponent {
   componentDidMount() {
     setTimeout(this.init, 3000);
-  };
+  }
+
   init = () => {
     const { next, getList } = this.props;
     if (next) {
@@ -48,15 +50,18 @@ class ContentListFooterComponent extends PureComponent {
       });
     }
   };
+
   goNext = () => {
     const { next, replace } = this.props;
     const { id, title } = next || {};
     replace({ chapter_id: id, title, pre: true });
   };
+
   goBack = () => {
     const { navigation } = this.props;
     navigation.goBack(null);
   };
+
   render() {
     const { next, navigation } = this.props;
     const { id, title } = next || {};
@@ -68,12 +73,18 @@ class ContentListFooterComponent extends PureComponent {
           titleStyle={textStyle}
           onPress={this.goBack}
         />
-        {!next ? <TextStyled>已经看完啦</TextStyled> : <Button
-          buttonStyle={buttonStyle}
-          title={`下一章：${title}`}
-          titleStyle={textStyle}
-          onPress={this.goNext}
-        />}
+        {!next ? (
+          <TextStyled>
+已经看完啦
+          </TextStyled>
+        ) : (
+          <Button
+            buttonStyle={buttonStyle}
+            title={`下一章：${title}`}
+            titleStyle={textStyle}
+            onPress={this.goNext}
+          />
+        )}
       </ContainStyled>
     );
   }

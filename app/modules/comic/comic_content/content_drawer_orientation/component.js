@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Dimensions } from 'react-native';
 import { brand_primary } from '../../../../theme';
@@ -10,7 +10,7 @@ const ContainStyled = styled.View`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-`
+`;
 const options = [
   {
     text: '竖 屏',
@@ -20,7 +20,7 @@ const options = [
     text: '横 屏',
     value: 'horizon',
   },
-]
+];
 
 class ContentDrawerOrientationComponent extends PureComponent {
   static propTypes = {
@@ -29,8 +29,11 @@ class ContentDrawerOrientationComponent extends PureComponent {
     changeWidth: PropTypes.func.isRequired,
     orientation: PropTypes.string.isRequired,
   };
-  switchOrientation = value => {
-    const { switchOrientation, changeWidth, toggleDrawer, switchReadingMode } = this.props;
+
+  switchOrientation = (value) => {
+    const {
+      switchOrientation, changeWidth, toggleDrawer, switchReadingMode,
+    } = this.props;
     toggleDrawer();
     if (value === 'vertical') Orientation.lockToPortrait();
     if (value === 'horizon') {
@@ -40,6 +43,7 @@ class ContentDrawerOrientationComponent extends PureComponent {
     changeWidth(Dimensions.get('window').height);
     switchOrientation(value);
   };
+
   render() {
     const { orientation } = this.props;
     return (
@@ -48,7 +52,8 @@ class ContentDrawerOrientationComponent extends PureComponent {
           title="屏幕方向："
           changeValue={this.switchOrientation}
           value={orientation}
-          options={options} />
+          options={options}
+        />
       </ContainStyled>
     );
   }

@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { BlurView } from 'react-native-blur';
-import { Image, Dimensions, findNodeHandle, View } from 'react-native';
+import {
+  Image, Dimensions, findNodeHandle, View,
+} from 'react-native';
 import { numberFormat } from '../../../../utils';
 
 const { width } = Dimensions.get('window');
@@ -11,7 +13,7 @@ const { width } = Dimensions.get('window');
 const ContainStyled = styled.View`
   height: 240px;
   background-color: #000;
-`
+`;
 const coverImageStyled = {
   position: 'absolute',
   bottom: 10,
@@ -21,7 +23,7 @@ const coverImageStyled = {
   zIndex: 2,
   borderWidth: 1,
   borderColor: '#fff',
-}
+};
 const blurImageStyled = {
   position: 'absolute',
   top: 0,
@@ -29,7 +31,7 @@ const blurImageStyled = {
   width,
   height: 240,
   zIndex: 1,
-}
+};
 const TextContainStyled = styled.View`
   position: absolute;
   top: 100px;
@@ -37,23 +39,23 @@ const TextContainStyled = styled.View`
   bottom: 15px;
   z-index: 4;
   width: ${width - 110};
-`
+`;
 const TitleStyled = styled.Text`
   color: #fff;
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 8px;
-`
+`;
 const BottomTextContainStyled = styled.View`
   position: absolute;
   left: 0;
   bottom: 0;
-`
+`;
 const BottomTextStyled = styled.Text`
   color: #fff;
   font-size: 12px;
   opacity: 0.8;
-`
+`;
 
 class ComicDetailTopComponent extends PureComponent {
   static propTypes = {
@@ -66,32 +68,39 @@ class ComicDetailTopComponent extends PureComponent {
       }),
     }),
   };
+
   state = {
     viewRef: null,
   };
+
   constructor() {
     super();
     this.onFetch = this.onFetch.bind(this);
     this.imageLoaded = this.imageLoaded.bind(this);
-  };
+  }
+
   componentDidMount() {
     const { id } = this.props.navigation.state.params;
     this.onFetch(id);
-  };
+  }
+
   imageLoaded() {
     this.setState({ viewRef: findNodeHandle(this.backgroundImage) }, this.hideLoading);
-  };
+  }
+
   async onFetch(id) {
     const { getDetail } = this.props;
     await getDetail(id);
     this.fetchCompleted = true; // 标识请求已完成
     this.hideLoading();
-  };
+  }
+
   hideLoading() {
     const { hideLoading } = this.props;
     if (!this.state.viewRef || !this.fetchCompleted) return; // blur组件未加载或者请求为完成时都不能隐藏loading
     hideLoading();
   }
+
   render() {
     const { detail, navigation } = this.props;
     const { viewRef } = this.state;
@@ -103,26 +112,37 @@ class ComicDetailTopComponent extends PureComponent {
     return (
       <ContainStyled>
         <Image
-          ref={(img) => { this.backgroundImage = img }}
+          ref={(img) => { this.backgroundImage = img; }}
           style={blurImageStyled}
           onLoadEnd={this.imageLoaded}
-          source={{uri: cover}}
+          source={{ uri: cover }}
         />
-        {viewRef && <BlurView
+        {viewRef && (
+        <BlurView
           style={blurImageStyled}
           viewRef={viewRef}
           blurType="dark"
           blurAmount={6}
-        />}
+        />
+        )}
         <Image
           style={coverImageStyled}
-          source={{uri: cover}}
+          source={{ uri: cover }}
         />
         <TextContainStyled>
-          <TitleStyled>{title}</TitleStyled>
-          <BottomTextStyled>{author || '佚名'}</BottomTextStyled>
+          <TitleStyled>
+            {title}
+          </TitleStyled>
+          <BottomTextStyled>
+            {author || '佚名'}
+          </BottomTextStyled>
           <BottomTextContainStyled>
-            <BottomTextStyled>{class_name && (class_name + ' | ')}人气 {numberFormat(popularity_number)}</BottomTextStyled>
+            <BottomTextStyled>
+              {class_name && (`${class_name} | `)}
+人气
+              {' '}
+              {numberFormat(popularity_number)}
+            </BottomTextStyled>
           </BottomTextContainStyled>
         </TextContainStyled>
       </ContainStyled>

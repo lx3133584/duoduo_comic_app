@@ -1,3 +1,5 @@
+import * as comicContentActions from './actions';
+
 export { default as Screen } from './screen';
 export { default as ContentList } from './content_list/container';
 export { default as ContentListScroll } from './content_list_scroll/container';
@@ -21,5 +23,4 @@ export { default as ContentDrawerOrientation } from './content_drawer_orientatio
 export { default as ContentDrawerReadingMode } from './content_drawer_reading_mode/container';
 export { default as ContentDrawerManager } from './content_drawer_manager/container';
 export { default as ContentHeader } from './content_header/container';
-import * as comicContentActions from './actions';
 export { comicContentActions };

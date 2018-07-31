@@ -12,28 +12,31 @@ class SearchListComponent extends PureComponent {
       navigate: PropTypes.func.isRequired,
     }),
   };
+
   constructor(props) {
     super(props);
     this.onFetch = this.onFetch.bind(this);
     this.navigate = props.navigation.navigate.bind(this);
-  };
+  }
+
   async onFetch(page) {
     const { keyword, search } = this.props;
     if (!keyword) return;
     return await search({ page, keyword });
-  };
+  }
+
   render() {
     const list = this.props.list.toJS();
     return (
       <LongList
-         list={list}
-         Item={SearchListItem}
-         onFetch={this.onFetch}
-         itemOnPress={this.navigate}
-         emptyText="试着搜索看看吧~"
-         isLong
-         showFooter
-       />
+        list={list}
+        Item={SearchListItem}
+        onFetch={this.onFetch}
+        itemOnPress={this.navigate}
+        emptyText="试着搜索看看吧~"
+        isLong
+        showFooter
+      />
     );
   }
 }

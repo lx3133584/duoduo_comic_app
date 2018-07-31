@@ -1,3 +1,5 @@
+import * as searchListActions from './actions';
+
 export { default as Screen } from './screen';
 export { default as SearchBar } from './search_bar/container';
 export { default as SearchList } from './search_list/container';
@@ -7,5 +9,4 @@ export { default as LongListItem } from './long_list_item/component';
 export { default as ListEmpty } from './list_empty/component';
 export { default as Image } from './image/component';
 export { default as TouchableNativeFeedback } from './touchable_native_feedback/component';
-import * as searchListActions from './actions';
 export { searchListActions };

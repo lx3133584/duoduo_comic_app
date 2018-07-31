@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Toast from 'react-native-root-toast';
@@ -7,7 +7,7 @@ import { LoginInput, LoginButton } from '..';
 
 const InputContainStyled = styled.View`
   margin-bottom: 30px;
-`
+`;
 
 class LoginLocalComponent extends PureComponent {
   static propTypes = {
@@ -15,25 +15,30 @@ class LoginLocalComponent extends PureComponent {
     getFavorites: PropTypes.func.isRequired,
     getHistory: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired
+      navigate: PropTypes.func.isRequired,
     }),
   };
+
   state = {
     username: '',
     password: '',
     loading: false,
   };
+
   constructor() {
     super();
     this.onChangeUsername = this.changFunc('username');
     this.onChangePassword = this.changFunc('password');
-  };
+  }
+
   onSubmit = () => {
-    const { loginLocal, navigation, getFavorites, getHistory } = this.props;
+    const {
+      loginLocal, navigation, getFavorites, getHistory,
+    } = this.props;
     const { username, password } = this.state;
     if (username.length < 8 || password.length < 8) return;
     this.setState({ loading: true });
-    loginLocal({ username, password }).then(res => {
+    loginLocal({ username, password }).then((res) => {
       this.setState({ loading: false });
       if (res.error) return;
       getFavorites();
@@ -42,11 +47,13 @@ class LoginLocalComponent extends PureComponent {
         position: -70,
       });
       navigation.goBack();
-    }).catch(e => {
+    }).catch((e) => {
       this.setState({ loading: false });
     });
   };
+
   changFunc = key => value => this.setState({ [key]: value });
+
   render() {
     const { username, password, loading } = this.state;
     return (
@@ -57,7 +64,7 @@ class LoginLocalComponent extends PureComponent {
             iconName="user"
             onChange={this.onChangeUsername}
             onSubmit={this.onSubmit}
-            errorMessage={username && username.length < 8 && "用户名必须大于8位"}
+            errorMessage={username && username.length < 8 && '用户名必须大于8位'}
           />
           <LoginInput
             placeholder="密码"
@@ -65,7 +72,7 @@ class LoginLocalComponent extends PureComponent {
             iconName="lock"
             onSubmit={this.onSubmit}
             password
-            errorMessage={password && password.length < 8 && "密码必须大于8位"}
+            errorMessage={password && password.length < 8 && '密码必须大于8位'}
           />
         </InputContainStyled>
         <LoginButton
@@ -78,7 +85,7 @@ class LoginLocalComponent extends PureComponent {
           text="立即注册"
           onPress={() => this.props.navigation.navigate('Register')}
         />
-    </View>
+      </View>
     );
   }
 }

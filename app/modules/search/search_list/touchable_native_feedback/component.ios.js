@@ -5,8 +5,9 @@ export default function TouchableOpacityComponent(props) {
   return (
     <TouchableOpacity
       activeOpacity={0.6}
-      {...props}>
+      {...props}
+    >
       {props.children}
     </TouchableOpacity>
-  )
+  );
 }

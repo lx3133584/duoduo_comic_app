@@ -11,9 +11,7 @@ const initialState = Immutable.Map({
 });
 
 export default handleActions({
-  [`${discoveryListActions.getClassList}_FULFILLED`]: (state, action) => {
-    return state.set('class_list', Immutable.List(action.payload.data));
-  },
+  [`${discoveryListActions.getClassList}_FULFILLED`]: (state, action) => state.set('class_list', Immutable.List(action.payload.data)),
   [`${rankItemListActions.getRankItemList}_PENDING`]: (state, action) => {
     const { type } = action.payload;
     if (type === state.get('rank_item_type')) return state;
@@ -22,7 +20,7 @@ export default handleActions({
   },
   [`${rankItemListActions.getRankItemList}_FULFILLED`]: (state, action) => {
     if (!action.meta.page) {
-      state = state.update('rank_item_list', (list) => list.clear());
+      state = state.update('rank_item_list', list => list.clear());
     }
     return state.update('rank_item_list', list => list.concat(action.payload.data));
   },
@@ -34,8 +32,8 @@ export default handleActions({
   },
   [`${classItemListActions.getClassItemList}_FULFILLED`]: (state, action) => {
     if (!action.meta.page) {
-      state = state.update('class_item_list', (list) => list.clear());
+      state = state.update('class_item_list', list => list.clear());
     }
     return state.update('class_item_list', list => list.concat(action.payload.data));
   },
-}, initialState)
+}, initialState);

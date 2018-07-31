@@ -2,7 +2,9 @@ import React from 'react';
 import { View } from 'react-native';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import { brand_primary } from '../../../../theme';
-import { ComicDetailTop, ComicDetailBtns, ComicDetailTabs, DetailHeader, DetailBackButton } from '..';
+import {
+  ComicDetailTop, ComicDetailBtns, ComicDetailTabs, DetailHeader, DetailBackButton,
+} from '..';
 
 export default function ParallaxComponent({ hideLoading }) {
   return (
@@ -15,12 +17,13 @@ export default function ParallaxComponent({ hideLoading }) {
       stickyHeaderHeight={70}
       useNativeDriver
       renderForeground={() => (
-       <ComicDetailTop hideLoading={hideLoading} />
-      )}>
+        <ComicDetailTop hideLoading={hideLoading} />
+      )}
+    >
       <View>
         <ComicDetailBtns />
         <ComicDetailTabs />
       </View>
     </ParallaxScrollView>
-  )
+  );
 }

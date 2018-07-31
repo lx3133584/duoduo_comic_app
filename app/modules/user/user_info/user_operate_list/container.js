@@ -1,21 +1,19 @@
-import Component from './component';
 import { withNavigation } from 'react-navigation';
-import { logoutAction } from '../actions';
 import { connect } from 'react-redux';
+import Component from './component';
+import { logoutAction } from '../actions';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    info: state['user'].get('info'),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  info: state.user.get('info'),
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   logout() {
-    return dispatch(logoutAction())
+    return dispatch(logoutAction());
   },
-})
+});
 
 export default withNavigation(connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Component));
+  mapStateToProps,
+  mapDispatchToProps,
+)(Component));

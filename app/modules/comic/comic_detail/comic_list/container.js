@@ -1,31 +1,29 @@
 import { connect } from 'react-redux';
-import Component from './component';
 import { withNavigation } from 'react-navigation';
-import { getComicList } from '../actions';
 import { createSelector } from 'reselect';
+import Component from './component';
+import { getComicList } from '../actions';
 
-const listSelector = state => state['comic'].get('list');
+const listSelector = state => state.comic.get('list');
 
 const formatListSelector = createSelector(
   listSelector,
-  list => list.toJS()
+  list => list.toJS(),
 );
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    comic_id: state['comic'].getIn(['detail', 'id']),
-    list: formatListSelector(state),
-    chapter_id: state['comic'].getIn(['detail', 'chapter_id']),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  comic_id: state.comic.getIn(['detail', 'id']),
+  list: formatListSelector(state),
+  chapter_id: state.comic.getIn(['detail', 'chapter_id']),
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   getList(params) {
-    return dispatch(getComicList(params))
+    return dispatch(getComicList(params));
   },
-})
+});
 
 export default withNavigation(connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Component));
+  mapStateToProps,
+  mapDispatchToProps,
+)(Component));

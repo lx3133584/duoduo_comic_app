@@ -6,7 +6,5 @@ export const { getUserInfo, logoutAction } = createActions({
     const result = await fetchUserInfo();
     return result;
   },
-  LOGOUT_ACTION: async () => {
-    return await logout();
-  },
+  LOGOUT_ACTION: async () => await logout(),
 });

@@ -2,11 +2,9 @@ import { connect } from 'react-redux';
 import Component from './component';
 import { configActions } from '../../..';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    orientation: state['config'].get('orientation'),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  orientation: state.config.get('orientation'),
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   switchOrientation(params) {
@@ -18,9 +16,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   switchReadingMode(params) {
     return dispatch(configActions.switchReadingMode(params));
   },
-})
+});
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(Component);

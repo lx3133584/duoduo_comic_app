@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import styled from "styled-components";
+import styled from 'styled-components';
 import Toast from 'react-native-root-toast';
 import { brand_primary } from '../../../../theme';
 import { Modal } from '../../..';
@@ -9,12 +9,12 @@ import { ListItem } from '..';
 
 const ContainStyled = styled.View`
   padding-bottom: 20px;
-`
+`;
 
 const ItemContainStyled = styled.View`
   margin-top: 10px;
   background: #fff;
-`
+`;
 
 const list = [
   {
@@ -32,7 +32,7 @@ const list = [
   //   route: 'Favorites',
   //   index: 2,
   // },
-]
+];
 
 class UserOperateListComponent extends PureComponent {
   static propTypes = {
@@ -43,22 +43,29 @@ class UserOperateListComponent extends PureComponent {
       navigate: PropTypes.func.isRequired,
     }),
   };
+
   constructor(props) {
     super(props);
-  };
+  }
+
   state = {
     isVisible: false,
   };
+
   logout = () => {
     this.setState({ isVisible: true });
   };
+
   check = () => {
-    this.props.checkUpdate().then(res => {
-      if (!res) Toast.show('应用已是最新版本', {
-        position: -70,
-      });
-    })
+    this.props.checkUpdate().then((res) => {
+      if (!res) {
+        Toast.show('应用已是最新版本', {
+          position: -70,
+        });
+      }
+    });
   };
+
   confirm = () => {
     const { navigation, logout } = this.props;
     this.setState({ isVisible: false });
@@ -68,21 +75,25 @@ class UserOperateListComponent extends PureComponent {
     });
     // navigation.navigate('Login');
   };
-  cancel = ()  => {
+
+  cancel = () => {
     this.setState({ isVisible: false });
   };
+
   render() {
     const { isVisible } = this.state;
     const { info, navigation } = this.props;
     return (
       <ContainStyled>
         <ItemContainStyled>
-          {!!info.size && <ListItem
+          {!!info.size && (
+          <ListItem
             chevron
             key="user_info_edit"
             title="个人中心"
             onPress={() => navigation.navigate('UserInfoEdit')}
-          />}
+          />
+          )}
           {
             list.map(({ name, route, index }) => (
               <ListItem
@@ -97,21 +108,25 @@ class UserOperateListComponent extends PureComponent {
         <ItemContainStyled>
           <ListItem
             chevron
-            key='check'
-            title='检查更新'
+            key="check"
+            title="检查更新"
             onPress={this.check}
           />
-          {!!info.size && <ListItem
+          {!!info.size && (
+          <ListItem
             chevron
-            key='logout'
-            title='退出登录'
+            key="logout"
+            title="退出登录"
             onPress={this.logout}
-          />}
+          />
+          )}
         </ItemContainStyled>
         <Modal
           confirm={this.confirm}
           cancel={this.cancel}
-          isVisible={isVisible}>
+          isVisible={isVisible}
+        >
+
           是否确认退出登录？
         </Modal>
       </ContainStyled>
