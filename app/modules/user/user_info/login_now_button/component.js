@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
 import { brand_primary } from '../../../../theme';
 
@@ -22,7 +23,7 @@ const containerStyle = {
   alignItems: 'center',
 };
 
-export default function LoginNowButtonComponent({ navigation, large }) {
+function LoginNowButtonComponent({ navigation, large }) {
   return (
     <Button
       title="立即登录"
@@ -33,3 +34,13 @@ export default function LoginNowButtonComponent({ navigation, large }) {
     />
   );
 }
+LoginNowButtonComponent.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  large: PropTypes.bool,
+};
+LoginNowButtonComponent.defaultProps = {
+  large: false,
+};
+export default LoginNowButtonComponent;

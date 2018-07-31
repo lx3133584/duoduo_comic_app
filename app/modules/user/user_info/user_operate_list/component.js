@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 import Toast from 'react-native-root-toast';
-import { brand_primary } from '../../../../theme';
 import { Modal } from '../../..';
 import { ListItem } from '..';
 
@@ -41,12 +40,8 @@ class UserOperateListComponent extends PureComponent {
     checkUpdate: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
-    }),
+    }).isRequired,
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   state = {
     isVisible: false,
@@ -57,7 +52,8 @@ class UserOperateListComponent extends PureComponent {
   };
 
   check = () => {
-    this.props.checkUpdate().then((res) => {
+    const { checkUpdate } = this.props;
+    checkUpdate().then((res) => {
       if (!res) {
         Toast.show('应用已是最新版本', {
           position: -70,
@@ -67,7 +63,7 @@ class UserOperateListComponent extends PureComponent {
   };
 
   confirm = () => {
-    const { navigation, logout } = this.props;
+    const { logout } = this.props;
     this.setState({ isVisible: false });
     logout();
     Toast.show('注销成功', {

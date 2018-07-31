@@ -6,7 +6,7 @@ import {
   ComicDetailTop, ComicDetailBtns, ComicDetailTabs, DetailHeader, DetailBackButton,
 } from '..';
 
-export default function ParallaxComponent({ hideLoading }) {
+export default function ParallaxComponent(props) {
   return (
     <ParallaxScrollView
       backgroundColor={brand_primary}
@@ -17,7 +17,7 @@ export default function ParallaxComponent({ hideLoading }) {
       stickyHeaderHeight={70}
       useNativeDriver
       renderForeground={() => (
-        <ComicDetailTop hideLoading={hideLoading} />
+        <ComicDetailTop {...props} />
       )}
     >
       <View>

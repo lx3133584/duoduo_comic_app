@@ -1,4 +1,3 @@
-import React from 'react';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Dimensions } from 'react-native';
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
@@ -13,7 +12,7 @@ import {
   ClasskItemListScreen,
   ComicContentListDrawerScreen,
 } from '../modules';
-import { default as TabNavigator } from './tab_navigation';
+import TabNavigator from './tab_navigation';
 
 const { width } = Dimensions.get('window');
 
@@ -42,7 +41,7 @@ const RootStack = StackNavigator(
     ClasskItemList: { screen: ClasskItemListScreen },
   },
   {
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: () => ({
       header: null,
     }),
     transitionConfig: () => ({

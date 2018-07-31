@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BackHandler, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, NavigationActions } from 'react-navigation';
@@ -7,6 +8,11 @@ import AppNavigator from './stack_navigation';
 import { addListener } from '../store';
 
 class NavigationWithState extends React.Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    nav: PropTypes.object.isRequired,
+  }
+
   constructor() {
     super();
     this.canExit = false;

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { FavoritesListItem, Modal } from '..';
 import styled from 'styled-components';
 import { LongList } from '../../..';
-import { brand_primary } from '../../../../theme';
 
 const ContainStyled = styled.View`
   padding-top: 15px;
@@ -17,11 +16,7 @@ class FavoritesListComponent extends PureComponent {
     list: ImmutablePropTypes.list.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
-    }),
-  };
-
-  state = {
-    isVisible: false,
+    }).isRequired,
   };
 
   constructor(props) {
@@ -33,8 +28,17 @@ class FavoritesListComponent extends PureComponent {
     this.navigate = props.navigation.navigate.bind(this);
   }
 
+  state = {
+    isVisible: false,
+  };
+
   componentDidMount() {
     this.onFetch();
+  }
+
+  async onFetch() {
+    const { getList } = this.props;
+    await getList();
   }
 
   removeFavorite(id) {
@@ -43,26 +47,23 @@ class FavoritesListComponent extends PureComponent {
   }
 
   confirm() {
+    const { remove } = this.props;
     this.setState({ isVisible: false });
-    this.props.remove(this.id);
+    remove(this.id);
   }
 
   cancel() {
     this.setState({ isVisible: false });
   }
 
-  async onFetch() {
-    const { getList } = this.props;
-    return await getList();
-  }
-
   render() {
-    const list = this.props.list.toJS();
+    const { list } = this.props;
+    const listFormat = list.toJS();
     const { isVisible } = this.state;
     return (
       <ContainStyled>
         <LongList
-          list={list}
+          list={listFormat}
           Item={FavoritesListItem}
           itemOnLongPress={this.removeFavorite}
           itemOnPress={this.navigate}

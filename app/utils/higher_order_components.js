@@ -1,7 +1,7 @@
+/* eslint-disable */
 import React, { PureComponent } from 'react';
 import {
   Platform,
-  View,
   Linking,
 } from 'react-native';
 import {
@@ -12,9 +12,8 @@ import {
   switchVersion,
   switchVersionLater,
 } from 'react-native-update';
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions, withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
-import { withNavigation } from 'react-navigation';
 import { createSelector } from 'reselect';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import _updateConfig from '../../update.json';
@@ -49,9 +48,6 @@ const { appKey } = _updateConfig[Platform.OS];
 // 提供热更新功能的高阶组件
 export const wrapWithUpdate = function (WrappedComponent) {
   class NewComponent extends PureComponent {
-    constructor() {
-      super();
-    }
 
     componentWillMount() {
       if (isFirstTime) markSuccess(); // 确认更新成功, 有报错则回滚版本

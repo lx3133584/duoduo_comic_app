@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { brand_primary } from '../../../../theme';
 import { Header } from '../../../../navigation';
 
@@ -7,7 +8,7 @@ const ContainStyled = styled.View`
   padding-top: 20px;
   background: ${brand_primary};
 `;
-export default function DetailHeaderComponent({ navigation, title }) {
+function DetailHeaderComponent({ navigation, title }) {
   return (
     <ContainStyled>
       <Header
@@ -18,3 +19,13 @@ export default function DetailHeaderComponent({ navigation, title }) {
     </ContainStyled>
   );
 }
+DetailHeaderComponent.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    state: PropTypes.shape({
+      params: PropTypes.object,
+    }),
+  }).isRequired,
+  title: PropTypes.string.isRequired,
+};
+export default DetailHeaderComponent;
