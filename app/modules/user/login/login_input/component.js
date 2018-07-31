@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styled from 'styled-components';
-import { brand_primary, red } from '../../../../theme';
+import { brand_primary, red } from '~/theme';
 
 const ContainStyled = styled.View`
   margin: 5px 40px;

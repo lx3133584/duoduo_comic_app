@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { brand_primary } from '../../../../theme';
+import { brand_primary } from '~/theme';
 
 const ICON_SIZE = 16;
 const ICON_COLOR = '#fff';

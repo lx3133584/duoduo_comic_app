@@ -4,7 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {
   green, red, blue_purple, yellow,
-} from '../../../../theme';
+} from '~/theme';
 
 const ICON_SIZE = 20;
 const ICON_COLOR = '#fff';

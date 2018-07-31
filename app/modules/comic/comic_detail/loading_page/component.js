@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Progress } from '..';
 import { Dimensions } from 'react-native';
-import { brand_primary } from '../../../../theme';
+import { brand_primary } from '~/theme';
 
 const { width: clientWidth, height } = Dimensions.get('window');
 

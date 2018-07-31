@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { brand_primary } from '../../../../theme';
-import { Header } from '../../../../navigation';
+import { brand_primary } from '~/theme';
+import { Header } from '~/navigation';
 
 const ContainStyled = styled.View`
   padding-top: 20px;

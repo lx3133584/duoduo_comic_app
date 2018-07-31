@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { StatusBar, Dimensions } from 'react-native';
 import { FavoritesListTabs } from '.';
-import { brand_primary } from '../../../theme';
+import { brand_primary } from '~/theme';
 
 const { height } = Dimensions.get('window');
 

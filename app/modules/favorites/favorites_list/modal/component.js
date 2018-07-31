@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Button } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 import Modal from 'react-native-modal';
-import { brand_primary } from '../../../../theme';
+import { brand_primary } from '~/theme';
 
 const { width } = Dimensions.get('window');
 

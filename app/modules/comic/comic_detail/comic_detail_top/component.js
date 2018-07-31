@@ -6,7 +6,7 @@ import { BlurView } from 'react-native-blur';
 import {
   Image, Dimensions, findNodeHandle,
 } from 'react-native';
-import { numberFormat } from '../../../../utils';
+import { numberFormat } from '~/utils';
 
 const { width } = Dimensions.get('window');
 

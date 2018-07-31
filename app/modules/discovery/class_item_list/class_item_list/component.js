@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { LongList, LoadingPage, SearchListItem } from '../../..';
-import { wrapWithLoading } from '../../../../utils';
+import { LongList, LoadingPage, SearchListItem } from '@';
+import { wrapWithLoading } from '~/utils';
 
 const ContainStyled = styled.View`
   padding-top: 15px;

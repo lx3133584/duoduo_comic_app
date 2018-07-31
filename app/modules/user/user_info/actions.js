@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions';
-import { fetchUserInfo, logout } from '../../../api';
+import { fetchUserInfo, logout } from '~/api';
 
 export const { getUserInfo, logoutAction } = createActions({
   GET_USER_INFO: async () => {

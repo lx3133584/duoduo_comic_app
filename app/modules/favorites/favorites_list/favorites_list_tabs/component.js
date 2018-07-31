@@ -7,8 +7,8 @@ import { Dimensions } from 'react-native';
 import {
   TabViewAnimated, TabViewPagerPan, TabBar,
 } from 'react-native-tab-view';
-import { LoginNowButton } from '../../..';
-import { brand_primary } from '../../../../theme';
+import { LoginNowButton } from '@';
+import { brand_primary } from '~/theme';
 
 const { width, height } = Dimensions.get('window');
 

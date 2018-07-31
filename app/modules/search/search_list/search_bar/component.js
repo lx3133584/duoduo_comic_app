@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { SearchBar } from 'react-native-elements';
 import PropTypes from 'prop-types';
-import { brand_primary } from '../../../../theme';
+import { brand_primary } from '~/theme';
 
 const containerStyle = {
   borderTopWidth: 0,

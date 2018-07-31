@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Component from './component';
-import { configActions } from '../../..';
+import { configActions } from '@';
 
 const mapStateToProps = state => ({
   brightness: state.config.get('brightness'),

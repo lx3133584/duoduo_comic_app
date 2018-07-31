@@ -29,5 +29,16 @@ module.exports = {
       "import/prefer-default-export": 0,
       "react/forbid-prop-types": [0, { "forbid": ["any", "array", "object"] }],
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    },
+    "settings": {
+      "import/resolver": {
+        "babel-plugin-root-import": [{
+           "rootPathPrefix": "~",
+           "rootPathSuffix": "app"
+         }, {
+           "rootPathPrefix": "@",
+           "rootPathSuffix": "app/modules"
+         }]
+      }
     }
 };

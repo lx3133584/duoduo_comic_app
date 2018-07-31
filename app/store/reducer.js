@@ -7,8 +7,8 @@ import {
   discoveryReducer,
   cookiesReducer,
   configReducer,
-} from '../modules';
-import navReducer from '../navigation/reducer';
+} from '@';
+import navReducer from '~/navigation/reducer';
 
 export default combineReducers({
   comic: comicReducer,

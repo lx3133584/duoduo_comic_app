@@ -4,8 +4,8 @@ import { Slider } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import Feather from 'react-native-vector-icons/Feather';
-import { brand_primary } from '../../../../theme';
-import { wrapWithReplace } from '../../../../utils';
+import { brand_primary } from '~/theme';
+import { wrapWithReplace } from '~/utils';
 
 const ICON_SIZE = 20;
 const ICON_COLOR = '#fff';

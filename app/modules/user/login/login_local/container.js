@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { loginForLocal } from '../actions';
-import { favoritesListActions } from '../../..';
+import { favoritesListActions } from '@';
 import Component from './component';
 
 const mapDispatchToProps = dispatch => ({

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Rating from 'react-native-star-rating';
 import { RatingModal } from '..';
-import { TouchableNativeFeedback } from '../../..';
-import { numberFormat } from '../../../../utils';
-import { yellow } from '../../../../theme';
+import { TouchableNativeFeedback } from '@';
+import { numberFormat } from '~/utils';
+import { yellow } from '~/theme';
 
 const ContainStyled = styled.View`
   height: 75px;

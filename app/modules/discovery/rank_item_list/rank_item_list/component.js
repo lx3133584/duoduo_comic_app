@@ -3,8 +3,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { RankItemListItem } from '..';
 import styled from 'styled-components';
-import { LongList, LoadingPage } from '../../..';
-import { wrapWithLoading } from '../../../../utils';
+import { LongList, LoadingPage } from '@';
+import { wrapWithLoading } from '~/utils';
 
 const ContainStyled = styled.View`
   padding-top: 15px;

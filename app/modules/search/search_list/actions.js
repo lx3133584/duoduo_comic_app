@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions';
-import { searchLocal } from '../../../api';
+import { searchLocal } from '~/api';
 
 export const { getSearchList } = createActions({
   GET_SEARCH_LIST: async ({ keyword, page }) => {

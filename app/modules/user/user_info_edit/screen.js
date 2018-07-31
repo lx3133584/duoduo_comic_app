@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { StatusBar, View } from 'react-native';
-import { brand_primary } from '../../../theme';
+import { brand_primary } from '~/theme';
 import { UserInfoEditList } from '.';
 
 class UserInfoEditScreen extends PureComponent {

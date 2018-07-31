@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from 'react-native-elements';
-import baseURL from '../../../../api/base_url';
+import baseURL from '~/api/base_url';
 
 import avatarImg from './avatar.jpg';
 

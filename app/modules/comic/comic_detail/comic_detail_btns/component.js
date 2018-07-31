@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import { Button } from 'react-native-elements';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { brand_primary } from '../../../../theme';
-import { Modal } from '../../..';
-import { numberFormat } from '../../../../utils';
+import { brand_primary } from '~/theme';
+import { Modal } from '@';
+import { numberFormat } from '~/utils';
 
 const { width } = Dimensions.get('window');
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 import Toast from 'react-native-root-toast';
-import { Modal } from '../../..';
+import { Modal } from '@';
 import { ListItem } from '..';
 
 const ContainStyled = styled.View`

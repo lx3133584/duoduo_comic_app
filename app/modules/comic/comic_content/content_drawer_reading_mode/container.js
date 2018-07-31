@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Component from './component';
-import { configActions } from '../../..';
+import { configActions } from '@';
 import { goToIndex } from '../actions';
 
 const mapStateToProps = state => ({

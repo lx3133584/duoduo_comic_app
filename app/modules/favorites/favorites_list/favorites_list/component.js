@@ -3,7 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { FavoritesListItem, Modal } from '..';
 import styled from 'styled-components';
-import { LongList } from '../../..';
+import { LongList } from '@';
 
 const ContainStyled = styled.View`
   padding-top: 15px;

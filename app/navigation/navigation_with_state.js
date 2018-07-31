@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, NavigationActions } from 'react-navigation';
 import Toast from 'react-native-root-toast';
 import AppNavigator from './stack_navigation';
-import { addListener } from '../store';
+import { addListener } from '~/store';
 
 class NavigationWithState extends React.Component {
   static propTypes = {

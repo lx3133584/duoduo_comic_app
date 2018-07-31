@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { LongListItem } from '..';
 import { Badge } from 'react-native-elements';
-import { green, red, purple } from '../../../../theme';
+import { green, red, purple } from '~/theme';
 
 const ContainStyled = styled.View`
   flex-direction: row;

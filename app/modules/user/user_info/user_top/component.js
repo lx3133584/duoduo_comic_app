@@ -3,7 +3,7 @@ import { Avatar, LoginNowButton } from '..';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { brand_primary } from '../../../../theme';
+import { brand_primary } from '~/theme';
 
 const ContainStyled = styled.View`
   height: 260px;

@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions';
-import { fetchContentList, postHistory } from '../../../api';
+import { fetchContentList, postHistory } from '~/api';
 
 export const {
   getContentList,

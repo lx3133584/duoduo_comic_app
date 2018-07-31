@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Progress from 'react-native-progress/Bar';
 import { Dimensions } from 'react-native';
-import { brand_primary } from '../../../../theme';
+import { brand_primary } from '~/theme';
 
 const { width } = Dimensions.get('window');
 

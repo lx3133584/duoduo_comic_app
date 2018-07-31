@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
-import { brand_primary } from '../../../../theme';
+import { brand_primary } from '~/theme';
 import {
   ComicDetailTop, ComicDetailBtns, ComicDetailTabs, DetailHeader, DetailBackButton,
 } from '..';

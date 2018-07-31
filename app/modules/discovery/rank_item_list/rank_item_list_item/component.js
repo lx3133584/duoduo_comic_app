@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Badge } from 'react-native-elements';
-import { LongListItem } from '../../..';
+import { LongListItem } from '@';
 import { rankTypes } from '../..';
-import { numberFormat } from '../../../../utils';
+import { numberFormat } from '~/utils';
 
 const ContainStyled = styled.View`
   flex-direction: row;

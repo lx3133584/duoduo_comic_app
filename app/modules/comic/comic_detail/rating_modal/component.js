@@ -5,7 +5,7 @@ import { Button } from 'react-native-elements';
 import Rating from 'react-native-star-rating';
 import { Dimensions } from 'react-native';
 import Modal from 'react-native-modal';
-import { yellow } from '../../../../theme';
+import { yellow } from '~/theme';
 
 const { width } = Dimensions.get('window');
 

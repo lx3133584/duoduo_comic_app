@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { ScrollView, StatusBar } from 'react-native';
 import { UserTop, UserOperateList } from '.';
-import { brand_primary } from '../../../theme';
-import { wrapWithUpdate } from '../../../utils';
+import { brand_primary } from '~/theme';
+import { wrapWithUpdate } from '~/utils';
 
 @wrapWithUpdate
 class UserInfoScreen extends PureComponent {

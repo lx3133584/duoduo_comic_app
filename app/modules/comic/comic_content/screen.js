@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import Orientation from 'react-native-orientation';
 import DeviceBrightness from 'react-native-device-brightness';
 import { ContentList, ContentStatusBar, ContentDrawerManager } from '.';
-import { wrapWithLoading } from '../../../utils';
+import { wrapWithLoading } from '~/utils';
 import { configActions } from '../..';
 
 const ContainStyled = styled.View`

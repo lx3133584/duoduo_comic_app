@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
-import { brand_primary } from '../../../../theme';
+import { brand_primary } from '~/theme';
 
 const ContainStyled = styled.View`
   flex: 1;

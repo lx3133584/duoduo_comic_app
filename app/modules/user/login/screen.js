@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { StatusBar, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Brand, LoginLocal } from '.';
-import { brand_primary } from '../../../theme';
-import { Header } from '../../../navigation';
+import { brand_primary } from '~/theme';
+import { Header } from '~/navigation';
 
 const { height } = Dimensions.get('window');
 

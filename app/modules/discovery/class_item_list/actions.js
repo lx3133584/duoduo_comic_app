@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions';
-import { fetchClassItemList } from '../../../api';
+import { fetchClassItemList } from '~/api';
 
 export const { getClassItemList } = createActions({
   GET_CLASS_ITEM_LIST: [

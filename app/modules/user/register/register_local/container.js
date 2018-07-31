@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { registerForLocal } from '../actions';
-import { favoritesListActions } from '../../..';
+import { favoritesListActions } from '@';
 import Component from './component';
 
 const mapDispatchToProps = dispatch => ({

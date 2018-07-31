@@ -11,7 +11,7 @@ import {
   RankItemListScreen,
   ClasskItemListScreen,
   ComicContentListDrawerScreen,
-} from '../modules';
+} from '@';
 import TabNavigator from './tab_navigation';
 
 const { width } = Dimensions.get('window');

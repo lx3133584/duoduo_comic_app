@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { getFavoritesList } from '../actions';
-import { comicDetailActions } from '../../../comic';
+import { comicDetailActions } from '@/comic';
 import Component from './component';
 
 const mapStateToProps = state => ({

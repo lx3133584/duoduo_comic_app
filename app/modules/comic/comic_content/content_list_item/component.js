@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'react-native';
 import { ImgPlaceholder } from '..';
-import { wrapWithLoading, getImgHeight } from '../../../../utils';
+import { wrapWithLoading, getImgHeight } from '~/utils';
 
 const { prefetch } = Image;
 

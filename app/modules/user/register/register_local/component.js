@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Toast from 'react-native-root-toast';
 import { LoginInput, LoginButton } from '../..';
-import { wrapWithGoBack } from '../../../../utils';
+import { wrapWithGoBack } from '~/utils';
 
 const InputContainStyled = styled.View`
   margin-bottom: 30px;

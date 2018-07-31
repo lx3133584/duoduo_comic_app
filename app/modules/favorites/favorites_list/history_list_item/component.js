@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Badge } from 'react-native-elements';
-import { LongListItem } from '../../..';
-import { green, red } from '../../../../theme';
+import { LongListItem } from '@';
+import { green, red } from '~/theme';
 
 const ContainStyled = styled.View`
   flex-direction: row;

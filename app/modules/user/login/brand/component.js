@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Image } from 'react-native';
-import { brand_primary } from '../../../../theme';
+import { brand_primary } from '~/theme';
 
-import logoImg from './logo/png';
+import logoImg from './logo.png';
 
 const ContainStyled = styled.View`
   padding: 30px 0;

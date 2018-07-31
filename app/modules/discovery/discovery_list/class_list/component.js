@@ -3,7 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ClassListItem } from '..';
-import { LongList } from '../../..';
+import { LongList } from '@';
 
 const ContainStyled = styled.View`
   padding-bottom: 125px;

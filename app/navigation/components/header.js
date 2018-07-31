@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Header } from 'react-native-elements';
 import PropTypes from 'prop-types';
-import { brand_primary } from '../../theme';
+import { brand_primary } from '~/theme';
 import LeftButton from './left_button';
 
 const centerTextStyle = {

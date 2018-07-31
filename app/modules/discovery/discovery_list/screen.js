@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { StatusBar, Dimensions } from 'react-native';
 import styled from 'styled-components';
 import { ClassList, RankList } from '.';
-import { brand_primary } from '../../../theme';
-import { Header } from '../../../navigation';
+import { brand_primary } from '~/theme';
+import { Header } from '~/navigation';
 
 const { height, width } = Dimensions.get('window');
 

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-root-toast';
 import { TouchableOpacity } from 'react-native';
-import { Header } from '../../../../navigation';
-import { brand_primary, red } from '../../../../theme';
+import { Header } from '~/navigation';
+import { brand_primary, red } from '~/theme';
 import { ListItem } from '../..';
 
 const ContainStyled = styled.View`

@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions';
-import { fetchFavoritesList, fetchHistoryList, deleteHistory } from '../../../api';
+import { fetchFavoritesList, fetchHistoryList, deleteHistory } from '~/api';
 
 export const { getFavoritesList, getHistoryList, removeHistory } = createActions({
   GET_FAVORITES_LIST: async () => {

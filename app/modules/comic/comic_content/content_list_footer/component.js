@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
 import { Image, Dimensions } from 'react-native';
-import { wrapWithReplace } from '../../../../utils';
+import { wrapWithReplace } from '~/utils';
 
 const { width } = Dimensions.get('window');
 const { prefetch } = Image;

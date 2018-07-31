@@ -1,9 +1,10 @@
 import { TabNavigator, TabBarBottom } from 'react-navigation';
+
+import { brand_primary } from '~/theme';
+import { TabBar } from './components';
 import {
   FavoritesListScreen, SearchListScreen, DiscoveryListScreen, UserInfoScreen,
-} from '../modules';
-import { brand_primary } from '../theme';
-import { TabBar } from './components';
+} from '@';
 
 export default TabNavigator({
   Favorites: { screen: FavoritesListScreen },

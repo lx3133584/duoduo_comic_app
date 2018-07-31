@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { brand_primary } from '../../../../theme';
+import { brand_primary } from '~/theme';
 
 const ContainStyled = styled.View`
   padding-left: 10px;

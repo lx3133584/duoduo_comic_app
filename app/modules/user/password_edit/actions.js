@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions';
-import { changePassword } from '../../../api';
+import { changePassword } from '~/api';
 
 export const { editPassword } = createActions({
   EDIT_PASSWORD:

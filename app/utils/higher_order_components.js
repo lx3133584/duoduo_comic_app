@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import _updateConfig from '../../update.json';
-import { Modal } from '../modules';
+import { Modal } from '@';
 
 // 提供loading状态的高阶组件
 export const wrapWithLoading = function (WrappedComponent) {

@@ -1,7 +1,7 @@
 import { createActions } from 'redux-actions';
 import {
   fetchComicDetail, fetchComicList, postFavorite, deleteFavorite, postScore,
-} from '../../../api';
+} from '~/api';
 
 export const {
   getComicDetail, getComicList, addFavorite, removeFavorite, addScore,

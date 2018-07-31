@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import DeviceBrightness from 'react-native-device-brightness';
-import { brand_primary } from '../../../../theme';
+import { brand_primary } from '~/theme';
 
 const ICON_SIZE = 20;
 const ICON_COLOR = '#fff';

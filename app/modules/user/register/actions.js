@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions';
-import { registerLocal } from '../../../api';
+import { registerLocal } from '~/api';
 
 export const { registerForLocal } = createActions({
   REGISTER_FOR_LOCAL: async ({ username, password, rePassword }) => {

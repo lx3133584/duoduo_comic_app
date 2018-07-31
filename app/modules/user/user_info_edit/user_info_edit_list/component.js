@@ -6,8 +6,8 @@ import Toast from 'react-native-root-toast';
 import ImagePicker from 'react-native-image-picker';
 import ActionSheet from 'react-native-actionsheet';
 import { TouchableOpacity } from 'react-native';
-import { Header } from '../../../../navigation';
-import { brand_primary } from '../../../../theme';
+import { Header } from '~/navigation';
+import { brand_primary } from '~/theme';
 import { Avatar, ListItem } from '../..';
 
 const ContainStyled = styled.View`

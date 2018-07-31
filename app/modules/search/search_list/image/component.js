@@ -4,7 +4,7 @@ import Image from 'react-native-image-progress';
 import Progress from 'react-native-progress/CircleSnail';
 import {
   green, red, purple,
-} from '../../../../theme';
+} from '~/theme';
 
 const indicatorProps = {
   color: [red, green, purple],

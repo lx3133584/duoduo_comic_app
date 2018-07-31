@@ -2,10 +2,10 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { StatusBar, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { brand_primary } from '../../../theme';
+import { brand_primary } from '~/theme';
 import { RegisterLocal } from '.';
 import { Brand } from '..';
-import { Header } from '../../../navigation';
+import { Header } from '~/navigation';
 
 const { height } = Dimensions.get('window');
 

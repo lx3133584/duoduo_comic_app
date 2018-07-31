@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { SectionList, Dimensions } from 'react-native';
 import { ComicListItem, ComicListCategory, Progress } from '..';
 import styled from 'styled-components';
-import { wrapWithLoading } from '../../../../utils';
+import { wrapWithLoading } from '~/utils';
 
 const { height } = Dimensions.get('window');
 const initNumber = Math.ceil(height / 50);
