@@ -3,7 +3,7 @@ import { registerForLocal } from '../actions';
 import { favoritesListActions } from '../../..';
 import Component from './component';
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   registerLocal(params) {
     return dispatch(registerForLocal(params));
   },

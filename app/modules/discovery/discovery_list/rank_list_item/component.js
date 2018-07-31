@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TouchableOpacity } from 'react-native';
-import { Dimensions } from 'react-native';
-import baseURL from '../../../../api/base_url';
+import PropTypes from 'prop-types';
+import { TouchableOpacity, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 const containWidth = width / 2 - 25;
@@ -21,13 +20,7 @@ const TitleStyled = styled.Text`
   color: #fff;
   font-size: 16px;
 `;
-const ImageBoxStyled = styled.View`
-  border-radius: 999px;
-  width: 80;
-  height: 80;
-  overflow: hidden;
-`;
-export default function RankListItem({
+function RankListItem({
   id, name, color, Icon, navigation,
 }) {
   return (
@@ -44,3 +37,13 @@ export default function RankListItem({
     </TouchableOpacity>
   );
 }
+RankListItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  Icon: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
+export default RankListItem;

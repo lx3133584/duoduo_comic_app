@@ -2,12 +2,8 @@ import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Dimensions } from 'react-native';
 import { LongList, LoadingPage, SearchListItem } from '../../..';
-import { brand_primary } from '../../../../theme';
 import { wrapWithLoading } from '../../../../utils';
-
-const { height } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   padding-top: 15px;
@@ -25,7 +21,7 @@ class ClassItemListComponent extends PureComponent {
       state: PropTypes.shape({
         params: PropTypes.object.isRequired,
       }),
-    }),
+    }).isRequired,
   };
 
   constructor(props) {
@@ -48,13 +44,13 @@ class ClassItemListComponent extends PureComponent {
   }
 
   render() {
-    const list = this.props.list.toJS();
-    const { loading } = this.props;
+    const { loading, list } = this.props;
+    const listFormat = list.toJS();
     return ([
       <LoadingPage show={loading} key="loading" />,
       <ContainStyled key="main">
         <LongList
-          list={list}
+          list={listFormat}
           Item={SearchListItem}
           itemOnPress={this.navigate}
           onFetch={this.onFetch}

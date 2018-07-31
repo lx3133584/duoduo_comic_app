@@ -25,9 +25,13 @@ class SearchBarComponent extends PureComponent {
     keyword: PropTypes.string,
   };
 
+  static defaultProps = {
+    keyword: '',
+  }
+
   constructor(props) {
     super(props);
-    const { keyword = '' } = props;
+    const { keyword } = props;
     this.state = {
       value: keyword,
       loading: false,

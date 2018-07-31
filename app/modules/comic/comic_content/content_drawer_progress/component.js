@@ -27,6 +27,8 @@ const thumbTouchSize = {
 };
 @wrapWithReplace('ComicContent')
 class ContentDrawerProgressComponent extends PureComponent {
+  static height = 50;
+
   static propTypes = {
     goIndex: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
@@ -35,15 +37,13 @@ class ContentDrawerProgressComponent extends PureComponent {
     prev: PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-    }),
+    }).isRequired,
     next: PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-    }),
+    }).isRequired,
     replace: PropTypes.func.isRequired,
   };
-
-  static height = 50;
 
   goIndex = (value) => {
     const { goIndex } = this.props;

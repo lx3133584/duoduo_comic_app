@@ -14,12 +14,13 @@ class LeftButton extends PureComponent {
   static propTypes = {
     navigation: PropTypes.shape({
       goBack: PropTypes.func.isRequired,
-    }),
+    }).isRequired,
   };
 
   render() {
+    const { navigation } = this.props;
     return (
-      <TouchableOpacity onPress={() => this.props.navigation.goBack(null)}>
+      <TouchableOpacity onPress={() => navigation.goBack(null)}>
         <ContainStyled>
           <BackIcon />
         </ContainStyled>

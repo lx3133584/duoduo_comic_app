@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
-import styled from 'styled-components';
 import { brand_primary } from '../../../../theme';
 
 const buttonStyle = {
@@ -22,12 +22,12 @@ const containerStyle = {
   alignItems: 'center',
 };
 
-export default function LoginButtonComponent({
+function LoginButtonComponent({
   text, loading, onPress, outline,
 }) {
   return (
     <Button
-      title={text || '登  录'}
+      title={text}
       loading={loading}
       containerStyle={containerStyle}
       titleStyle={[textStyle, outline && { color: brand_primary }]}
@@ -36,3 +36,15 @@ export default function LoginButtonComponent({
     />
   );
 }
+LoginButtonComponent.propTypes = {
+  text: PropTypes.string,
+  loading: PropTypes.bool,
+  outline: PropTypes.bool,
+  onPress: PropTypes.func.isRequired,
+};
+LoginButtonComponent.defaultProps = {
+  text: '登  录',
+  loading: false,
+  outline: false,
+};
+export default LoginButtonComponent;

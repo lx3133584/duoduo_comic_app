@@ -46,10 +46,15 @@ const textStyle = {
 class RatingModalComponent extends PureComponent {
   static propTypes = {
     isVisible: PropTypes.bool.isRequired,
-    cancel: PropTypes.func,
+    cancel: PropTypes.func.isRequired,
     add: PropTypes.func.isRequired,
-    id: PropTypes.number,
+    id: PropTypes.number.isRequired,
+    my_score: PropTypes.number,
   };
+
+  static defaultProps = {
+    my_score: 0,
+  }
 
   constructor(props) {
     super(props);

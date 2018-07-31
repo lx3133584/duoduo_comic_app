@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
@@ -30,7 +31,7 @@ const icon_map = {
   progress: SliderIcon,
 };
 
-export default function ContentDrawerIconComponent({ icon_type = 'setting', title = '设置', onPress }) {
+function ContentDrawerIconComponent({ icon_type, title, onPress }) {
   const Icon = icon_map[icon_type];
   return (
     <TouchableOpacity onPress={onPress}>
@@ -43,3 +44,14 @@ export default function ContentDrawerIconComponent({ icon_type = 'setting', titl
     </TouchableOpacity>
   );
 }
+ContentDrawerIconComponent.propTypes = {
+  icon_type: PropTypes.string,
+  title: PropTypes.string,
+  onPress: PropTypes.func,
+};
+ContentDrawerIconComponent.defaultProps = {
+  icon_type: 'setting',
+  title: '设置',
+  onPress: f => f,
+};
+export default ContentDrawerIconComponent;

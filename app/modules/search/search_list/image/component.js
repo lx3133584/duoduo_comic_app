@@ -1,15 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Image from 'react-native-image-progress';
 import Progress from 'react-native-progress/CircleSnail';
 import {
-  brand_primary, green, red, purple,
+  green, red, purple,
 } from '../../../../theme';
 
 const indicatorProps = {
   color: [red, green, purple],
 };
 
-export default function ImageComponent({ source, imageStyle }) {
+function ImageComponent({ source, imageStyle }) {
   return (
     <Image
       source={source}
@@ -20,3 +21,16 @@ export default function ImageComponent({ source, imageStyle }) {
     />
   );
 }
+ImageComponent.propTypes = {
+  source: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.shape({
+      uri: PropTypes.string,
+    }),
+  ]).isRequired,
+  imageStyle: PropTypes.object,
+};
+ImageComponent.defaultProps = {
+  imageStyle: {},
+};
+export default ImageComponent;

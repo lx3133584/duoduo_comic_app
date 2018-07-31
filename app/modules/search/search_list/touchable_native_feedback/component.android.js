@@ -1,13 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TouchableNativeFeedback } from 'react-native';
 
-export default function TouchableNativeFeedbackComponent(props) {
+function TouchableNativeFeedbackComponent(props) {
+  const { children } = props;
   return (
     <TouchableNativeFeedback
       {...props}
       background={TouchableNativeFeedback.SelectableBackground()}
     >
-      {props.children}
+      {children}
     </TouchableNativeFeedback>
   );
 }
+TouchableNativeFeedbackComponent.propTypes = {
+  children: PropTypes.element.isRequired,
+};
+export default TouchableNativeFeedbackComponent;

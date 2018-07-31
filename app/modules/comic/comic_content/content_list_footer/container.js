@@ -28,16 +28,16 @@ const indexSelector = createSelector(
 const nextItemSelector = createSelector(
   [chaptersSelector, indexSelector],
   (chapters, index) => {
-    if (index === chapters.length - 1) return false;
+    if (index === chapters.length - 1) return null;
     return chapters[index + 1];
   },
 );
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   next: nextItemSelector(state),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getList(params) {
     return dispatch(getContentList(params));
   },

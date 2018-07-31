@@ -3,12 +3,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { RankItemListItem } from '..';
 import styled from 'styled-components';
-import { Dimensions } from 'react-native';
 import { LongList, LoadingPage } from '../../..';
-import { brand_primary } from '../../../../theme';
 import { wrapWithLoading } from '../../../../utils';
-
-const { height } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   padding-top: 15px;
@@ -26,7 +22,7 @@ class RankItemListComponent extends PureComponent {
       state: PropTypes.shape({
         params: PropTypes.object.isRequired,
       }),
-    }),
+    }).isRequired,
   };
 
   constructor(props) {
@@ -51,13 +47,13 @@ class RankItemListComponent extends PureComponent {
   renderItem = props => <RankItemListItem {...props} type={this.type} />;
 
   render() {
-    const list = this.props.list.toJS();
-    const { loading } = this.props;
+    const { list, loading } = this.props;
+    const listFormat = list.toJS();
     return ([
       <LoadingPage show={loading} key="loading" />,
       <ContainStyled key="main">
         <LongList
-          list={list}
+          list={listFormat}
           Item={this.renderItem}
           itemOnPress={this.navigate}
           onFetch={this.onFetch}

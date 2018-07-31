@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Progress } from '..';
 import { Dimensions } from 'react-native';
 import { brand_primary } from '../../../../theme';
@@ -27,7 +28,7 @@ const TextStyled = styled.Text`
   margin-top: 10px;
 `;
 
-export default function ProgressComponent({ show, width = clientWidth }) {
+function ProgressComponent({ show, width }) {
   if (!show) return null;
   return (
     <ContainStyled style={{ width }}>
@@ -40,3 +41,13 @@ export default function ProgressComponent({ show, width = clientWidth }) {
     </ContainStyled>
   );
 }
+ProgressComponent.propTypes = {
+  show: PropTypes.bool,
+  width: PropTypes.number,
+};
+ProgressComponent.defaultProps = {
+  show: false,
+  width: clientWidth,
+};
+
+export default ProgressComponent;

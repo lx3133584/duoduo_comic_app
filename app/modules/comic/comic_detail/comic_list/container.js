@@ -11,13 +11,13 @@ const formatListSelector = createSelector(
   list => list.toJS(),
 );
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   comic_id: state.comic.getIn(['detail', 'id']),
   list: formatListSelector(state),
   chapter_id: state.comic.getIn(['detail', 'chapter_id']),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getList(params) {
     return dispatch(getComicList(params));
   },

@@ -3,12 +3,12 @@ import { withNavigation } from 'react-navigation';
 import { getSearchList } from '../actions';
 import Component from './component';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   list: state.search.get('list'),
   keyword: state.search.get('keyword'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   search(params) {
     return dispatch(getSearchList(params));
   },

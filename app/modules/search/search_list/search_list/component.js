@@ -10,7 +10,7 @@ class SearchListComponent extends PureComponent {
     keyword: PropTypes.string.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
-    }),
+    }).isRequired,
   };
 
   constructor(props) {
@@ -22,14 +22,15 @@ class SearchListComponent extends PureComponent {
   async onFetch(page) {
     const { keyword, search } = this.props;
     if (!keyword) return;
-    return await search({ page, keyword });
+    await search({ page, keyword });
   }
 
   render() {
-    const list = this.props.list.toJS();
+    const { list } = this.props;
+    const listFormat = list.toJS();
     return (
       <LongList
-        list={list}
+        list={listFormat}
         Item={SearchListItem}
         onFetch={this.onFetch}
         itemOnPress={this.navigate}

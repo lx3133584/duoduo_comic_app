@@ -2,7 +2,7 @@ import axios from 'axios';
 import Toast from 'react-native-root-toast';
 import baseURL from './base_url';
 import store from '../store';
-import { cookiesActions, userInfoActions } from '../modules';
+import { cookiesActions } from '../modules';
 
 axios.defaults.timeout = 60000; // 响应时间
 axios.defaults.responseType = 'json';

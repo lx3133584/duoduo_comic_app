@@ -56,11 +56,7 @@ class ComicDetailBtnsComponent extends PureComponent {
     remove: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
-    }),
-  };
-
-  state = {
-    isVisible: false,
+    }).isRequired,
   };
 
   constructor() {
@@ -72,14 +68,19 @@ class ComicDetailBtnsComponent extends PureComponent {
     this.cancel = this.cancel.bind(this);
   }
 
+  state = {
+    isVisible: false,
+  };
+
   removeFavorite() {
     this.setState({ isVisible: true });
   }
 
   confirm() {
+    const { detail, remove } = this.props;
     this.setState({ isVisible: false });
-    const id = this.props.detail.get('id');
-    this.props.remove(id);
+    const id = detail.get('id');
+    remove(id);
   }
 
   cancel() {
@@ -87,12 +88,13 @@ class ComicDetailBtnsComponent extends PureComponent {
   }
 
   addFavorite() {
-    const id = this.props.detail.get('id');
-    this.props.add(id);
+    const { detail, add } = this.props;
+    const id = detail.get('id');
+    add(id);
   }
 
   startRead() {
-    const { detail, list } = this.props;
+    const { detail, list, navigation } = this.props;
     let chapter_id = detail.get('chapter_id');
     let cur_chapter = detail.get('cur_chapter');
     if (!chapter_id && list.size) {
@@ -100,7 +102,7 @@ class ComicDetailBtnsComponent extends PureComponent {
       chapter_id = id;
       cur_chapter = title;
     }
-    this.props.navigation.navigate('ComicContent', { chapter_id, title: cur_chapter, pre: false });
+    navigation.navigate('ComicContent', { chapter_id, title: cur_chapter, pre: false });
   }
 
   render() {

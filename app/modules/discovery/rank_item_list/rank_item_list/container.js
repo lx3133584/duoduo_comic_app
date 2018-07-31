@@ -3,11 +3,11 @@ import { withNavigation } from 'react-navigation';
 import { getRankItemList } from '../actions';
 import Component from './component';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   list: state.discovery.get('rank_item_list'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getList(params) {
     return dispatch(getRankItemList(params));
   },

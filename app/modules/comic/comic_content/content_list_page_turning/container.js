@@ -21,14 +21,14 @@ const imageUrlsSelector = createSelector(
   }),
 );
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   content: imageUrlsSelector(state),
   content_index: state.comic.getIn(['detail', 'index']),
   width: state.config.get('width'),
   total: state.comic.get('content_total'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   saveIndex(params) {
     return dispatch(saveContentIndex(params));
   },

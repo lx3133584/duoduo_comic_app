@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styled from 'styled-components';
@@ -15,7 +16,7 @@ const containerStyle = {
   borderBottomColor: brand_primary,
 };
 
-export default function LoginInputComponent({
+function LoginInputComponent({
   password, errorMessage, iconName, placeholder, value, onChange, onSubmit,
 }) {
   return (
@@ -34,7 +35,7 @@ export default function LoginInputComponent({
         errorMessage={errorMessage || null}
         leftIcon={(
           <Icon
-            name={iconName || 'user'}
+            name={iconName}
             size={24}
             color={brand_primary}
           />
@@ -43,3 +44,19 @@ export default function LoginInputComponent({
     </ContainStyled>
   );
 }
+LoginInputComponent.propTypes = {
+  password: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  iconName: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
+LoginInputComponent.defaultProps = {
+  password: false,
+  errorMessage: null,
+  iconName: 'user',
+  placeholder: '请输入',
+};
+export default LoginInputComponent;

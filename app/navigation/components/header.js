@@ -16,6 +16,9 @@ const outerContainerStyles = {
 };
 
 class HeaderComponent extends PureComponent {
+  options = {
+  };
+
   static propTypes = {
     scene: PropTypes.object,
     navigation: PropTypes.shape({
@@ -23,10 +26,20 @@ class HeaderComponent extends PureComponent {
     }),
     getScreenDetails: PropTypes.func,
     isNoBack: PropTypes.bool,
+    customTitle: PropTypes.string,
+    customBackgroundColor: PropTypes.string,
+    rightComponent: PropTypes.element,
   };
 
-  options = {
-  };
+  static defaultProps = {
+    scene: null,
+    navigation: null,
+    getScreenDetails: null,
+    isNoBack: false,
+    customTitle: '',
+    customBackgroundColor: '',
+    rightComponent: null,
+  }
 
   constructor(props) {
     super(props);
@@ -43,13 +56,16 @@ class HeaderComponent extends PureComponent {
   render() {
     const { title, backgroundColor } = this.options;
     const {
-      isNoBack, customTitle, customBackgroundColor, rightComponent = null,
+      isNoBack, customTitle, customBackgroundColor, rightComponent,
     } = this.props;
     return (
       <Header
         leftComponent={isNoBack ? null : <LeftButton navigation={this.navigation} />}
         centerComponent={{ text: customTitle || title, style: centerTextStyle }}
-        outerContainerStyles={{ backgroundColor: customBackgroundColor || backgroundColor || brand_primary, ...outerContainerStyles }}
+        outerContainerStyles={{
+          backgroundColor: customBackgroundColor || backgroundColor || brand_primary,
+          ...outerContainerStyles,
+        }}
         rightComponent={rightComponent}
       />
     );

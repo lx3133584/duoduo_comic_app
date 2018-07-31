@@ -11,7 +11,8 @@ const initialState = Immutable.Map({
 });
 
 export default handleActions({
-  [`${discoveryListActions.getClassList}_FULFILLED`]: (state, action) => state.set('class_list', Immutable.List(action.payload.data)),
+  [`${discoveryListActions.getClassList}_FULFILLED`]:
+    (state, action) => state.set('class_list', Immutable.List(action.payload.data)),
   [`${rankItemListActions.getRankItemList}_PENDING`]: (state, action) => {
     const { type } = action.payload;
     if (type === state.get('rank_item_type')) return state;

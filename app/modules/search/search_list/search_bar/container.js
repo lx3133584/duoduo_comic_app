@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import { getSearchList } from '../actions';
 import Component from './component';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   keyword: state.search.get('keyword'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   search(params) {
     return dispatch(getSearchList(params));
   },

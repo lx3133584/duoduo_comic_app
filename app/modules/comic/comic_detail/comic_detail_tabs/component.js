@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ComicList, ComicDetail } from '..';
 import { Dimensions } from 'react-native';
 import {
-  TabViewAnimated, TabViewPagerPan, TabBar, SceneMap,
+  TabViewAnimated, TabViewPagerPan, TabBar,
 } from 'react-native-tab-view';
 
 const initialLayout = {
@@ -27,13 +27,28 @@ const tabBarUnderlineStyle = {
   borderRadius: 10,
 };
 
+function switchPage(key) {
+  switch (key) {
+    case 'detail':
+      return <ComicDetail />;
+    case 'list':
+      return (
+        <ListStyled>
+          <ComicList />
+        </ListStyled>
+      );
+    default:
+      return null;
+  }
+}
+
 class ComicDetailTabsComponent extends PureComponent {
   static propTypes = {
     navigation: PropTypes.shape({
       state: PropTypes.shape({
         params: PropTypes.object,
       }),
-    }),
+    }).isRequired,
   };
 
   constructor(props) {
@@ -65,29 +80,15 @@ class ComicDetailTabsComponent extends PureComponent {
     />
   );
 
-  switchPage(key) {
-    switch (key) {
-      case 'detail':
-        return <ComicDetail />;
-      case 'list':
-        return (
-          <ListStyled>
-            <ComicList />
-          </ListStyled>
-        );
-      default:
-        return null;
-    }
-  }
-
-  _renderScene = ({ route, index }) => this.switchPage(route.key)
+  _renderScene = ({ route }) => switchPage(route.key)
   // }
   // return null;
 
   render() {
+    const { index, routes } = this.state;
     return (
       <TabViewAnimated
-        navigationState={this.state}
+        navigationState={{ index, routes }}
         renderScene={this._renderScene}
         renderHeader={this._renderHeader}
         renderPager={this._renderPager}

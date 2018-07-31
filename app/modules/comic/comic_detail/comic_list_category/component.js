@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { brand_primary } from '../../../../theme';
 
 const ContainStyled = styled.View`
@@ -15,7 +16,7 @@ const TitleStyled = styled.Text`
   border-left-width: 3px;
   border-left-color: ${brand_primary};
 `;
-export default function ComicListCategory({ children, dark }) {
+function ComicListCategory({ children, dark }) {
   return (
     <ContainStyled style={dark && { backgroundColor: '#333' }}>
       <TitleStyled style={dark && { color: '#fff' }}>
@@ -24,3 +25,12 @@ export default function ComicListCategory({ children, dark }) {
     </ContainStyled>
   );
 }
+ComicListCategory.propTypes = {
+  children: PropTypes.string,
+  dark: PropTypes.bool,
+};
+ComicListCategory.defaultProps = {
+  children: '',
+  dark: false,
+};
+export default ComicListCategory;

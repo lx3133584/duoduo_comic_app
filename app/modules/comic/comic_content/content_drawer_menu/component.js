@@ -10,11 +10,13 @@ const ContainStyled = styled.View`
 `;
 
 class ContentDrawerMenuComponent extends PureComponent {
+  static height = 80;
+
   static propTypes = {
     switchBottomType: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
-    }),
+    }).isRequired,
   };
 
   constructor(props) {
@@ -39,13 +41,15 @@ class ContentDrawerMenuComponent extends PureComponent {
     ];
   }
 
-  static height = 80;
-
   render() {
     return (
       <ContainStyled style={{ height: ContentDrawerMenuComponent.height }}>
         {
-          this.menu_list.map(({ icon_type, title, onPress }) => <ContentDrawerIcon icon_type={icon_type} title={title} key={icon_type} onPress={onPress} />)
+          this.menu_list.map(({
+            icon_type,
+            title,
+            onPress,
+          }) => <ContentDrawerIcon icon_type={icon_type} title={title} key={icon_type} onPress={onPress} />)
         }
       </ContainStyled>
     );

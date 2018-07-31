@@ -69,6 +69,9 @@ class UserInfoEditListComponent extends PureComponent {
     uploadUserAvatar: PropTypes.func.isRequired,
     editUserInfo: PropTypes.func.isRequired,
     csrf: PropTypes.string.isRequired,
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   constructor(props) {

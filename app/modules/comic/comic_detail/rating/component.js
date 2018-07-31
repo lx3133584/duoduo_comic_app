@@ -36,6 +36,11 @@ class RatingComponent extends PureComponent {
     score_number: PropTypes.number,
   };
 
+  static defaultProps = {
+    score: 0,
+    score_number: 0,
+  }
+
   constructor() {
     super();
     this.cancel = this.cancel.bind(this);

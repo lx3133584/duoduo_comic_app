@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Image } from '..';
-import { View } from 'react-native';
+
+import noresImg from './nores.png';
 
 const ContainStyled = styled.View`
   flex: 1;
@@ -21,18 +23,25 @@ const imageStyle = {
   height: 80,
 };
 
-export default function ListEmptyComponent({ text }) {
+function ListEmptyComponent({ text }) {
   return (
     <ContainStyled>
       <ImageContainStyled>
         <Image
-          source={require('./nores.png')}
+          source={noresImg}
           imageStyle={imageStyle}
         />
       </ImageContainStyled>
       <DescStyled>
-        {text || '这里什么都没有呢~'}
+        {text}
       </DescStyled>
     </ContainStyled>
   );
 }
+ListEmptyComponent.propTypes = {
+  text: PropTypes.string,
+};
+ListEmptyComponent.defaultProps = {
+  text: '这里什么都没有呢~',
+};
+export default ListEmptyComponent;

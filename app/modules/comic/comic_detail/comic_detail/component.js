@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Rating } from '..';
 
 const ContainStyled = styled.View`
@@ -36,7 +37,7 @@ const DescStyled = styled.Text`
   margin: 8px 0;
   line-height: 20px;
 `;
-export default function ComicDetailComponent({ detail }) {
+function ComicDetailComponent({ detail }) {
   const status = detail.get('status');
   const author = detail.get('author');
   const update_time = detail.get('update_time');
@@ -69,3 +70,7 @@ export default function ComicDetailComponent({ detail }) {
     </ContainStyled>
   );
 }
+ComicDetailComponent.propTypes = {
+  detail: ImmutablePropTypes.map.isRequired,
+};
+export default ComicDetailComponent;

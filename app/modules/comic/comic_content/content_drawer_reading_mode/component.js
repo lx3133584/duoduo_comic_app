@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { brand_primary } from '../../../../theme';
 import { ContentDrawerSettingCheckbox } from '..';
 
 const ContainStyled = styled.View`

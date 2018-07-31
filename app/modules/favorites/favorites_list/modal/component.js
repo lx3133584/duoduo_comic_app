@@ -59,9 +59,14 @@ const cancelTextStyle = {
 
 class ModalComponent extends PureComponent {
   static propTypes = {
-    confirm: PropTypes.func,
-    cancel: PropTypes.func,
+    confirm: PropTypes.func.isRequired,
+    cancel: PropTypes.func.isRequired,
+    children: PropTypes.element.isRequired,
     isVisible: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    isVisible: false,
   };
 
   constructor(props) {

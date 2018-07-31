@@ -164,7 +164,7 @@ export const wrapWithReplace = function (routeName) {
       },
     );
 
-    const mapStateToProps = (state, ownProps) => ({
+    const mapStateToProps = state => ({
       route_key: keySelector(state),
     });
     hoistNonReactStatics(NewComponent, WrappedComponent);
@@ -198,7 +198,7 @@ export const wrapWithGoBack = function (WrappedComponent) {
     }
   }
 
-  const mapStateToProps = (state, ownProps) => ({
+  const mapStateToProps = state => ({
     routes: state.nav.routes,
   });
   hoistNonReactStatics(NewComponent, WrappedComponent);

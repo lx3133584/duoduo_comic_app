@@ -20,14 +20,14 @@ const imgPositonArrSelector = createSelector(
   },
 );
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   content: formatContentSelector(state),
   img_positon_arr: imgPositonArrSelector(state),
   content_index: state.comic.getIn(['detail', 'index']),
   width: widthSelector(state),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   saveIndex(params) {
     return dispatch(saveContentIndex(params));
   },

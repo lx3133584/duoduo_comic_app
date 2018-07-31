@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Image } from 'react-native';
 import { brand_primary } from '../../../../theme';
 
+import logoImg from './logo/png';
+
 const ContainStyled = styled.View`
   padding: 30px 0;
   justify-content: center;
@@ -28,12 +30,12 @@ const imageStyle = {
   height: 60,
 };
 
-export default function BrandComponent({ navigation }) {
+function BrandComponent() {
   return (
     <ContainStyled>
       <ImageContainStyled>
         <Image
-          source={require('./logo.png')}
+          source={logoImg}
           style={imageStyle}
         />
       </ImageContainStyled>
@@ -43,3 +45,5 @@ export default function BrandComponent({ navigation }) {
     </ContainStyled>
   );
 }
+
+export default BrandComponent;

@@ -1,6 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Dimensions } from 'react-native';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import * as Animatable from 'react-native-animatable';
 import {
@@ -10,12 +8,10 @@ import {
   ContentDrawerSetting,
 } from '..';
 
-const { width } = Dimensions.get('window');
 const HEADER_HEIGHT = 60;
 const containStyle = {
   position: 'absolute',
   left: 0,
-  width,
   backgroundColor: 'rgba(0, 0, 0, 0.85)',
   zIndex: 2,
 };
@@ -46,7 +42,8 @@ class ContentDrawerManagerComponent extends PureComponent {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.show !== this.props.show) this.toggleDrawer();
+    const { show } = this.props;
+    if (nextProps.show !== show) this.toggleDrawer();
   }
 
   _getRef = type => ref => this[type] = ref;

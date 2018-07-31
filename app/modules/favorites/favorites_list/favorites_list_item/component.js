@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Badge } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native';
-import { Dimensions } from 'react-native';
+import PropTypes from 'prop-types';
+import { TouchableOpacity, Dimensions } from 'react-native';
 import { Image } from '../../..';
 
 const { width } = Dimensions.get('window');
@@ -11,9 +10,6 @@ const contentWidth = width / 3 - 25;
 const ContainStyled = styled.View`
   margin: 5px 12px;
   width: ${contentWidth};
-`;
-const TopStyled = styled.View`
-  width: 80px;
 `;
 const BottomStyled = styled.View`
   margin-top: 8px;
@@ -30,7 +26,7 @@ const imageStyle = {
   width: contentWidth,
   height: contentWidth * 3 / 2,
 };
-export default function FavoritesListItem({
+function FavoritesListItem({
   title, cover, itemOnPress, itemOnLongPress, id, cur_chapter,
 }) {
   return (
@@ -56,3 +52,17 @@ export default function FavoritesListItem({
     </ContainStyled>
   );
 }
+FavoritesListItem.propTypes = {
+  title: PropTypes.string,
+  cover: PropTypes.string,
+  itemOnPress: PropTypes.func.isRequired,
+  itemOnLongPress: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  cur_chapter: PropTypes.string,
+};
+FavoritesListItem.defaultProps = {
+  title: '',
+  cover: '',
+  cur_chapter: '',
+};
+export default FavoritesListItem;

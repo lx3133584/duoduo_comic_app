@@ -13,17 +13,19 @@ const initialState = Immutable.Map({
   go_to_flag: false, // 标志go_to_index被触发
 });
 export default handleActions({
-  [`${comicDetailActions.getComicDetail}_PENDING`]: (state, action) => {
+  [`${comicDetailActions.getComicDetail}_PENDING`]: (state) => {
     state = state.update('detail', detail => detail.clear());
     return state.update('list', list => list.clear());
   },
-  [`${comicDetailActions.getComicDetail}_FULFILLED`]: (state, action) => state.set('detail', Immutable.Map(action.payload.data)),
-  [`${comicDetailActions.getComicList}_FULFILLED`]: (state, action) => state.set('list', Immutable.List(action.payload.data)),
-  [`${comicDetailActions.addFavorite}_PENDING`]: (state, action) => {
+  [`${comicDetailActions.getComicDetail}_FULFILLED`]:
+    (state, action) => state.set('detail', Immutable.Map(action.payload.data)),
+  [`${comicDetailActions.getComicList}_FULFILLED`]:
+    (state, action) => state.set('list', Immutable.List(action.payload.data)),
+  [`${comicDetailActions.addFavorite}_PENDING`]: (state) => {
     state = state.updateIn(['detail', 'collection_number'], num => +num + 1);
     return state.setIn(['detail', 'favorite_id'], 1);
   },
-  [`${comicDetailActions.removeFavorite}_PENDING`]: (state, action) => {
+  [`${comicDetailActions.removeFavorite}_PENDING`]: (state) => {
     state = state.updateIn(['detail', 'collection_number'], num => +num - 1);
     return state.setIn(['detail', 'favorite_id'], 0);
   },
@@ -33,7 +35,10 @@ export default handleActions({
       score_number = +num;
       return +num + 1;
     });
-    state = state.updateIn(['detail', 'score'], score => (score_number * score + action.payload.score) / (score_number + 1));
+    state = state.updateIn(
+      ['detail', 'score'],
+      score => (score_number * score + action.payload.score) / (score_number + 1),
+    );
     return state.setIn(['detail', 'my_score'], action.payload.score);
   },
   [comicContentActions.preContentList]: (state, action) => {

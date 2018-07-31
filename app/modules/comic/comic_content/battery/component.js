@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import DeviceBattery from 'react-native-device-battery';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -18,6 +19,9 @@ const ICON_COLOR = '#fff';
 
 const IsChargingIcon = () => <Ionicons name="ios-battery-charging-outline" size={22} color={ICON_COLOR} />;
 const BatteryIcons = ({ name }) => <FontAwesome name={name} size={14} color={ICON_COLOR} />;
+BatteryIcons.propTypes = {
+  name: PropTypes.string.isRequired,
+};
 
 class BatteryComponent extends PureComponent {
   constructor() {
@@ -30,11 +34,6 @@ class BatteryComponent extends PureComponent {
     is_charging: false,
   };
 
-  getBattery(state) {
-    const { level, charging } = state;
-    this.setState({ battery_level: level, is_charging: charging });
-  }
-
   componentDidMount() {
     DeviceBattery.getBatteryLevel().then(battery_level => this.setState({ battery_level }));
     DeviceBattery.isCharging().then(is_charging => this.setState({ is_charging }));
@@ -43,6 +42,11 @@ class BatteryComponent extends PureComponent {
 
   componentWillUnmount() {
     DeviceBattery.removeListener(this.getBattery);
+  }
+
+  getBattery(state) {
+    const { level, charging } = state;
+    this.setState({ battery_level: level, is_charging: charging });
   }
 
   render() {

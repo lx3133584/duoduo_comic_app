@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { FavoritesList, HistoryList } from '..';
 import { Dimensions } from 'react-native';
 import {
-  TabViewAnimated, TabViewPagerPan, TabBar, SceneMap,
+  TabViewAnimated, TabViewPagerPan, TabBar,
 } from 'react-native-tab-view';
 import { LoginNowButton } from '../../..';
 import { brand_primary } from '../../../../theme';
@@ -34,6 +34,16 @@ const tabBarUnderlineStyle = {
   height: 4,
   borderRadius: 10,
 };
+function switchPage(key) {
+  switch (key) {
+    case 'favorite':
+      return <FavoritesList />;
+    case 'history':
+      return <HistoryList />;
+    default:
+      return null;
+  }
+}
 
 class ComicDetailTabsComponent extends PureComponent {
   static propTypes = {
@@ -42,7 +52,7 @@ class ComicDetailTabsComponent extends PureComponent {
       state: PropTypes.shape({
         params: PropTypes.object,
       }),
-    }),
+    }).isRequired,
   };
 
   constructor(props) {
@@ -59,7 +69,8 @@ class ComicDetailTabsComponent extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { params } = nextProps.navigation.state;
-    if (params && (params.index !== this.state.index)) {
+    const { index } = this.state;
+    if (params && (params.index !== index)) {
       this.setState({ index: params.index || 0 });
     }
   }
@@ -76,17 +87,6 @@ class ComicDetailTabsComponent extends PureComponent {
     />
   );
 
-  switchPage(key) {
-    switch (key) {
-      case 'favorite':
-        return <FavoritesList />;
-      case 'history':
-        return <HistoryList />;
-      default:
-        return null;
-    }
-  }
-
   _renderPager = props => (
     <TabViewPagerPan
       swipeEnabled
@@ -94,7 +94,7 @@ class ComicDetailTabsComponent extends PureComponent {
     />
   );
 
-  _renderScene = ({ route, index }) => {
+  _renderScene = ({ route }) => {
     const { info } = this.props;
     if (!info.size) {
       return (
@@ -103,13 +103,14 @@ class ComicDetailTabsComponent extends PureComponent {
         </ContainStyled>
       );
     }
-    return this.switchPage(route.key);
+    return switchPage(route.key);
   }
 
   render() {
+    const { index, routes } = this.state;
     return (
       <TabViewAnimated
-        navigationState={this.state}
+        navigationState={{ index, routes }}
         renderScene={this._renderScene}
         renderHeader={this._renderHeader}
         renderPager={this._renderPager}

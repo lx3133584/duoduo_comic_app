@@ -16,13 +16,7 @@ class LoginLocalComponent extends PureComponent {
     getHistory: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
-    }),
-  };
-
-  state = {
-    username: '',
-    password: '',
-    loading: false,
+    }).isRequired,
   };
 
   constructor() {
@@ -30,6 +24,12 @@ class LoginLocalComponent extends PureComponent {
     this.onChangeUsername = this.changFunc('username');
     this.onChangePassword = this.changFunc('password');
   }
+
+  state = {
+    username: '',
+    password: '',
+    loading: false,
+  };
 
   onSubmit = () => {
     const {
@@ -47,7 +47,7 @@ class LoginLocalComponent extends PureComponent {
         position: -70,
       });
       navigation.goBack();
-    }).catch((e) => {
+    }).catch(() => {
       this.setState({ loading: false });
     });
   };
@@ -56,6 +56,7 @@ class LoginLocalComponent extends PureComponent {
 
   render() {
     const { username, password, loading } = this.state;
+    const { navigation } = this.props;
     return (
       <View>
         <InputContainStyled>
@@ -83,7 +84,7 @@ class LoginLocalComponent extends PureComponent {
         <LoginButton
           outline
           text="立即注册"
-          onPress={() => this.props.navigation.navigate('Register')}
+          onPress={() => navigation.navigate('Register')}
         />
       </View>
     );

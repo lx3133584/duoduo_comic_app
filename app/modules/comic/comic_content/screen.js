@@ -15,24 +15,30 @@ const ContainStyled = styled.View`
 `;
 @wrapWithLoading
 class ContentListScreen extends PureComponent {
+  static navigationOptions = {
+    title: '漫画内容',
+  };
+
   static propTypes = {
     hideLoading: PropTypes.func.isRequired,
     changeWidth: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     orientation: PropTypes.string.isRequired,
     brightness: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
     navigation: PropTypes.shape({
       addListener: PropTypes.func.isRequired,
-    }),
+    }).isRequired,
   };
 
-  static navigationOptions = {
-    title: '漫画内容',
+  state = {
+    show_drawer: false,
   };
 
   componentDidMount() {
     this.initConfig();
-    this.willBlurSubscription = this.props.navigation.addListener(
+    const { navigation } = this.props;
+    this.willBlurSubscription = navigation.addListener(
       'willBlur',
       () => {
         Orientation.lockToPortrait();
@@ -43,10 +49,6 @@ class ContentListScreen extends PureComponent {
   componentWillUnmount() {
     this.willBlurSubscription.remove();
   }
-
-  state = {
-    show_drawer: false,
-  };
 
   initConfig = () => {
     this.initOrientation();
@@ -84,13 +86,13 @@ class ContentListScreen extends PureComponent {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   orientation: state.config.get('orientation'),
   brightness: state.config.get('brightness'),
   width: state.config.get('width'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   changeWidth(params) {
     return dispatch(configActions.changeWidth(params));
   },

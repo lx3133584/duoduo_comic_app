@@ -1,4 +1,5 @@
-import React from 'React';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -9,10 +10,17 @@ const BookIcon = ({ color }) => <Entypo name="book" size={ICON_SIZE} color={colo
 const DiscoveryIcon = ({ color }) => <Entypo name="compass" size={ICON_SIZE} color={color} />;
 const SearchIcon = ({ color }) => <FontAwesome name="search" size={ICON_SIZE} color={color} />;
 const UserIcon = ({ color }) => <FontAwesome name="user" size={ICON_SIZE} color={color} />;
-
+const iconType = {
+  color: PropTypes.string.isRequired,
+};
+BookIcon.propTypes = iconType;
+DiscoveryIcon.propTypes = iconType;
+SearchIcon.propTypes = iconType;
+UserIcon.propTypes = iconType;
 
 const TabBar = ({ navigation }) => ({
-  tabBarIcon: ({ focused, tintColor }) => {
+  /* eslint-disable-next-line */
+  tabBarIcon: ({ tintColor }) => {
     const { routeName } = navigation.state;
     let TabBarIcon = UserIcon;
     switch (routeName) {
@@ -28,6 +36,8 @@ const TabBar = ({ navigation }) => ({
       case 'User':
         TabBarIcon = UserIcon;
         break;
+      default:
+        TabBarIcon = UserIcon;
     }
     return <TabBarIcon color={tintColor} />;
   },

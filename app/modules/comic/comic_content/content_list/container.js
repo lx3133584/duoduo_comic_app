@@ -10,7 +10,7 @@ import {
 } from '../actions';
 import { comicDetailActions } from '../..';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   comic_id: state.comic.getIn(['detail', 'id']),
   chapter_id: state.comic.getIn(['detail', 'chapter_id']),
   content_index: state.comic.getIn(['detail', 'index']),
@@ -19,7 +19,7 @@ const mapStateToProps = (state, ownProps) => ({
   mode: state.config.get('mode'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getList(params) {
     return dispatch(comicDetailActions.getComicList(params));
   },

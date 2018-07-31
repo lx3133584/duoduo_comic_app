@@ -3,12 +3,12 @@ import { withNavigation } from 'react-navigation';
 import { uploadAvatar, changeUserInfo } from '../actions';
 import Component from './component';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   info: state.user.get('info'),
   csrf: state.cookies.get('csrfToken'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   uploadUserAvatar(params) {
     return dispatch(uploadAvatar(params));
   },

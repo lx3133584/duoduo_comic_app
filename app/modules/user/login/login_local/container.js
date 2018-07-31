@@ -4,7 +4,7 @@ import { loginForLocal } from '../actions';
 import { favoritesListActions } from '../../..';
 import Component from './component';
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   loginLocal(params) {
     return dispatch(loginForLocal(params));
   },

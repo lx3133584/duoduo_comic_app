@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import Component from './component';
 import { configActions } from '../../..';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   orientation: state.config.get('orientation'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   switchOrientation(params) {
     return dispatch(configActions.switchOrientation(params));
   },

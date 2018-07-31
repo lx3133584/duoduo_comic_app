@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
 import { Image, Dimensions } from 'react-native';
 import { wrapWithReplace } from '../../../../utils';
 
 const { width } = Dimensions.get('window');
-const prefetch = Image.prefetch;
+const { prefetch } = Image;
 
 const ContainStyled = styled.View`
   width: ${width};
@@ -36,6 +37,25 @@ const textStyle = {
 };
 @wrapWithReplace('ComicContent')
 class ContentListFooterComponent extends PureComponent {
+  static propTypes = {
+    next: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }),
+    getList: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired,
+    navigation: PropTypes.shape({
+      addListener: PropTypes.func.isRequired,
+      navigate: PropTypes.func.isRequired,
+      state: PropTypes.shape({
+        params: PropTypes.object.isRequired,
+      }),
+    }).isRequired,
+  };
+
+  static defaultProps = {
+    next: null,
+  }
+
   componentDidMount() {
     setTimeout(this.init, 3000);
   }
@@ -63,8 +83,8 @@ class ContentListFooterComponent extends PureComponent {
   };
 
   render() {
-    const { next, navigation } = this.props;
-    const { id, title } = next || {};
+    const { next } = this.props;
+    const { title } = next || {};
     return (
       <ContainStyled>
         <Button

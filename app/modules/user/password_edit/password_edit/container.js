@@ -3,7 +3,7 @@ import { withNavigation } from 'react-navigation';
 import { editPassword } from '../actions';
 import Component from './component';
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   changePassword(params) {
     return dispatch(editPassword(params));
   },

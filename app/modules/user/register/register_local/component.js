@@ -18,19 +18,19 @@ class RegisterLocalComponent extends PureComponent {
     goBack: PropTypes.func.isRequired,
   };
 
-  state = {
-    username: '',
-    password: '',
-    rePassword: '',
-    loading: false,
-  };
-
   constructor() {
     super();
     this.onChangeUsername = this.changFunc('username');
     this.onChangePassword = this.changFunc('password');
     this.onChangeRePassword = this.changFunc('rePassword');
   }
+
+  state = {
+    username: '',
+    password: '',
+    rePassword: '',
+    loading: false,
+  };
 
   onSubmit = () => {
     const {
@@ -53,7 +53,7 @@ class RegisterLocalComponent extends PureComponent {
         position: -70,
       });
       goBack(2);
-    }).catch((e) => {
+    }).catch(() => {
       this.setState({ loading: false });
     });
   };

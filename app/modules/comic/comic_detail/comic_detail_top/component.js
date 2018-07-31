@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BlurView } from 'react-native-blur';
 import {
-  Image, Dimensions, findNodeHandle, View,
+  Image, Dimensions, findNodeHandle,
 } from 'react-native';
 import { numberFormat } from '../../../../utils';
 
@@ -66,11 +66,7 @@ class ComicDetailTopComponent extends PureComponent {
       state: PropTypes.shape({
         params: PropTypes.object.isRequired,
       }),
-    }),
-  };
-
-  state = {
-    viewRef: null,
+    }).isRequired,
   };
 
   constructor() {
@@ -79,13 +75,14 @@ class ComicDetailTopComponent extends PureComponent {
     this.imageLoaded = this.imageLoaded.bind(this);
   }
 
-  componentDidMount() {
-    const { id } = this.props.navigation.state.params;
-    this.onFetch(id);
-  }
+  state = {
+    viewRef: null,
+  };
 
-  imageLoaded() {
-    this.setState({ viewRef: findNodeHandle(this.backgroundImage) }, this.hideLoading);
+  componentDidMount() {
+    const { navigation } = this.props;
+    const { id } = navigation.state.params;
+    this.onFetch(id);
   }
 
   async onFetch(id) {
@@ -95,14 +92,19 @@ class ComicDetailTopComponent extends PureComponent {
     this.hideLoading();
   }
 
+  imageLoaded() {
+    this.setState({ viewRef: findNodeHandle(this.backgroundImage) }, this.hideLoading);
+  }
+
   hideLoading() {
     const { hideLoading } = this.props;
-    if (!this.state.viewRef || !this.fetchCompleted) return; // blur组件未加载或者请求为完成时都不能隐藏loading
+    const { viewRef } = this.state;
+    if (!viewRef || !this.fetchCompleted) return; // blur组件未加载或者请求为完成时都不能隐藏loading
     hideLoading();
   }
 
   render() {
-    const { detail, navigation } = this.props;
+    const { detail } = this.props;
     const { viewRef } = this.state;
     const cover = detail.get('cover');
     const title = detail.get('title');

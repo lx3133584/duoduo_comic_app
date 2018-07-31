@@ -26,7 +26,13 @@ class ContentListScrollComponent extends Component {
     increasePage: PropTypes.func.isRequired,
     toggleDrawer: PropTypes.func.isRequired,
     onFetch: PropTypes.func.isRequired,
+    getRef: PropTypes.func.isRequired,
   };
+
+  static defaultProps = {
+    content_index: 0,
+    offset: 0,
+  }
 
   constructor(props) {
     super(props);
@@ -35,8 +41,24 @@ class ContentListScrollComponent extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.content !== this.props.content;
+    const { content } = this.props;
+    return nextProps.content !== content;
   }
+
+  onScroll = (e) => {
+    const {
+      saveIndex, content_index, img_positon_arr, offset,
+    } = this.props;
+    const scrollY = e.nativeEvent.contentOffset.y;
+    let index = 0;
+    for (let len = img_positon_arr.size, i = len - 1; i >= 0; i--) {
+      if (scrollY > img_positon_arr.get(i)) {
+        index = i;
+        break;
+      }
+    }
+    if (index !== content_index - offset) saveIndex(index + offset);
+  };
 
   scrollTo = (index = 0) => {
     const { content } = this.props;
@@ -51,21 +73,6 @@ class ContentListScrollComponent extends Component {
     });
   };
 
-  onScroll = (e) => {
-    const {
-      saveIndex, content, content_index, img_positon_arr, offset,
-    } = this.props;
-    const scrollY = e.nativeEvent.contentOffset.y;
-    let index = 0;
-    for (let len = img_positon_arr.size, i = len - 1; i >= 0; i--) {
-      if (scrollY > img_positon_arr.get(i)) {
-        index = i;
-        break;
-      }
-    }
-    if (index !== content_index - offset) saveIndex(index + offset);
-  };
-
   _getItemLayout = (data, index) => {
     const { img_positon_arr, width } = this.props;
     const item = data[index];
@@ -73,6 +80,8 @@ class ContentListScrollComponent extends Component {
     const offset = img_positon_arr.get(index);
     return { length, offset, index };
   };
+
+  _getRef = ref => this.content_ref = ref;
 
   renderItem = (props) => {
     const { toggleDrawer } = this.props;
@@ -84,8 +93,6 @@ class ContentListScrollComponent extends Component {
       </TouchableWithoutFeedback>
     );
   };
-
-  _getRef = ref => this.content_ref = ref;
 
   render() {
     const {

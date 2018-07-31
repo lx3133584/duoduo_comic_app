@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
 import { Dimensions } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -27,8 +28,8 @@ const textStyle = {
   fontSize: 14,
 };
 
-export default function ComicListItem({
-  title, id, itemOnPress, active, item, dark,
+function ComicListItem({
+  title, id, itemOnPress, active, dark,
 }) {
   return (
     <Button
@@ -40,3 +41,15 @@ export default function ComicListItem({
     />
   );
 }
+ComicListItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  itemOnPress: PropTypes.func.isRequired,
+  active: PropTypes.bool,
+  dark: PropTypes.bool,
+};
+ComicListItem.defaultProps = {
+  active: false,
+  dark: false,
+};
+export default ComicListItem;

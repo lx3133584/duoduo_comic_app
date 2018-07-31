@@ -40,7 +40,7 @@ const nextItemSelector = createSelector(
   },
 );
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   index: state.comic.getIn(['detail', 'index']),
   total: state.comic.get('content_total'),
   prev: prevItemSelector(state),
@@ -48,7 +48,7 @@ const mapStateToProps = (state, ownProps) => ({
   width: state.config.get('width'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   goIndex(params) {
     return dispatch(goToIndex(params));
   },

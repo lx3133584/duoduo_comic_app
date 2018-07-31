@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import Toast from 'react-native-root-toast';
 import { Image } from 'react-native';
 import { ContentListScroll, ContentListPageTurning } from '..';
-import { getImgHeight } from '../../../../utils';
 
-const prefetch = Image.prefetch;
+const { prefetch } = Image;
 const page_size = 5;
 const pre_num = 3;
 class ContentListComponent extends Component {
@@ -22,7 +21,8 @@ class ContentListComponent extends Component {
     saveIndex: PropTypes.func.isRequired,
     saveTitle: PropTypes.func.isRequired,
     toggleDrawer: PropTypes.func.isRequired,
-    comic_id: PropTypes.number,
+    go_to_flag: PropTypes.bool,
+    comic_id: PropTypes.number.isRequired,
     chapter_id: PropTypes.number,
     navigation: PropTypes.shape({
       addListener: PropTypes.func.isRequired,
@@ -30,8 +30,14 @@ class ContentListComponent extends Component {
       state: PropTypes.shape({
         params: PropTypes.object.isRequired,
       }),
-    }),
+    }).isRequired,
   };
+
+  static defaultProps = {
+    go_to_flag: false,
+    content_index: 0,
+    chapter_id: 0,
+  }
 
   constructor() {
     super();
@@ -45,99 +51,37 @@ class ContentListComponent extends Component {
 
   componentDidMount() {
     this.init();
-    this.willBlurSubscription = this.props.navigation.addListener(
+    const { navigation } = this.props;
+    this.willBlurSubscription = navigation.addListener(
       'willBlur',
       this.saveHistory,
     );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { go_to_flag } = this.props;
+    if (nextProps.go_to_flag !== go_to_flag) {
+      this.goToIndex(nextProps.content_index);
+    }
   }
 
   componentWillUnmount() {
     this.willBlurSubscription.remove();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.go_to_flag !== this.props.go_to_flag) {
-      this.goToIndex(nextProps.content_index);
-    }
-  }
-
-  init = async () => {
-    const { chapter_id: id, title, pre } = this.props.navigation.state.params;
-    const {
-      preContent,
-      hideLoading,
-      saveTitle,
-      pre_content,
-      content_index,
-      chapter_id,
-    } = this.props;
-    this.chapter_id = id;
-    let cur_chapter = title;
-    if (!+id) { // 如果chapter_id为null则从list中取
-      const { id, title } = await this.getChapterFromList();
-      this.chapter_id = id;
-      cur_chapter = title;
-    }
-    saveTitle(cur_chapter);
-    if (pre && pre_content.size) {
-      preContent(this.chapter_id);
-    } else {
-      let offset = 0;
-      let page = 0;
-      if (chapter_id === this.chapter_id) {
-        page = this.computePage(content_index);
-        this.setState({ page });
-        offset = content_index % page_size;
-      } else {
-        this.onRefresh(0, true);
-      }
-      await this.goPage({ page, offset, init: true });
-      this.scrollTo(offset);
-      // if (offset > page_size - pre_num) {
-      //   this.setState(({ page }) => { page: page + 1 });
-      //   await this.goPage({ page: page + 1, offset: 0, init: false }); // 如果后面不足3张图片则加载下一页
-      // }
-    }
-    this.saveHistory();
-    hideLoading();
+  onRefresh = (page, init) => {
+    const { saveIndex } = this.props;
+    if (!init) return;
+    saveIndex(0);
+    this.init_page = 0;
+    this.setState({ page: 0 });
   };
 
-  // 保存阅读进度
-  saveHistory = () => {
-    const { content_index, postHistory } = this.props;
-    postHistory({ chapter_id: this.chapter_id, index: content_index });
-  };
-
-  // 根据index计算page
-  computePage = index => ~~((index + 1) / (page_size + 0.000001));
-
-  // 增加页码
-  increasePage = (newPage) => {
-    if (newPage !== undefined) { // 传入参数则为设定页码
-      this.setState({ page: newPage });
-    } else {
-      this.setState(({ page }) => ({ page: page + 1 }));
-    }
-  };
-
-  // 跳页
-  goToIndex = async (index) => {
-    const page = this.computePage(index);
-    const offset = index % page_size;
-    if (page !== this.state.page) {
-      this.setState({ page });
-      await this.goPage({ page, offset, init: true });
-    }
-    this.scrollTo(offset);
-  };
-
-  // 调用滚动列表的滚动方法
-  scrollTo = (index) => {
-    if (this.props.mode !== 'scroll') return;
-    if (!this.content_list_ref || !this.content_list_ref.scrollTo) return;
-    setTimeout(() => {
-      this.content_list_ref.scrollTo(index);
-    }, 0);
+  onFetch = async (page, init = false) => {
+    const { getContent } = this.props;
+    await getContent({
+      id: this.chapter_id, page, init, pre: false,
+    });
   };
 
   // 从目录中取第一个章节
@@ -161,20 +105,87 @@ class ContentListComponent extends Component {
     }
   };
 
-  onRefresh = (page, init) => {
-    const { saveIndex } = this.props;
-    if (!init) return;
-    saveIndex(0);
-    this.init_page = 0;
-    this.setState({ page: 0 });
+  // 调用滚动列表的滚动方法
+  scrollTo = (index) => {
+    const { mode } = this.props;
+    if (mode !== 'scroll') return;
+    if (!this.content_list_ref || !this.content_list_ref.scrollTo) return;
+    setTimeout(() => {
+      this.content_list_ref.scrollTo(index);
+    }, 0);
   };
 
-  onFetch = async (page, init = false) => {
-    const { getContent } = this.props;
-    return await getContent({
-      id: this.chapter_id, page, init, pre: false,
-    });
+  // 根据index计算page
+  computePage = index => ~~((index + 1) / (page_size + 0.000001));
+
+  // 增加页码
+  increasePage = (newPage) => {
+    if (newPage !== undefined) { // 传入参数则为设定页码
+      this.setState({ page: newPage });
+    } else {
+      this.setState(({ page }) => ({ page: page + 1 }));
+    }
   };
+
+  // 跳页
+  goToIndex = async (index) => {
+    const page = this.computePage(index);
+    const offset = index % page_size;
+    const { page: myPage } = this.state;
+    if (page !== myPage) {
+      this.setState({ page });
+      await this.goPage({ page, offset, init: true });
+    }
+    this.scrollTo(offset);
+  };
+
+    init = async () => {
+      const { navigation } = this.props;
+      const { chapter_id: id, title, pre } = navigation.state.params;
+      const {
+        preContent,
+        hideLoading,
+        saveTitle,
+        pre_content,
+        content_index,
+        chapter_id,
+      } = this.props;
+      this.chapter_id = id;
+      let cur_chapter = title;
+      if (!+id) { // 如果chapter_id为null则从list中取
+        const { id: _id, title: _title } = await this.getChapterFromList();
+        this.chapter_id = _id;
+        cur_chapter = _title;
+      }
+      saveTitle(cur_chapter);
+      if (pre && pre_content.size) {
+        preContent(this.chapter_id);
+      } else {
+        let offset = 0;
+        let page = 0;
+        if (chapter_id === this.chapter_id) {
+          page = this.computePage(content_index);
+          this.setState({ page });
+          offset = content_index % page_size;
+        } else {
+          this.onRefresh(0, true);
+        }
+        await this.goPage({ page, offset, init: true });
+        this.scrollTo(offset);
+        // if (offset > page_size - pre_num) {
+        //   this.setState(({ page }) => { page: page + 1 });
+        //   await this.goPage({ page: page + 1, offset: 0, init: false }); // 如果后面不足3张图片则加载下一页
+        // }
+      }
+      this.saveHistory();
+      hideLoading();
+    };
+
+    // 保存阅读进度
+    saveHistory = () => {
+      const { content_index, postHistory } = this.props;
+      postHistory({ chapter_id: this.chapter_id, index: content_index });
+    };
 
   _getRef = ref => this.content_list_ref = ref;
 

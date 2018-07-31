@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Badge } from 'react-native-elements';
 import { LongListItem } from '../../..';
-import { green, red, purple } from '../../../../theme';
+import { green, red } from '../../../../theme';
 
 const ContainStyled = styled.View`
   flex-direction: row;
@@ -31,7 +32,7 @@ const greenBackground = {
 const redBackground = {
   backgroundColor: red,
 };
-export default function HistoryListItem(props) {
+function HistoryListItem(props) {
   const {
     cur_chapter, last_read_time, author, status,
   } = props;
@@ -58,3 +59,15 @@ export default function HistoryListItem(props) {
     </LongListItem>
   );
 }
+HistoryListItem.propTypes = {
+  cur_chapter: PropTypes.string,
+  last_read_time: PropTypes.string,
+  author: PropTypes.string,
+  status: PropTypes.string.isRequired,
+};
+HistoryListItem.defaultProps = {
+  cur_chapter: '',
+  last_read_time: '',
+  author: '',
+};
+export default HistoryListItem;

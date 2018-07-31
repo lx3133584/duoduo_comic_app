@@ -3,11 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import { HistoryListItem, Modal } from '..';
 import styled from 'styled-components';
-import { Dimensions } from 'react-native';
 import { LongList } from '../../..';
-import { brand_primary } from '../../../../theme';
-
-const { height } = Dimensions.get('window');
 
 const ContainStyled = styled.View`
   padding-top: 15px;
@@ -20,11 +16,7 @@ class FavoritesListComponent extends PureComponent {
     list: ImmutablePropTypes.list.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
-    }),
-  };
-
-  state = {
-    isVisible: false,
+    }).isRequired,
   };
 
   constructor(props) {
@@ -36,32 +28,38 @@ class FavoritesListComponent extends PureComponent {
     this.navigate = props.navigation.navigate.bind(this);
   }
 
-  removeFavorite(id) {
-    this.setState({ isVisible: true });
-    this.id = id;
-  }
+  state = {
+    isVisible: false,
+  };
 
-  confirm() {
-    this.setState({ isVisible: false });
-    this.props.remove(this.id);
+  async onFetch(page) {
+    const { getList } = this.props;
+    await getList(page);
   }
 
   cancel() {
     this.setState({ isVisible: false });
   }
 
-  async onFetch(page) {
-    const { getList } = this.props;
-    return await getList(page);
+  confirm() {
+    const { remove } = this.props;
+    this.setState({ isVisible: false });
+    remove(this.id);
+  }
+
+  removeFavorite(id) {
+    this.setState({ isVisible: true });
+    this.id = id;
   }
 
   render() {
-    const list = this.props.list.toJS();
+    const { list } = this.props;
+    const listFormat = list.toJS();
     const { isVisible } = this.state;
     return (
       <ContainStyled>
         <LongList
-          list={list}
+          list={listFormat}
           Item={HistoryListItem}
           itemOnLongPress={this.removeFavorite}
           itemOnPress={this.navigate}

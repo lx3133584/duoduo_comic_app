@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native';
 import { Image } from '../../..';
 import baseURL from '../../../../api/base_url';
@@ -23,7 +24,7 @@ const imageStyle = {
   width: 80,
   height: 80,
 };
-export default function ClassListItem({
+function ClassListItem({
   id, name, cover, itemOnPress,
 }) {
   return (
@@ -45,3 +46,10 @@ export default function ClassListItem({
     </ContainStyled>
   );
 }
+ClassListItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  itemOnPress: PropTypes.func.isRequired,
+  cover: PropTypes.string.isRequired,
+};
+export default ClassListItem;

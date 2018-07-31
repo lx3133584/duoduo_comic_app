@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Dimensions } from 'react-native';
-import { brand_primary } from '../../../../theme';
 import Orientation from 'react-native-orientation';
 import { ContentDrawerSettingCheckbox } from '..';
 
@@ -26,6 +25,7 @@ class ContentDrawerOrientationComponent extends PureComponent {
   static propTypes = {
     switchOrientation: PropTypes.func.isRequired,
     switchReadingMode: PropTypes.func.isRequired,
+    toggleDrawer: PropTypes.func.isRequired,
     changeWidth: PropTypes.func.isRequired,
     orientation: PropTypes.string.isRequired,
   };

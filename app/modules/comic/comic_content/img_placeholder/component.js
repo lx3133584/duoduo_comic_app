@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ContainStyled = styled.View`
   background-color: #999;
@@ -10,12 +11,19 @@ const TitleStyled = styled.Text`
   font-size: 32px;
   color: #eee;
 `;
-export default function ImagePlaceholder({ children, style }) {
+function ImagePlaceholder({ children, ...otherProps }) {
   return (
-    <ContainStyled style={style}>
+    <ContainStyled {...otherProps}>
       <TitleStyled>
         {children}
       </TitleStyled>
     </ContainStyled>
   );
 }
+ImagePlaceholder.propTypes = {
+  children: PropTypes.string,
+};
+ImagePlaceholder.defaultProps = {
+  children: null,
+};
+export default ImagePlaceholder;

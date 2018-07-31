@@ -3,11 +3,11 @@ import { withNavigation } from 'react-navigation';
 import Component from './component';
 import { getUserInfo } from '../actions';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   info: state.user.get('info'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getUser() {
     return dispatch(getUserInfo());
   },

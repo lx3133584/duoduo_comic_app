@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Badge } from 'react-native-elements';
 import { LongListItem } from '../../..';
 import { rankTypes } from '../..';
@@ -25,9 +26,10 @@ const textStyle = {
 const wrapperStyle = {
   marginRight: 10,
 };
-export default function RankItemListItem(props) {
+function RankItemListItem(props) {
   const { desc, author, type } = props;
   const { key, color } = rankTypes[type];
+  const { [key]: value } = props;
   return (
     <LongListItem {...props}>
       <DescStyled numberOfLines={3}>
@@ -39,7 +41,7 @@ export default function RankItemListItem(props) {
           {author || '佚名'}
         </AuthorStyled>
         <Badge
-          value={numberFormat(props[key])}
+          value={numberFormat(value)}
           textStyle={textStyle}
           wrapperStyle={wrapperStyle}
           containerStyle={{ backgroundColor: color }}
@@ -48,3 +50,13 @@ export default function RankItemListItem(props) {
     </LongListItem>
   );
 }
+RankItemListItem.propTypes = {
+  desc: PropTypes.string,
+  author: PropTypes.string,
+  type: PropTypes.oneOf([0, 1, 2, 3]).isRequired,
+};
+RankItemListItem.defaultProps = {
+  desc: '',
+  author: '佚名',
+};
+export default RankItemListItem;

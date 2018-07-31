@@ -3,11 +3,11 @@ import { withNavigation } from 'react-navigation';
 import { getHistoryList, removeHistory } from '../actions';
 import Component from './component';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   list: state.favorites.get('history_list'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getList(params) {
     return dispatch(getHistoryList(params));
   },

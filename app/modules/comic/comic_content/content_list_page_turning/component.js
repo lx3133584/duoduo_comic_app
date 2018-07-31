@@ -5,9 +5,11 @@ import { Dimensions } from 'react-native';
 import { ImgPlaceholder, ContentListFooter } from '..';
 import styled from 'styled-components';
 
-const { width, height } = Dimensions.get('window');
+import failImg from './fail.jpg';
+
+const { width: screenWidth, height } = Dimensions.get('window');
 const ContainStyled = styled.View`
-  width: ${width};
+  width: ${screenWidth};
   height: ${height};
 `;
 
@@ -20,12 +22,19 @@ class ContentListPageTurningComponent extends Component {
     })).isRequired,
     content_index: PropTypes.number,
     width: PropTypes.number.isRequired,
+    toggleDrawer: PropTypes.func.isRequired,
+    offset: PropTypes.number,
     total: PropTypes.number.isRequired,
     saveIndex: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     onFetch: PropTypes.func.isRequired,
     increasePage: PropTypes.func.isRequired,
   };
+
+  static defaultProps = {
+    content_index: 0,
+    offset: 0,
+  }
 
   constructor(props) {
     super(props);
@@ -36,21 +45,8 @@ class ContentListPageTurningComponent extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return (nextProps.content !== this.props.content) || (nextProps.content_index !== this.props.content_index);
-  }
-
-  _onFetch() {
-    const { onFetch, increasePage, page } = this.props;
-    if (!onFetch) return;
-    this.loading = true;
-    onFetch(page).then((res) => {
-      this.loading = false;
-      if (!res.error && res.value.result.data.length) {
-        increasePage();
-      }
-    }).catch((e) => {
-      this.loading = false;
-    });
+    const { content, content_index } = this.props;
+    return (nextProps.content !== content) || (nextProps.content_index !== content_index);
   }
 
   onChange = (index) => {
@@ -65,8 +61,22 @@ class ContentListPageTurningComponent extends Component {
     if (index !== content_index - offset) saveIndex(index + offset);
   };
 
+  _onFetch() {
+    const { onFetch, increasePage, page } = this.props;
+    if (!onFetch) return;
+    this.loading = true;
+    onFetch(page).then((res) => {
+      this.loading = false;
+      if (!res.error && res.value.result.data.length) {
+        increasePage();
+      }
+    }).catch(() => {
+      this.loading = false;
+    });
+  }
+
   renderLoading = () => (
-    <ImgPlaceholder style={{ width, height }}>
+    <ImgPlaceholder style={{ width: screenWidth, height }}>
 loading
     </ImgPlaceholder>
   );
@@ -88,7 +98,7 @@ loading
           index={content_index - offset}
           imageUrls={content}
           onChange={this.onChange}
-          failImageSource={require('./fail.jpg')}
+          failImageSource={failImg}
           loadingRender={this.renderLoading}
           renderFooter={this.renderFooter}
           onClick={toggleDrawer}

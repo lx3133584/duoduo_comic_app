@@ -20,7 +20,7 @@ class ClassListComponent extends PureComponent {
     list: ImmutablePropTypes.list.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
-    }),
+    }).isRequired,
   };
 
   constructor(props) {
@@ -34,15 +34,16 @@ class ClassListComponent extends PureComponent {
 
   async onFetch() {
     const { getList } = this.props;
-    return await getList();
+    await getList();
   }
 
   render() {
-    const list = this.props.list.toJS();
+    const { list } = this.props;
+    const listFormat = list.toJS();
     return (
       <ContainStyled>
         <LongList
-          list={list}
+          list={listFormat}
           Item={ClassListItem}
           customkey="id"
           itemOnPress={this.navigate}

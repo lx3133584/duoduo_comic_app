@@ -19,6 +19,13 @@ module.exports = {
       "no-nested-ternary": 0,
       "guard-for-in": 0,
       "no-mixed-operators": 0,
+      "no-unused-expressions": 0,
+      "camelcase": 0,
+      "no-bitwise": 0,
+      "no-plusplus": 0,
+      "no-param-reassign": 0,
+      "no-underscore-dangle": 0,
+      "import/no-cycle": 0, // 暂时屏蔽
       "import/prefer-default-export": 0,
       "react/forbid-prop-types": [0, { "forbid": ["any", "array", "object"] }],
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]

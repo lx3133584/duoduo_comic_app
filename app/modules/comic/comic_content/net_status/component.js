@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { NetInfo } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -6,6 +7,9 @@ const ICON_SIZE = 12;
 const ICON_COLOR = '#fff';
 
 const WifiIcon = ({ name }) => <Feather name={name} size={ICON_SIZE} color={ICON_COLOR} />;
+WifiIcon.propTypes = {
+  name: PropTypes.string.isRequired,
+};
 
 class NetStatusComponent extends PureComponent {
   constructor() {
@@ -17,6 +21,15 @@ class NetStatusComponent extends PureComponent {
     net: 'wifi',
   };
 
+  componentDidMount() {
+    NetInfo.getConnectionInfo().then(this.getNetStatus);
+    NetInfo.addEventListener('connectionChange', this.getNetStatus);
+  }
+
+  componentWillUnmount() {
+    NetInfo.removeEventListener('connectionChange', this.getNetStatus);
+  }
+
   getNetStatus({ type }) {
     if (type === 'wifi') {
       this.setState({ net: type });
@@ -25,15 +38,6 @@ class NetStatusComponent extends PureComponent {
     } else {
       this.setState({ net: 'bar-chart' });
     }
-  }
-
-  componentDidMount() {
-    NetInfo.getConnectionInfo().then(this.getNetStatus);
-    NetInfo.addEventListener('connectionChange', this.getNetStatus);
-  }
-
-  componentWillUnmount() {
-    NetInfo.removeEventListener('connectionChange', this.getNetStatus);
   }
 
   render() {

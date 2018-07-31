@@ -1,16 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Avatar } from 'react-native-elements';
 import baseURL from '../../../../api/base_url';
 
-export default function AvatarComponent(props) {
+import avatarImg from './avatar.jpg';
+
+function AvatarComponent(props) {
+  const { src, onPress } = props;
   return (
     <Avatar
       large
       rounded
-      source={props.src ? { uri: baseURL + props.src } : require('./avatar.jpg')}
-      onPress={props.onPress}
+      source={src ? { uri: baseURL + src } : avatarImg}
+      onPress={onPress}
       activeOpacity={0.7}
       {...props}
     />
   );
 }
+AvatarComponent.propTypes = {
+  src: PropTypes.string,
+  onPress: PropTypes.func,
+};
+AvatarComponent.defaultProps = {
+  src: '',
+  onPress: null,
+};
+export default AvatarComponent;

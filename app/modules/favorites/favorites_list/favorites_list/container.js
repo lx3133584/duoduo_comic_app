@@ -4,11 +4,11 @@ import { getFavoritesList } from '../actions';
 import { comicDetailActions } from '../../../comic';
 import Component from './component';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   list: state.favorites.get('favorites_list'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getList(params) {
     return dispatch(getFavoritesList(params));
   },

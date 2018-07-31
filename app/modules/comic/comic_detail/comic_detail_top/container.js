@@ -3,11 +3,11 @@ import { withNavigation } from 'react-navigation';
 import { getComicDetail } from '../actions';
 import Component from './component';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   detail: state.comic.get('detail'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   getDetail(params) {
     return dispatch(getComicDetail(params));
   },

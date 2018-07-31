@@ -4,7 +4,7 @@ import { Image } from 'react-native';
 import { ImgPlaceholder } from '..';
 import { wrapWithLoading, getImgHeight } from '../../../../utils';
 
-const prefetch = Image.prefetch;
+const { prefetch } = Image;
 
 @wrapWithLoading
 class ContentListItem extends PureComponent {
@@ -17,21 +17,17 @@ class ContentListItem extends PureComponent {
     size: PropTypes.shape({
       height: PropTypes.number.isRequired,
       width: PropTypes.number.isRequired,
-    }),
+    }).isRequired,
   };
 
-  constructor() {
-    super();
+  componentDidMount() {
+    this.preFetchImage();
   }
 
   async preFetchImage() {
     const { url, hideLoading } = this.props;
     await prefetch(url);
     hideLoading();
-  }
-
-  componentDidMount() {
-    this.preFetchImage();
   }
 
   render() {

@@ -3,12 +3,12 @@ import { withNavigation } from 'react-navigation';
 import Component from './component';
 import { addFavorite, removeFavorite } from '../actions';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   detail: state.comic.get('detail'),
   list: state.comic.get('list'),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   add(params) {
     return dispatch(addFavorite(params));
   },

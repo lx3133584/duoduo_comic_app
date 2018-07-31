@@ -6,6 +6,11 @@ const TextStyled = styled.Text`
   font-size: 12px;
 `;
 
+function fillZero(num) {
+  if (num < 10) return `0${num}`;
+  return num;
+}
+
 class TimeComponent extends PureComponent {
   constructor() {
     super();
@@ -16,18 +21,6 @@ class TimeComponent extends PureComponent {
     time: '00:00',
   };
 
-  getTime() {
-    const date = new Date();
-    const hour = date.getHours();
-    const minutes = date.getMinutes();
-    this.setState({ time: `${this.fillZero(hour)}:${this.fillZero(minutes)}` });
-  }
-
-  fillZero(num) {
-    if (num < 10) return `0${num}`;
-    return num;
-  }
-
   componentDidMount() {
     this.getTime();
     this.timer = setInterval(this.getTime, 30000);
@@ -35,6 +28,13 @@ class TimeComponent extends PureComponent {
 
   componentWillUnmount() {
     clearInterval(this.timer);
+  }
+
+  getTime() {
+    const date = new Date();
+    const hour = date.getHours();
+    const minutes = date.getMinutes();
+    this.setState({ time: `${fillZero(hour)}:${fillZero(minutes)}` });
   }
 
   render() {

@@ -3,20 +3,30 @@ import PropTypes from 'prop-types';
 import { SectionList, Dimensions } from 'react-native';
 import { ComicListItem, ComicListCategory, Progress } from '..';
 import styled from 'styled-components';
-import { NavigationActions } from 'react-navigation';
 import { wrapWithLoading } from '../../../../utils';
 
 const { height } = Dimensions.get('window');
 const initNumber = Math.ceil(height / 50);
 
-const rowStyle = {
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-};
 const ItemSeparatorComponent = styled.View`
   border-bottom-color: #c0c0c0;
   border-bottom-width: 1px;
 `;
+
+function _getItemLayout(arr, index) {
+  let len = 0;
+  let offset = 50;
+  arr.forEach(({ data }, i) => { // 计算分类标题高度
+    len += data.length;
+    if (i < len) return;
+    offset += 50;
+  });
+  return { length: 51, offset: 51 * (index - 1) + offset, index };
+}
+function _keyExtractor(item) {
+  return `${item.id}`;
+}
+
 @wrapWithLoading
 class ComicListComponent extends PureComponent {
   static propTypes = {
@@ -25,15 +35,25 @@ class ComicListComponent extends PureComponent {
     comic_id: PropTypes.number,
     getList: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
+    isReplace: PropTypes.bool,
+    dark: PropTypes.bool,
     loading: PropTypes.bool.isRequired,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
+      replace: PropTypes.func.isRequired,
       getParam: PropTypes.func.isRequired,
       state: PropTypes.shape({
         params: PropTypes.object,
       }),
-    }),
+    }).isRequired,
   };
+
+  static defaultProps = {
+    chapter_id: 0,
+    comic_id: 0,
+    isReplace: false,
+    dark: false,
+  }
 
   constructor(props) {
     super(props);
@@ -46,7 +66,8 @@ class ComicListComponent extends PureComponent {
   }
 
   async onFetch() {
-    const id = this.props.navigation.getParam('id', null);
+    const { navigation } = this.props;
+    const id = navigation.getParam('id', null);
     const {
       getList, hideLoading, comic_id, chapter_id,
     } = this.props;
@@ -74,30 +95,15 @@ class ComicListComponent extends PureComponent {
     });
   };
 
-  _keyExtractor(item, index) {
-    return `${item.id}`;
-  }
-
-  _getItemLayout(data, index) {
-    let len = 0;
-    let offset = 50;
-    data.forEach(({ data }, index) => { // 计算分类标题高度
-      len += data.length;
-      if (index < len) return;
-      offset += 50;
-    });
-    return { length: 51, offset: 51 * (index - 1) + offset, index };
-  }
-
   _getRef = ref => this.comic_list_ref = ref;
 
   renderItem = ({ item }) => {
-    const { chapter_id, replace, dark } = this.props;
+    const { chapter_id, isReplace, dark } = this.props;
     return (
       <ComicListItem
         {...item}
         dark={dark}
-        itemOnPress={replace ? this.replace : this.navigate}
+        itemOnPress={isReplace ? this.replace : this.navigate}
         active={item.id === chapter_id}
       />
     );
@@ -127,10 +133,10 @@ class ComicListComponent extends PureComponent {
         renderSectionHeader={this.renderSectionHeader}
         ItemSeparatorComponent={this.renderItemSeparator}
         stickySectionHeadersEnabled
-        keyExtractor={this._keyExtractor}
+        keyExtractor={_keyExtractor}
         initialNumToRender={initNumber}
         sections={list}
-        getItemLayout={this._getItemLayout}
+        getItemLayout={_getItemLayout}
       />
     );
   }

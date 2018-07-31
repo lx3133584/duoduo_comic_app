@@ -18,15 +18,26 @@ function FooterComponent({ text }) {
   return (
     <ContainStyled>
       <TextStyled>
-        {text || '下面什么都没有了哦.'}
+        {text}
       </TextStyled>
     </ContainStyled>
   );
+}
+FooterComponent.propTypes = {
+  text: PropTypes.string,
+};
+FooterComponent.defaultProps = {
+  text: '下面什么都没有了哦。',
+};
+
+function _keyExtractor(item) {
+  return `${item[this.customkey]}`;
 }
 
 class LongListComponent extends PureComponent {
   static propTypes = {
     initPage: PropTypes.number,
+    page: PropTypes.number,
     customkey: PropTypes.string,
     Item: PropTypes.oneOfType([
       PropTypes.element,
@@ -36,10 +47,32 @@ class LongListComponent extends PureComponent {
     onFetch: PropTypes.func,
     increasePage: PropTypes.func,
     callback: PropTypes.func,
+    itemOnPress: PropTypes.func,
+    itemOnLongPress: PropTypes.func,
+    getRef: PropTypes.func,
+    itemHeight: PropTypes.number,
     isLong: PropTypes.bool,
     horizontal: PropTypes.bool,
-    numColumns: PropTypes.number,
+    showFooter: PropTypes.bool,
+    emptyText: PropTypes.string,
   };
+
+  static defaultProps = {
+    initPage: 0,
+    customkey: 'title',
+    page: 0,
+    onFetch: null,
+    callback: f => f,
+    increasePage: f => f,
+    itemOnPress: f => f,
+    itemOnLongPress: f => f,
+    getRef: f => f,
+    itemHeight: 140,
+    isLong: false,
+    horizontal: false,
+    showFooter: false,
+    emptyText: '这里什么都没有呢~',
+  }
 
   constructor(props) {
     super(props);
@@ -52,24 +85,18 @@ class LongListComponent extends PureComponent {
     this._onRefresh = this._onRefresh.bind(this);
     this._onFetch = this._onFetch.bind(this);
     this._renderItem = this._renderItem.bind(this);
-    this._keyExtractor = this._keyExtractor.bind(this);
     this._itemOnLongPress = this._itemOnLongPress.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.page !== this.props.page) this.page = nextProps.page;
+    const { page } = this.props;
+    if (nextProps.page !== page) this.page = nextProps.page;
   }
 
-  _keyExtractor(item, index) {
-    return `${item[this.customkey]}`;
-  }
-
-  _onRefresh() {
-    const { increasePage } = this.props;
-    this.page = 0;
-    increasePage && increasePage(0);
-    this._onFetch({ init: true });
-  }
+  _getItemLayout = (data, index) => {
+    const { itemHeight } = this.props;
+    return { length: itemHeight, offset: itemHeight * index, index };
+  };
 
   _onFetch({ init }) {
     const { onFetch, callback, increasePage } = this.props;
@@ -81,18 +108,18 @@ class LongListComponent extends PureComponent {
       this.setState({ loading: false });
       const data = res.value.result ? res.value.result.data : res.value.data;
       if (!res.error && data.length) {
-        callback && callback(this.page, init);
+        callback(this.page, init);
         this.page++;
-        increasePage && increasePage();
+        increasePage();
       }
-    }).catch((e) => {
+    }).catch(() => {
       this.setState({ loading: false });
     });
   }
 
   _itemOnLongPress(...params) {
     Vibration.vibrate(pattern);
-    const { itemOnLongPress = f => f } = this.props;
+    const { itemOnLongPress } = this.props;
     itemOnLongPress(...params);
   }
 
@@ -101,10 +128,12 @@ class LongListComponent extends PureComponent {
     return <Item {...item} itemOnPress={itemOnPress} itemOnLongPress={this._itemOnLongPress} />;
   }
 
-  _getItemLayout = (data, index) => {
-    const { itemHeight = 140 } = this.props;
-    return { length: itemHeight, offset: itemHeight * index, index };
-  };
+  _onRefresh() {
+    const { increasePage } = this.props;
+    this.page = 0;
+    increasePage(0);
+    this._onFetch({ init: true });
+  }
 
   render() {
     const {
@@ -115,7 +144,7 @@ class LongListComponent extends PureComponent {
       <FlatList
         ref={getRef}
         data={list}
-        keyExtractor={this._keyExtractor}
+        keyExtractor={_keyExtractor}
         renderItem={this._renderItem}
         onEndReached={isLong && this._onFetch}
         onEndReachedThreshold={1.6}

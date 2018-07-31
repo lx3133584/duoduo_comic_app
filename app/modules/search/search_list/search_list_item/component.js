@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { LongListItem } from '..';
 import { Badge } from 'react-native-elements';
 import { green, red, purple } from '../../../../theme';
@@ -34,7 +35,7 @@ const redBackground = {
 const purpleBackground = {
   backgroundColor: purple,
 };
-export default function SearchListItem(props) {
+function SearchListItem(props) {
   const {
     desc, author, status, class_name,
   } = props;
@@ -66,3 +67,15 @@ export default function SearchListItem(props) {
     </LongListItem>
   );
 }
+SearchListItem.propTypes = {
+  desc: PropTypes.string,
+  class_name: PropTypes.string,
+  author: PropTypes.string,
+  status: PropTypes.string.isRequired,
+};
+SearchListItem.defaultProps = {
+  desc: '',
+  class_name: '',
+  author: '',
+};
+export default SearchListItem;

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { ComicList } from '..';
 
 class ComicContentListDrawerScreen extends PureComponent {
@@ -6,12 +7,19 @@ class ComicContentListDrawerScreen extends PureComponent {
     title: '目录',
   };
 
+  static propTypes = {
+    navigation: PropTypes.shape({
+      addListener: PropTypes.func.isRequired,
+    }).isRequired,
+  };
+
   state = {
     initialized: false, // 是否初始化完成
   };
 
   componentDidMount() {
-    this.willBlurSubscription = this.props.navigation.addListener(
+    const { navigation } = this.props;
+    this.willBlurSubscription = navigation.addListener(
       'willBlur',
       () => {
         this.setState({ initialized: true });
@@ -26,7 +34,7 @@ class ComicContentListDrawerScreen extends PureComponent {
   render() {
     const { initialized } = this.state;
     return (
-      initialized && <ComicList {...this.props} dark replace />
+      initialized && <ComicList {...this.props} dark isReplace />
     );
   }
 }

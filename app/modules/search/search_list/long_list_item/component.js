@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Image, TouchableNativeFeedback } from '..';
 
@@ -28,7 +29,7 @@ const imageStyle = {
 const WhiteContainStyled = styled.View`
   background: #fff;
 `;
-export default function LongListItem({
+function LongListItem({
   id, title, cover, children, itemOnPress, itemOnLongPress,
 }) {
   return (
@@ -53,6 +54,14 @@ export default function LongListItem({
         </ContainStyled>
       </TouchableNativeFeedback>
     </WhiteContainStyled>
-
   );
 }
+LongListItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  cover: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
+  itemOnPress: PropTypes.func.isRequired,
+  itemOnLongPress: PropTypes.func.isRequired,
+};
+export default LongListItem;

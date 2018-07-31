@@ -45,16 +45,10 @@ class UserTopComponent extends PureComponent {
   static propTypes = {
     info: ImmutablePropTypes.map.isRequired,
     getUser: PropTypes.func.isRequired,
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
   };
-
-  state = {
-    value: '',
-    loading: false,
-  };
-
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     const { getUser } = this.props;
