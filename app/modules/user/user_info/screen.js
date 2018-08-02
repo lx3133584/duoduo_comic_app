@@ -7,10 +7,6 @@ import { wrapWithUpdate } from '~/utils';
 
 @wrapWithUpdate
 class UserInfoScreen extends PureComponent {
-  static navigationOptions = {
-    title: '用户',
-  };
-
   static propTypes = {
     checkUpdate: PropTypes.func.isRequired,
   };

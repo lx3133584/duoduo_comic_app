@@ -6,14 +6,10 @@ import { AsyncStorage } from 'react-native';
 import middleware from './middleware';
 import rootReducer from './reducer';
 
-export { addListener } from './middleware';
-
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  transforms: [immutableTransform({
-    blacklist: ['nav'],
-  })],
+  transforms: [immutableTransform()],
   blacklist: ['search'],
 };
 

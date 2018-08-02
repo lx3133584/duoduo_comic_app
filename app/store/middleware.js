@@ -1,17 +1,7 @@
 import promiseMiddleware from 'redux-promise-middleware';
 import { createLogger } from 'redux-logger';
-import {
-  createReduxBoundAddListener,
-  createReactNavigationReduxMiddleware,
-} from 'react-navigation-redux-helpers';
 
-const navigationMiddleware = createReactNavigationReduxMiddleware(
-  'root',
-  state => state.nav,
-);
-export const addListener = createReduxBoundAddListener('root');
-
-const middleware = [navigationMiddleware, promiseMiddleware()];
+const middleware = [promiseMiddleware()];
 
 const isNotProduction = process.env.NODE_ENV !== 'production';
 

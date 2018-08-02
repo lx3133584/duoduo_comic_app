@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { StatusBar, Dimensions } from 'react-native';
 import styled from 'styled-components';
 import { ClassList, RankList } from '.';
@@ -19,23 +19,17 @@ const HeaderContainStyled = styled.View`
   z-index: 1;
 `;
 
-class DiscoveryListScreen extends PureComponent {
-  static navigationOptions = {
-    title: '发现',
-  };
-
-  render() {
-    return [
-      <HeaderContainStyled key="header">
-        <Header isNoBack customTitle="漫画分类" />
-      </HeaderContainStyled>,
-      <ContainStyled key="main">
-        <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
-        <RankList />
-        <ClassList />
-      </ContainStyled>,
-    ];
-  }
+function DiscoveryListScreen() {
+  return [
+    <HeaderContainStyled key="header">
+      <Header isNoBack customTitle="漫画分类" />
+    </HeaderContainStyled>,
+    <ContainStyled key="main">
+      <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
+      <RankList />
+      <ClassList />
+    </ContainStyled>,
+  ];
 }
 
 export default DiscoveryListScreen;

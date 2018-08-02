@@ -4,7 +4,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { PersistGate } from 'redux-persist/integration/react';
 import Orientation from 'react-native-orientation';
 import store, { persistor } from './store';
-import Navigation from './navigation';
+import RootRoute from './router';
 import './api/config';
 
 class App extends React.Component {
@@ -20,7 +20,7 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Navigation />
+          <RootRoute />
         </PersistGate>
       </Provider>
     );

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { StatusBar, Dimensions } from 'react-native';
 import { FavoritesListTabs } from '.';
@@ -12,18 +12,12 @@ const ContainStyled = styled.View`
   padding-bottom: 72px;
 `;
 
-class FavoritesListScreen extends PureComponent {
-  static navigationOptions = {
-    title: '书架',
-  };
-
-  render() {
-    return (
-      <ContainStyled>
-        <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
-        <FavoritesListTabs />
-      </ContainStyled>);
-  }
+function FavoritesListScreen() {
+  return (
+    <ContainStyled>
+      <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
+      <FavoritesListTabs />
+    </ContainStyled>);
 }
 
 export default FavoritesListScreen;
