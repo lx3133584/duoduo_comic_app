@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { SectionList, Dimensions } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { ComicListItem, ComicListCategory, Progress } from '..';
 import styled from 'styled-components';
 import { wrapWithLoading } from '~/utils';
@@ -38,14 +39,6 @@ class ComicListComponent extends PureComponent {
     isReplace: PropTypes.bool,
     dark: PropTypes.bool,
     loading: PropTypes.bool.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-      replace: PropTypes.func.isRequired,
-      getParam: PropTypes.func.isRequired,
-      state: PropTypes.shape({
-        params: PropTypes.object,
-      }),
-    }).isRequired,
   };
 
   static defaultProps = {
@@ -55,19 +48,12 @@ class ComicListComponent extends PureComponent {
     dark: false,
   }
 
-  constructor(props) {
-    super(props);
-    this.navigate = props.navigation.navigate.bind(this);
-    this.replace = props.navigation.replace.bind(this);
-  }
-
   componentDidMount() {
     this.onFetch();
   }
 
   async onFetch() {
-    const { navigation } = this.props;
-    const id = navigation.getParam('id', null);
+    const { id } = this.props;
     const {
       getList, hideLoading, comic_id, chapter_id,
     } = this.props;
@@ -99,11 +85,16 @@ class ComicListComponent extends PureComponent {
 
   renderItem = ({ item }) => {
     const { chapter_id, isReplace, dark } = this.props;
+    const itemOnPress = (params) => {
+      isReplace
+        ? Actions.replace('comicContent', params)
+        : Actions.push('comicContent', params);
+    };
     return (
       <ComicListItem
         {...item}
         dark={dark}
-        itemOnPress={isReplace ? this.replace : this.navigate}
+        itemOnPress={itemOnPress}
         active={item.id === chapter_id}
       />
     );

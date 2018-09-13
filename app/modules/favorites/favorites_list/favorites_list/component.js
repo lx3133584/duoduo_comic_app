@@ -14,9 +14,6 @@ class FavoritesListComponent extends PureComponent {
     getList: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired,
     list: ImmutablePropTypes.list.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
   };
 
   constructor(props) {
@@ -25,7 +22,6 @@ class FavoritesListComponent extends PureComponent {
     this.removeFavorite = this.removeFavorite.bind(this);
     this.confirm = this.confirm.bind(this);
     this.cancel = this.cancel.bind(this);
-    this.navigate = props.navigation.navigate.bind(this);
   }
 
   state = {
@@ -66,7 +62,6 @@ class FavoritesListComponent extends PureComponent {
           list={listFormat}
           Item={FavoritesListItem}
           itemOnLongPress={this.removeFavorite}
-          itemOnPress={this.navigate}
           onFetch={this.onFetch}
           numColumns={3}
         />
@@ -75,7 +70,6 @@ class FavoritesListComponent extends PureComponent {
           cancel={this.cancel}
           isVisible={isVisible}
         >
-
            是否确认删除收藏？
         </Modal>
       </ContainStyled>

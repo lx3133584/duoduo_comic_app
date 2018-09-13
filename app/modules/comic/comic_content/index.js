@@ -14,7 +14,7 @@ export { default as Title } from './title/container';
 export { default as ReadingProgress } from './reading_progress/container';
 export { default as NetStatus } from './net_status/component';
 export { default as ContentDrawerIcon } from './content_drawer_icon/component';
-export { default as ContentDrawerMenu } from './content_drawer_menu/container';
+export { default as ContentDrawerMenu } from './content_drawer_menu/component';
 export { default as ContentDrawerProgress } from './content_drawer_progress/container';
 export { default as ContentDrawerBrightness } from './content_drawer_brightness/container';
 export { default as ContentDrawerSettingCheckbox } from './content_drawer_setting_checkbox/component';

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
+import { Actions } from 'react-native-router-flux';
 import { brand_primary } from '~/theme';
 
 const buttonStyle = {
@@ -23,21 +24,18 @@ const containerStyle = {
   alignItems: 'center',
 };
 
-function LoginNowButtonComponent({ navigation, large }) {
+function LoginNowButtonComponent({ large }) {
   return (
     <Button
       title="立即登录"
       containerStyle={containerStyle}
       titleStyle={[textStyle, large && { fontSize: 14 }]}
       buttonStyle={[buttonStyle, large && largeStyle]}
-      onPress={() => navigation.navigate('Login')}
+      onPress={Actions.login}
     />
   );
 }
 LoginNowButtonComponent.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
   large: PropTypes.bool,
 };
 LoginNowButtonComponent.defaultProps = {

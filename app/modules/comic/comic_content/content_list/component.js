@@ -23,20 +23,13 @@ class ContentListComponent extends Component {
     toggleDrawer: PropTypes.func.isRequired,
     go_to_flag: PropTypes.bool,
     comic_id: PropTypes.number.isRequired,
-    chapter_id: PropTypes.number,
-    navigation: PropTypes.shape({
-      addListener: PropTypes.func.isRequired,
-      navigate: PropTypes.func.isRequired,
-      state: PropTypes.shape({
-        params: PropTypes.object.isRequired,
-      }),
-    }).isRequired,
+    detail_chapter_id: PropTypes.number,
   };
 
   static defaultProps = {
     go_to_flag: false,
     content_index: 0,
-    chapter_id: 0,
+    detail_chapter_id: 0,
   }
 
   constructor() {
@@ -51,11 +44,6 @@ class ContentListComponent extends Component {
 
   componentDidMount() {
     this.init();
-    const { navigation } = this.props;
-    this.willBlurSubscription = navigation.addListener(
-      'willBlur',
-      this.saveHistory,
-    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -66,7 +54,7 @@ class ContentListComponent extends Component {
   }
 
   componentWillUnmount() {
-    this.willBlurSubscription.remove();
+    this.saveHistory();
   }
 
   onRefresh = (page, init) => {
@@ -140,15 +128,16 @@ class ContentListComponent extends Component {
   };
 
     init = async () => {
-      const { navigation } = this.props;
-      const { chapter_id: id, title, pre } = navigation.state.params;
       const {
+        chapter_id: id,
+        title,
+        pre,
         preContent,
         hideLoading,
         saveTitle,
         pre_content,
         content_index,
-        chapter_id,
+        detail_chapter_id,
       } = this.props;
       this.chapter_id = id;
       let cur_chapter = title;
@@ -163,7 +152,7 @@ class ContentListComponent extends Component {
       } else {
         let offset = 0;
         let page = 0;
-        if (chapter_id === this.chapter_id) {
+        if (detail_chapter_id === this.chapter_id) {
           page = this.computePage(content_index);
           this.setState({ page });
           offset = content_index % page_size;

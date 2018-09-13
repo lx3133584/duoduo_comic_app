@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
+import { Actions } from 'react-native-router-flux';
 import { Image, Dimensions } from 'react-native';
-import { wrapWithReplace } from '~/utils';
 
 const { width } = Dimensions.get('window');
 const { prefetch } = Image;
@@ -35,21 +35,12 @@ const textStyle = {
   color: '#666',
   fontSize: 14,
 };
-@wrapWithReplace('ComicContent')
 class ContentListFooterComponent extends PureComponent {
   static propTypes = {
     next: PropTypes.shape({
       id: PropTypes.number.isRequired,
     }),
     getList: PropTypes.func.isRequired,
-    replace: PropTypes.func.isRequired,
-    navigation: PropTypes.shape({
-      addListener: PropTypes.func.isRequired,
-      navigate: PropTypes.func.isRequired,
-      state: PropTypes.shape({
-        params: PropTypes.object.isRequired,
-      }),
-    }).isRequired,
   };
 
   static defaultProps = {
@@ -72,14 +63,9 @@ class ContentListFooterComponent extends PureComponent {
   };
 
   goNext = () => {
-    const { next, replace } = this.props;
+    const { next } = this.props;
     const { id, title } = next || {};
-    replace({ chapter_id: id, title, pre: true });
-  };
-
-  goBack = () => {
-    const { navigation } = this.props;
-    navigation.goBack(null);
+    Actions.replace('comicContent', { chapter_id: id, title, pre: true });
   };
 
   render() {
@@ -91,7 +77,7 @@ class ContentListFooterComponent extends PureComponent {
           buttonStyle={buttonStyle}
           title="返回目录"
           titleStyle={textStyle}
-          onPress={this.goBack}
+          onPress={Actions.pop}
         />
         {!next ? (
           <TextStyled>

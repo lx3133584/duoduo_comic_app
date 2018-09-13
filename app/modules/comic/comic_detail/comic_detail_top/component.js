@@ -61,12 +61,8 @@ class ComicDetailTopComponent extends PureComponent {
   static propTypes = {
     getDetail: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
     detail: ImmutablePropTypes.map.isRequired,
-    navigation: PropTypes.shape({
-      state: PropTypes.shape({
-        params: PropTypes.object.isRequired,
-      }),
-    }).isRequired,
   };
 
   constructor() {
@@ -80,8 +76,7 @@ class ComicDetailTopComponent extends PureComponent {
   };
 
   componentDidMount() {
-    const { navigation } = this.props;
-    const { id } = navigation.state.params;
+    const { id } = this.props;
     this.onFetch(id);
   }
 

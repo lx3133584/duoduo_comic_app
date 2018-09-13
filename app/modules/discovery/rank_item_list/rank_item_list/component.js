@@ -16,21 +16,17 @@ class RankItemListComponent extends PureComponent {
     getList: PropTypes.func.isRequired,
     hideLoading: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
+    type: PropTypes.number,
     list: ImmutablePropTypes.list.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-      state: PropTypes.shape({
-        params: PropTypes.object.isRequired,
-      }),
-    }).isRequired,
   };
+
+  static defaultProps = {
+    type: 0,
+  }
 
   constructor(props) {
     super(props);
-    const { type = 0 } = props.navigation.state.params;
-    this.type = type;
     this.onFetch = this.onFetch.bind(this);
-    this.navigate = props.navigation.navigate.bind(this);
   }
 
   componentDidMount() {
@@ -38,13 +34,13 @@ class RankItemListComponent extends PureComponent {
   }
 
   async onFetch(page) {
-    const { getList, hideLoading } = this.props;
-    const res = await getList({ page, type: this.type });
+    const { getList, hideLoading, type } = this.props;
+    const res = await getList({ page, type });
     hideLoading();
     return res;
   }
 
-  renderItem = props => <RankItemListItem {...props} type={this.type} />;
+  renderItem = props => <RankItemListItem {...props} />;
 
   render() {
     const { list, loading } = this.props;
@@ -55,7 +51,6 @@ class RankItemListComponent extends PureComponent {
         <LongList
           list={listFormat}
           Item={this.renderItem}
-          itemOnPress={this.navigate}
           onFetch={this.onFetch}
           isLong
           showFooter

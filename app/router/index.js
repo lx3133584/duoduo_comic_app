@@ -4,9 +4,11 @@ import {
   Router,
   Stack,
   Tabs,
+  Drawer,
   Lightbox,
 } from 'react-native-router-flux';
 import StyleInterpolator from 'react-navigation/src/views/StackView/StackViewStyleInterpolator';
+// import { StatusBar } from 'react-native';
 import {
   FavoritesListScreen,
   SearchListScreen,
@@ -19,13 +21,25 @@ import {
   ComicDetailScreen,
   ComicContentScreen,
   RankItemListScreen,
-  ClasskItemListScreen,
+  ClassItemListScreen,
   ComicContentListDrawerScreen,
 } from '@';
 
 import onBackPress from './onBack';
 import { Header, TabIcon } from './components';
 import { brand_primary } from '~/theme';
+
+export { Header };
+
+// const styleType = {
+//   dark: 'dark-content',
+//   light: 'light-content',
+// };
+// const toggleBarStyle = type => () => {
+//   const barStyle = styleType[type];
+//   if (!barStyle) return;
+//   StatusBar.setBarStyle(barStyle, true);
+// };
 
 const RootRoute = () => (
   <Router backAndroidHandler={onBackPress}>
@@ -88,6 +102,41 @@ const RootRoute = () => (
           key="register"
           component={RegisterScreen}
           title="注册"
+        />
+        <Scene
+          key="userEdit"
+          component={UserInfoEditScreen}
+          title="个人资料"
+        />
+        <Scene
+          key="password"
+          component={PasswordEditScreen}
+          title="修改密码"
+        />
+        <Scene
+          key="comicDetail"
+          component={ComicDetailScreen}
+          title="漫画详情"
+        />
+        <Scene
+          key="comicContent"
+          component={ComicContentScreen}
+          title="漫画内容"
+        />
+        <Scene
+          key="rankItem"
+          component={RankItemListScreen}
+          title="排行榜"
+        />
+        <Scene
+          key="classItem"
+          component={ClassItemListScreen}
+          title="分类"
+        />
+        <Drawer
+          key="contentListDrawer"
+          component={ComicContentListDrawerScreen}
+          title="目录"
         />
       </Stack>
     </Lightbox>

@@ -27,7 +27,7 @@ class RankItemListScreen extends PureComponent {
     return (
       <ContainStyled>
         <StatusBar barStyle="light-content" backgroundColor={brand_primary} />
-        <RankItemList />
+        <RankItemList {...this.props} />
       </ContainStyled>
     );
   }

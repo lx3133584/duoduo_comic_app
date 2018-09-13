@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Toast from 'react-native-root-toast';
+import { Actions } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
 import ActionSheet from 'react-native-actionsheet';
 import { TouchableOpacity } from 'react-native';
@@ -69,9 +70,6 @@ class UserInfoEditListComponent extends PureComponent {
     uploadUserAvatar: PropTypes.func.isRequired,
     editUserInfo: PropTypes.func.isRequired,
     csrf: PropTypes.string.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
   };
 
   constructor(props) {
@@ -115,10 +113,10 @@ class UserInfoEditListComponent extends PureComponent {
   };
 
   saveUserInfo = async () => {
-    const { editUserInfo, navigation } = this.props;
+    const { editUserInfo } = this.props;
     await editUserInfo(this.state);
     this.showToast('修改成功');
-    navigation.goBack();
+    Actions.pop();
   };
 
   changFunc = key => value => this.setState({ [key]: value });
@@ -138,7 +136,7 @@ class UserInfoEditListComponent extends PureComponent {
   );
 
   render() {
-    const { info, navigation } = this.props;
+    const { info } = this.props;
     const { name } = this.state;
     const username = info.get('username');
     return (
@@ -178,7 +176,7 @@ class UserInfoEditListComponent extends PureComponent {
           title="修改密码"
           chevron
           containerStyle={itemContainStyle}
-          onPress={() => navigation.navigate('PasswordEdit')}
+          onPress={Actions.password}
         />
         <ActionSheet
           ref={o => this.ActionSheet = o}

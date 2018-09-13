@@ -15,10 +15,6 @@ const ContainStyled = styled.View`
 `;
 @wrapWithLoading
 class ContentListScreen extends PureComponent {
-  static navigationOptions = {
-    title: '漫画内容',
-  };
-
   static propTypes = {
     hideLoading: PropTypes.func.isRequired,
     changeWidth: PropTypes.func.isRequired,
@@ -26,9 +22,6 @@ class ContentListScreen extends PureComponent {
     orientation: PropTypes.string.isRequired,
     brightness: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
-    navigation: PropTypes.shape({
-      addListener: PropTypes.func.isRequired,
-    }).isRequired,
   };
 
   state = {
@@ -37,17 +30,10 @@ class ContentListScreen extends PureComponent {
 
   componentDidMount() {
     this.initConfig();
-    const { navigation } = this.props;
-    this.willBlurSubscription = navigation.addListener(
-      'willBlur',
-      () => {
-        Orientation.lockToPortrait();
-      },
-    );
   }
 
   componentWillUnmount() {
-    this.willBlurSubscription.remove();
+    Orientation.lockToPortrait();
   }
 
   initConfig = () => {
@@ -72,7 +58,7 @@ class ContentListScreen extends PureComponent {
   };
 
   render() {
-    const { loading, hideLoading, width } = this.props;
+    const { loading, width } = this.props;
     const { show_drawer } = this.state;
     return ([
       <LoadingPage show={loading} key="loading" width={width} />,
@@ -80,7 +66,7 @@ class ContentListScreen extends PureComponent {
       <ContentStatusBar key="status_bar" />,
       <ContainStyled key="content">
         <StatusBar hidden />
-        <ContentList toggleDrawer={this.toggleDrawer} hideLoading={hideLoading} />
+        <ContentList toggleDrawer={this.toggleDrawer} {...this.props} />
       </ContainStyled>,
     ]);
   }

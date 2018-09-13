@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Actions } from 'react-native-router-flux';
 import { TouchableOpacity } from 'react-native';
 import { Image } from '@';
 import baseURL from '~/api/base_url';
@@ -25,13 +26,13 @@ const imageStyle = {
   height: 80,
 };
 function ClassListItem({
-  id, name, cover, itemOnPress,
+  id, name, cover,
 }) {
   return (
     <ContainStyled>
       <TouchableOpacity
         activeOpacity={0.6}
-        onPress={() => itemOnPress('ClasskItemList', { id, name })}
+        onPress={() => Actions.classItem({ id, name })}
       >
         <ImageBoxStyled>
           <Image
@@ -49,7 +50,6 @@ function ClassListItem({
 ClassListItem.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  itemOnPress: PropTypes.func.isRequired,
   cover: PropTypes.string.isRequired,
 };
 export default ClassListItem;

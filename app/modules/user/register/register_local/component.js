@@ -3,19 +3,18 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Toast from 'react-native-root-toast';
+import { Actions } from 'react-native-router-flux';
 import { LoginInput, LoginButton } from '../..';
-import { wrapWithGoBack } from '~/utils';
 
 const InputContainStyled = styled.View`
   margin-bottom: 30px;
 `;
-@wrapWithGoBack
+
 class RegisterLocalComponent extends PureComponent {
   static propTypes = {
     registerLocal: PropTypes.func.isRequired,
     getFavorites: PropTypes.func.isRequired,
     getHistory: PropTypes.func.isRequired,
-    goBack: PropTypes.func.isRequired,
   };
 
   constructor() {
@@ -34,7 +33,7 @@ class RegisterLocalComponent extends PureComponent {
 
   onSubmit = () => {
     const {
-      registerLocal, getFavorites, getHistory, goBack,
+      registerLocal, getFavorites, getHistory,
     } = this.props;
     const { username, password, rePassword } = this.state;
     if (
@@ -52,7 +51,8 @@ class RegisterLocalComponent extends PureComponent {
       Toast.show('注册成功', {
         position: -70,
       });
-      goBack(2);
+      Actions.pop();
+      Actions.pop();
     }).catch(() => {
       this.setState({ loading: false });
     });
@@ -64,7 +64,6 @@ class RegisterLocalComponent extends PureComponent {
     const {
       username, password, rePassword, loading,
     } = this.state;
-    const { goBack } = this.props;
     return (
       <View>
         <InputContainStyled>
@@ -100,7 +99,7 @@ class RegisterLocalComponent extends PureComponent {
         <LoginButton
           outline
           text="返回登录"
-          onPress={() => goBack(1)}
+          onPress={Actions.pop}
         />
       </View>
     );

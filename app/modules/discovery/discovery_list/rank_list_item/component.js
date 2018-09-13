@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Actions } from 'react-native-router-flux';
 import { TouchableOpacity, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -21,11 +22,11 @@ const TitleStyled = styled.Text`
   font-size: 16px;
 `;
 function RankListItem({
-  id, name, color, Icon, navigation,
+  id, name, color, Icon,
 }) {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('RankItemList', { type: id })}
+      onPress={() => Actions.rankItem({ type: id })}
       activeOpacity={0.6}
     >
       <ContainStyled style={{ backgroundColor: color }}>
@@ -42,8 +43,5 @@ RankListItem.propTypes = {
   id: PropTypes.number.isRequired,
   Icon: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
 };
 export default RankListItem;

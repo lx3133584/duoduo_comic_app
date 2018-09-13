@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-import PropTypes from 'prop-types';
+import { Actions } from 'react-native-router-flux';
 import styled from 'styled-components';
 
 const ContainStyled = styled.View`
@@ -10,23 +10,14 @@ const ContainStyled = styled.View`
 
 const BackIcon = () => <Entypo name="chevron-left" size={24} color="#fff" />;
 
-class LeftButton extends PureComponent {
-  static propTypes = {
-    navigation: PropTypes.shape({
-      goBack: PropTypes.func.isRequired,
-    }).isRequired,
-  };
-
-  render() {
-    const { navigation } = this.props;
-    return (
-      <TouchableOpacity onPress={() => navigation.goBack(null)}>
-        <ContainStyled>
-          <BackIcon />
-        </ContainStyled>
-      </TouchableOpacity>
-    );
-  }
+function LeftButton() {
+  return (
+    <TouchableOpacity onPress={Actions.pop}>
+      <ContainStyled>
+        <BackIcon />
+      </ContainStyled>
+    </TouchableOpacity>
+  );
 }
 
 export default LeftButton;

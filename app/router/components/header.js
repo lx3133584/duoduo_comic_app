@@ -16,54 +16,32 @@ const outerContainerStyles = {
 };
 
 class HeaderComponent extends PureComponent {
-  options = {
-  };
-
   static propTypes = {
-    scene: PropTypes.object,
-    navigation: PropTypes.shape({
-      goBack: PropTypes.func,
-    }),
-    getScreenDetails: PropTypes.func,
     isNoBack: PropTypes.bool,
+    title: PropTypes.string,
     customTitle: PropTypes.string,
     customBackgroundColor: PropTypes.string,
     rightComponent: PropTypes.element,
   };
 
   static defaultProps = {
-    scene: null,
-    navigation: null,
-    getScreenDetails: null,
     isNoBack: false,
+    title: '',
     customTitle: '',
     customBackgroundColor: '',
     rightComponent: null,
   }
 
-  constructor(props) {
-    super(props);
-    this.options = {};
-    const { getScreenDetails, scene, navigation } = props;
-    if (!navigation) return;
-    if (getScreenDetails && scene) {
-      const { options } = getScreenDetails(scene);
-      this.options = options;
-    }
-    this.navigation = navigation;
-  }
-
   render() {
-    const { title, backgroundColor } = this.options;
     const {
-      isNoBack, customTitle, customBackgroundColor, rightComponent,
+      title, isNoBack, customTitle, customBackgroundColor, rightComponent,
     } = this.props;
     return (
       <Header
-        leftComponent={isNoBack ? null : <LeftButton navigation={this.navigation} />}
+        leftComponent={isNoBack ? null : <LeftButton />}
         centerComponent={{ text: customTitle || title, style: centerTextStyle }}
         outerContainerStyles={{
-          backgroundColor: customBackgroundColor || backgroundColor || brand_primary,
+          backgroundColor: customBackgroundColor || brand_primary,
           ...outerContainerStyles,
         }}
         rightComponent={rightComponent}

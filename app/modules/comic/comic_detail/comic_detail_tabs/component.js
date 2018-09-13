@@ -44,16 +44,16 @@ function switchPage(key) {
 
 class ComicDetailTabsComponent extends PureComponent {
   static propTypes = {
-    navigation: PropTypes.shape({
-      state: PropTypes.shape({
-        params: PropTypes.object,
-      }),
-    }).isRequired,
+    index: PropTypes.number,
   };
+
+  static defaultProps = {
+    index: 0,
+  }
 
   constructor(props) {
     super(props);
-    const { index = 0 } = props.navigation.state.params;
+    const { index } = props;
     this.state = {
       index,
       routes: [

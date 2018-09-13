@@ -21,7 +21,7 @@ export default function ParallaxComponent(props) {
       )}
     >
       <View>
-        <ComicDetailBtns />
+        <ComicDetailBtns {...props} />
         <ComicDetailTabs />
       </View>
     </ParallaxScrollView>

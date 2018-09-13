@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Slider } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
+import { Actions } from 'react-native-router-flux';
 import Feather from 'react-native-vector-icons/Feather';
 import { brand_primary } from '~/theme';
-import { wrapWithReplace } from '~/utils';
 
 const ICON_SIZE = 20;
 const ICON_COLOR = '#fff';
@@ -25,7 +25,7 @@ const thumbTouchSize = {
   width: 25,
   height: 25,
 };
-@wrapWithReplace('ComicContent')
+
 class ContentDrawerProgressComponent extends PureComponent {
   static height = 50;
 
@@ -42,7 +42,6 @@ class ContentDrawerProgressComponent extends PureComponent {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
     }).isRequired,
-    replace: PropTypes.func.isRequired,
   };
 
   goIndex = (value) => {
@@ -61,8 +60,7 @@ class ContentDrawerProgressComponent extends PureComponent {
   };
 
   goChapter = ({ id, title }) => {
-    const { replace } = this.props;
-    replace({ chapter_id: id, title, pre: false });
+    Actions.replace('comicContent', { chapter_id: id, title, pre: false });
   };
 
   render() {

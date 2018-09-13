@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-root-toast';
 import { TouchableOpacity } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Header } from '~/navigation';
 import { brand_primary, red } from '~/theme';
 import { ListItem } from '../..';
@@ -52,7 +53,7 @@ class PasswordEditComponent extends PureComponent {
   };
 
   savePassword = async () => {
-    const { changePassword, navigation } = this.props;
+    const { changePassword } = this.props;
     const { oldPassword, password, rePassword } = this.state;
     if (
       oldPassword.length < 8
@@ -62,16 +63,14 @@ class PasswordEditComponent extends PureComponent {
     ) return;
     await changePassword(this.state);
     this.showToast('修改成功');
-    navigation.goBack();
+    Actions.pop();
   };
 
   changFunc = key => value => this.setState({ [key]: value });
 
   renderSaveButton = () => (
     <TouchableOpacity onPress={this.savePassword}>
-      <SaveTextStyled>
-保存
-      </SaveTextStyled>
+      <SaveTextStyled>保存</SaveTextStyled>
     </TouchableOpacity>
   );
 

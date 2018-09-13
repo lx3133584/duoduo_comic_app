@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withNavigation } from 'react-navigation';
 import Component from './component';
 import {
   getContentList,
@@ -12,7 +11,7 @@ import { comicDetailActions } from '../..';
 
 const mapStateToProps = state => ({
   comic_id: state.comic.getIn(['detail', 'id']),
-  chapter_id: state.comic.getIn(['detail', 'chapter_id']),
+  detail_chapter_id: state.comic.getIn(['detail', 'chapter_id']),
   content_index: state.comic.getIn(['detail', 'index']),
   pre_content: state.comic.get('pre_content'),
   go_to_flag: state.comic.get('go_to_flag'),
@@ -40,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default withNavigation(connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Component));
+)(Component);

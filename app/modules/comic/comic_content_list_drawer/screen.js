@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import { ComicList } from '..';
 
 class ComicContentListDrawerScreen extends PureComponent {
-  static navigationOptions = {
-    title: '目录',
-  };
-
   static propTypes = {
     navigation: PropTypes.shape({
       addListener: PropTypes.func.isRequired,

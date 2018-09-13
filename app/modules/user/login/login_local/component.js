@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import Toast from 'react-native-root-toast';
 import { LoginInput, LoginButton } from '..';
 
@@ -14,9 +15,6 @@ class LoginLocalComponent extends PureComponent {
     loginLocal: PropTypes.func.isRequired,
     getFavorites: PropTypes.func.isRequired,
     getHistory: PropTypes.func.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
   };
 
   constructor() {
@@ -33,7 +31,7 @@ class LoginLocalComponent extends PureComponent {
 
   onSubmit = () => {
     const {
-      loginLocal, navigation, getFavorites, getHistory,
+      loginLocal, getFavorites, getHistory,
     } = this.props;
     const { username, password } = this.state;
     if (username.length < 8 || password.length < 8) return;
@@ -46,7 +44,7 @@ class LoginLocalComponent extends PureComponent {
       Toast.show('登陆成功', {
         position: -70,
       });
-      navigation.goBack();
+      Actions.pop();
     }).catch(() => {
       this.setState({ loading: false });
     });
@@ -56,7 +54,6 @@ class LoginLocalComponent extends PureComponent {
 
   render() {
     const { username, password, loading } = this.state;
-    const { navigation } = this.props;
     return (
       <View>
         <InputContainStyled>
@@ -84,7 +81,7 @@ class LoginLocalComponent extends PureComponent {
         <LoginButton
           outline
           text="立即注册"
-          onPress={() => navigation.navigate('Register')}
+          onPress={Actions.register}
         />
       </View>
     );

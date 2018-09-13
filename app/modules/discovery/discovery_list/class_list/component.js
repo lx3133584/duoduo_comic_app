@@ -18,15 +18,7 @@ class ClassListComponent extends PureComponent {
   static propTypes = {
     getList: PropTypes.func.isRequired,
     list: ImmutablePropTypes.list.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
   };
-
-  constructor(props) {
-    super(props);
-    this.navigate = props.navigation.navigate.bind(this);
-  }
 
   componentDidMount() {
     this.onFetch();
@@ -46,7 +38,6 @@ class ClassListComponent extends PureComponent {
           list={listFormat}
           Item={ClassListItem}
           customkey="id"
-          itemOnPress={this.navigate}
           numColumns={3}
           columnWrapperStyle={columnWrapperStyle}
         />

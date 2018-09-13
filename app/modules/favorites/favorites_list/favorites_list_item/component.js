@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Actions } from 'react-native-router-flux';
 import { TouchableOpacity, Dimensions } from 'react-native';
 import { Image } from '@';
 
@@ -27,14 +28,14 @@ const imageStyle = {
   height: contentWidth * 3 / 2,
 };
 function FavoritesListItem({
-  title, cover, itemOnPress, itemOnLongPress, id, cur_chapter,
+  title, cover, itemOnLongPress, id, cur_chapter,
 }) {
   return (
     <ContainStyled>
       <TouchableOpacity
         activeOpacity={0.6}
         onLongPress={() => itemOnLongPress(id)}
-        onPress={() => itemOnPress('ComicDetail', { id, index: 1 })}
+        onPress={() => Actions.comicDetail({ id, index: 1 })}
       >
         <Image
           source={{ uri: cover }}
@@ -55,7 +56,6 @@ function FavoritesListItem({
 FavoritesListItem.propTypes = {
   title: PropTypes.string,
   cover: PropTypes.string,
-  itemOnPress: PropTypes.func.isRequired,
   itemOnLongPress: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   cur_chapter: PropTypes.string,

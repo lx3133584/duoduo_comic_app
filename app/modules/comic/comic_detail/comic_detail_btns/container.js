@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withNavigation } from 'react-navigation';
 import Component from './component';
 import { addFavorite, removeFavorite } from '../actions';
 
@@ -17,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default withNavigation(connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Component));
+)(Component);

@@ -8,11 +8,10 @@ const ContainStyled = styled.View`
   padding-top: 20px;
   background: ${brand_primary};
 `;
-function DetailHeaderComponent({ navigation, title }) {
+function DetailHeaderComponent({ title }) {
   return (
     <ContainStyled>
       <Header
-        navigation={navigation}
         customTitle={title}
         isNoBack
       />
@@ -20,12 +19,6 @@ function DetailHeaderComponent({ navigation, title }) {
   );
 }
 DetailHeaderComponent.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-    state: PropTypes.shape({
-      params: PropTypes.object,
-    }),
-  }).isRequired,
   title: PropTypes.string.isRequired,
 };
 export default DetailHeaderComponent;

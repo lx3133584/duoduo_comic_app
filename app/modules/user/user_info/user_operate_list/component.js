@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
+import { Actions } from 'react-native-router-flux';
 import Toast from 'react-native-root-toast';
 import { Modal } from '@';
 import { ListItem } from '..';
@@ -18,18 +19,15 @@ const ItemContainStyled = styled.View`
 const list = [
   {
     name: '我的收藏',
-    route: 'Favorites',
-    index: 0,
+    onPress: () => Actions.favorites({ index: 0 }),
   },
   {
     name: '浏览记录',
-    route: 'Favorites',
-    index: 1,
+    onPress: () => Actions.favorites({ index: 1 }),
   },
   // {
   //   name: '我的下载',
-  //   route: 'Favorites',
-  //   index: 2,
+  //   onPress: () => Actions.favorites({ index: 2 }),
   // },
 ];
 
@@ -38,9 +36,6 @@ class UserOperateListComponent extends PureComponent {
     info: ImmutablePropTypes.map.isRequired,
     logout: PropTypes.func.isRequired,
     checkUpdate: PropTypes.func.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
   };
 
   state = {
@@ -78,7 +73,7 @@ class UserOperateListComponent extends PureComponent {
 
   render() {
     const { isVisible } = this.state;
-    const { info, navigation } = this.props;
+    const { info } = this.props;
     return (
       <ContainStyled>
         <ItemContainStyled>
@@ -87,16 +82,16 @@ class UserOperateListComponent extends PureComponent {
             chevron
             key="user_info_edit"
             title="个人中心"
-            onPress={() => navigation.navigate('UserInfoEdit')}
+            onPress={Actions.userEdit}
           />
           )}
           {
-            list.map(({ name, route, index }) => (
+            list.map(({ name, onPress }) => (
               <ListItem
                 chevron
                 key={name}
                 title={name}
-                onPress={() => navigation.navigate(route, { index })}
+                onPress={onPress}
               />
             ))
           }

@@ -12,9 +12,6 @@ import {
   switchVersion,
   switchVersionLater,
 } from 'react-native-update';
-import { NavigationActions, withNavigation } from 'react-navigation';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import _updateConfig from '../../update.json';
 import { Modal } from '@';
@@ -129,77 +126,4 @@ export const wrapWithUpdate = function (WrappedComponent) {
 
   hoistNonReactStatics(NewComponent, WrappedComponent);
   return NewComponent;
-};
-
-// 提供路由replace函数的高阶组件
-export const wrapWithReplace = function (routeName) {
-  return function (WrappedComponent) {
-    class NewComponent extends PureComponent {
-      replace = (params) => {
-        const { navigation, route_key: key } = this.props;
-        const replaceAction = NavigationActions.replace({
-          key,
-          routeName,
-          params,
-        });
-        navigation.dispatch(replaceAction);
-      };
-
-      render() {
-        return <WrappedComponent {...this.props} replace={this.replace} />;
-      }
-    }
-    const routesSelector = state => state.nav.routes;
-
-    const keySelector = createSelector(
-      routesSelector,
-      (routes) => {
-        const arr = routes.filter(route => route.routeName === routeName);
-        if (!arr.length) return null;
-        return arr[0].key;
-      },
-    );
-
-    const mapStateToProps = state => ({
-      route_key: keySelector(state),
-    });
-    hoistNonReactStatics(NewComponent, WrappedComponent);
-    return withNavigation(connect(
-      mapStateToProps,
-      null,
-    )(NewComponent));
-  };
-};
-
-// 提供选择路由返回步数的高阶组件
-export const wrapWithGoBack = function (WrappedComponent) {
-  class NewComponent extends PureComponent {
-    goBack = (step) => {
-      const { navigation } = this.props;
-      const key = this.getKey(step);
-      navigation.goBack(key);
-    };
-
-    getKey = (step) => {
-      const { routes } = this.props;
-      const pos = routes.length - step;
-      if (pos < 0) return null;
-      const route = routes[pos];
-      if (!route) return null;
-      return route.key;
-    };
-
-    render() {
-      return <WrappedComponent {...this.props} goBack={this.goBack} />;
-    }
-  }
-
-  const mapStateToProps = state => ({
-    routes: state.nav.routes,
-  });
-  hoistNonReactStatics(NewComponent, WrappedComponent);
-  return withNavigation(connect(
-    mapStateToProps,
-    null,
-  )(NewComponent));
 };

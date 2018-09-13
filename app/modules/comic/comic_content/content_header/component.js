@@ -7,11 +7,10 @@ const ContainStyled = styled.View`
   padding-top: 10px;
 `;
 
-function ContentHeaderComponent({ navigation, title }) {
+function ContentHeaderComponent({ title }) {
   return (
     <ContainStyled>
       <Header
-        navigation={navigation}
         customTitle={title}
         customBackgroundColor="transparent"
       />
@@ -20,11 +19,5 @@ function ContentHeaderComponent({ navigation, title }) {
 }
 ContentHeaderComponent.propTypes = {
   title: PropTypes.string.isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-    state: PropTypes.shape({
-      params: PropTypes.object.isRequired,
-    }),
-  }).isRequired,
 };
 export default ContentHeaderComponent;

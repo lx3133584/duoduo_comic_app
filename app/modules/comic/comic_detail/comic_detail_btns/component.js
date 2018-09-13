@@ -3,6 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from 'react-native-elements';
+import { Actions } from 'react-native-router-flux';
 import { Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { brand_primary } from '~/theme';
@@ -54,9 +55,6 @@ class ComicDetailBtnsComponent extends PureComponent {
     list: ImmutablePropTypes.list.isRequired,
     add: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
   };
 
   constructor() {
@@ -94,7 +92,7 @@ class ComicDetailBtnsComponent extends PureComponent {
   }
 
   startRead() {
-    const { detail, list, navigation } = this.props;
+    const { detail, list } = this.props;
     let chapter_id = detail.get('chapter_id');
     let cur_chapter = detail.get('cur_chapter');
     if (!chapter_id && list.size) {
@@ -102,7 +100,7 @@ class ComicDetailBtnsComponent extends PureComponent {
       chapter_id = id;
       cur_chapter = title;
     }
-    navigation.navigate('ComicContent', { chapter_id, title: cur_chapter, pre: false });
+    Actions.comicContent({ chapter_id, title: cur_chapter, pre: false });
   }
 
   render() {

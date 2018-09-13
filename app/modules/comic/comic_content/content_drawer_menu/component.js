@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Actions } from 'react-native-router-flux';
 import { ContentDrawerIcon } from '..';
 
 const ContainStyled = styled.View`
@@ -14,19 +15,16 @@ class ContentDrawerMenuComponent extends PureComponent {
 
   static propTypes = {
     switchBottomType: PropTypes.func.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
   };
 
   constructor(props) {
     super(props);
-    const { switchBottomType, navigation } = props;
+    const { switchBottomType } = props;
     this.menu_list = [
       {
         icon_type: 'list',
         title: '目录',
-        onPress: () => navigation.navigate('DrawerOpen'),
+        onPress: Actions.contentListDrawer,
       },
       {
         icon_type: 'progress',

@@ -41,6 +41,6 @@ export {
 export {
   DiscoveryListScreen,
   RankItemListScreen,
-  ClasskItemListScreen,
+  ClassItemListScreen,
   discoveryReducer,
 } from './discovery';

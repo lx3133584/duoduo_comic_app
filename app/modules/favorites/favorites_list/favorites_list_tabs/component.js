@@ -48,18 +48,18 @@ function switchPage(key) {
 class ComicDetailTabsComponent extends PureComponent {
   static propTypes = {
     info: ImmutablePropTypes.map.isRequired,
-    navigation: PropTypes.shape({
-      state: PropTypes.shape({
-        params: PropTypes.object,
-      }),
-    }).isRequired,
+    index: PropTypes.number,
   };
+
+  static defaultProps = {
+    index: 0,
+  }
 
   constructor(props) {
     super(props);
-    const { params } = props.navigation.state;
+    const { index } = props;
     this.state = {
-      index: params ? params.index || 0 : 0,
+      index,
       routes: [
         { title: '收藏', key: 'favorite' },
         { title: '历史', key: 'history' },
@@ -68,10 +68,9 @@ class ComicDetailTabsComponent extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { params } = nextProps.navigation.state;
     const { index } = this.state;
-    if (params && (params.index !== index)) {
-      this.setState({ index: params.index || 0 });
+    if (nextProps.index !== index) {
+      this.setState({ index: nextProps.index || 0 });
     }
   }
 

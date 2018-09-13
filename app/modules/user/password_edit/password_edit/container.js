@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withNavigation } from 'react-navigation';
 import { editPassword } from '../actions';
 import Component from './component';
 
@@ -9,7 +8,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default withNavigation(connect(
+export default connect(
   null,
   mapDispatchToProps,
-)(Component));
+)(Component);

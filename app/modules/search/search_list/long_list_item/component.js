@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Actions } from 'react-native-router-flux';
 import { Image, TouchableNativeFeedback } from '..';
 
 const ContainStyled = styled.View`
@@ -30,13 +31,13 @@ const WhiteContainStyled = styled.View`
   background: #fff;
 `;
 function LongListItem({
-  id, title, cover, children, itemOnPress, itemOnLongPress,
+  id, title, cover, children, itemOnLongPress,
 }) {
   return (
     <WhiteContainStyled>
       <TouchableNativeFeedback
         onLongPress={() => itemOnLongPress(id)}
-        onPress={() => itemOnPress('ComicDetail', { id })}
+        onPress={() => Actions.comicDetail({ id })}
       >
         <ContainStyled>
           <LeftStyled>

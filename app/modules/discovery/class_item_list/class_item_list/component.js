@@ -16,20 +16,18 @@ class ClassItemListComponent extends PureComponent {
     hideLoading: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     list: ImmutablePropTypes.list.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-      state: PropTypes.shape({
-        params: PropTypes.object.isRequired,
-      }),
-    }).isRequired,
+    id: PropTypes.number,
   };
+
+  static defaultProps = {
+    id: 0,
+  }
 
   constructor(props) {
     super(props);
-    const { id = 0 } = props.navigation.state.params;
+    const { id } = props;
     this.id = id;
     this.onFetch = this.onFetch.bind(this);
-    this.navigate = props.navigation.navigate.bind(this);
   }
 
   componentDidMount() {
@@ -52,7 +50,6 @@ class ClassItemListComponent extends PureComponent {
         <LongList
           list={listFormat}
           Item={SearchListItem}
-          itemOnPress={this.navigate}
           onFetch={this.onFetch}
           isLong
           showFooter

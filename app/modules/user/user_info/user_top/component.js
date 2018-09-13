@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Avatar, LoginNowButton } from '..';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
+import { Actions } from 'react-native-router-flux';
 import styled from 'styled-components';
 import { brand_primary } from '~/theme';
 
@@ -45,9 +46,6 @@ class UserTopComponent extends PureComponent {
   static propTypes = {
     info: ImmutablePropTypes.map.isRequired,
     getUser: PropTypes.func.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
   };
 
   componentDidMount() {
@@ -56,7 +54,7 @@ class UserTopComponent extends PureComponent {
   }
 
   render() {
-    const { info, navigation } = this.props;
+    const { info } = this.props;
     return (
       <ContainStyled>
         <TransparentContainStyled>
@@ -65,7 +63,7 @@ class UserTopComponent extends PureComponent {
             <AvatarStyled>
               <Avatar
                 src={info.get('avatar')}
-                onPress={info.size ? () => navigation.navigate('UserInfoEdit') : null}
+                onPress={info.size ? Actions.userEdit : null}
               />
             </AvatarStyled>
           </AvatarContainStyled>
