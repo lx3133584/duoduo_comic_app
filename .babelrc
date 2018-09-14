@@ -2,12 +2,15 @@
   "presets": ["react-native"],
   "plugins": [
     "transform-decorators-legacy",
-    ["babel-plugin-root-import", [{
-       "rootPathPrefix": "~",
-       "rootPathSuffix": "app"
-     }, {
-       "rootPathPrefix": "@",
-       "rootPathSuffix": "app/modules"
-     }]]
-  ],
+    [
+      "module-resolver",
+      {
+        "root": ["./", "./app"],
+        "alias": {
+          "@": "./app/modules",
+        },
+        "extensions": [".ios.js", ".android.js", ".js", ".json"]
+      }
+    ]
+  ]
 }

@@ -32,13 +32,7 @@ module.exports = {
     },
     "settings": {
       "import/resolver": {
-        "babel-plugin-root-import": [{
-           "rootPathPrefix": "~",
-           "rootPathSuffix": "app"
-         }, {
-           "rootPathPrefix": "@",
-           "rootPathSuffix": "app/modules"
-         }]
+        "babel-module": {}
       }
     }
 };
